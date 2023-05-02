@@ -1,7 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, catchError, map, tap, throwError } from 'rxjs';
-import { Product } from './product';
+import { Observable, map } from 'rxjs';
+import { Category, Product } from './product';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +14,13 @@ export class ProductService {
   public getProducts(): Observable<Product[]> {
     return this._http
       .get<Product[]>('https://localhost:7242/api/products')
-      .pipe(
-        map((data: any[]) => data.map(this._fmtProduct))
-      );
+      .pipe(map((data: any[]) => data.map(this._fmtProduct)));
+  }
+
+  public getCategories(): Observable<Category[]> {
+    return this._http.get<Category[]>(
+      'https://localhost:7242/api/products-categories'
+    );
   }
 
   private _fmtProduct(product: any): Product {
