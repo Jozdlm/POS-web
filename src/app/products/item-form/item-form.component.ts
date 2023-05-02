@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-item-form',
@@ -9,5 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./item-form.component.scss']
 })
 export class ItemFormComponent {
+  private _productService = inject(ProductService);
 
+  public categories$ = this._productService.getCategories();
 }

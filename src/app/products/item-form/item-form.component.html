@@ -42,9 +42,12 @@
           <div class="mb-3">
             <select class="form-select">
               <option selected>Selecciona una categoría</option>
-              <option value="1">Escolar</option>
-              <option value="2">Papelería</option>
-              <option value="3">Oficina</option>
+              <option
+                *ngFor="let item of categories$ | async"
+                [value]="item.id"
+              >
+                {{ item.name }}
+              </option>
             </select>
           </div>
           <div class="mb-3 d-flex gap-3">
