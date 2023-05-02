@@ -8,3 +8,9 @@ export interface Product {
   category: string;
   active: boolean;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+  description: string;
+}
