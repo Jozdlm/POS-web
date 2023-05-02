@@ -1,1 +1,74 @@
-<p>item-form works!</p>
+<!-- Button trigger modal -->
+<button
+  type="button"
+  class="btn btn-primary"
+  data-bs-toggle="modal"
+  data-bs-target="#exampleModal"
+>
+  Nuevo Producto
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Producto</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Codigo de barras"
+          />
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Nombre del producto"
+          />
+          <div class="mb-3">
+            <select class="form-select">
+              <option selected>Selecciona una categoría</option>
+              <option value="1">Escolar</option>
+              <option value="2">Papelería</option>
+              <option value="3">Oficina</option>
+            </select>
+          </div>
+          <div class="mb-3 d-flex gap-3">
+            <input
+              type="number"
+              min="0"
+              class="form-control"
+              placeholder="Stock Min."
+            />
+            <input
+              type="number"
+              min="0"
+              class="form-control"
+              placeholder="Precio Venta"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancelar
+        </button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
