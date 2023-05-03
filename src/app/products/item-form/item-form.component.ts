@@ -15,4 +15,12 @@ export class ItemFormComponent {
   private _formBuilder = inject(FormBuilder);
 
   public categories$ = this._productService.getCategories();
+
+  public itemForm = this._formBuilder.group({
+    barcode: [''],
+    product_name: ['', Validators.required],
+    category_id: [0, [Validators.required, Validators.min(1)]],
+    min_stock: [0, [Validators.required, Validators.min(0)]],
+    selling_price: [0, [Validators.required, Validators.min(0)]]
+  });
 }
