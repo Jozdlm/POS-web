@@ -23,4 +23,13 @@ export class ItemFormComponent {
     min_stock: [0, [Validators.required, Validators.min(0)]],
     selling_price: [0, [Validators.required, Validators.min(0)]]
   });
+
+  public handleSubmit() {
+    if(this.itemForm.valid) {
+      console.log(this.itemForm.value);
+
+      this.itemForm.reset();
+      this.itemForm.patchValue({category_id: 0});
+    }
+  }
 }
