@@ -1,6 +1,6 @@
 export interface Product {
   id: number;
-  code: string;
+  barcode: string;
   product_name: string;
   min_stock: number;
   selling_price: number;
