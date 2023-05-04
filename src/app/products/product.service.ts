@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Category, Product } from './product';
+import { Category, Product, ProductDto } from './product';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +20,17 @@ export class ProductService {
   public getCategories(): Observable<Category[]> {
     return this._http.get<Category[]>(
       'https://localhost:7242/api/products-categories'
+    );
+  }
+
+  public createProduct(newProduct: ProductDto) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+    return this._http.post(
+      'https://localhost:7242/api/products',
+      newProduct,
+      httpOptions
     );
   }
 
