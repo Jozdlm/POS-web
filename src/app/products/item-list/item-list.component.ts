@@ -13,4 +13,13 @@ export class ItemListComponent {
   private _productService = inject(ProductService);
 
   public products$ = this._productService.getProducts();
+
+  public deleteProduct(id: number) {
+    this._productService.deleteProduct(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.products$ = this._productService.getProducts();
+      }
+    })
+  }
 }
