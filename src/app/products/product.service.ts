@@ -34,6 +34,10 @@ export class ProductService {
     );
   }
 
+  public deleteProduct(id: number) {
+    return this._http.delete(`https://localhost:7242/api/products/${id}`);
+  }
+
   private _fmtProduct(product: any): Product {
     return <Product>{
       ...product,
