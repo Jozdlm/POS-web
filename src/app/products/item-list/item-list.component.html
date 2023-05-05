@@ -10,17 +10,34 @@
       <th scope="col">Categoría</th>
       <th scope="col">Stock Mín.</th>
       <th scope="col">Precio Venta</th>
-      <th scope="col">Estado</th>
+      <th scope="col" colspan="2">Estado</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of products$ |async">
-      <td scope="row">{{item.product_name}}</td>
-      <td>{{item.barcode}}</td>
-      <td>{{item.category}}</td>
-      <td>{{item.min_stock}}</td>
-      <td>{{item.selling_price | currency: 'Q'}}</td>
-      <td>{{item.active}}</td>
+    <tr *ngFor="let item of products$ | async">
+      <td scope="row">{{ item.product_name }}</td>
+      <td>{{ item.barcode }}</td>
+      <td>{{ item.category }}</td>
+      <td>{{ item.min_stock }}</td>
+      <td>{{ item.selling_price | currency : "Q" }}</td>
+      <td>{{ item.active }}</td>
+      <td>
+        <div class="dropdown">
+          <button
+            class="btn btn-outline-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            aria-label="icon-button"
+          >
+            <i class="bi bi-gear-fill"></i>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Modificar</a></li>
+            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+          </ul>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>
