@@ -23,18 +23,20 @@
       <td>{{ item.active }}</td>
       <td>
         <div class="dropdown">
-          <button
-            class="btn btn-outline-secondary dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            aria-label="icon-button"
-          >
+          <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false" aria-label="icon-button">
             <i class="bi bi-gear-fill"></i>
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Modificar</a></li>
-            <li><a class="dropdown-item" href="#">Eliminar</a></li>
+            <li>
+              <button class="dropdown-item">Ver detalles</button>
+            </li>
+            <li>
+              <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Modificar</button>
+            </li>
+            <li>
+              <button class="dropdown-item" (click)="deleteProduct(item.id)">Eliminar</button>
+            </li>
           </ul>
         </div>
       </td>
