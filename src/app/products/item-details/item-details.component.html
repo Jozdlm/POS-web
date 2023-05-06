@@ -1,1 +1,9 @@
-<p>item-details works!</p>
+<section *ngIf="product">
+  <h3> {{product.barcode}} </h3>
+  <p> {{product.product_name}} </p>
+  <p>Mínimo Stock: {{product.min_stock}} </p>
+  <p>Precio Venta: {{product.selling_price}} </p>
+  <p>Categoría: {{product.category.name}} </p>
+  <p>Estado: {{product.active}} </p>
+  <p>Imágen: {{product.img_url}} </p>
+</section>

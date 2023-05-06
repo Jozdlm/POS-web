@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-item-details',
@@ -15,7 +16,7 @@ export class ItemDetailsComponent {
   public route = inject(ActivatedRoute);
 
   public productId = 0;
-  public product = {};
+  public product!: Product;
 
   constructor() {
     this.productId = Number(this.route.snapshot.params['id']);
