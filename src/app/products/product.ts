@@ -5,7 +5,7 @@ export interface Product {
   min_stock: number;
   selling_price: number;
   img_url: string;
-  category: string;
+  category: Category;
   active: boolean;
 }
 

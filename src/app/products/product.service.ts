@@ -45,7 +45,6 @@ export class ProductService {
   private _fmtProduct(product: any): Product {
     return <Product>{
       ...product,
-      category: product.category.name,
       active: product.active ? 'Activo' : 'Desactivado',
     };
   }
