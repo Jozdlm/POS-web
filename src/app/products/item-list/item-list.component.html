@@ -29,7 +29,7 @@
           </button>
           <ul class="dropdown-menu">
             <li>
-              <button class="dropdown-item">Ver detalles</button>
+              <button class="dropdown-item" [routerLink]="['/products', item.id]">Ver detalles</button>
             </li>
             <li>
               <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Modificar</button>
