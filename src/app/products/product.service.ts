@@ -17,6 +17,10 @@ export class ProductService {
       .pipe(map((data: any[]) => data.map(this._fmtProduct)));
   }
 
+  public getProductById(id: number): Observable<Product> {
+    return this._http.get<Product>(`https://localhost:7242/api/products/${id}`);
+  }
+
   public getCategories(): Observable<Category[]> {
     return this._http.get<Category[]>(
       'https://localhost:7242/api/products-categories'
