@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ProductDto } from '../product';
 
 @Component({
   selector: 'app-item-form',
@@ -40,7 +41,7 @@ export class ItemFormComponent {
 
   public handleSubmit() {
     if (this.itemForm.valid) {
-      const newProduct = this.createProductDto();
+      const newProduct: ProductDto = this.createProductDto();
 
       this._productService.createProduct(newProduct).subscribe({
         next: (value) => console.log(value),
