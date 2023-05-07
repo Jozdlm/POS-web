@@ -24,22 +24,28 @@ export class ItemFormComponent {
     selling_price: [0, [Validators.required, Validators.min(0)]],
   });
 
+  public createProductDto() {
+    const formValue = {...this.itemForm.value};
+    return {
+      formValue,
+      category_id: parseInt(`${formValue.category_id}`),
+      img_url: '',
+      active: true,
+      barcode: formValue.barcode!,
+      product_name: formValue.product_name!,
+      min_stock: formValue.min_stock!,
+      selling_price: formValue.selling_price!,
+    };
+  }
+
   public handleSubmit() {
     if (this.itemForm.valid) {
-      const newProduct = {
-        ...this.itemForm.value,
-        category_id: parseInt(`${this.itemForm.value.category_id}`),
-        img_url: '',
-        active: true,
-        barcode: this.itemForm.value.barcode!,
-        product_name: this.itemForm.value.product_name!,
-        min_stock: this.itemForm.value.min_stock!,
-        selling_price: this.itemForm.value.selling_price!,
-      };
+      const newProduct = this.createProductDto();
 
       this._productService.createProduct(newProduct).subscribe({
         next: (value) => console.log(value),
       });
+
       this.itemForm.reset({ category_id: 0 });
     }
   }
