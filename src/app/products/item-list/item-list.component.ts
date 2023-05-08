@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
-import { ItemFormComponent } from '../item-form/item-form.component';
 import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, ItemFormComponent],
+  imports: [CommonModule, RouterModule],
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss'],
 })
