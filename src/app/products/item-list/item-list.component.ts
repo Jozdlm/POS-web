@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
 import { RouterModule } from '@angular/router';
@@ -17,6 +17,9 @@ export class ItemListComponent {
   @Input()
   public products: Product[] = [];
 
+  @Output()
+  public onDeleteProduct = new EventEmitter<number>();
+
   public updateProduct(id: number): void {
     this._productService.getProductById(id).subscribe({
       next: (res) => console.log(res)
@@ -24,11 +27,6 @@ export class ItemListComponent {
   }
 
   public deleteProduct(id: number) {
-    this._productService.deleteProduct(id).subscribe({
-      next: (res) => {
-        console.log(res);
-        // this.products$ = this._productService.getProducts();
-      }
-    })
+    this.onDeleteProduct.emit(id);
   }
 }
