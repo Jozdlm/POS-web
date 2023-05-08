@@ -4,6 +4,7 @@ import { ProductService } from '../product.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
+  selector: 'app-item-list',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './item-list.component.html',
