@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
 import { RouterModule } from '@angular/router';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-item-list',
@@ -13,7 +14,8 @@ import { RouterModule } from '@angular/router';
 export class ItemListComponent {
   private _productService = inject(ProductService);
 
-  public products$ = this._productService.getProducts();
+  @Input()
+  public products: Product[] = [];
 
   public updateProduct(id: number): void {
     this._productService.getProductById(id).subscribe({
@@ -25,7 +27,7 @@ export class ItemListComponent {
     this._productService.deleteProduct(id).subscribe({
       next: (res) => {
         console.log(res);
-        this.products$ = this._productService.getProducts();
+        // this.products$ = this._productService.getProducts();
       }
     })
   }
