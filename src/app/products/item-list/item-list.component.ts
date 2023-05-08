@@ -15,6 +15,12 @@ export class ItemListComponent {
 
   public products$ = this._productService.getProducts();
 
+  public updateProduct(id: number): void {
+    this._productService.getProductById(id).subscribe({
+      next: (res) => console.log(res)
+    })
+  }
+
   public deleteProduct(id: number) {
     this._productService.deleteProduct(id).subscribe({
       next: (res) => {

@@ -42,7 +42,7 @@
               <button class="dropdown-item" [routerLink]="['/products', item.id]">Ver detalles</button>
             </li>
             <li>
-              <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Modificar</button>
+              <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="updateProduct(item.id)">Modificar</button>
             </li>
             <li>
               <button class="dropdown-item" (click)="deleteProduct(item.id)">Eliminar</button>
