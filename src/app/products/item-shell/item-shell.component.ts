@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ProductService } from '../product.service';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-item-shell',
@@ -9,5 +11,13 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./item-shell.component.scss']
 })
 export class ItemShellComponent {
+  private _productService = inject(ProductService);
 
+  public products: Product[] = [];
+
+  constructor() {
+    this._productService.getProducts().subscribe({
+      next: (products) => this.products = products
+    })
+  }
 }
