@@ -12,4 +12,7 @@
 
 <app-item-form></app-item-form>
 
-<app-item-list [products]="products"></app-item-list>
+<app-item-list
+  [products]="products"
+  (onDeleteProduct)="deleteProduct($event)"
+></app-item-list>

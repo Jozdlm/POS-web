@@ -22,4 +22,16 @@ export class ItemShellComponent {
       next: (products) => this.products = products
     })
   }
+
+  public deleteProduct(id: number): void {
+    this._productService.deleteProduct(id).subscribe({
+      next: (res) => {
+        console.log(res); // Se recibe la respuesta de exito
+
+        this._productService.getProducts().subscribe({
+          next: (products) => (this.products = products),
+        });
+      },
+    });
+  }
 }
