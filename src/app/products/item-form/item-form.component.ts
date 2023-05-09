@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -25,10 +25,11 @@ export class ItemFormComponent {
     selling_price: [0, [Validators.required, Validators.min(0)]],
   });
 
+  @Output() public onCreateProduct = new EventEmitter<ProductDto>();
+
   public createProductDto() {
     const formValue = {...this.itemForm.value};
     return {
-      formValue,
       category_id: parseInt(`${formValue.category_id}`),
       img_url: '',
       active: true,
@@ -42,10 +43,7 @@ export class ItemFormComponent {
   public handleSubmit() {
     if (this.itemForm.valid) {
       const newProduct: ProductDto = this.createProductDto();
-
-      this._productService.createProduct(newProduct).subscribe({
-        next: (value) => console.log(value),
-      });
+      this.onCreateProduct.emit(newProduct);
 
       this.itemForm.reset({ category_id: 0 });
     }
