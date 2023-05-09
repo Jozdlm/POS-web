@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProductDto } from '../product';
+import { Category, ProductDto } from '../product';
 
 @Component({
   selector: 'app-item-form',
@@ -12,11 +12,7 @@ import { ProductDto } from '../product';
   styleUrls: ['./item-form.component.scss'],
 })
 export class ItemFormComponent {
-  private _productService = inject(ProductService);
   private _formBuilder = inject(FormBuilder);
-
-  public categories$ = this._productService.getCategories();
-
   public itemForm = this._formBuilder.group({
     barcode: [''],
     product_name: ['', Validators.required],
@@ -24,6 +20,8 @@ export class ItemFormComponent {
     min_stock: [0, [Validators.required, Validators.min(0)]],
     selling_price: [0, [Validators.required, Validators.min(0)]],
   });
+
+  @Input() public categories: Category[] = [];
 
   @Output() public onCreateProduct = new EventEmitter<ProductDto>();
 
