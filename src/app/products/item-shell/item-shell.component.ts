@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
-import { Product, ProductDto } from '../product';
+import { Category, Product, ProductDto } from '../product';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import { ItemListComponent } from '../item-list/item-list.component';
 
@@ -16,10 +16,15 @@ export class ItemShellComponent {
   private _productService = inject(ProductService);
 
   public products: Product[] = [];
+  public categories: Category[] = [];
 
   constructor() {
     this._productService.getProducts().subscribe({
       next: (products) => this.products = products
+    })
+
+    this._productService.getCategories().subscribe({
+      next: (categories) => this.categories = categories
     })
   }
 
