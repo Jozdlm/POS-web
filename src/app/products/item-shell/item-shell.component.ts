@@ -23,6 +23,10 @@ export class ItemShellComponent {
     })
   }
 
+  public updateProduct(id: number): void {
+    console.log(id);
+  }
+
   public deleteProduct(id: number): void {
     this._productService.deleteProduct(id).subscribe({
       next: (res) => {
