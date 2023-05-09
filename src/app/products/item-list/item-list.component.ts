@@ -11,14 +11,10 @@ import { Product } from '../product';
   styleUrls: ['./item-list.component.scss'],
 })
 export class ItemListComponent {
-  @Input()
-  public products: Product[] = [];
+  @Input() public products: Product[] = [];
 
-  @Output()
-  public onDeleteProduct = new EventEmitter<number>();
-
-  @Output()
-  public onUpdateProduct = new EventEmitter<number>();
+  @Output() public onDeleteProduct = new EventEmitter<number>();
+  @Output() public onUpdateProduct = new EventEmitter<number>();
 
   public updateProduct(id: number): void {
     this.onUpdateProduct.emit(id);
