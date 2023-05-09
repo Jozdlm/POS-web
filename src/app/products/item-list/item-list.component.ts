@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../product.service';
 import { RouterModule } from '@angular/router';
 import { Product } from '../product';
 
@@ -12,21 +11,20 @@ import { Product } from '../product';
   styleUrls: ['./item-list.component.scss'],
 })
 export class ItemListComponent {
-  private _productService = inject(ProductService);
-
   @Input()
   public products: Product[] = [];
 
   @Output()
   public onDeleteProduct = new EventEmitter<number>();
 
+  @Output()
+  public onUpdateProduct = new EventEmitter<number>();
+
   public updateProduct(id: number): void {
-    this._productService.getProductById(id).subscribe({
-      next: (res) => console.log(res)
-    })
+    this.onUpdateProduct.emit(id);
   }
 
-  public deleteProduct(id: number) {
+  public deleteProduct(id: number): void {
     this.onDeleteProduct.emit(id);
   }
 }
