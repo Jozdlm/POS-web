@@ -10,7 +10,7 @@
   Nuevo Producto
 </button>
 
-<app-item-form></app-item-form>
+<app-item-form (onCreateProduct)="createProduct($event)"></app-item-form>
 
 <app-item-list
   [products]="products"

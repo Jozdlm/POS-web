@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductService } from '../product.service';
-import { Product } from '../product';
+import { Product, ProductDto } from '../product';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import { ItemListComponent } from '../item-list/item-list.component';
 
@@ -21,6 +21,10 @@ export class ItemShellComponent {
     this._productService.getProducts().subscribe({
       next: (products) => this.products = products
     })
+  }
+
+  public createProduct(productDto: ProductDto): void {
+    console.log(productDto);
   }
 
   public updateProduct(id: number): void {
