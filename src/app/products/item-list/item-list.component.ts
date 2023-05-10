@@ -14,11 +14,6 @@ export class ItemListComponent {
   @Input() public products: Product[] = [];
 
   @Output() public onDeleteProduct = new EventEmitter<number>();
-  @Output() public onUpdateProduct = new EventEmitter<number>();
-
-  public updateProduct(id: number): void {
-    this.onUpdateProduct.emit(id);
-  }
 
   public deleteProduct(id: number): void {
     this.onDeleteProduct.emit(id);

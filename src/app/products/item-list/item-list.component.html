@@ -40,9 +40,7 @@
             <li>
               <button
                 class="dropdown-item"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-                (click)="updateProduct(item.id)"
+                [routerLink]="['/products/edit', item.id]"
               >
                 Modificar
               </button>
