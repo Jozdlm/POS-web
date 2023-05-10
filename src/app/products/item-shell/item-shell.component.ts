@@ -29,7 +29,15 @@ export class ItemShellComponent {
   }
 
   public createProduct(productDto: ProductDto): void {
-    console.log(productDto);
+    this._productService.createProduct(productDto).subscribe({
+      next: (res) => {
+        console.log(res);
+
+        this._productService.getProducts().subscribe({
+          next: (products) => (this.products = products)
+        });
+      }
+    });
   }
 
   public updateProduct(id: number): void {
