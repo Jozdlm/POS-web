@@ -25,4 +25,8 @@ export class ItemUpdateComponent {
   });
 
   public categories$ = this._productService.getCategories();
+
+  public handleSubmit(): void {
+    console.log(this.itemForm.value);
+  }
 }
