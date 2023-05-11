@@ -35,15 +35,22 @@ export class ItemUpdateComponent {
 
   public constructor() {
     this._activatedRoute.params
-      .pipe(
-        switchMap(({id}) => {
-          return this._productService.getProductById(id);
-        })
-      )
+      .pipe(switchMap(({ id }) => this._productService.getProductById(id)))
       .subscribe({
-        next: (product) => this.product = product,
-        error: (error) => this.handleErrorHttp()
+        next: (product) => this.setFormValues(product),
+        error: (error) => this.handleErrorHttp(),
       });
+  }
+
+  public setFormValues(product: Product): void {
+    this.itemForm.patchValue({
+      barcode: product.barcode,
+      product_name: product.product_name,
+      min_stock: product.min_stock,
+      selling_price: product.selling_price,
+      category_id: product.category.id,
+      active: Number(product.active),
+    });
   }
 
   public handleErrorHttp(): void {
