@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../product.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { of, switchMap } from 'rxjs';
 import { Product } from '../product';
 
@@ -17,6 +17,7 @@ export class ItemUpdateComponent {
   private _productService = inject(ProductService);
   private _formBuilder = inject(FormBuilder);
   private _activatedRoute = inject(ActivatedRoute);
+  private _router = inject(Router);
 
   public product!: Product;
 
@@ -39,9 +40,14 @@ export class ItemUpdateComponent {
           return this._productService.getProductById(id);
         })
       )
-      .subscribe((product) => {
-        this.product = product;
+      .subscribe({
+        next: (product) => this.product = product,
+        error: (error) => this.handleErrorHttp()
       });
+  }
+
+  public handleErrorHttp(): void {
+    this._router.navigate(['/products']);
   }
 
   public handleSubmit(): void {
