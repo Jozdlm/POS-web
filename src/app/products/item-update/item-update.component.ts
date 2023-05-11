@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../product.service';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-item-update',
@@ -14,6 +14,9 @@ import { RouterModule } from '@angular/router';
 export class ItemUpdateComponent {
   private _productService = inject(ProductService);
   private _formBuilder = inject(FormBuilder);
+  private _activatedRoute = inject(ActivatedRoute);
+
+  public productId: number = 0;
 
   public itemForm = this._formBuilder.group({
     barcode: [''],
@@ -26,6 +29,12 @@ export class ItemUpdateComponent {
   });
 
   public categories$ = this._productService.getCategories();
+
+  public constructor() {
+    this._activatedRoute.params.subscribe({
+      next: (params) => this.productId = params['id']
+    });
+  }
 
   public handleSubmit(): void {
     console.log(this.itemForm.value);
