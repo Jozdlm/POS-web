@@ -38,6 +38,18 @@ export class ProductService {
     );
   }
 
+  public updateProduct(id: number, updatedProduct: ProductDto) {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    };
+
+    return this._http.put(
+      `https://localhost:7242/api/products/${id}`,
+      updatedProduct,
+      httpOptions
+    );
+  }
+
   public deleteProduct(id: number) {
     return this._http.delete(`https://localhost:7242/api/products/${id}`);
   }
