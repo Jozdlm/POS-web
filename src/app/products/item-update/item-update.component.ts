@@ -72,6 +72,12 @@ export class ItemUpdateComponent {
   }
 
   public handleSubmit(): void {
-    console.log(this.itemForm.value);
+    if (this.itemForm.valid) {
+      this._productService
+        .updateProduct(this.productId, this.createProductDto())
+        .subscribe({
+          next: (res) => this._router.navigate(['/products']),
+        });
+    }
   }
 }
