@@ -19,8 +19,6 @@ export class ItemUpdateComponent {
   private _activatedRoute = inject(ActivatedRoute);
   private _router = inject(Router);
 
-  public product!: Product;
-
   public itemForm = this._formBuilder.group({
     barcode: [''],
     product_name: ['', Validators.required],
@@ -38,7 +36,7 @@ export class ItemUpdateComponent {
       .pipe(switchMap(({ id }) => this._productService.getProductById(id)))
       .subscribe({
         next: (product) => this.setFormValues(product),
-        error: (error) => this.handleErrorHttp(),
+        error: () => this.handleErrorHttp(),
       });
   }
 
