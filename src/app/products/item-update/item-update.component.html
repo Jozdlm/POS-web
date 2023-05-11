@@ -63,15 +63,17 @@
         <option value="1">Activado</option>
       </select>
     </div>
-    <button
-      type="button"
-      class="btn btn-outline-danger"
-      [routerLink]="['/products']"
-    >
-      Cancelar
-    </button>
-    <button type="button" class="btn btn-primary" [disabled]="itemForm.invalid">
-      Guardar
-    </button>
+    <div class="d-flex justify-content-end gap-2">
+      <button
+        type="button"
+        class="btn btn-outline-danger"
+        [routerLink]="['/products']"
+      >
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-primary" [disabled]="itemForm.invalid">
+        Guardar
+      </button>
+    </div>
   </form>
 </div>
