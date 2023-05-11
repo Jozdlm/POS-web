@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '../product.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { of, switchMap } from 'rxjs';
-import { Product } from '../product';
+import { Product, ProductDto } from '../product';
 
 @Component({
   selector: 'app-item-update',
@@ -18,6 +18,8 @@ export class ItemUpdateComponent {
   private _formBuilder = inject(FormBuilder);
   private _activatedRoute = inject(ActivatedRoute);
   private _router = inject(Router);
+
+  public productId: number = 0;
 
   public itemForm = this._formBuilder.group({
     barcode: [''],
@@ -41,6 +43,7 @@ export class ItemUpdateComponent {
   }
 
   public setFormValues(product: Product): void {
+    this.productId = product.id;
     this.itemForm.patchValue({
       barcode: product.barcode,
       product_name: product.product_name,
@@ -49,6 +52,19 @@ export class ItemUpdateComponent {
       category_id: product.category.id,
       active: Number(product.active),
     });
+  }
+
+  public createProductDto(): ProductDto {
+    const formValue = { ...this.itemForm.value };
+    return {
+      category_id: parseInt(`${formValue.category_id}`),
+      img_url: '',
+      active: formValue.active === 1,
+      barcode: formValue.barcode!,
+      product_name: formValue.product_name!,
+      min_stock: formValue.min_stock!,
+      selling_price: formValue.selling_price!,
+    };
   }
 
   public handleErrorHttp(): void {
