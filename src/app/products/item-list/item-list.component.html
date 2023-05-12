@@ -16,7 +16,9 @@
       <td>{{ item.category.name }}</td>
       <td>{{ item.min_stock }}</td>
       <td>{{ item.selling_price | currency : "Q" }}</td>
-      <td>{{ item.active }}</td>
+      <td>
+        <span ProductStatus [isActive]="item.active"></span>
+      </td>
       <td>
         <div class="dropdown">
           <button
