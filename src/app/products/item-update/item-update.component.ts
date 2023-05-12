@@ -56,10 +56,11 @@ export class ItemUpdateComponent {
 
   public createProductDto(): ProductDto {
     const formValue = { ...this.itemForm.value };
+
     return {
-      category_id: parseInt(`${formValue.category_id}`),
+      category_id: Number(formValue.category_id),
       img_url: '',
-      active: formValue.active === 1,
+      active: !!Number(formValue.active),
       barcode: formValue.barcode!,
       product_name: formValue.product_name!,
       min_stock: formValue.min_stock!,
