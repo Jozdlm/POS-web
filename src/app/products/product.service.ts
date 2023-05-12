@@ -12,9 +12,7 @@ export class ProductService {
   constructor() {}
 
   public getProducts(): Observable<Product[]> {
-    return this._http
-      .get<Product[]>('https://localhost:7242/api/products')
-      .pipe(map((data: any[]) => data.map(this._fmtProduct)));
+    return this._http.get<Product[]>('https://localhost:7242/api/products');
   }
 
   public getProductById(id: number): Observable<Product> {
@@ -52,12 +50,5 @@ export class ProductService {
 
   public deleteProduct(id: number) {
     return this._http.delete(`https://localhost:7242/api/products/${id}`);
-  }
-
-  private _fmtProduct(product: any): Product {
-    return <Product>{
-      ...product,
-      active: product.active ? 'Activo' : 'Desactivado',
-    };
   }
 }
