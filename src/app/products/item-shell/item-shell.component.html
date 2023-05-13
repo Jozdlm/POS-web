@@ -10,6 +10,10 @@
   Nuevo Producto
 </button>
 
+<form [formGroup]="searchForm">
+  <input type="text" placeholder="Buscar producto" class="form-control" formControlName="query">
+</form>
+
 <app-item-form
   [categories]="categories"
   (onCreateProduct)="createProduct($event)"
