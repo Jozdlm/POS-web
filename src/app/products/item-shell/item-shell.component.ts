@@ -5,6 +5,7 @@ import { Category, Product, ProductDto } from '../product';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import { ItemListComponent } from '../item-list/item-list.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-item-shell',
@@ -32,6 +33,14 @@ export class ItemShellComponent {
     this._productService.getCategories().subscribe({
       next: (categories) => this.categories = categories
     })
+
+    this.searchForm.get('query')?.valueChanges
+      .pipe(debounceTime(500))
+      .subscribe(query => this.searchProduct(query ?? ''));
+  }
+
+  public searchProduct(searchTerm: string): void {
+    console.log(searchTerm);
   }
 
   public createProduct(productDto: ProductDto): void {
