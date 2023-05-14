@@ -10,11 +10,12 @@
   Nuevo Producto
 </button>
 
-<form [formGroup]="searchForm">
+<form [formGroup]="searchForm" autocomplete="off">
   <input
     type="text"
     placeholder="Buscar producto"
     class="form-control"
+    name="query-search"
     formControlName="query"
   />
 </form>
