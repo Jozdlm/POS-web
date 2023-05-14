@@ -10,9 +10,14 @@ import { debounceTime } from 'rxjs';
 @Component({
   selector: 'app-item-shell',
   standalone: true,
-  imports: [CommonModule, ItemFormComponent, ItemListComponent, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ItemFormComponent,
+    ItemListComponent,
+    ReactiveFormsModule,
+  ],
   templateUrl: './item-shell.component.html',
-  styleUrls: ['./item-shell.component.scss']
+  styleUrls: ['./item-shell.component.scss'],
 })
 export class ItemShellComponent {
   private _productService = inject(ProductService);
@@ -22,21 +27,22 @@ export class ItemShellComponent {
   public categories: Category[] = [];
 
   public searchForm = this._formBuilder.group({
-    query: ['', Validators.required]
-  })
+    query: ['', Validators.required],
+  });
 
   constructor() {
     this._productService.getProducts().subscribe({
-      next: (products) => this.products = products
-    })
+      next: (products) => (this.products = products),
+    });
 
     this._productService.getCategories().subscribe({
-      next: (categories) => this.categories = categories
-    })
+      next: (categories) => (this.categories = categories),
+    });
 
-    this.searchForm.get('query')?.valueChanges
-      .pipe(debounceTime(500))
-      .subscribe(query => this.searchProduct(query ?? ''));
+    this.searchForm
+      .get('query')
+      ?.valueChanges.pipe(debounceTime(500))
+      .subscribe((query) => this.searchProduct(query ?? ''));
   }
 
   public searchProduct(searchTerm: string): void {
@@ -49,9 +55,9 @@ export class ItemShellComponent {
         console.log(res);
 
         this._productService.getProducts().subscribe({
-          next: (products) => (this.products = products)
+          next: (products) => (this.products = products),
         });
-      }
+      },
     });
   }
 
