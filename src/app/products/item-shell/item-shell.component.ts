@@ -46,7 +46,8 @@ export class ItemShellComponent {
   }
 
   public searchProduct(searchTerm: string): void {
-    console.log(searchTerm);
+    this._productService.getProductsByName(searchTerm)
+      .subscribe(products => this.products = products);
   }
 
   public createProduct(productDto: ProductDto): void {
