@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Category, Product, ProductDto } from './product';
@@ -13,6 +13,12 @@ export class ProductService {
 
   public getProducts(): Observable<Product[]> {
     return this._http.get<Product[]>('https://localhost:7242/api/products');
+  }
+
+  public getProductsByName(searchTerm: string): Observable<Product[]> {
+    return this._http.get<Product[]>('https://localhost:7242/api/products', {
+      params: new HttpParams().append('q', searchTerm)
+    });
   }
 
   public getProductById(id: number): Observable<Product> {
