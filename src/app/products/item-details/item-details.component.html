@@ -1,9 +1,33 @@
 <section *ngIf="product">
-  <h3> {{product.barcode}} </h3>
-  <p> {{product.product_name}} </p>
-  <p>Mínimo Stock: {{product.min_stock}} </p>
-  <p>Precio Venta: {{product.selling_price}} </p>
-  <p>Categoría: {{product.category.name}} </p>
-  <p>Estado: {{product.active}} </p>
-  <p>Imágen: {{product.img_url}} </p>
+  <div class="row p-4">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header">Producto #{{ product.id }}</div>
+        <div class="card-body">
+          <h5 class="card-title">{{ product.product_name }}</h5>
+          <p class="mb-2" ProductStatus [isActive]="product.active"></p>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span class="fw-semibold">Código:</span> {{ product.barcode }}
+            </li>
+            <li class="list-group-item">
+              <span class="fw-semibold">Categoría:</span>
+              {{ product.category.name }}
+            </li>
+            <li class="list-group-item">
+              <span class="fw-semibold">Existencia Mínima:</span> {{ product.min_stock }}
+            </li>
+            <li class="list-group-item">
+              <span class="fw-semibold">Precio Venta:</span>
+              {{ product.selling_price | currency:'Q' }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <h1 class="fs-3">Movimientos</h1>
+    </div>
+  </div>
 </section>

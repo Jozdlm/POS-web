@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../product.service';
 import { Product } from '../product';
+import { ProductStatusDirective } from '../product-status.directive';
 
 @Component({
   selector: 'app-item-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ProductStatusDirective],
   templateUrl: './item-details.component.html',
   styleUrls: ['./item-details.component.scss'],
 })
