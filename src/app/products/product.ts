@@ -6,7 +6,7 @@ export interface Product {
   selling_price: number;
   img_url: string;
   category: Category;
-  active: boolean;
+  is_active: boolean;
 }
 
 export interface Category {
@@ -22,5 +22,5 @@ export interface ProductDto {
   selling_price: number;
   img_url: string;
   category_id: number;
-  active: boolean;
+  is_active: boolean;
 }

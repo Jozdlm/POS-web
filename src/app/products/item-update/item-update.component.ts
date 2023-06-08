@@ -50,7 +50,7 @@ export class ItemUpdateComponent {
       min_stock: product.min_stock,
       selling_price: product.selling_price,
       category_id: product.category.id,
-      active: Number(product.active),
+      active: Number(product.is_active),
     });
   }
 
@@ -60,7 +60,7 @@ export class ItemUpdateComponent {
     return {
       category_id: Number(formValue.category_id),
       img_url: '',
-      active: !!Number(formValue.active),
+      is_active: !!Number(formValue.active),
       barcode: formValue.barcode!,
       product_name: formValue.product_name!,
       min_stock: formValue.min_stock!,

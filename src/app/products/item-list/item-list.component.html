@@ -17,7 +17,7 @@
       <td>{{ item.min_stock }}</td>
       <td>{{ item.selling_price | currency : "Q" }}</td>
       <td>
-        <span ProductStatus [isActive]="item.active"></span>
+        <span ProductStatus [isActive]="item.is_active"></span>
       </td>
       <td>
         <div class="dropdown">

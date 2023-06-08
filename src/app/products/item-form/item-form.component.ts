@@ -30,7 +30,7 @@ export class ItemFormComponent {
     return {
       category_id: parseInt(`${formValue.category_id}`),
       img_url: '',
-      active: true,
+      is_active: true,
       barcode: formValue.barcode!,
       product_name: formValue.product_name!,
       min_stock: formValue.min_stock!,

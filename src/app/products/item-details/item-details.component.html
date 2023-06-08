@@ -5,7 +5,7 @@
         <div class="card-header">Producto #{{ product.id }}</div>
         <div class="card-body">
           <h5 class="card-title">{{ product.product_name }}</h5>
-          <p class="mb-2" ProductStatus [isActive]="product.active"></p>
+          <p class="mb-2" ProductStatus [isActive]="product.is_active"></p>
           <ul class="list-group">
             <li class="list-group-item">
               <span class="fw-semibold">Código:</span> {{ product.barcode }}
