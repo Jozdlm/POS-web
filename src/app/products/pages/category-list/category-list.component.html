@@ -1,1 +1,5 @@
 <p>category-list works!</p>
+
+<div>
+    <p *ngFor="let category of categories$ | async">{{category.name}}</p>
+</div>

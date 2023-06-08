@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CategoryService } from '../../category.service';
 
 @Component({
   selector: 'app-category-list',
@@ -9,5 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./category-list.component.scss']
 })
 export class CategoryListComponent {
+  private _categoryService = inject(CategoryService);
 
+  public categories$ = this._categoryService.getCategories();
 }
