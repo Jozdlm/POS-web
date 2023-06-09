@@ -6,6 +6,7 @@ import { ItemFormComponent } from '../item-form/item-form.component';
 import { ItemListComponent } from '../item-list/item-list.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-item-shell',
@@ -21,6 +22,7 @@ import { debounceTime } from 'rxjs';
 })
 export class ItemShellComponent {
   private _productService = inject(ProductService);
+  private _categoryService = inject(CategoryService);
   private _formBuilder = inject(FormBuilder);
 
   public products: Product[] = [];
@@ -35,7 +37,7 @@ export class ItemShellComponent {
       next: (products) => (this.products = products),
     });
 
-    this._productService.getCategories().subscribe({
+    this._categoryService.getCategories().subscribe({
       next: (categories) => (this.categories = categories),
     });
 

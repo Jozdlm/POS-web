@@ -25,9 +25,9 @@ export class ProductService {
     return this._http.get<Product>(`https://localhost:7242/api/products/${id}`);
   }
 
-  public getCategories(): Observable<Category[]> {
-    return this._http.get<Category[]>(
-      'https://localhost:7242/api/products-categories'
+  public getProductsByCategory(categoryName: string): Observable<Product[]> {
+    return this._http.get<Product[]>(
+      `https://localhost:7242/api/products/${categoryName}`
     );
   }
 

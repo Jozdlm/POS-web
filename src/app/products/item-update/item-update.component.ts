@@ -5,6 +5,7 @@ import { ProductService } from '../product.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { of, switchMap } from 'rxjs';
 import { Product, ProductDto } from '../product';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-item-update',
@@ -15,6 +16,7 @@ import { Product, ProductDto } from '../product';
 })
 export class ItemUpdateComponent {
   private _productService = inject(ProductService);
+  private _categoryService = inject(CategoryService);
   private _formBuilder = inject(FormBuilder);
   private _activatedRoute = inject(ActivatedRoute);
   private _router = inject(Router);
@@ -31,7 +33,7 @@ export class ItemUpdateComponent {
     active: [1, [Validators.required]],
   });
 
-  public categories$ = this._productService.getCategories();
+  public categories$ = this._categoryService.getCategories();
 
   public constructor() {
     this._activatedRoute.params
