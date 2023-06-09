@@ -23,7 +23,6 @@ export class ItemDetailsComponent {
     this.productId = Number(this.route.snapshot.params['id']);
     this._productService.getProductById(this.productId).subscribe({
       next: (value) => {
-        console.log(value);
         this.product = value;
       },
     });
