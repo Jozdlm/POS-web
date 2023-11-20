@@ -1,1 +1,108 @@
-<p>add-quotation works!</p>
+<div class="container mt-3">
+  <div class="row mb-2">
+    <h1 class="fs-3">Nueva Cotización</h1>
+  </div>
+  <div class="row">
+    <div class="col-8">
+      <h2 class="fs-5">Añadir Articulo</h2>
+
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="search-field"
+          placeholder=""
+        />
+        <label for="search-field">Buscar</label>
+      </div>
+
+      <div>
+        <p>Product Result</p>
+      </div>
+
+      <hr />
+
+      <h2 class="fs-5">Articulos</h2>
+
+      <table class="table table-striped">
+        <thead>
+          <th>#</th>
+          <th>Descripción</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Importe</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Cuaderno Espiral 100H Cuadros</td>
+            <td>1</td>
+            <td>GTQ 2.00</td>
+            <td>GTQ 3.00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <div>
+        <p class="fs-5">Total: GTQ 100.00</p>
+      </div>
+    </div>
+    <div class="col-4">
+      <h2 class="fs-5">Datos Generales</h2>
+
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="customer-field"
+          placeholder=""
+        />
+        <label for="customer-field">Cliente</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="student-field"
+          placeholder=""
+        />
+        <label for="student-field">Estudiante</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          type="date"
+          class="form-control"
+          id="date-field"
+          placeholder=""
+        />
+        <label for="date-field">Fecha</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="school-grade-field"
+          placeholder=""
+        />
+        <label for="school-grade-field">Grado</label>
+      </div>
+
+      <div class="form-floating mb-3">
+        <input
+          type="text"
+          class="form-control"
+          id="school-field"
+          placeholder=""
+        />
+        <label for="school-field">Centro Educativo</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Generar Cotización</button>
+    </div>
+  </div>
+</div>
