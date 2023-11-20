@@ -5,6 +5,7 @@ import { ItemUpdateComponent } from "./products/item-update/item-update.componen
 import { CategoryListComponent } from "./products/pages/category-list/category-list.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { QuotationComponent } from "./quotations/quotation.component";
+import { AddQuotationComponent } from "./quotations/pages/add-quotation/add-quotation.component";
 
 export const APP_ROUTES: Routes = [
   { path: 'categories', component: CategoryListComponent },
@@ -12,5 +13,6 @@ export const APP_ROUTES: Routes = [
   { path: 'products/edit/:id', component: ItemUpdateComponent },
   { path: 'products/:id', component: ItemDetailsComponent },
   { path: 'quotations', component: QuotationComponent },
+  { path: 'quotations/add', component: AddQuotationComponent },
   { path: '', component: WelcomeComponent, pathMatch: 'full' },
 ];
