@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { SupabaseService } from 'src/app/core/services/supabase.service';
 
 @Component({
   standalone: true,
@@ -11,13 +12,32 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
   styleUrl: './add-quotation.component.scss',
 })
 export class AddQuotationComponent {
+  private readonly _supabaseService = inject(SupabaseService);
+  private readonly _supabase = this._supabaseService.supabase;
   public searchControl = new FormControl('');
+  // TODO: Add typo to array type
+  public filteredProducts: any[] = [];
 
   constructor() {
     this.searchControl.valueChanges
       .pipe(debounceTime(400), distinctUntilChanged())
-      .subscribe((value) => this.searchProduct(value));
+      .subscribe(async (value) => {
+        if (value) {
+          const products = await this.searchProduct(value);
+          this.filteredProducts = products;
+        }
+      });
   }
 
-  public searchProduct(query: string | null): void {}
+  // TODO: Add typo to return type
+  public async searchProduct(query: string): Promise<any[]> {
+    const querySanitized = query.toLowerCase().trim();
+    let { data: products, error } = await this._supabase
+      .from('products')
+      .select('*')
+      .ilike('name', `%${querySanitized}%`)
+      .range(0, 7);
+
+    return products || [];
+  }
 }
