@@ -31,6 +31,7 @@
           <th>Cantidad</th>
           <th>Precio</th>
           <th>Importe</th>
+          <th></th>
         </thead>
         <tbody>
           <tr>
@@ -39,6 +40,7 @@
             <td>1</td>
             <td>GTQ 2.00</td>
             <td>GTQ 3.00</td>
+            <td><button class="btn btn-outline-danger">Descartar</button></td>
           </tr>
         </tbody>
       </table>
@@ -99,8 +101,16 @@
           <label for="school-field">Centro Educativo</label>
         </div>
         <div class="d-flex justify-content-end column-gap-2">
-          <button type="button" class="btn btn-outline-danger" routerLink="/quotations">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Generar Cotización</button>
+          <button
+            type="button"
+            class="btn btn-outline-danger"
+            routerLink="/quotations"
+          >
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            Generar Cotización
+          </button>
         </div>
       </form>
     </div>
