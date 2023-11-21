@@ -12,12 +12,13 @@
           class="form-control"
           id="search-field"
           placeholder=""
+          [formControl]="searchControl"
         />
         <label for="search-field">Buscar</label>
       </div>
 
       <div>
-        <p>Product Result</p>
+        <p>{{searchControl.valueChanges | async}}</p>
       </div>
 
       <hr />
