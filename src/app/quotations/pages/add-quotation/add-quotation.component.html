@@ -43,7 +43,7 @@
         </tbody>
       </table>
 
-      <hr>
+      <hr />
 
       <div>
         <p class="fs-5">Total: GTQ 100.00</p>
@@ -52,57 +52,57 @@
     <div class="col-4">
       <h2 class="fs-5">Datos Generales</h2>
 
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          id="customer-field"
-          placeholder=""
-        />
-        <label for="customer-field">Cliente</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          id="student-field"
-          placeholder=""
-        />
-        <label for="student-field">Estudiante</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <input
-          type="date"
-          class="form-control"
-          id="date-field"
-          placeholder=""
-        />
-        <label for="date-field">Fecha</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          id="school-grade-field"
-          placeholder=""
-        />
-        <label for="school-grade-field">Grado</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          id="school-field"
-          placeholder=""
-        />
-        <label for="school-field">Centro Educativo</label>
-      </div>
-
-      <button type="submit" class="btn btn-primary">Generar Cotización</button>
+      <form>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="customer-field"
+            placeholder=""
+          />
+          <label for="customer-field">Cliente</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="student-field"
+            placeholder=""
+          />
+          <label for="student-field">Estudiante</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="date"
+            class="form-control"
+            id="date-field"
+            placeholder=""
+          />
+          <label for="date-field">Fecha</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="school-grade-field"
+            placeholder=""
+          />
+          <label for="school-grade-field">Grado</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="school-field"
+            placeholder=""
+          />
+          <label for="school-field">Centro Educativo</label>
+        </div>
+        <div class="d-flex justify-content-end column-gap-2">
+          <button type="button" class="btn btn-outline-danger" routerLink="/quotations">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Generar Cotización</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
