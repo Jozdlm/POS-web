@@ -17,13 +17,17 @@
         <label for="search-field">Buscar</label>
       </div>
 
+      <!-- TODO: Create a select for search fields (name, code) -->
+
       <div>
         <div class="search-result">
           @for (item of filteredProducts; track item.id) {
             <div class="border rounded p-3">
-              <p>{{item.name}}</p>
+              <p>{{ item.name }}</p>
               <div class="d-flex justify-content-between align-items-end">
-                <p class="fw-medium">{{item.selling_price | currency:'GTQ'}}</p>
+                <p class="fw-medium">
+                  {{ item.selling_price | currency: "GTQ" }}
+                </p>
                 <button type="button" class="btn btn-light">Añadir</button>
               </div>
             </div>
@@ -48,6 +52,7 @@
           <tr>
             <td>1</td>
             <td>Cuaderno Espiral 100H Cuadros</td>
+            <!-- TODO: Form field to increase or decrease the quantity -->
             <td>1</td>
             <td>GTQ 2.00</td>
             <td>GTQ 3.00</td>
@@ -59,13 +64,14 @@
       <hr />
 
       <div>
+        <!-- TODO: Get the total dinamicly with signals -->
         <p class="fs-5">Total: GTQ 100.00</p>
       </div>
     </div>
     <div class="col-4">
       <h2 class="fs-5">Datos Generales</h2>
 
-      <form>
+      <form autocomplete="off">
         <div class="form-floating mb-3">
           <input
             type="text"
@@ -94,13 +100,16 @@
           <label for="date-field">Fecha</label>
         </div>
         <div class="form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
+          <select
+            class="form-select"
             id="school-grade-field"
-            placeholder=""
-          />
-          <label for="school-grade-field">Grado</label>
+            aria-label="Floating label select example"
+          >
+            @for (op of schoolGrades; track op.id) {
+              <option [value]="op.id">{{ op.name }}</option>
+            }
+          </select>
+          <label for="school-grade-field">Grado Academico</label>
         </div>
         <div class="form-floating mb-3">
           <input
