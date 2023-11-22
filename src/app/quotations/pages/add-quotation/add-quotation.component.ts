@@ -6,6 +6,7 @@ import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { SupabaseService } from 'src/app/core/services/supabase.service';
 import { SchoolGradeService } from '../../services/school-grade.service';
 import { SchoolGrade } from '../../models/school-grades';
+import { QuotationStateService } from '../../services/quotation-state.service';
 
 @Component({
   standalone: true,
@@ -16,12 +17,14 @@ import { SchoolGrade } from '../../models/school-grades';
 export class AddQuotationComponent {
   private readonly _supabaseService = inject(SupabaseService);
   private readonly _schoolGradeService = inject(SchoolGradeService);
+  private readonly _quotationState = inject(QuotationStateService);
   private readonly _supabase = this._supabaseService.supabase;
   private _subscriptions = new Subscription();
   public searchControl = new FormControl('');
   // TODO: Add typo to array type
   public filteredProducts: any[] = [];
   public schoolGrades: SchoolGrade[] = [];
+  public quotationItems$ = this._quotationState.items$;
 
   // TODO: Establecer la fecha por defecto de la cotización el día de hoy
 
@@ -67,5 +70,9 @@ export class AddQuotationComponent {
       .range(0, 7);
 
     return products || [];
+  }
+
+  public addItemToQuotation(item: any): void {
+    this._quotationState.addItem(item);
   }
 }

@@ -28,7 +28,8 @@
                 <p class="fw-medium">
                   {{ item.selling_price | currency: "GTQ" }}
                 </p>
-                <button type="button" class="btn btn-light">Añadir</button>
+                <!-- TODO: Implementar lógica para añadir un producto a la cotización -->
+                <button type="button" class="btn btn-light" (click)="addItemToQuotation(item)">Añadir</button>
               </div>
             </div>
           }
@@ -38,6 +39,8 @@
       <hr />
 
       <h2 class="fs-5">Articulos</h2>
+
+      <pre>{{quotationItems$ | async | json}}</pre>
 
       <table class="table align-middle">
         <thead>
@@ -55,13 +58,17 @@
             <td>1</td>
             <td>Cuaderno Espiral 100H Cuadros</td>
             <td>
+              <!-- TODO: Implementar lógica para aumentar o disminuir la cantidad -->
               <button class="btn btn-light me-1">-</button>
               1
               <button class="btn btn-light ms-1">+</button>
             </td>
             <td>GTQ 2.00</td>
             <td>GTQ 3.00</td>
-            <td><button class="btn btn-outline-danger">Descartar</button></td>
+            <td>
+              <!-- TODO: Implementar lógica para eliminar articulo de la cotización -->
+              <button class="btn btn-outline-danger">Descartar</button>
+            </td>
           </tr>
         </tbody>
       </table>
