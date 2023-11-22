@@ -72,7 +72,14 @@ export class AddQuotationComponent {
     return products || [];
   }
 
+  // TODO: Add typo to parameter type
   public addItemToQuotation(item: any): void {
-    this._quotationState.addItem(item);
+    this._quotationState.addItem({
+      // TODO: Create a object that match with the type
+      ...item,
+      description: item.name,
+      quantity: 1,
+      ammount: 1
+    });
   }
 }
