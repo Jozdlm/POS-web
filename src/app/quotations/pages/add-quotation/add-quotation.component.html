@@ -39,21 +39,26 @@
 
       <h2 class="fs-5">Articulos</h2>
 
-      <table class="table table-striped">
+      <table class="table align-middle">
         <thead>
-          <th>#</th>
-          <th>Descripción</th>
-          <th>Cantidad</th>
-          <th>Precio</th>
-          <th>Importe</th>
-          <th></th>
+          <tr>
+            <th>#</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Importe</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
           <tr>
             <td>1</td>
             <td>Cuaderno Espiral 100H Cuadros</td>
-            <!-- TODO: Form field to increase or decrease the quantity -->
-            <td>1</td>
+            <td>
+              <button class="btn btn-light me-1">-</button>
+              1
+              <button class="btn btn-light ms-1">+</button>
+            </td>
             <td>GTQ 2.00</td>
             <td>GTQ 3.00</td>
             <td><button class="btn btn-outline-danger">Descartar</button></td>
