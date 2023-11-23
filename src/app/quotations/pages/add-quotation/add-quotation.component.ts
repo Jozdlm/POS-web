@@ -1,12 +1,19 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { SupabaseService } from 'src/app/core/services/supabase.service';
 import { SchoolGradeService } from '../../services/school-grade.service';
 import { SchoolGrade } from '../../models/school-grades';
 import { QuotationStateService } from '../../services/quotation-state.service';
+import { Product } from '@app/quotations/models/product';
+import { QuotationItem } from '@app/quotations/models/quotation-item';
 
 @Component({
   standalone: true,
@@ -22,18 +29,16 @@ export class AddQuotationComponent {
   private readonly _supabase = this._supabaseService.supabase;
   private _subscriptions = new Subscription();
   public searchControl = new FormControl('');
-  // TODO: Add typo to array type
-  public filteredProducts: any[] = [];
+  public filteredProducts: Product[] = [];
   public schoolGrades: SchoolGrade[] = [];
   public quotationItems$ = this._quotationState.items$;
 
-  // TODO: Create a control group for quotations
   public quotationInfo = this._formBuilder.group({
     customerName: ['', [Validators.required, Validators.minLength(3)]],
     studentName: ['', [Validators.required, Validators.minLength(3)]],
     date: [this.getCurrentDate(), Validators.required],
     schoolGrade: ['', [Validators.required, Validators.min(1)]],
-    schoolName: ['', [Validators.required, Validators.minLength(3)]]
+    schoolName: ['', [Validators.required, Validators.minLength(3)]],
   });
 
   constructor() {
@@ -76,8 +81,7 @@ export class AddQuotationComponent {
     }
   }
 
-  // TODO: Add typo to return type
-  public async searchProduct(query: string): Promise<any[]> {
+  public async searchProduct(query: string): Promise<Product[]> {
     const querySanitized = query.toLowerCase().trim();
     let { data: products, error } = await this._supabase
       .from('products')
@@ -85,17 +89,27 @@ export class AddQuotationComponent {
       .ilike('name', `%${querySanitized}%`)
       .range(0, 7);
 
-    return products || [];
+    return (
+      products?.map((item) => ({
+        id: item.id,
+        name: item.name,
+        barcode: item.barcode,
+        inStock: item.in_stock,
+        isActive: item.is_active,
+        sellingPrice: item.selling_price,
+      })) || []
+    );
   }
 
-  // TODO: Add typo to parameter type
-  public addItemToQuotation(item: any): void {
-    this._quotationState.addItem({
-      // TODO: Create a object that match with the type
-      ...item,
+  public addItemToQuotation(item: Product): void {
+    const quotationItem: QuotationItem = {
+      productId: item.id,
       description: item.name,
       quantity: 1,
-      ammount: 1
-    });
+      price: item.sellingPrice,
+      ammount: 1,
+    };
+
+    this._quotationState.addItem(quotationItem);
   }
 }
