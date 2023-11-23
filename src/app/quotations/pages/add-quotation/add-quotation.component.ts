@@ -116,4 +116,8 @@ export class AddQuotationComponent {
   public removeItemOfQuotation(itemId: number): void {
     this._quotationState.removeItem(itemId);
   }
+
+  public increaseQuantity(itemId: number): void {
+    this._quotationState.increaseQuantity(itemId);
+  }
 }
