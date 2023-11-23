@@ -12,10 +12,17 @@ export class QuotationStateService {
 
   constructor() {}
 
-  public addItem(item: QuotationItem): void {
-    // TODO: Validates if the item is already exist at items array
-    this._items = [...this._items, item];
-    this._stateEmitter.next(this._items);
+  public addItem(newItem: QuotationItem): void {
+    const inArray = this._items.find(
+      (item) => item.productId == newItem.productId,
+    );
+
+    if(inArray) {
+      this.increaseQuantity(newItem.productId);
+    } else {
+      this._items = [...this._items, newItem];
+      this._stateEmitter.next(this._items);
+    }
   }
 
   public removeItem(itemId: number): void {
@@ -56,8 +63,8 @@ export class QuotationStateService {
       if (item.quantity > 1) {
         this._items[itemIndex] = {
           ...item,
-          quantity: newQuantity - 1,
-          ammount: newQuantity - 1 * item.price,
+          quantity: newQuantity,
+          ammount: newQuantity * item.price,
         };
 
         this._stateEmitter.next(this._items);
