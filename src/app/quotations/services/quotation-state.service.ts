@@ -22,4 +22,22 @@ export class QuotationStateService {
     this._items = [...this._items.filter((item) => item.productId != itemId)];
     this._stateEmitter.next(this._items);
   }
+
+  public increaseQuantity(itemId: number): void {
+    const itemIndex = this._items.findIndex(
+      (item) => item.productId === itemId,
+    );
+
+    if (itemIndex !== -1) {
+      const item = this._items[itemIndex];
+
+      this._items[itemIndex] = {
+        ...item,
+        quantity: item.quantity + 1,
+        ammount: item.quantity + 1 * item.price,
+      };
+
+      this._stateEmitter.next(this._items);
+    }
+  }
 }
