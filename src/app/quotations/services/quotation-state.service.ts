@@ -40,4 +40,25 @@ export class QuotationStateService {
       this._stateEmitter.next(this._items);
     }
   }
+
+  public decreaseQuantity(itemId: number): void {
+    const itemIndex = this._items.findIndex(
+      (item) => item.productId === itemId,
+    );
+
+    if (itemIndex !== -1) {
+      const item = this._items[itemIndex];
+
+      if(item.quantity > 1) {
+        this._items[itemIndex] = {
+          ...item,
+          quantity: item.quantity - 1,
+          ammount: item.quantity - 1 * item.price,
+        };
+
+        this._stateEmitter.next(this._items);
+      }
+      // TODO: Otherwise ask to the user if their wants to delete an item
+    }
+  }
 }
