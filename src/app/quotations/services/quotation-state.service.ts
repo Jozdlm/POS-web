@@ -23,6 +23,8 @@ export class QuotationStateService {
     this._stateEmitter.next(this._items);
   }
 
+  // TODO: Improve the code readability
+
   public increaseQuantity(itemId: number): void {
     const itemIndex = this._items.findIndex(
       (item) => item.productId === itemId,
@@ -30,11 +32,12 @@ export class QuotationStateService {
 
     if (itemIndex !== -1) {
       const item = this._items[itemIndex];
+      const newQuantity = item.quantity + 1;
 
       this._items[itemIndex] = {
         ...item,
-        quantity: item.quantity + 1,
-        ammount: item.quantity + 1 * item.price,
+        quantity: newQuantity,
+        ammount: newQuantity * item.price,
       };
 
       this._stateEmitter.next(this._items);
@@ -48,12 +51,13 @@ export class QuotationStateService {
 
     if (itemIndex !== -1) {
       const item = this._items[itemIndex];
+      const newQuantity = item.quantity - 1;
 
-      if(item.quantity > 1) {
+      if (item.quantity > 1) {
         this._items[itemIndex] = {
           ...item,
-          quantity: item.quantity - 1,
-          ammount: item.quantity - 1 * item.price,
+          quantity: newQuantity - 1,
+          ammount: newQuantity - 1 * item.price,
         };
 
         this._stateEmitter.next(this._items);
