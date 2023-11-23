@@ -17,6 +17,8 @@
         <label for="search-field">Buscar</label>
       </div>
 
+      <!-- TODO: Create button to clear the query search -->
+
       <!-- TODO: Create a select for search fields (name, code) -->
 
       <div>
@@ -28,7 +30,6 @@
                 <p class="fw-medium">
                   {{ item.sellingPrice | currency: "GTQ" }}
                 </p>
-                <!-- TODO: Implementar lógica para añadir un producto a la cotización -->
                 <button
                   type="button"
                   class="btn btn-light"
@@ -71,8 +72,12 @@
               <td>{{ item.price | currency: "GTQ" }}</td>
               <td>{{ item.ammount | currency: "GTQ" }}</td>
               <td>
-                <!-- TODO: Implementar lógica para eliminar articulo de la cotización -->
-                <button class="btn btn-outline-danger">Descartar</button>
+                <button
+                  class="btn btn-outline-danger"
+                  (click)="removeItemOfQuotation(item.productId)"
+                >
+                  Descartar
+                </button>
               </td>
             </tr>
           } @empty {

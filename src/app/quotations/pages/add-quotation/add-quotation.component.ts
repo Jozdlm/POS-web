@@ -112,4 +112,8 @@ export class AddQuotationComponent {
 
     this._quotationState.addItem(quotationItem);
   }
+
+  public removeItemOfQuotation(itemId: number): void {
+    this._quotationState.removeItem(itemId);
+  }
 }
