@@ -95,13 +95,14 @@
     <div class="col-4">
       <h2 class="fs-5">Datos Generales</h2>
 
-      <form autocomplete="off">
+      <form autocomplete="off" [formGroup]="quotationInfo">
         <div class="form-floating mb-3">
           <input
             type="text"
             class="form-control"
             id="customer-field"
             placeholder=""
+            formControlName="customerName"
           />
           <label for="customer-field">Cliente</label>
         </div>
@@ -111,6 +112,7 @@
             class="form-control"
             id="student-field"
             placeholder=""
+            formControlName="studentName"
           />
           <label for="student-field">Estudiante</label>
         </div>
@@ -120,6 +122,7 @@
             class="form-control"
             id="date-field"
             placeholder=""
+            formControlName="date"
           />
           <label for="date-field">Fecha</label>
         </div>
@@ -128,7 +131,9 @@
             class="form-select"
             id="school-grade-field"
             aria-label="Floating label select example"
+            formControlName="schoolGrade"
           >
+            <option value="">Escoge un grado</option>
             @for (op of schoolGrades; track op.id) {
               <option [value]="op.id">{{ op.name }}</option>
             }
@@ -141,6 +146,7 @@
             class="form-control"
             id="school-field"
             placeholder=""
+            formControlName="schoolName"
           />
           <label for="school-field">Centro Educativo</label>
         </div>

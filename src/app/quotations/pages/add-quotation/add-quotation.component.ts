@@ -27,11 +27,13 @@ export class AddQuotationComponent {
   public schoolGrades: SchoolGrade[] = [];
   public quotationItems$ = this._quotationState.items$;
 
-  // TODO: Establecer la fecha por defecto de la cotización el día de hoy
-
   // TODO: Create a control group for quotations
   public quotationInfo = this._formBuilder.group({
-    date: [this.getCurrentDate(), Validators.required]
+    customerName: ['', [Validators.required, Validators.minLength(3)]],
+    studentName: ['', [Validators.required, Validators.minLength(3)]],
+    date: [this.getCurrentDate(), Validators.required],
+    schoolGrade: ['', [Validators.required, Validators.min(1)]],
+    schoolName: ['', [Validators.required, Validators.minLength(3)]]
   });
 
   constructor() {
