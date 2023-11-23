@@ -120,4 +120,8 @@ export class AddQuotationComponent {
   public increaseQuantity(itemId: number): void {
     this._quotationState.increaseQuantity(itemId);
   }
+
+  public decreaseQuantity(itemId: number): void {
+    this._quotationState.decreaseQuantity(itemId);
+  }
 }
