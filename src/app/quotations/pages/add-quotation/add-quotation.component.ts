@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { SupabaseService } from 'src/app/core/services/supabase.service';
 import { SchoolGradeService } from '../../services/school-grade.service';
@@ -18,6 +18,7 @@ export class AddQuotationComponent {
   private readonly _supabaseService = inject(SupabaseService);
   private readonly _schoolGradeService = inject(SchoolGradeService);
   private readonly _quotationState = inject(QuotationStateService);
+  private readonly _formBuilder = inject(FormBuilder);
   private readonly _supabase = this._supabaseService.supabase;
   private _subscriptions = new Subscription();
   public searchControl = new FormControl('');
@@ -29,6 +30,9 @@ export class AddQuotationComponent {
   // TODO: Establecer la fecha por defecto de la cotización el día de hoy
 
   // TODO: Create a control group for quotations
+  public quotationInfo = this._formBuilder.group({
+    date: [this.getCurrentDate(), Validators.required]
+  });
 
   constructor() {
     this.subscribeToSearchChanges();
@@ -36,6 +40,16 @@ export class AddQuotationComponent {
     inject(DestroyRef).onDestroy(() => {
       this._subscriptions.unsubscribe();
     });
+  }
+
+  private getCurrentDate(): string {
+    const currentDate = new Date();
+
+    const day = currentDate.getDate().toString().padStart(2, '0');
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Note: Month is zero-based
+    const year = currentDate.getFullYear().toString();
+
+    return `${year}-${month}-${day}`;
   }
 
   private subscribeToSearchChanges(): void {
