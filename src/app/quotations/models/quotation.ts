@@ -20,6 +20,5 @@ export interface QuotationDto {
   school_grade: number;
   school_name: string;
   total_ammount: number;
-  items: QuotationItem[];
   created_at?: string;
 }
