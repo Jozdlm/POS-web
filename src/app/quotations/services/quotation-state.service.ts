@@ -18,6 +18,11 @@ export class QuotationStateService {
     return this._items.reduce((prev, curr) => prev * 1 + curr.ammount, 0.0);
   }
 
+  private emmitStateChanges(): void {
+    this._stateEmitter.next(this._items);
+    this._ammountEmitter.next(this.getTotalAmmount());
+  }
+
   public addItem(newItem: QuotationItem): void {
     const inArray = this._items.find(
       (item) => item.productId == newItem.productId,
@@ -27,15 +32,13 @@ export class QuotationStateService {
       this.increaseQuantity(newItem.productId);
     } else {
       this._items = [...this._items, newItem];
-      this._stateEmitter.next(this._items);
-      this._ammountEmitter.next(this.getTotalAmmount());
+      this.emmitStateChanges();
     }
   }
 
   public removeItem(itemId: number): void {
     this._items = [...this._items.filter((item) => item.productId != itemId)];
-    this._stateEmitter.next(this._items);
-    this._ammountEmitter.next(this.getTotalAmmount());
+    this.emmitStateChanges();
   }
 
   // TODO: Improve the code readability
@@ -55,8 +58,7 @@ export class QuotationStateService {
         ammount: newQuantity * item.price,
       };
 
-      this._stateEmitter.next(this._items);
-      this._ammountEmitter.next(this.getTotalAmmount());
+      this.emmitStateChanges();
     }
   }
 
@@ -76,8 +78,7 @@ export class QuotationStateService {
           ammount: newQuantity * item.price,
         };
 
-        this._stateEmitter.next(this._items);
-        this._ammountEmitter.next(this.getTotalAmmount());
+        this.emmitStateChanges();
       }
       // TODO: Otherwise ask to the user if their wants to delete an item
     }
