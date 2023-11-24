@@ -32,6 +32,7 @@ export class AddQuotationComponent {
   public filteredProducts: Product[] = [];
   public schoolGrades: SchoolGrade[] = [];
   public quotationItems$ = this._quotationState.items$;
+  public totalAmmount$ = this._quotationState.ammount$;
 
   public quotationInfo = this._formBuilder.group({
     customerName: ['', [Validators.required, Validators.minLength(3)]],
@@ -107,7 +108,7 @@ export class AddQuotationComponent {
       description: item.name,
       quantity: 1,
       price: item.sellingPrice,
-      ammount: 1,
+      ammount: item.sellingPrice,
     };
 
     this._quotationState.addItem(quotationItem);
