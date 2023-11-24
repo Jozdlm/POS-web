@@ -23,7 +23,7 @@ export class QuotationStateService {
     this._ammountEmitter.next(this.getTotalAmmount());
   }
 
-  public getStateSnapshot(): any {
+  public getStateSnapshot(): { items: QuotationItem[]; totalAmmount: number } {
     return {
       items: this._items,
       totalAmmount: this.getTotalAmmount(),
