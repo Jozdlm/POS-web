@@ -23,6 +23,13 @@ export class QuotationStateService {
     this._ammountEmitter.next(this.getTotalAmmount());
   }
 
+  public getStateSnapshot(): any {
+    return {
+      items: this._items,
+      totalAmmount: this.getTotalAmmount(),
+    };
+  }
+
   public addItem(newItem: QuotationItem): void {
     const inArray = this._items.find(
       (item) => item.productId == newItem.productId,
@@ -65,7 +72,7 @@ export class QuotationStateService {
   public decreaseQuantity(itemId: number): void {
     const itemIndex = this._items.findIndex(
       (item) => item.productId === itemId,
-      );
+    );
 
     if (itemIndex !== -1) {
       const item = this._items[itemIndex];
