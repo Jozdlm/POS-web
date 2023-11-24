@@ -7,27 +7,35 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class QuotationStateService {
   private _items: QuotationItem[] = [];
+  private _ammountEmitter = new BehaviorSubject<number>(0);
   private _stateEmitter = new BehaviorSubject<QuotationItem[]>([]);
   public readonly items$ = this._stateEmitter.asObservable();
+  public readonly ammount$ = this._ammountEmitter.asObservable();
 
   constructor() {}
+
+  private getTotalAmmount(): number {
+    return this._items.reduce((prev, curr) => prev * 1 + curr.ammount, 0.0);
+  }
 
   public addItem(newItem: QuotationItem): void {
     const inArray = this._items.find(
       (item) => item.productId == newItem.productId,
     );
 
-    if(inArray) {
+    if (inArray) {
       this.increaseQuantity(newItem.productId);
     } else {
       this._items = [...this._items, newItem];
       this._stateEmitter.next(this._items);
+      this._ammountEmitter.next(this.getTotalAmmount());
     }
   }
 
   public removeItem(itemId: number): void {
     this._items = [...this._items.filter((item) => item.productId != itemId)];
     this._stateEmitter.next(this._items);
+    this._ammountEmitter.next(this.getTotalAmmount());
   }
 
   // TODO: Improve the code readability
@@ -48,13 +56,14 @@ export class QuotationStateService {
       };
 
       this._stateEmitter.next(this._items);
+      this._ammountEmitter.next(this.getTotalAmmount());
     }
   }
 
   public decreaseQuantity(itemId: number): void {
     const itemIndex = this._items.findIndex(
       (item) => item.productId === itemId,
-    );
+      );
 
     if (itemIndex !== -1) {
       const item = this._items[itemIndex];
@@ -68,6 +77,7 @@ export class QuotationStateService {
         };
 
         this._stateEmitter.next(this._items);
+        this._ammountEmitter.next(this.getTotalAmmount());
       }
       // TODO: Otherwise ask to the user if their wants to delete an item
     }
