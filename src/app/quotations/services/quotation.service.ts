@@ -7,16 +7,18 @@ import { Quotation, QuotationDto } from '../models/quotation';
 export class QuotationService {
   constructor() {}
 
-  public createQuotation(data: Quotation): void {
-    const quotationDto: QuotationDto = {
-      customer_name: data.customerName,
-      student_name: data.studentName,
-      date: data.date,
-      school_grade: data.schoolGrade,
-      school_name: data.schoolName,
-      total_ammount: data.totalAmmount,
-    }
+  private _mapperQuotation(source: Quotation): QuotationDto {
+    return {
+      customer_name: source.customerName,
+      student_name: source.studentName,
+      date: source.date,
+      school_grade: source.schoolGrade,
+      school_name: source.schoolName,
+      total_ammount: source.totalAmmount,
+    };
+  }
 
-    console.log(quotationDto)
+  public async createQuotation(quotation: Quotation): Promise<void> {
+    const quotationDto: QuotationDto = this._mapperQuotation(quotation);
   }
 }
