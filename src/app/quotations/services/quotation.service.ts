@@ -48,6 +48,16 @@ export class QuotationService {
     return data[0];
   }
 
+  private async _insertItems(items: QuotationItemDto[]): Promise<void> {
+    const { error } = await this._supabase
+      .from('quotation_items')
+      .insert(items);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+  }
+
   public async createQuotation(quotation: Quotation): Promise<void> {
     const quotationDto: QuotationDto = this._mapperQuotation(quotation);
 
@@ -57,5 +67,7 @@ export class QuotationService {
     const quotationItems: QuotationItemDto[] = quotation.items.map((item) =>
       this._mapperItem(item, quotationId),
     );
+
+    await this._insertItems(quotationItems);
   }
 }
