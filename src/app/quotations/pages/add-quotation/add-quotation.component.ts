@@ -124,4 +124,9 @@ export class AddQuotationComponent {
   public decreaseQuantity(itemId: number): void {
     this._quotationState.decreaseQuantity(itemId);
   }
+
+  public clearSearchControl(): void {
+    this.searchControl.reset();
+    this.filteredProducts = [];
+  }
 }
