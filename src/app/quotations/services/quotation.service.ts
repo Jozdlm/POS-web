@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Quotation, QuotationDto } from '../models/quotation';
 import { SupabaseService } from '@app/core/services/supabase.service';
-import { QuotationItemDto } from '../models/quotation-item';
+import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,18 @@ export class QuotationService {
     };
   }
 
+  private _mapperItem(
+    source: QuotationItem,
+    quotationId: number,
+  ): QuotationItemDto {
+    return {
+      product_id: source.productId,
+      quantity: source.quantity,
+      price: source.price,
+      quotation_id: quotationId,
+    };
+  }
+
   private async _insertHeader(header: QuotationDto): Promise<any> {
     const { data, error } = await this._supabase
       .from('quotation_header')
@@ -41,5 +53,9 @@ export class QuotationService {
 
     const insertedHeader = await this._insertHeader(quotationDto);
     const quotationId: number = insertedHeader.id;
+
+    const quotationItems: QuotationItemDto[] = quotation.items.map((item) =>
+      this._mapperItem(item, quotationId),
+    );
   }
 }
