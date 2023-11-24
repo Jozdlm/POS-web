@@ -11,3 +11,15 @@ export interface Quotation {
   items: QuotationItem[];
   createdAt?: string;
 }
+
+export interface QuotationDto {
+  id?: number;
+  customer_name: string;
+  student_name: string;
+  date: string;
+  school_grade: number;
+  school_name: string;
+  total_ammount: number;
+  items: QuotationItem[];
+  created_at?: string;
+}
