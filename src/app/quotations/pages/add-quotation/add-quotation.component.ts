@@ -14,6 +14,7 @@ import { SchoolGrade } from '../../models/school-grades';
 import { QuotationStateService } from '../../services/quotation-state.service';
 import { Product } from '@app/quotations/models/product';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
+import { QuotationService } from '@app/quotations/services/quotation.service';
 
 @Component({
   standalone: true,
@@ -25,6 +26,7 @@ export class AddQuotationComponent {
   private readonly _supabaseService = inject(SupabaseService);
   private readonly _schoolGradeService = inject(SchoolGradeService);
   private readonly _quotationState = inject(QuotationStateService);
+  private readonly _quotationService = inject(QuotationService);
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _supabase = this._supabaseService.supabase;
   private _subscriptions = new Subscription();
@@ -34,7 +36,7 @@ export class AddQuotationComponent {
   public quotationItems$ = this._quotationState.items$;
   public totalAmmount$ = this._quotationState.ammount$;
 
-  public quotationInfo = this._formBuilder.group({
+  public quotationInfo = this._formBuilder.nonNullable.group({
     customerName: ['', [Validators.required, Validators.minLength(3)]],
     studentName: ['', [Validators.required, Validators.minLength(3)]],
     date: [this.getCurrentDate(), Validators.required],
@@ -129,5 +131,17 @@ export class AddQuotationComponent {
   public clearSearchControl(): void {
     this.searchControl.reset();
     this.filteredProducts = [];
+  }
+
+  public createQuotation(): void {
+    const quotationHeader = this.quotationInfo.getRawValue();
+    const quotationSnapshot = this._quotationState.getStateSnapshot();
+
+    this._quotationService.createQuotation({
+      ...quotationHeader,
+      schoolGrade: parseInt(quotationHeader.schoolGrade),
+      items: quotationSnapshot.items,
+      totalAmmount: quotationSnapshot.totalAmmount,
+    });
   }
 }
