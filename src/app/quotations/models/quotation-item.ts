@@ -6,3 +6,11 @@ export interface QuotationItem {
   price: number;
   ammount: number;
 }
+
+export interface QuotationItemDto {
+  id?: number;
+  product_id: number;
+  quantity: number;
+  price: number;
+  quotation_id: number;
+}
