@@ -9,4 +9,5 @@ export interface Quotation {
   schoolName: string;
   totalAmmount: number;
   items: QuotationItem[];
+  createdAt?: string;
 }
