@@ -1,1 +1,23 @@
-<p>welcome works!</p>
+<form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+  <div class="form-floating mb-3">
+    <input
+      type="email"
+      class="form-control"
+      id="emailInput"
+      placeholder="name@example.com"
+      formControlName="email"
+    />
+    <label for="emailInput">Email address</label>
+  </div>
+  <div class="form-floating">
+    <input
+      type="password"
+      class="form-control"
+      id="passwordInput"
+      placeholder="Password"
+      formControlName="password"
+    />
+    <label for="passwordInput">Password</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+</form>
