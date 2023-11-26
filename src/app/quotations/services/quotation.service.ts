@@ -71,6 +71,20 @@ export class QuotationService {
     await this._insertItems(quotationItems);
   }
 
+  // TODO: Map the type from dto to entity and returned
+  public async getQuotations(): Promise<QuotationDto[]> {
+    let { data: quotation_header, error } = await this._supabase
+      .from('quotation_header')
+      // TODO: Get the related table (products) with only the column name
+      .select('*');
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return quotation_header || [];
+  }
+
   // TODO: Get all the data related to quotation_header by foreign keys
   public async getQuotationById(quotationId: number): Promise<any[]> {
     let { data: quotation_header, error } = await this._supabase
@@ -78,7 +92,7 @@ export class QuotationService {
       .select('*')
       .eq('id', quotationId);
 
-    if(error) {
+    if (error) {
       throw new Error(error.message);
     }
 
