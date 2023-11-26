@@ -16,15 +16,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Claudia Hernandez</td>
-        <td>Waldemar Martinez</td>
-        <td>Liceo Cristiano Sendas Nuevas</td>
-        <td>Quinto Perito Contador</td>
-        <td>25-11-2023</td>
-        <td>GTQ500</td>
-      </tr>
+      <!-- TODO: Change the propertys for use the entity properties and not of DTO -->
+      @for (item of quotations; track item.id) {
+        <tr>
+          <td>{{item.id}}</td>
+          <td>{{item.customer_name}}</td>
+          <td>{{item.student_name}}</td>
+          <td>{{item.school_name}}</td>
+          <td>{{item.school_grade}}</td>
+          <td>{{item.date}}</td>
+          <td>{{item.total_ammount | currency: 'GTQ'}}</td>
+        </tr>
+      }
     </tbody>
   </table>
 </div>

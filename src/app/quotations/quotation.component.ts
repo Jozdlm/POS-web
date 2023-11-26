@@ -1,15 +1,24 @@
-import { CommonModule } from "@angular/common";
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RouterModule } from "@angular/router";
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { QuotationService } from './services/quotation.service';
+import { QuotationDto } from './models/quotation';
 
 @Component({
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
+  imports: [CommonModule, RouterModule],
   templateUrl: './quotation.component.html',
   styleUrl: './quotation.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuotationComponent { }
+export class QuotationComponent {
+  private readonly _quotationService = inject(QuotationService);
+  // TODO: Change the type from DTO to Entity
+  public quotations: QuotationDto[] = [];
+
+  constructor() {
+    this._quotationService
+      .getQuotations()
+      .then((values) => (this.quotations = values))
+      .catch((err) => console.error(err));
+  }
+}
