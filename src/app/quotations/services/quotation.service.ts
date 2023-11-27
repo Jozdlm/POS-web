@@ -86,7 +86,9 @@ export class QuotationService {
   }
 
   // TODO: Get all the data related to quotation_header by foreign keys
-  public async getQuotationById(quotationId: number): Promise<any[]> {
+  public async getQuotationById(
+    quotationId: number,
+  ): Promise<QuotationDto | null> {
     let { data: quotation_header, error } = await this._supabase
       .from('quotation_header')
       .select('*')
@@ -96,6 +98,6 @@ export class QuotationService {
       throw new Error(error.message);
     }
 
-    return quotation_header || [];
+    return quotation_header ? quotation_header[0] : null;
   }
 }
