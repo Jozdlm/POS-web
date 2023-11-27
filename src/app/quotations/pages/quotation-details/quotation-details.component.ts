@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuotationService } from '@app/quotations/services/quotation.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-quotation-details',
@@ -11,10 +12,16 @@ import { QuotationService } from '@app/quotations/services/quotation.service';
 })
 export class QuotationDetailsComponent {
   private readonly _quotationService = inject(QuotationService);
+  private readonly _route = inject(ActivatedRoute);
+  public quotationId: number = 0;
 
   constructor() {
+    this._route.paramMap.subscribe(
+      (params) => (this.quotationId = Number(params.get('id'))),
+    );
+
     this._quotationService
-      .getQuotationById(6)
+      .getQuotationById(this.quotationId)
       .then((quotation) => console.log(quotation))
       .catch((err) => console.error(err));
   }
