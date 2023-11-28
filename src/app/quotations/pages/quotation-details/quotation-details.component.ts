@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuotationDto } from '@app/quotations/models/quotation';
+import { QuotationItemDto } from '@app/quotations/models/quotation-item';
 
 @Component({
   selector: 'app-quotation-details',
@@ -17,6 +18,7 @@ export class QuotationDetailsComponent {
   private readonly _router = inject(Router);
   public quotationId: number = 0;
   public quotationHeader: QuotationDto | undefined = undefined;
+  public quotationItems: QuotationItemDto[] = [];
 
   constructor() {
     this._activedRoute.paramMap.subscribe(
@@ -31,6 +33,10 @@ export class QuotationDetailsComponent {
         } else {
           this._router.navigateByUrl('/quotations');
         }
+        return this._quotationService.getQuotationItems(this.quotationId);
+      })
+      .then((items) => {
+        this.quotationItems = items;
       })
       .catch((err) => console.error(err));
   }
