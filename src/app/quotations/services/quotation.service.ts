@@ -71,6 +71,29 @@ export class QuotationService {
     await this._insertItems(quotationItems);
   }
 
+  // TODO: Map the propierties and move to quotation-item entity
+  public async getQuotationItems(
+    quotationId: number,
+  ): Promise<QuotationItemDto[]> {
+    let { data: quotation_items, error } = await this._supabase
+      .from('quotation_items')
+      .select(
+        `
+        *,
+        products (
+          name
+        )
+        `,
+      )
+      .eq('quotation_id', quotationId);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return quotation_items || [];
+  }
+
   // TODO: Map the type from dto to entity and returned
   public async getQuotations(): Promise<QuotationDto[]> {
     let { data: quotation_header, error } = await this._supabase
