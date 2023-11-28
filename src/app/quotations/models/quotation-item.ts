@@ -13,4 +13,7 @@ export interface QuotationItemDto {
   quantity: number;
   price: number;
   quotation_id: number;
+  products?: {
+    name: string;
+  };
 }
