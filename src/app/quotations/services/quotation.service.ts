@@ -45,6 +45,19 @@ export class QuotationService {
     };
   }
 
+  private _mapDtoToQuotation(source: QuotationDto): Quotation {
+    return {
+      id: source.id || 0,
+      customerName: source.customer_name,
+      studentName: source.student_name,
+      date: source.date,
+      schoolGrade: source.school_grade,
+      gradeName: source.school_grades?.name || '',
+      schoolName: source.school_name,
+      totalAmmount: source.total_ammount,
+    };
+  }
+
   private async _insertHeader(header: QuotationDto): Promise<any> {
     const { data, error } = await this._supabase
       .from('quotation_header')
@@ -73,6 +86,8 @@ export class QuotationService {
 
     const insertedHeader = await this._insertHeader(quotationDto);
     const quotationId: number = insertedHeader.id;
+
+    quotation.items = quotation.items ? quotation.items : [];
 
     const quotationItems: QuotationItemDto[] = quotation.items.map((item) =>
       this._mapperItem(item, quotationId),
@@ -124,16 +139,20 @@ export class QuotationService {
   // TODO: Get all the data related to quotation_header by foreign keys
   public async getQuotationById(
     quotationId: number,
-  ): Promise<QuotationDto | null> {
+  ): Promise<Quotation | null> {
     let { data: quotation_header, error } = await this._supabase
       .from('quotation_header')
-      .select('*')
+      .select('*, school_grades(name)')
       .eq('id', quotationId);
 
     if (error) {
       throw new Error(error.message);
     }
 
-    return quotation_header ? quotation_header[0] : null;
+    const quotation = quotation_header
+      ? this._mapDtoToQuotation(quotation_header[0])
+      : null;
+
+    return quotation;
   }
 }
