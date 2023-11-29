@@ -6,9 +6,10 @@ export interface Quotation {
   studentName: string;
   date: string;
   schoolGrade: number;
+  gradeName?: string;
   schoolName: string;
   totalAmmount: number;
-  items: QuotationItem[];
+  items?: QuotationItem[];
   createdAt?: string;
 }
 
@@ -21,4 +22,7 @@ export interface QuotationDto {
   school_name: string;
   total_ammount: number;
   created_at?: string;
+  school_grades?: {
+    name: string;
+  };
 }
