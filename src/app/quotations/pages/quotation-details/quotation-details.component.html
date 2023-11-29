@@ -1,11 +1,13 @@
 <div class="quotation">
   <section class="d-flex justify-content-between">
-    <p>Logo</p>
+    <div>
+      <p class="fs-3 fw-medium">Librería La Joya</p>
+    </div>
     <div class="text-end">
       <p class="fs-4 fw-medium">{{ "cotización" | uppercase }}</p>
     </div>
   </section>
-  <hr class="mb-4 mt-4" />
+  <hr class="mb-4 mt-sm-2" />
   <section class="d-flex justify-content-between mb-4">
     <div>
       <p class="fs-5 fw-medium">Datos Cliente</p>
@@ -35,35 +37,43 @@
         <span class="fw-medium">Fecha Cotización:</span>
         {{ quotationHeader?.date | date: "dd/MM/yyyy" }}
       </p>
-      <p class="metadata">
-        <span class="fw-medium">Observaciones:</span>
-        Mis observaciones
-      </p>
     </div>
+  </section>
+  <section class="mb-4">
+    <p class="metadata">
+      <span class="fw-medium">Observaciones:</span>
+      La presente cotización tiene vigencia únicamente 15 días desde
+      realizada la cotización.
+    </p>
   </section>
   <section>
     <table class="table align-middle">
       <thead>
-        <tr>
-          <th>Descripción</th>
-          <th>Cantidad</th>
-          <th>Precio</th>
-          <th>Descuento</th>
-          <th>Total</th>
+        <tr class="table-light text-dark-emphasis">
+          <th class="table-header">{{ "Descripción" | uppercase }}</th>
+          <th class="table-header text-end">{{ "Cantidad" | uppercase }}</th>
+          <th class="table-header text-end">{{ "Precio" | uppercase }}</th>
+          <th class="table-header text-end">{{ "Descuento" | uppercase }}</th>
+          <th class="table-header text-end">{{ "Total" | uppercase }}</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
+        @for (item of quotationItems; track item.id) {
+          <tr>
+            <td>{{ item.description | titlecase }}</td>
+            <td class="text-end">{{ item.quantity }}</td>
+            <td class="text-end">{{ item.price | number: "1.2-3" }}</td>
+            <td class="text-end"></td>
+            <td class="text-end">{{ item.ammount | number: "1.2-3" }}</td>
+          </tr>
+        }
       </tbody>
       <tfoot>
-        <tr>
-          <td colspan="5">Total</td>
+        <tr class="table-light text-dark-emphasis">
+          <td colspan="4" class="fw-medium">Total</td>
+          <td class="fw-medium">
+            {{ quotationHeader?.totalAmmount | currency: "GTQ" }}
+          </td>
         </tr>
       </tfoot>
     </table>
