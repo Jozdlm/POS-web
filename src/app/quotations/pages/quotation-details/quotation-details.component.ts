@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QuotationDto } from '@app/quotations/models/quotation';
-import { QuotationItemDto } from '@app/quotations/models/quotation-item';
+import { Quotation } from '@app/quotations/models/quotation';
+import { QuotationItem } from '@app/quotations/models/quotation-item';
 
 @Component({
   selector: 'app-quotation-details',
@@ -17,8 +17,8 @@ export class QuotationDetailsComponent {
   private readonly _activedRoute = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   public quotationId: number = 0;
-  public quotationHeader: QuotationDto | undefined = undefined;
-  public quotationItems: QuotationItemDto[] = [];
+  public quotationHeader: Quotation | undefined = undefined;
+  public quotationItems: QuotationItem[] = [];
 
   constructor() {
     this._activedRoute.paramMap.subscribe(
