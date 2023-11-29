@@ -1,19 +1,45 @@
 <div class="quotation">
-  <section>
+  <section class="d-flex justify-content-between">
     <p>Logo</p>
-    <div>
-      <p>Cotización</p>
-      <p>Cotización #: 2023-0225512</p>
-      <p>Fecha Cotización: 24/11/2023</p>
+    <div class="text-end">
+      <p class="fs-4 fw-medium">{{ "cotización" | uppercase }}</p>
     </div>
   </section>
-  <hr />
-  <section>
-    <p>Datos cliente</p>
-    <p>Cliente</p>
-    <p>Estudiante</p>
-    <p>Grado Academico</p>
-    <p>Colegio / Escuela</p>
+  <hr class="mb-4 mt-4" />
+  <section class="d-flex justify-content-between mb-4">
+    <div>
+      <p class="fs-5 fw-medium">Datos Cliente</p>
+      <p class="metadata">
+        <span class="fw-medium">Cliente:</span>
+        {{ quotationHeader?.customerName }}
+      </p>
+      <p class="metadata">
+        <span class="fw-medium">Estudiante:</span>
+        {{ quotationHeader?.studentName }}
+      </p>
+      <p class="metadata">
+        <span class="fw-medium">Grado Académico:</span>
+        {{ quotationHeader?.gradeName }}
+      </p>
+      <p class="metadata">
+        <span class="fw-medium">Centro Educativo:</span>
+        {{ quotationHeader?.schoolName }}
+      </p>
+    </div>
+    <div class="text-end">
+      <p class="fs-5 fw-medium">Datos Cotización</p>
+      <p class="metadata">
+        <span class="fw-medium">Cotización #:</span> {{ quotationHeader?.id }}
+      </p>
+      <p class="metadata">
+        <span class="fw-medium">Fecha Cotización:</span>
+        {{ quotationHeader?.date | date: "dd/MM/yyyy" }}
+      </p>
+      <p class="metadata">
+        <span class="fw-medium">Observaciones:</span>
+        Mis observaciones
+      </p>
+    </div>
   </section>
   <section>
     <table class="table align-middle">
