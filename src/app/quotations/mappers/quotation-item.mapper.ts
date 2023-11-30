@@ -10,4 +10,16 @@ export class QuotationItemMapper {
       ammount: dto.quantity * dto.price,
     };
   }
+
+  public static toDto(
+    src: QuotationItem,
+    quotationId: number,
+  ): QuotationItemDto {
+    return {
+      product_id: src.productId,
+      quantity: src.quantity,
+      price: src.price,
+      quotation_id: quotationId,
+    };
+  }
 }
