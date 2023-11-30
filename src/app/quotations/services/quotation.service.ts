@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Quotation, QuotationDto } from '../models/quotation';
 import { SupabaseService } from '@app/core/services/supabase.service';
 import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
+import { QuotationMapper } from '../mappers/quotation.mapper';
 
 @Injectable({
   providedIn: 'root',
@@ -42,19 +43,6 @@ export class QuotationService {
       quantity: source.quantity,
       price: source.price,
       ammount: source.quantity * source.price,
-    };
-  }
-
-  private _mapDtoToQuotation(source: QuotationDto): Quotation {
-    return {
-      id: source.id || 0,
-      customerName: source.customer_name,
-      studentName: source.student_name,
-      date: source.date,
-      schoolGrade: source.school_grade,
-      gradeName: source.school_grades?.name || '',
-      schoolName: source.school_name,
-      totalAmmount: source.total_ammount,
     };
   }
 
@@ -150,7 +138,7 @@ export class QuotationService {
     }
 
     const quotation = quotation_header
-      ? this._mapDtoToQuotation(quotation_header[0])
+      ? QuotationMapper.toEntity(quotation_header[0])
       : null;
 
     return quotation;
