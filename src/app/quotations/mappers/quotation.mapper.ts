@@ -13,4 +13,15 @@ export class QuotationMapper {
       totalAmmount: dto.total_ammount,
     };
   }
+
+  public static toDto(src: Quotation): QuotationDto {
+    return {
+      customer_name: src.customerName,
+      student_name: src.studentName,
+      date: src.date,
+      school_grade: src.schoolGrade,
+      school_name: src.schoolName,
+      total_ammount: src.totalAmmount,
+    };
+  }
 }
