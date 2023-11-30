@@ -13,17 +13,6 @@ export class QuotationService {
 
   constructor() {}
 
-  private _mapperQuotation(source: Quotation): QuotationDto {
-    return {
-      customer_name: source.customerName,
-      student_name: source.studentName,
-      date: source.date,
-      school_grade: source.schoolGrade,
-      school_name: source.schoolName,
-      total_ammount: source.totalAmmount,
-    };
-  }
-
   private _mapperItem(
     source: QuotationItem,
     quotationId: number,
@@ -70,7 +59,7 @@ export class QuotationService {
   }
 
   public async createQuotation(quotation: Quotation): Promise<void> {
-    const quotationDto: QuotationDto = this._mapperQuotation(quotation);
+    const quotationDto: QuotationDto = QuotationMapper.toDto(quotation);
 
     const insertedHeader = await this._insertHeader(quotationDto);
     const quotationId: number = insertedHeader.id;
@@ -89,14 +78,7 @@ export class QuotationService {
   ): Promise<QuotationItem[]> {
     let { data: quotation_items, error } = await this._supabase
       .from('quotation_items')
-      .select(
-        `
-        *,
-        products (
-          name
-        )
-        `,
-      )
+      .select('*, products(name)')
       .eq('quotation_id', quotationId);
 
     if (error) {
