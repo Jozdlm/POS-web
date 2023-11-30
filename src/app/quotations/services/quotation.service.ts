@@ -14,18 +14,6 @@ export class QuotationService {
 
   constructor() {}
 
-  private _mapperItem(
-    source: QuotationItem,
-    quotationId: number,
-  ): QuotationItemDto {
-    return {
-      product_id: source.productId,
-      quantity: source.quantity,
-      price: source.price,
-      quotation_id: quotationId,
-    };
-  }
-
   private async _insertHeader(header: QuotationDto): Promise<any> {
     const { data, error } = await this._supabase
       .from('quotation_header')
@@ -58,7 +46,7 @@ export class QuotationService {
     quotation.items = quotation.items ? quotation.items : [];
 
     const quotationItems: QuotationItemDto[] = quotation.items.map((item) =>
-      this._mapperItem(item, quotationId),
+      QuotationItemMapper.toDto(item, quotationId),
     );
 
     await this._insertItems(quotationItems);
