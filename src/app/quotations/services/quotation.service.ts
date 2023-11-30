@@ -3,6 +3,7 @@ import { Quotation, QuotationDto } from '../models/quotation';
 import { SupabaseService } from '@app/core/services/supabase.service';
 import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
 import { QuotationMapper } from '../mappers/quotation.mapper';
+import { QuotationItemMapper } from '../mappers/quotation-item.mapper';
 
 @Injectable({
   providedIn: 'root',
@@ -22,16 +23,6 @@ export class QuotationService {
       quantity: source.quantity,
       price: source.price,
       quotation_id: quotationId,
-    };
-  }
-
-  private _mapDtoToItem(source: QuotationItemDto): QuotationItem {
-    return {
-      productId: source.product_id,
-      description: source.products?.name || '',
-      quantity: source.quantity,
-      price: source.price,
-      ammount: source.quantity * source.price,
     };
   }
 
@@ -86,7 +77,7 @@ export class QuotationService {
     }
 
     const items = quotation_items
-      ? quotation_items.map((itemDto) => this._mapDtoToItem(itemDto))
+      ? quotation_items.map((itemDto) => QuotationItemMapper.toEntity(itemDto))
       : [];
 
     return items;
