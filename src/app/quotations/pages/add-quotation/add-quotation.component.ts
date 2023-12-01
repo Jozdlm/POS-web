@@ -49,6 +49,7 @@ export class AddQuotationComponent {
     this.getSchoolGrades();
     inject(DestroyRef).onDestroy(() => {
       this._subscriptions.unsubscribe();
+      this._quotationState.clearQuotationState();
     });
   }
 
