@@ -90,4 +90,9 @@ export class QuotationStateService {
       // TODO: Otherwise ask to the user if their wants to delete an item
     }
   }
+
+  public clearQuotationState(): void {
+    this._items = [];
+    this.emmitStateChanges();
+  }
 }
