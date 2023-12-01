@@ -71,9 +71,8 @@ export class QuotationService {
     return items;
   }
 
-  // TODO: Map the type from dto to entity and returned
-  public async getQuotations(): Promise<QuotationDto[]> {
-    let { data: quotation_header, error } = await this._supabase
+  public async getQuotations(): Promise<Quotation[]> {
+    let { data: items, error } = await this._supabase
       .from('quotation_header')
       .select('*, school_grades(name)');
 
@@ -81,7 +80,11 @@ export class QuotationService {
       throw new Error(error.message);
     }
 
-    return quotation_header || [];
+    const quotations = items
+      ? items.map((item) => QuotationMapper.toEntity(item))
+      : ([] as Quotation[]);
+
+    return quotations;
   }
 
   // TODO: Get all the data related to quotation_header by foreign keys
