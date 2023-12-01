@@ -75,8 +75,7 @@ export class QuotationService {
   public async getQuotations(): Promise<QuotationDto[]> {
     let { data: quotation_header, error } = await this._supabase
       .from('quotation_header')
-      // TODO: Get the related table (products) with only the column name
-      .select('*');
+      .select('*, school_grades(name)');
 
     if (error) {
       throw new Error(error.message);
