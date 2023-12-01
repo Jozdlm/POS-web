@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { QuotationService } from './services/quotation.service';
-import { QuotationDto } from './models/quotation';
+import { Quotation } from './models/quotation';
 
 @Component({
   standalone: true,
@@ -12,8 +12,7 @@ import { QuotationDto } from './models/quotation';
 })
 export class QuotationComponent {
   private readonly _quotationService = inject(QuotationService);
-  // TODO: Change the type from DTO to Entity
-  public quotations: QuotationDto[] = [];
+  public quotations: Quotation[] = [];
 
   constructor() {
     this._quotationService
