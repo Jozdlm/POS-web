@@ -18,11 +18,14 @@ export interface QuotationDto {
   customer_name: string;
   student_name: string;
   date: string;
-  school_grade: number;
-  school_name: string;
+  grade_id: number;
+  school_id: string;
   total_ammount: number;
   created_at?: string;
   school_grades?: {
+    name: string;
+  };
+  schools?: {
     name: string;
   };
 }
