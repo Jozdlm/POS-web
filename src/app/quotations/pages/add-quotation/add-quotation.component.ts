@@ -15,6 +15,7 @@ import { QuotationStateService } from '../../services/quotation-state.service';
 import { Product } from '@app/quotations/models/product';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { QuotationService } from '@app/quotations/services/quotation.service';
+import { ProductMapper } from '@app/catalog/mappers/product.mapper';
 
 @Component({
   standalone: true,
@@ -93,16 +94,7 @@ export class AddQuotationComponent {
       .ilike('name', `%${querySanitized}%`)
       .range(0, 7);
 
-    return (
-      products?.map((item) => ({
-        id: item.id,
-        name: item.name,
-        barcode: item.barcode,
-        inStock: item.in_stock,
-        isActive: item.is_active,
-        sellingPrice: item.selling_price,
-      })) || []
-    );
+    return products?.map((item) => ProductMapper.toEntity(item)) || [];
   }
 
   public addItemToQuotation(item: Product): void {
