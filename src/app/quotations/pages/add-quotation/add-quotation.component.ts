@@ -16,6 +16,7 @@ import { Product } from '@app/quotations/models/product';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ProductMapper } from '@app/catalog/mappers/product.mapper';
+import { DbTables } from '@app/core/enums/db-tables';
 
 @Component({
   standalone: true,
@@ -89,7 +90,7 @@ export class AddQuotationComponent {
   public async searchProduct(query: string): Promise<Product[]> {
     const querySanitized = query.toLowerCase().trim();
     let { data: products, error } = await this._supabase
-      .from('products')
+      .from(DbTables.PRODUCTS)
       .select('*')
       .ilike('name', `%${querySanitized}%`)
       .range(0, 7);
