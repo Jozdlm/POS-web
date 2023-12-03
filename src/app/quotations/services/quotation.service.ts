@@ -87,13 +87,12 @@ export class QuotationService {
     return quotations;
   }
 
-  // TODO: Get all the data related to quotation_header by foreign keys
   public async getQuotationById(
     quotationId: number,
   ): Promise<Quotation | null> {
     let { data: quotation_header, error } = await this._supabase
       .from('quotation_header')
-      .select('*, school_grades(name)')
+      .select('*, school_grades(name), schools(name)')
       .eq('id', quotationId);
 
     if (error) {
