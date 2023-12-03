@@ -1,6 +1,6 @@
 @if (showButtons) {
   <div class="d-flex justify-content-center my-4">
-    <button class="btn btn-primary">Imprimir</button>
+    <a [routerLink]="['../print', this.quotationId]" class="btn btn-primary">Imprimir</a>
   </div>
 }
 
