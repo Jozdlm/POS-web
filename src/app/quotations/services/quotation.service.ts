@@ -4,6 +4,7 @@ import { SupabaseService } from '@app/core/services/supabase.service';
 import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
 import { QuotationMapper } from '../mappers/quotation.mapper';
 import { QuotationItemMapper } from '../mappers/quotation-item.mapper';
+import { DbTables } from '@app/core/enums/db-tables';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class QuotationService {
 
   private async _insertHeader(header: QuotationDto): Promise<any> {
     const { data, error } = await this._supabase
-      .from('quotation_header')
+      .from(DbTables.QUOTATIONS)
       .insert(header)
       .select();
 
@@ -29,7 +30,7 @@ export class QuotationService {
 
   private async _insertItems(items: QuotationItemDto[]): Promise<void> {
     const { error } = await this._supabase
-      .from('quotation_items')
+      .from(DbTables.QUOTATION_ITEMS)
       .insert(items);
 
     if (error) {
@@ -56,8 +57,8 @@ export class QuotationService {
     quotationId: number,
   ): Promise<QuotationItem[]> {
     let { data: quotation_items, error } = await this._supabase
-      .from('quotation_items')
-      .select('*, products(name)')
+      .from(DbTables.QUOTATION_ITEMS)
+      .select(`*, ${DbTables.PRODUCTS}(name)`)
       .eq('quotation_id', quotationId);
 
     if (error) {
@@ -73,8 +74,8 @@ export class QuotationService {
 
   public async getQuotations(): Promise<Quotation[]> {
     let { data: items, error } = await this._supabase
-      .from('quotation_header')
-      .select('*, school_grades(name), schools(name)');
+      .from(DbTables.QUOTATIONS)
+      .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`);
 
     if (error) {
       throw new Error(error.message);
@@ -91,8 +92,8 @@ export class QuotationService {
     quotationId: number,
   ): Promise<Quotation | null> {
     let { data: quotation_header, error } = await this._supabase
-      .from('quotation_header')
-      .select('*, school_grades(name), schools(name)')
+      .from(DbTables.QUOTATIONS)
+      .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`)
       .eq('id', quotationId);
 
     if (error) {

@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from 'src/app/core/services/supabase.service';
 import { SchoolGrade } from '../models/school-grades';
+import { DbTables } from '@app/core/enums/db-tables';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class SchoolGradeService {
 
   public async getSchoolGrades(): Promise<SchoolGrade[]> {
     let { data: school_grades, error } = await this._supabase
-      .from('school_grades')
+      .from(DbTables.SCHOOL_GRADES)
       .select('*');
 
     if (error) {
