@@ -74,7 +74,7 @@ export class QuotationService {
   public async getQuotations(): Promise<Quotation[]> {
     let { data: items, error } = await this._supabase
       .from('quotation_header')
-      .select('*, school_grades(name)');
+      .select('*, school_grades(name), schools(name)');
 
     if (error) {
       throw new Error(error.message);
