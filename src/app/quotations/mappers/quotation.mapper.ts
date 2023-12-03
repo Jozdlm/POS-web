@@ -7,9 +7,9 @@ export class QuotationMapper {
       customerName: dto.customer_name,
       studentName: dto.student_name,
       date: dto.date,
-      schoolGrade: dto.school_grade,
+      schoolGrade: dto.grade_id,
       gradeName: dto.school_grades?.name || '',
-      schoolName: dto.school_name,
+      schoolName: dto.schools?.name || '',
       totalAmmount: dto.total_ammount,
     };
   }
@@ -19,8 +19,8 @@ export class QuotationMapper {
       customer_name: src.customerName,
       student_name: src.studentName,
       date: src.date,
-      school_grade: src.schoolGrade,
-      school_name: src.schoolName,
+      grade_id: src.schoolGrade,
+      school_id: src.schoolName,
       total_ammount: src.totalAmmount,
     };
   }
