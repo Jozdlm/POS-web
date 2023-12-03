@@ -30,19 +30,23 @@ export class QuotationDetailsComponent {
       (segment) => segment.path === 'print',
     );
 
-    this._quotationService
-      .getQuotationById(this.quotationId)
-      .then((quotation) => {
-        if (quotation) {
-          this.quotationHeader = quotation;
-        } else {
-          this._router.navigateByUrl('/quotations');
-        }
-        return this._quotationService.getQuotationItems(this.quotationId);
-      })
-      .then((items) => {
-        this.quotationItems = items;
-      })
-      .catch((err) => console.error(err));
+    this.getQuotationAndItems();
+  }
+
+  public async getQuotationAndItems(): Promise<void> {
+    const quotation = await this._quotationService.getQuotationById(
+      this.quotationId,
+    );
+
+    if (quotation) {
+      this.quotationHeader = quotation;
+
+      const items = await this._quotationService.getQuotationItems(
+        this.quotationId,
+      );
+      this.quotationItems = items;
+    } else {
+      this._router.navigateByUrl('/quotations');
+    }
   }
 }
