@@ -19,10 +19,15 @@ export class QuotationDetailsComponent {
   public quotationId: number = 0;
   public quotationHeader: Quotation | undefined = undefined;
   public quotationItems: QuotationItem[] = [];
+  public showButtons: boolean = true;
 
   constructor() {
     this._activedRoute.paramMap.subscribe(
       (params) => (this.quotationId = Number(params.get('id'))),
+    );
+
+    this.showButtons = !this._activedRoute.snapshot.url.some(
+      (segment) => segment.path === 'print',
     );
 
     this._quotationService
