@@ -3,10 +3,11 @@ import { ItemDetailsComponent } from './products/item-details/item-details.compo
 import { ItemShellComponent } from './products/item-shell/item-shell.component';
 import { ItemUpdateComponent } from './products/item-update/item-update.component';
 import { CategoryListComponent } from './products/pages/category-list/category-list.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { AppComponent } from './app.component';
 
 // TODO: Defines guards to prevent an anon client to come in to private pages
 export const APP_ROUTES: Routes = [
+  { path: 'auth', loadChildren: () => import('./auth/auth.routes') },
   { path: 'categories', component: CategoryListComponent },
   { path: 'products', component: ItemShellComponent },
   { path: 'products/edit/:id', component: ItemUpdateComponent },
@@ -15,5 +16,5 @@ export const APP_ROUTES: Routes = [
     path: 'quotations',
     loadChildren: () => import('./quotations/quotation.routes'),
   },
-  { path: '', component: WelcomeComponent, pathMatch: 'full' },
+  { path: '', component: AppComponent, pathMatch: 'full' },
 ];
