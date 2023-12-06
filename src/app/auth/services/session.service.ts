@@ -32,4 +32,14 @@ export class SessionService {
 
     this._router.navigateByUrl('/quotations');
   }
+
+  public async logOut(): Promise<void> {
+    let {error} = await this._db.auth.signOut();
+
+    if(error) {
+      throw new Error(error.message);
+    }
+
+    this._router.navigateByUrl('/auth')
+  }
 }
