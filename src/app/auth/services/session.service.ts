@@ -13,6 +13,16 @@ export class SessionService {
 
   constructor() {}
 
+  public async isClientLogged(): Promise<boolean> {
+    const { data, error } = await this._db.auth.getSession();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data ? true : false;
+  }
+
   public async login(credentials: LoginCredentials) {
     let { error } = await this._db.auth.signInWithPassword(credentials);
 
