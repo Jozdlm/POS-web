@@ -1,7 +1,8 @@
 @if (showButtons) {
   <div class="d-flex justify-content-center my-4 column-gap-2">
-    <a routerLink="../" class="btn btn-outline-secondary">Regresar</a>
-    <a [routerLink]="['../print', this.quotationId]" class="btn btn-primary">Imprimir</a>
+    <a routerLink="../"  class="btn btn-outline-secondary">Regresar</a>
+    <!-- TODO: Open a new tab for printing the quotation -->
+    <a [routerLink]="['/print/quotation', this.quotationId]" class="btn btn-primary">Imprimir</a>
   </div>
 }
 

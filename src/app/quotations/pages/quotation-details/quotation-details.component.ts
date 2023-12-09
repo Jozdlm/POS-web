@@ -25,7 +25,7 @@ export class QuotationDetailsComponent {
 
   constructor() {
     this.showButtons = !this._activedRoute.snapshot.url.some(
-      (segment) => segment.path === 'print',
+      (segment) => segment.path === 'quotation',
     );
 
     this.subscribeToObservables();
