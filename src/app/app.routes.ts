@@ -37,9 +37,10 @@ export const APP_ROUTES: Routes = [
         loadChildren: () => import('./quotations/quotation.routes'),
       },
       { path: PagePrefix.CATEGORIES, component: CategoryListComponent },
-      { path: PagePrefix.PRODUCTS, component: ItemShellComponent },
-      { path: 'products/edit/:id', component: ItemUpdateComponent },
-      { path: 'products/:id', component: ItemDetailsComponent },
+      {
+        path: PagePrefix.PRODUCTS,
+        loadChildren: () => import('./catalog/products.routes'),
+      },
     ],
   },
   {
