@@ -1,13 +1,18 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { SessionService } from '../services/session.service';
+import { map } from 'rxjs';
 
 export const loggedClientGuard: CanActivateFn = (_, __) => {
-  const isLogged = inject(SessionService).isClientLogged;
+  const router: Router = inject(Router);
 
-  if (!isLogged) {
-    return inject(Router).createUrlTree(['/', 'auth']);
-  }
+  return inject(SessionService).isClientLogged$.pipe(
+    map((isLogged) => {
+      if (!isLogged) {
+        return router.createUrlTree(['/', 'auth']);
+      }
 
-  return isLogged;
+      return true;
+    }),
+  );
 };
