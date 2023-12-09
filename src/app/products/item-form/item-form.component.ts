@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../catalog/services/product.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Category, ProductDto } from '../product';
 

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../catalog/services/product.service';
 import { Category, Product, ProductDto } from '../product';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import { ItemListComponent } from '../item-list/item-list.component';

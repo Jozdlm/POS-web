@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../catalog/services/product.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { of, switchMap } from 'rxjs';
 import { Product, ProductDto } from '../product';

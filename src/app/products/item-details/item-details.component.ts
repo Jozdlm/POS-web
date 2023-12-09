@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from '../product.service';
+import { ProductService } from '../../catalog/services/product.service';
 import { Product } from '../product';
 import { ProductStatusDirective } from '../product-status.directive';
 
