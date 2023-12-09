@@ -6,17 +6,20 @@ import { CategoryListComponent } from './products/pages/category-list/category-l
 import { AddQuotationComponent } from './quotations/pages/add-quotation/add-quotation.component';
 import { anonClientGuard } from './auth/guards/anon-client.guard';
 import { loggedClientGuard } from './auth/guards/logged-client.guard';
+import { QuotationDetailsComponent } from './quotations/pages/quotation-details/quotation-details.component';
+import { ViewsShellComponent } from './core/layout/views-shell/views-shell.component';
 
 // TODO: Defines guards to prevent an anon client to come in to private pages
 export const APP_ROUTES: Routes = [
   {
     path: 'auth',
-    canMatch: [anonClientGuard],
+    // canActivate: [anonClientGuard],
     loadChildren: () => import('./auth/auth.routes'),
   },
   {
     path: '',
-    canActivate: [loggedClientGuard],
+    component: ViewsShellComponent,
+    // canActivate: [loggedClientGuard],
     children: [
       {
         path: '',
@@ -31,6 +34,15 @@ export const APP_ROUTES: Routes = [
       { path: 'products', component: ItemShellComponent },
       { path: 'products/edit/:id', component: ItemUpdateComponent },
       { path: 'products/:id', component: ItemDetailsComponent },
+    ],
+  },
+  {
+    path: 'print',
+    children: [
+      {
+        path: 'quotation/:id',
+        component: QuotationDetailsComponent,
+      },
     ],
   },
 ];
