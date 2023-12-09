@@ -9,17 +9,16 @@ import { loggedClientGuard } from './auth/guards/logged-client.guard';
 import { QuotationDetailsComponent } from './quotations/pages/quotation-details/quotation-details.component';
 import { ViewsShellComponent } from './core/layout/views-shell/views-shell.component';
 
-// TODO: Defines guards to prevent an anon client to come in to private pages
 export const APP_ROUTES: Routes = [
   {
     path: 'auth',
-    // canActivate: [anonClientGuard],
+    canActivate: [anonClientGuard],
     loadChildren: () => import('./auth/auth.routes'),
   },
   {
     path: '',
     component: ViewsShellComponent,
-    // canActivate: [loggedClientGuard],
+    canActivate: [loggedClientGuard],
     children: [
       {
         path: '',
@@ -38,6 +37,7 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'print',
+    canActivate: [loggedClientGuard],
     children: [
       {
         path: 'quotation/:id',
