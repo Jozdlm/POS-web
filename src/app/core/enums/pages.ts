@@ -2,6 +2,7 @@
 export enum PagePrefix {
   AUTH = 'auth',
   CATEGORIES = 'categories',
+  DASHBOARD = 'dashboard',
   GRADES = 'school-grades',
   HOME = '',
   PRINT = 'print',

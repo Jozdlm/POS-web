@@ -27,6 +27,11 @@ export const APP_ROUTES: Routes = [
         pathMatch: 'full',
         component: AddQuotationComponent,
       },
+      // TODO: Define the component for dashboard route
+      {
+        path: PagePrefix.DASHBOARD,
+        redirectTo: '',
+      },
       {
         path: PagePrefix.QUOTATIONS,
         loadChildren: () => import('./quotations/quotation.routes'),
