@@ -8,10 +8,12 @@ import { anonClientGuard } from './auth/guards/anon-client.guard';
 import { loggedClientGuard } from './auth/guards/logged-client.guard';
 import { QuotationDetailsComponent } from './quotations/pages/quotation-details/quotation-details.component';
 import { ViewsShellComponent } from './core/layout/views-shell/views-shell.component';
+import { PagePrefix } from './core/enums/pages';
 
+// TODO: Set title property to all routes
 export const APP_ROUTES: Routes = [
   {
-    path: 'auth',
+    path: PagePrefix.AUTH,
     canActivate: [anonClientGuard],
     loadChildren: () => import('./auth/auth.routes'),
   },
@@ -26,21 +28,21 @@ export const APP_ROUTES: Routes = [
         component: AddQuotationComponent,
       },
       {
-        path: 'quotations',
+        path: PagePrefix.QUOTATIONS,
         loadChildren: () => import('./quotations/quotation.routes'),
       },
-      { path: 'categories', component: CategoryListComponent },
-      { path: 'products', component: ItemShellComponent },
+      { path: PagePrefix.CATEGORIES, component: CategoryListComponent },
+      { path: PagePrefix.PRODUCTS, component: ItemShellComponent },
       { path: 'products/edit/:id', component: ItemUpdateComponent },
       { path: 'products/:id', component: ItemDetailsComponent },
     ],
   },
   {
-    path: 'print',
+    path: PagePrefix.PRINT,
     canActivate: [loggedClientGuard],
     children: [
       {
-        path: 'quotation/:id',
+        path: `${PagePrefix.QUOTATIONS}/:id`,
         component: QuotationDetailsComponent,
       },
     ],
