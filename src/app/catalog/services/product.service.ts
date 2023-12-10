@@ -13,8 +13,23 @@ export class ProductService {
 
   constructor() {}
 
+  public getProductCount(): Observable<number> {
+    return from(
+      this._db
+        .from(DbTables.PRODUCTS)
+        .select('*', { count: 'exact', head: true }),
+    ).pipe(
+      map(({ count, error }) => {
+        if (error) throw new Error(error?.message);
+
+        return count || 0;
+      }),
+    );
+  }
+
+  // TODO: Implements pagination and order by
   public getProducts(): Observable<Product[]> {
-    return from(this._db.from(DbTables.PRODUCTS).select('*')).pipe(
+    return from(this._db.from(DbTables.PRODUCTS).select('*').range(0, 49)).pipe(
       map(({ data, error }) => {
         if (error) {
           throw new Error(error.message);
