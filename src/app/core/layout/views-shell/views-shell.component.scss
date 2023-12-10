@@ -1,7 +1,11 @@
-.views-wrapper {
+.app-wrapper {
   min-height: 100vh;
   width: 100%;
   display: grid;
   grid-template-columns: 240px 1fr;
   column-gap: 40px;
+}
+
+.views-wrapper {
+  margin-top: 24px;
 }
