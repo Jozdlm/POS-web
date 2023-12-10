@@ -3,7 +3,15 @@
 <div class="product-content">
   <p>Filtrar</p>
   <div>
-    <p>Search</p>
+    <div>
+      <input
+        type="text"
+        placeholder="Buscar producto"
+        [formControl]="searchControl"
+      />
+      <!-- TODO: Shows dinamicly the number of records -->
+      <p>Mostrando 50 productos de {{ productCount$ | async }}</p>
+    </div>
     <table>
       <thead>
         <tr>
@@ -18,15 +26,14 @@
         @for (item of products$ | async; track item.id) {
           <!-- TODO: Shows the product category -->
           <tr>
-            <td>{{item.barcode}}</td>
-            <td>{{item.name}}</td>
-            <td>{{item.sellingPrice}}</td>
-            <td>{{item.inStock}}</td>
-            <td>{{item.isActive}}</td>
+            <td>{{ item.barcode }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.sellingPrice }}</td>
+            <td>{{ item.inStock }}</td>
+            <td>{{ item.isActive }}</td>
           </tr>
         }
       </tbody>
     </table>
   </div>
 </div>
-
