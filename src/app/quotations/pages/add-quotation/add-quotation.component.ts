@@ -7,7 +7,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
+import {
+  Subscription,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  switchMap,
+} from 'rxjs';
 import { SupabaseService } from 'src/app/core/services/supabase.service';
 import { SchoolGradeService } from '../../services/school-grade.service';
 import { SchoolGrade } from '../../models/school-grades';
@@ -15,8 +22,7 @@ import { QuotationStateService } from '../../services/quotation-state.service';
 import { Product } from '@app/quotations/models/product';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { QuotationService } from '@app/quotations/services/quotation.service';
-import { ProductMapper } from '@app/catalog/mappers/product.mapper';
-import { DbTables } from '@app/core/enums/db-tables';
+import { ProductService } from '@app/catalog/services/product.service';
 
 @Component({
   standalone: true,
@@ -25,12 +31,11 @@ import { DbTables } from '@app/core/enums/db-tables';
   styleUrl: './add-quotation.component.scss',
 })
 export class AddQuotationComponent {
-  private readonly _supabaseService = inject(SupabaseService);
   private readonly _schoolGradeService = inject(SchoolGradeService);
   private readonly _quotationState = inject(QuotationStateService);
   private readonly _quotationService = inject(QuotationService);
   private readonly _formBuilder = inject(FormBuilder);
-  private readonly _supabase = this._supabaseService.supabase;
+  private readonly _productService = inject(ProductService);
   private _subscriptions = new Subscription();
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];
@@ -68,12 +73,17 @@ export class AddQuotationComponent {
   private subscribeToSearchChanges(): void {
     this._subscriptions.add(
       this.searchControl.valueChanges
-        .pipe(debounceTime(400), distinctUntilChanged())
-        .subscribe(async (value) => {
-          if (value) {
-            const products = await this.searchProduct(value);
-            this.filteredProducts = products;
-          }
+        .pipe(
+          debounceTime(400),
+          distinctUntilChanged(),
+          filter((value) => typeof value === 'string'),
+          map((value) => value as string),
+          switchMap((value) => {
+            return this._productService.getProductsBy(value, 'name');
+          }),
+        )
+        .subscribe((items) => {
+          this.filteredProducts = items;
         }),
     );
   }
@@ -85,17 +95,6 @@ export class AddQuotationComponent {
     } catch (err) {
       console.error(err);
     }
-  }
-
-  public async searchProduct(query: string): Promise<Product[]> {
-    const querySanitized = query.toLowerCase().trim();
-    let { data: products, error } = await this._supabase
-      .from(DbTables.PRODUCTS)
-      .select('*')
-      .ilike('name', `%${querySanitized}%`)
-      .range(0, 7);
-
-    return products?.map((item) => ProductMapper.toEntity(item)) || [];
   }
 
   public addItemToQuotation(item: Product): void {
