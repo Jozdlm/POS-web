@@ -1,60 +1,36 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { Category, Product, ProductDto } from '../../products/product';
+import { Observable, from, map } from 'rxjs';
+import { SupabaseService } from '@app/core/services/supabase.service';
+import { DbTables } from '@app/core/enums/db-tables';
+import { ProductMapper } from '../mappers/product.mapper';
+import { Product, ProductDto } from '@app/quotations/models/product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private _http = inject(HttpClient);
+  private readonly _db = inject(SupabaseService).supabase;
 
   constructor() {}
 
-  public getProducts(): Observable<Product[]> {
-    return this._http.get<Product[]>('https://localhost:7242/api/products');
-  }
+  // TODO: Make a type that set the columns that user can search (property: SearchableCols)
+  public getProductsBy(query: string, property: string): Observable<Product[]> {
+    return from(
+      this._db
+        .from(DbTables.PRODUCTS)
+        .select('*')
+        .like(property, `%${query}%`)
+        .range(0, 7),
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) {
+          throw new Error(error.message);
+        }
 
-  public getProductsByName(searchTerm: string): Observable<Product[]> {
-    return this._http.get<Product[]>('https://localhost:7242/api/products', {
-      params: new HttpParams().append('q', searchTerm)
-    });
-  }
-
-  public getProductById(id: number): Observable<Product> {
-    return this._http.get<Product>(`https://localhost:7242/api/products/${id}`);
-  }
-
-  public getProductsByCategory(categoryName: string): Observable<Product[]> {
-    return this._http.get<Product[]>(
-      `https://localhost:7242/api/products/${categoryName}`
+        return (data as ProductDto[]).map((item) =>
+          ProductMapper.toEntity(item),
+        );
+      }),
     );
-  }
-
-  public createProduct(newProduct: ProductDto) {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    };
-    return this._http.post(
-      'https://localhost:7242/api/products',
-      newProduct,
-      httpOptions
-    );
-  }
-
-  public updateProduct(id: number, updatedProduct: ProductDto) {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-    };
-
-    return this._http.put(
-      `https://localhost:7242/api/products/${id}`,
-      updatedProduct,
-      httpOptions
-    );
-  }
-
-  public deleteProduct(id: number) {
-    return this._http.delete(`https://localhost:7242/api/products/${id}`);
   }
 }
