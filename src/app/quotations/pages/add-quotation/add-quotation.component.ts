@@ -15,7 +15,6 @@ import {
   map,
   switchMap,
 } from 'rxjs';
-import { SupabaseService } from 'src/app/core/services/supabase.service';
 import { SchoolGradeService } from '../../services/school-grade.service';
 import { SchoolGrade } from '../../models/school-grades';
 import { QuotationStateService } from '../../services/quotation-state.service';
@@ -23,6 +22,7 @@ import { Product } from '@app/quotations/models/product';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ProductService } from '@app/catalog/services/product.service';
+import { getCurrentDate } from '@app/quotations/utils/current-date';
 
 @Component({
   standalone: true,
@@ -46,7 +46,7 @@ export class AddQuotationComponent {
   public quotationInfo = this._formBuilder.nonNullable.group({
     customerName: ['', [Validators.required, Validators.minLength(3)]],
     studentName: ['', [Validators.required, Validators.minLength(3)]],
-    date: [this.getCurrentDate(), Validators.required],
+    date: [getCurrentDate(), Validators.required],
     schoolGrade: ['', [Validators.required, Validators.min(1)]],
     schoolName: ['', [Validators.required, Validators.minLength(3)]],
   });
@@ -58,16 +58,6 @@ export class AddQuotationComponent {
       this._subscriptions.unsubscribe();
       this._quotationState.clearQuotationState();
     });
-  }
-
-  private getCurrentDate(): string {
-    const currentDate = new Date();
-
-    const day = currentDate.getDate().toString().padStart(2, '0');
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Note: Month is zero-based
-    const year = currentDate.getFullYear().toString();
-
-    return `${year}-${month}-${day}`;
   }
 
   private subscribeToSearchChanges(): void {
