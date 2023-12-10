@@ -1,12 +1,32 @@
-<h1>Productos</h1>
+<h1 class="fs-3 mb-3">Productos</h1>
 
 <div class="product-content">
-  <p>Filter</p>
+  <p>Filtrar</p>
   <div>
     <p>Search</p>
-    @for (item of products$ | async; track item.id) {
-      <p>{{ item.name }}</p>
-    }
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Nombre</th>
+          <th>Precio Venta</th>
+          <th>En Existencia</th>
+          <th>Está Activo</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of products$ | async; track item.id) {
+          <!-- TODO: Shows the product category -->
+          <tr>
+            <td>{{item.barcode}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.sellingPrice}}</td>
+            <td>{{item.inStock}}</td>
+            <td>{{item.isActive}}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
 </div>
 
