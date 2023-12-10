@@ -13,6 +13,20 @@ export class ProductService {
 
   constructor() {}
 
+  public getProducts(): Observable<Product[]> {
+    return from(this._db.from(DbTables.PRODUCTS).select('*')).pipe(
+      map(({ data, error }) => {
+        if (error) {
+          throw new Error(error.message);
+        }
+
+        return (data as ProductDto[]).map((item) =>
+          ProductMapper.toEntity(item),
+        );
+      }),
+    );
+  }
+
   // TODO: Make a type that set the columns that user can search (property: SearchableCols)
   public getProductsBy(query: string, property: string): Observable<Product[]> {
     return from(
