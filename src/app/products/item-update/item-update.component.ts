@@ -5,7 +5,7 @@ import { ProductService } from '../../catalog/services/product.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { of, switchMap } from 'rxjs';
 import { Product, ProductDto } from '../product';
-import { CategoryService } from '../category.service';
+import { CategoryService } from '../../catalog/services/category.service';
 
 @Component({
   selector: 'app-item-update',

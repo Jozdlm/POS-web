@@ -6,7 +6,7 @@ import { ItemFormComponent } from '../item-form/item-form.component';
 import { ItemListComponent } from '../item-list/item-list.component';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
-import { CategoryService } from '../category.service';
+import { CategoryService } from '../../catalog/services/category.service';
 
 @Component({
   selector: 'app-item-shell',

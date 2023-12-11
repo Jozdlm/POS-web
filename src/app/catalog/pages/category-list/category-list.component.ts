@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryService } from '../../../products/category.service';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-category-list',
