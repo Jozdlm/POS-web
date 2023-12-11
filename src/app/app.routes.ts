@@ -48,6 +48,8 @@ export const APP_ROUTES: Routes = [
     children: [
       {
         path: `quotation/:id`,
+        // TODO: Concatenate the app name with the title page
+        title: 'Librería La Joya - Imprimir Cotización',
         component: QuotationDetailsComponent,
       },
     ],
