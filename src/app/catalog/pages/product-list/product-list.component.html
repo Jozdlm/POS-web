@@ -3,21 +3,60 @@
 <div class="product-content">
   <div>
     <p class="fs-5">Filtrar</p>
-    <div>
-      <p class="fw-medium">Categorías</p>
-      @for (item of categories$ | async; track item.id) {
-        <p>{{item.name}}</p>
-      }
+    <div class="mb-3">
+      <p class="fw-medium mb-1">Categorías</p>
+      <!-- TODO: Make the categories filter form  -->
+      <form>
+        @for (item of categories$ | async; track item.id) {
+          <div class="form-check">
+            <input
+              type="checkbox"
+              [id]="item.name"
+              title="category checkbox"
+              class="form-check-input"
+            />
+            <label [for]="item.name" class="form-check-label">
+              {{ item.name }}
+            </label>
+          </div>
+        }
+      </form>
     </div>
-    <div>
-      <p class="fw-medium">Existencias</p>
-      <p>En existencia</p>
-      <p>Sin existencia</p>
+    <div class="mb-3">
+      <p class="fw-medium mb-1">Existencias</p>
+      <!-- TODO: Make the stock filter form  -->
+      <form>
+        <div class="form-check">
+          <input type="checkbox" id="inStockCheck" class="form-check-input" />
+          <label for="inStockCheck" class="form-check-label">
+            En existencia
+          </label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="outStockCheck" class="form-check-input" />
+          <label for="outStockCheck" class="form-check-label">
+            Sin existencia
+          </label>
+        </div>
+      </form>
     </div>
-    <div>
-      <p class="fw-medium">Activo</p>
-      <p>Activado</p>
-      <p>Desactivado</p>
+    <div class="mb-3">
+      <p class="fw-medium mb-1">Estado</p>
+      <!-- TODO: Make the status filter form  -->
+      <form>
+        <div class="form-check">
+          <input type="checkbox" id="activeCheck" class="form-check-input" />
+          <label for="activeCheck" class="form-check-label">
+            Activo
+          </label>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="disableCheck" class="form-check-input" />
+          <label for="disableCheck" class="form-check-label">
+            Inactivo
+          </label>
+        </div>
+      </form>
     </div>
   </div>
   <div>
@@ -30,7 +69,9 @@
           class="form-control form-control-sm mb-2"
         />
         <!-- TODO: Shows dinamicly the number of records -->
-        <p class="small-text">Mostrando 50 productos de {{ productCount$ | async }}</p>
+        <p class="small-text">
+          Mostrando 50 productos de {{ productCount$ | async }}
+        </p>
       </div>
       <div>
         <button class="btn btn-sm btn-primary">Nuevo Producto</button>
