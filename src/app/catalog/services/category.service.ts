@@ -1,18 +1,27 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Category } from '../../products/product';
-import { Observable } from 'rxjs';
+import { Observable, from, map } from 'rxjs';
+import { SupabaseService } from '@app/core/services/supabase.service';
+import { DbTables } from '@app/core/enums/db-tables';
+import { Category, CategoryDto } from '../models/category';
+import { CategoryMapper } from '../mappers/category.mapper';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CategoryService {
-  private _http: HttpClient = inject(HttpClient);
-  private _apiUrl: string = 'https://localhost:7242/api';
+  private readonly _db = inject(SupabaseService).supabase;
 
-  constructor() { }
+  constructor() {}
 
   public getCategories(): Observable<Category[]> {
-    return this._http.get<Category[]>(`${this._apiUrl}/products-categories`);
+    return from(this._db.from(DbTables.CATEGORIES).select('*')).pipe(
+      map(({ data, error }) => {
+        if (error) throw new Error(error.message);
+
+        return (data as CategoryDto[]).map((item) =>
+          CategoryMapper.toEntity(item),
+        );
+      }),
+    );
   }
 }
