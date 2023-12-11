@@ -4,9 +4,20 @@
   <div>
     <p class="fs-5">Filtrar</p>
     <div>
+      <p class="fw-medium">Categorías</p>
       @for (item of categories$ | async; track item.id) {
         <p>{{item.name}}</p>
       }
+    </div>
+    <div>
+      <p class="fw-medium">Existencias</p>
+      <p>En existencia</p>
+      <p>Sin existencia</p>
+    </div>
+    <div>
+      <p class="fw-medium">Activo</p>
+      <p>Activado</p>
+      <p>Desactivado</p>
     </div>
   </div>
   <div>
