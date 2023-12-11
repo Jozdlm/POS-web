@@ -3,37 +3,46 @@
 <div class="product-content">
   <p>Filtrar</p>
   <div>
-    <div>
-      <input
-        type="text"
-        placeholder="Buscar producto"
-        [formControl]="searchControl"
-      />
-      <!-- TODO: Shows dinamicly the number of records -->
-      <p>Mostrando 50 productos de {{ productCount$ | async }}</p>
+    <div class="d-flex justify-content-between">
+      <div>
+        <input
+          type="text"
+          placeholder="Buscar producto"
+          [formControl]="searchControl"
+          class="form-control form-control-sm mb-2"
+        />
+        <!-- TODO: Shows dinamicly the number of records -->
+        <p class="small-text">Mostrando 50 productos de {{ productCount$ | async }}</p>
+      </div>
+      <div>
+        <button class="btn btn-sm btn-primary">Nuevo Producto</button>
+      </div>
     </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Código</th>
-          <th>Nombre</th>
-          <th>Precio Venta</th>
-          <th>En Existencia</th>
-          <th>Está Activo</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (item of products$ | async; track item.id) {
-          <!-- TODO: Shows the product category -->
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
           <tr>
-            <td>{{ item.barcode }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.sellingPrice }}</td>
-            <td>{{ item.inStock }}</td>
-            <td>{{ item.isActive }}</td>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Precio Venta</th>
+            <th>En Existencia</th>
+            <th>Está Activo</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (item of products$ | async; track item.id) {
+            <!-- TODO: Shows the product category -->
+            <tr>
+              <td>{{ item.barcode }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.sellingPrice }}</td>
+              <!-- TODO: Make a directive to shows properly the boolean values of a product -->
+              <td>{{ item.inStock }}</td>
+              <td>{{ item.isActive }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
