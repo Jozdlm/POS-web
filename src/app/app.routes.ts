@@ -47,7 +47,7 @@ export const APP_ROUTES: Routes = [
     canActivate: [loggedClientGuard],
     children: [
       {
-        path: `${PagePrefix.QUOTATIONS}/:id`,
+        path: `quotation/:id`,
         component: QuotationDetailsComponent,
       },
     ],
