@@ -36,7 +36,7 @@
                 </p>
                 <button
                   type="button"
-                  class="btn btn-light"
+                  class="btn btn-light btn-sm"
                   (click)="addItemToQuotation(item)"
                 >
                   Añadir
@@ -54,7 +54,6 @@
       <table class="table align-middle">
         <thead>
           <tr>
-            <th>#</th>
             <th>Descripción</th>
             <th>Cantidad</th>
             <th>Precio</th>
@@ -65,28 +64,36 @@
         <tbody>
           @for (item of quotationItems$ | async; track item.productId) {
             <tr>
-              <td>{{ $index + 1 }}</td>
               <td>{{ item.description }}</td>
               <td>
-                <button
-                  class="btn btn-light me-1"
-                  (click)="decreaseQuantity(item.productId)"
-                >
-                  -
-                </button>
-                {{ item.quantity }}
-                <button
-                  class="btn btn-light ms-1"
-                  (click)="increaseQuantity(item.productId)"
-                >
-                  +
-                </button>
+                <div class="d-flex justify-content-between align-items-center">
+                  <button
+                    class="btn btn-light me-1 btn-sm"
+                    (click)="decreaseQuantity(item.productId)"
+                  >
+                    -
+                  </button>
+                  {{ item.quantity }}
+                  <button
+                    class="btn btn-light ms-1 btn-sm"
+                    (click)="increaseQuantity(item.productId)"
+                  >
+                    +
+                  </button>
+                </div>
               </td>
-              <td>{{ item.price | currency: "GTQ" }}</td>
+              <td>
+                <input
+                  class="form-control form-control-sm price-control"
+                  type="number"
+                  placeholder=".form-control-sm"
+                  [value]="item.price"
+                />
+              </td>
               <td>{{ item.ammount | currency: "GTQ" }}</td>
               <td>
                 <button
-                  class="btn btn-outline-danger"
+                  class="btn btn-outline-danger btn-sm"
                   (click)="removeItemOfQuotation(item.productId)"
                 >
                   Descartar

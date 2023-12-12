@@ -3,3 +3,7 @@
   grid-template-columns: repeat(4, minmax(160px, auto));
   gap: 16px;
 }
+
+.price-control {
+  max-width: 80px;
+}
