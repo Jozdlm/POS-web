@@ -154,26 +154,27 @@
           <select
             class="form-select"
             id="school-grade-field"
-            aria-label="Floating label select example"
             formControlName="schoolGrade"
           >
-            <option value="">Escoge un grado</option>
+            <option value="">Selecciona un grado</option>
             @for (op of schoolGrades; track op.id) {
               <option [value]="op.id">{{ op.name }}</option>
             }
           </select>
           <label for="school-grade-field">Grado Academico</label>
         </div>
-        <!-- TODO: Create a select input for the schools -->
         <div class="form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="school-field"
-            placeholder=""
+          <select
+            class="form-select"
+            id="schoolName"
             formControlName="schoolName"
-          />
-          <label for="school-field">Centro Educativo</label>
+          >
+            <option value="">Selecciona un centro educativo</option>
+            @for (op of schools$ | async; track op.id) {
+              <option [value]="op.id">{{ op.name }}</option>
+            }
+          </select>
+          <label for="schoolName">Centro Educativo</label>
         </div>
         <div class="d-flex justify-content-end column-gap-2">
           <button

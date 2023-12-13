@@ -23,6 +23,7 @@ import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ProductService } from '@app/catalog/services/product.service';
 import { getCurrentDate } from '@app/quotations/utils/current-date';
+import { SchoolService } from '@app/schools/services/school.service';
 
 @Component({
   standalone: true,
@@ -37,6 +38,7 @@ export class AddQuotationComponent {
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _productService = inject(ProductService);
   private _subscriptions = new Subscription();
+  public readonly schools$ = inject(SchoolService).getSchools();
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];
   public schoolGrades: SchoolGrade[] = [];
