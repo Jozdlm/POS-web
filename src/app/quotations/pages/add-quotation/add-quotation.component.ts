@@ -32,7 +32,6 @@ import { SchoolService } from '@app/schools/services/school.service';
   styleUrl: './add-quotation.component.scss',
 })
 export class AddQuotationComponent {
-  private readonly _schoolGradeService = inject(SchoolGradeService);
   private readonly _quotationState = inject(QuotationStateService);
   private readonly _quotationService = inject(QuotationService);
   private readonly _formBuilder = inject(FormBuilder);
@@ -106,6 +105,13 @@ export class AddQuotationComponent {
   public clearSearchControl(): void {
     this.searchControl.reset();
     this.filteredProducts = [];
+  }
+
+  public updateItemPrice(event: Event, itemId: number): void {
+    const inputValue = (event.target as HTMLInputElement).value;
+    const sellinPrice = parseFloat(inputValue);
+
+    this._quotationState.updateSellingPrice(itemId, sellinPrice);
   }
 
   public createQuotation(): void {
