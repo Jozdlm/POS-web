@@ -91,6 +91,26 @@ export class QuotationStateService {
     }
   }
 
+  public updateSellingPrice(itemId: number, newPrice: number): void {
+    if (newPrice < 0.01) return;
+
+    const itemIndex = this._items.findIndex(
+      (item) => item.productId === itemId,
+    );
+
+    if (itemIndex !== -1) {
+      const item = this._items[itemIndex];
+
+      this._items[itemIndex] = {
+        ...item,
+        price: newPrice,
+        ammount: newPrice * item.quantity,
+      };
+
+      this.emmitStateChanges();
+    }
+  }
+
   public clearQuotationState(): void {
     this._items = [];
     this.emmitStateChanges();
