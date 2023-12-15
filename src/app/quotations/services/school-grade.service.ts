@@ -2,25 +2,23 @@ import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from 'src/app/core/services/supabase.service';
 import { SchoolGrade } from '../models/school-grades';
 import { DbTables } from '@app/core/enums/db-tables';
+import { Observable, from, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SchoolGradeService {
-  private readonly _supabaseService = inject(SupabaseService);
-  private readonly _supabase = this._supabaseService.supabase;
+  private readonly _db = inject(SupabaseService).supabase;
 
   constructor() {}
 
-  public async getSchoolGrades(): Promise<SchoolGrade[]> {
-    let { data: school_grades, error } = await this._supabase
-      .from(DbTables.SCHOOL_GRADES)
-      .select('*');
+  public getSchoolGrades(): Observable<SchoolGrade[]> {
+    return from(this._db.from(DbTables.SCHOOL_GRADES).select('*')).pipe(
+      map(({ data, error }) => {
+        if (error) throw new Error(error.message);
 
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    return school_grades || [];
+        return data as SchoolGrade[];
+      }),
+    );
   }
 }
