@@ -157,7 +157,7 @@
             formControlName="schoolGrade"
           >
             <option value="">Selecciona un grado</option>
-            @for (op of schoolGrades; track op.id) {
+            @for (op of schoolGrades$ | async; track op.id) {
               <option [value]="op.id">{{ op.name }}</option>
             }
           </select>

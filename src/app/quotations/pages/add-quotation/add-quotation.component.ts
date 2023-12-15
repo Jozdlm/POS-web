@@ -39,9 +39,9 @@ export class AddQuotationComponent {
   private readonly _productService = inject(ProductService);
   private _subscriptions = new Subscription();
   public readonly schools$ = inject(SchoolService).getSchools();
+  public readonly schoolGrades$ = inject(SchoolGradeService).getSchoolGrades();
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];
-  public schoolGrades: SchoolGrade[] = [];
   public quotationItems$ = this._quotationState.items$;
   public totalAmmount$ = this._quotationState.ammount$;
 
@@ -55,7 +55,6 @@ export class AddQuotationComponent {
 
   constructor() {
     this.subscribeToSearchChanges();
-    this.getSchoolGrades();
     inject(DestroyRef).onDestroy(() => {
       this._subscriptions.unsubscribe();
       this._quotationState.clearQuotationState();
@@ -78,15 +77,6 @@ export class AddQuotationComponent {
           this.filteredProducts = items;
         }),
     );
-  }
-
-  private async getSchoolGrades(): Promise<void> {
-    try {
-      const grades = await this._schoolGradeService.getSchoolGrades();
-      this.schoolGrades = grades;
-    } catch (err) {
-      console.error(err);
-    }
   }
 
   public addItemToQuotation(item: Product): void {
