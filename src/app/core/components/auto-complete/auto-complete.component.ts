@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,13 +11,15 @@ import { CommonModule } from '@angular/common';
 export class AutoCompleteComponent {
   public showOptions: boolean = false;
 
+  @Input({ required: true }) public listId: string = '';
+
   @HostListener('window:click', ['$event'])
   public toggleOptions(event: MouseEvent): void {
     const element = event.target as HTMLElement;
 
     if (
-      element.id == 'selectWrapper' ||
-      element.parentElement?.id == 'selectWrapper'
+      element.id == this.listId ||
+      element.parentElement?.id == this.listId
     ) {
       this.showOptions = true;
     } else {
