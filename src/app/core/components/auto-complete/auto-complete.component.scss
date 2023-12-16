@@ -1,0 +1,26 @@
+.select-icon {
+  position: absolute;
+  top: calc(50% - 8px);
+  right: 12px;
+  width: 18px;
+  height: 18px;
+}
+
+.select {
+  position: relative;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-option-list {
+  position: absolute;
+  top: 100%;
+
+  width: 100%;
+  border-radius: 8px;
+  padding: 16px 0;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 5px #ccc;
+}
