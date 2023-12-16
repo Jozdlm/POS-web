@@ -1,1 +1,31 @@
-<p>auto-complete works!</p>
+<div class="select-wrapper">
+  <div
+    class="form-floating mb-3 select"
+    id="selectWrapper"
+  >
+    <input
+      type="email"
+      class="form-control"
+      id="floatingInput"
+      placeholder="name@example.com"
+    />
+    <label for="floatingInput">Escoge una ciudad</label>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke-width="1.5"
+      stroke="currentColor"
+      class="select-icon"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+      />
+    </svg>
+  </div>
+  @if (showOptions) {
+    <div class="select-option-list">options</div>
+  }
+</div>
