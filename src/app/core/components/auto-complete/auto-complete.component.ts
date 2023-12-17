@@ -12,15 +12,13 @@ export class AutoCompleteComponent {
   public showOptions: boolean = false;
 
   @Input({ required: true }) public listId: string = '';
+  @Input({ required: true }) public placeholder: string = '';
 
   @HostListener('window:click', ['$event'])
   public toggleOptions(event: MouseEvent): void {
     const element = event.target as HTMLElement;
 
-    if (
-      element.id == this.listId ||
-      element.parentElement?.id == this.listId
-    ) {
+    if (element.id == this.listId || element.parentElement?.id == this.listId) {
       this.showOptions = true;
     } else {
       this.showOptions = false;
