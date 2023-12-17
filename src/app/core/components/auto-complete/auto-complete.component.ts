@@ -28,7 +28,16 @@ export class AutoCompleteComponent {
   constructor() {
     this.searchControl.valueChanges
       .pipe(debounceTime(150), distinctUntilChanged())
-      .subscribe((value) => console.log(value));
+      .subscribe((value) => this.filterOptions(value ?? ''));
+  }
+
+  public filterOptions(query: string): void {
+    const querySanitazed = query.trim().toLowerCase();
+    const filteredList = this.options.filter((item) =>
+      (item.name as string).toLowerCase().includes(querySanitazed),
+    );
+
+    console.log(filteredList);
   }
 
   @HostListener('window:click', ['$event'])
