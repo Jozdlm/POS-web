@@ -1,15 +1,12 @@
 <div class="select-wrapper">
-  <div
-    class="form-floating mb-3 select"
-    [id]="listId"
-  >
+  <div class="form-floating mb-3 select" [id]="listId">
     <input
-      type="email"
+      type="text"
       class="form-control"
       id="floatingInput"
       [placeholder]="placeholder"
     />
-    <label for="floatingInput">{{placeholder}}</label>
+    <label for="floatingInput">{{ placeholder }}</label>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -27,7 +24,12 @@
   </div>
   @if (showOptions) {
     <div class="select-option-list">
-      <ng-content />
+      @for (item of options; track $index) {
+        <!-- TODO: Shows dinamicly the option label -->
+        <div class="list-option">{{ item.name }}</div>
+      } @empty {
+        <div class="list-option">No se encontraron resultados</div>
+      }
     </div>
   }
 </div>
