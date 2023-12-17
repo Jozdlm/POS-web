@@ -44,6 +44,11 @@ export class AutoCompleteComponent implements OnChanges {
     this.listState = filteredList;
   }
 
+  public chooseOption(index: number) {
+    const selectedOption = this.listState[index].name;
+    this.searchControl.setValue(selectedOption);
+  }
+
   @HostListener('window:click', ['$event'])
   public toggleOptions(event: MouseEvent): void {
     const element = event.target as HTMLElement;

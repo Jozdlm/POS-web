@@ -27,7 +27,9 @@
     <div class="select-option-list">
       @for (item of listState; track $index) {
         <!-- TODO: Shows dinamicly the option label -->
-        <div class="list-option">{{ item.name }}</div>
+        <div class="list-option" (click)="chooseOption($index)">
+          {{ item.name }}
+        </div>
       } @empty {
         <div class="list-option">No se encontraron resultados</div>
       }
