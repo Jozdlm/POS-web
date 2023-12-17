@@ -3,11 +3,12 @@
     <input
       type="text"
       class="form-control"
-      id="floatingInput"
+      [id]="listId + 'Control'"
       [placeholder]="placeholder"
       [formControl]="searchControl"
+      title="select-control"
     />
-    <label for="floatingInput">{{ placeholder }}</label>
+    <label [for]="listId + 'Control'">{{ label }}</label>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
