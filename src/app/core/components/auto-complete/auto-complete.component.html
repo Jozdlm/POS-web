@@ -25,7 +25,7 @@
   </div>
   @if (showOptions) {
     <div class="select-option-list">
-      @for (item of options; track $index) {
+      @for (item of listState; track $index) {
         <!-- TODO: Shows dinamicly the option label -->
         <div class="list-option">{{ item.name }}</div>
       } @empty {

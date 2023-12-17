@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, OnChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
@@ -10,8 +10,10 @@ import { debounceTime, distinctUntilChanged } from 'rxjs';
   templateUrl: './auto-complete.component.html',
   styleUrl: './auto-complete.component.scss',
 })
-export class AutoCompleteComponent {
+export class AutoCompleteComponent implements OnChanges {
   public showOptions: boolean = false;
+  public searchControl = new FormControl('');
+  public listState: any[] = [];
 
   @Input({ required: true }) public listId: string = '';
   @Input({ required: true }) public placeholder: string = '';
@@ -23,12 +25,14 @@ export class AutoCompleteComponent {
   })
   public options: any[] = [];
 
-  public searchControl = new FormControl('');
-
   constructor() {
     this.searchControl.valueChanges
       .pipe(debounceTime(150), distinctUntilChanged())
       .subscribe((value) => this.filterOptions(value ?? ''));
+  }
+
+  ngOnChanges(): void {
+    this.listState = this.options;
   }
 
   public filterOptions(query: string): void {
@@ -37,7 +41,7 @@ export class AutoCompleteComponent {
       (item.name as string).toLowerCase().includes(querySanitazed),
     );
 
-    console.log(filteredList);
+    this.listState = filteredList;
   }
 
   @HostListener('window:click', ['$event'])
