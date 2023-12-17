@@ -26,6 +26,8 @@
     </svg>
   </div>
   @if (showOptions) {
-    <div class="select-option-list">options</div>
+    <div class="select-option-list">
+      <ng-content />
+    </div>
   }
 </div>
