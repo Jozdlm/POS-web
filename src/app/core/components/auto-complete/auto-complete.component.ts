@@ -13,6 +13,13 @@ export class AutoCompleteComponent {
 
   @Input({ required: true }) public listId: string = '';
   @Input({ required: true }) public placeholder: string = '';
+  @Input({
+    required: true,
+    transform: (value: any[] | null) => {
+      return value ?? [];
+    },
+  })
+  public options: any[] = [];
 
   @HostListener('window:click', ['$event'])
   public toggleOptions(event: MouseEvent): void {
