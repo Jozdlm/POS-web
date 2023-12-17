@@ -1,10 +1,12 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-auto-complete',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './auto-complete.component.html',
   styleUrl: './auto-complete.component.scss',
 })
@@ -20,6 +22,14 @@ export class AutoCompleteComponent {
     },
   })
   public options: any[] = [];
+
+  public searchControl = new FormControl('');
+
+  constructor() {
+    this.searchControl.valueChanges
+      .pipe(debounceTime(150), distinctUntilChanged())
+      .subscribe((value) => console.log(value));
+  }
 
   @HostListener('window:click', ['$event'])
   public toggleOptions(event: MouseEvent): void {
