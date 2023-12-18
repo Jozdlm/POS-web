@@ -24,4 +24,17 @@ export class CategoryService {
       }),
     );
   }
+
+  public getCategoryById(categoryId: number): Observable<Category> {
+    return from(
+      this._db.from(DbTables.CATEGORIES).select('*').eq('id', categoryId),
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw new Error(error.message);
+
+        // TODO: Validate if the db has the provided Id
+        return CategoryMapper.toEntity(data[0] as CategoryDto);
+      }),
+    );
+  }
 }
