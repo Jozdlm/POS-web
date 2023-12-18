@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
 import { CategoryService } from '@app/catalog/services/category.service';
 import { Category } from '@app/catalog/models/category';
@@ -14,7 +14,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrl: './category-form.component.scss',
 })
 export class CategoryFormComponent {
-  private readonly _route = inject(ActivatedRoute);
+  private readonly _activatedRoute = inject(ActivatedRoute);
+  private readonly _router = inject(Router)
   private readonly _categoryService = inject(CategoryService);
   public category$: Observable<Category> | null = null;
 
@@ -28,7 +29,7 @@ export class CategoryFormComponent {
 
   constructor() {
     // TODO: Handle the unsubscription when the component is destroyed
-    this._route.paramMap
+    this._activatedRoute.paramMap
       .pipe(
         switchMap((params) => {
           const categoryId = params.get('id');
@@ -47,5 +48,10 @@ export class CategoryFormComponent {
   public setFormValuesFromDB(data: Category): void {
     const { name, description, slug, isActive } = data;
     this.categoryForm.setValue({ name, description, slug, isActive });
+  }
+
+  public cancelAndReset(): void {
+    this.categoryForm.reset();
+    this._router.navigateByUrl('categories');
   }
 }
