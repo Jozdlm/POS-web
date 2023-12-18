@@ -16,7 +16,6 @@ import {
   switchMap,
 } from 'rxjs';
 import { SchoolGradeService } from '../../services/school-grade.service';
-import { SchoolGrade } from '../../models/school-grades';
 import { QuotationStateService } from '../../services/quotation-state.service';
 import { Product } from '@app/quotations/models/product';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
