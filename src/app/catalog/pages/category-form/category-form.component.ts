@@ -1,0 +1,11 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-category-form',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './category-form.component.html',
+  styleUrl: './category-form.component.scss',
+})
+export class CategoryFormComponent {}
