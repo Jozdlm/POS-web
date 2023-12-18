@@ -28,15 +28,19 @@ export class CategoryFormComponent {
   });
 
   constructor() {
-    this._subscription.add(
-      this.getCategoryDetails().subscribe((data) => {
-        if (data) {
-          this.setFormValuesFromDB(data);
-        }
-      }),
-    );
+    this._subscription.add(this.getDataAndSetFormValues());
 
-    inject(DestroyRef).onDestroy(() => this._subscription.unsubscribe());
+    inject(DestroyRef).onDestroy(() => {
+      this._subscription.unsubscribe();
+    });
+  }
+
+  public getDataAndSetFormValues(): Subscription {
+    return this.getCategoryDetails().subscribe((data) => {
+      if (data) {
+        this.setDefaultFormValues(data);
+      }
+    });
   }
 
   public getCategoryDetails(): Observable<Category | null> {
@@ -50,7 +54,7 @@ export class CategoryFormComponent {
     );
   }
 
-  public setFormValuesFromDB(data: Category): void {
+  public setDefaultFormValues(data: Category): void {
     const { name, description, slug, isActive } = data;
     this.categoryForm.setValue({ name, description, slug, isActive });
   }
