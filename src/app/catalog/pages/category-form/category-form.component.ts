@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 import { CategoryService } from '@app/catalog/services/category.service';
 import { Category } from '@app/catalog/models/category';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -23,18 +23,29 @@ export class CategoryFormComponent {
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: [''],
     slug: ['', [Validators.required, Validators.minLength(3)]],
-    isActive: [1, Validators.required],
+    isActive: [true, Validators.required],
   });
 
   constructor() {
-    this._route.paramMap.subscribe((params) => {
-      const categoryId = params.get('id');
+    // TODO: Handle the unsubscription when the component is destroyed
+    this._route.paramMap
+      .pipe(
+        switchMap((params) => {
+          const categoryId = params.get('id');
 
-      if (categoryId) {
-        this.category$ = this._categoryService.getCategoryById(
-          parseInt(categoryId),
-        );
-      }
-    });
+          if (!categoryId) return of(null);
+          return this._categoryService.getCategoryById(parseInt(categoryId));
+        }),
+      )
+      .subscribe((data) => {
+        if (data) {
+          this.setFormValuesFromDB(data);
+        }
+      });
+  }
+
+  public setFormValuesFromDB(data: Category): void {
+    const { name, description, slug, isActive } = data;
+    this.categoryForm.setValue({ name, description, slug, isActive });
   }
 }
