@@ -1,1 +1,46 @@
-<p>category-form works!</p>
+<div class="wrapper">
+  <h1 class="fs-3 mb-4">Crear categoría</h1>
+  <form>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="categoryName"
+        placeholder="Nombre"
+      />
+      <label for="categoryName">Nombre</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="description"
+        placeholder="Descripción"
+      />
+      <label for="description">Descripción</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        type="text"
+        class="form-control"
+        id="slug"
+        placeholder="URL amigable (slug)"
+      />
+      <label for="slug">URL amigable (slug)</label>
+    </div>
+    <div class="form-floating mb-4">
+      <select
+        class="form-select"
+        id="categoryState"
+      >
+        <option value="0">Inactivo</option>
+        <option selected value="1">Activo</option>
+      </select>
+      <label for="categoryState">Estado</label>
+    </div>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn">Cancelar</button>
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </div>
+  </form>
+</div>
