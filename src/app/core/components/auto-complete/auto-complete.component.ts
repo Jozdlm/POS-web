@@ -16,8 +16,6 @@ export class AutoCompleteComponent implements OnChanges {
   public listState: any[] = [];
 
   @Input({ required: true }) public listId: string = '';
-  @Input({ required: true }) public placeholder: string = '';
-  @Input({ required: true }) public label: string = '';
   @Input({
     required: true,
     transform: (value: any[] | null) => {
@@ -34,7 +32,6 @@ export class AutoCompleteComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.listState = this.options;
-    this.searchControl.setValue(this.placeholder);
   }
 
   public filterOptions(query: string): void {

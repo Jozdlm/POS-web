@@ -1,6 +1,6 @@
 <div class="select-wrapper">
   <div class="form-floating mb-3 select" [id]="listId">
-    <input
+    <!-- <input
       type="text"
       class="form-control"
       [id]="listId + 'Control'"
@@ -8,7 +8,8 @@
       [formControl]="searchControl"
       title="select-control"
     />
-    <label [for]="listId + 'Control'">{{ label }}</label>
+    <label [for]="listId + 'Control'">{{ label }}</label> -->
+    <ng-content></ng-content>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
