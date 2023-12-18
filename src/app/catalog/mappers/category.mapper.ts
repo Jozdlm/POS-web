@@ -11,6 +11,7 @@ export class CategoryMapper {
       name: dto.name,
       description: dto.description,
       slug: dto.slug,
+      isActive: dto.is_active,
     };
   }
 

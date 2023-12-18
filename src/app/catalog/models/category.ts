@@ -3,6 +3,7 @@ export interface Category {
   name: string;
   description: string;
   slug: string;
+  isActive: boolean;
 }
 
 export interface CategoryDto {
@@ -10,4 +11,5 @@ export interface CategoryDto {
   name: string;
   description: string;
   slug: string;
+  is_active: boolean;
 }
