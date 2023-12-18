@@ -1,12 +1,13 @@
 <div class="wrapper">
   <h1 class="fs-3 mb-4">Crear categoría</h1>
-  <form>
+  <form [formGroup]="categoryForm">
     <div class="form-floating mb-3">
       <input
         type="text"
         class="form-control"
         id="categoryName"
         placeholder="Nombre"
+        formControlName="name"
       />
       <label for="categoryName">Nombre</label>
     </div>
@@ -16,6 +17,7 @@
         class="form-control"
         id="description"
         placeholder="Descripción"
+        formControlName="description"
       />
       <label for="description">Descripción</label>
     </div>
@@ -25,16 +27,14 @@
         class="form-control"
         id="slug"
         placeholder="URL amigable (slug)"
+        formControlName="slug"
       />
       <label for="slug">URL amigable (slug)</label>
     </div>
     <div class="form-floating mb-4">
-      <select
-        class="form-select"
-        id="categoryState"
-      >
+      <select class="form-select" id="categoryState" formControlName="isActive">
         <option value="0">Inactivo</option>
-        <option selected value="1">Activo</option>
+        <option value="1">Activo</option>
       </select>
       <label for="categoryState">Estado</label>
     </div>
