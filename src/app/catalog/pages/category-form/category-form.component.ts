@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, Subscription, of, switchMap } from 'rxjs';
 import { CategoryService } from '@app/catalog/services/category.service';
 import { Category } from '@app/catalog/models/category';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -17,6 +17,7 @@ export class CategoryFormComponent {
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   private readonly _categoryService = inject(CategoryService);
+  private readonly _subscription = new Subscription();
 
   // TODO: Generate dinamicly the category slug
   public categoryForm = inject(FormBuilder).nonNullable.group({
@@ -27,12 +28,15 @@ export class CategoryFormComponent {
   });
 
   constructor() {
-    // TODO: Handle the unsubscription when the component is destroyed
-    this.getCategoryDetails().subscribe((data) => {
-      if (data) {
-        this.setFormValuesFromDB(data);
-      }
-    });
+    this._subscription.add(
+      this.getCategoryDetails().subscribe((data) => {
+        if (data) {
+          this.setFormValuesFromDB(data);
+        }
+      }),
+    );
+
+    inject(DestroyRef).onDestroy(() => this._subscription.unsubscribe());
   }
 
   public getCategoryDetails(): Observable<Category | null> {
