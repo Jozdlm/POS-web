@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, from, map } from 'rxjs';
+import { Observable, from, map, of } from 'rxjs';
 import { SupabaseService } from '@app/core/services/supabase.service';
 import { DbTables } from '@app/core/enums/db-tables';
 import { Category, CategoryDto } from '../models/category';
@@ -34,6 +34,18 @@ export class CategoryService {
 
         // TODO: Validate if the db has the provided Id
         return CategoryMapper.toEntity(data[0] as CategoryDto);
+      }),
+    );
+  }
+
+  public createCategory(data: Category) {
+    const dto = CategoryMapper.toDto(data);
+
+    return from(this._db.from(DbTables.CATEGORIES).insert(dto).select()).pipe(
+      map(({ status, error }) => {
+        if (error) throw new Error(error.message);
+
+        return status === 201;
       }),
     );
   }
