@@ -18,6 +18,7 @@ export class CategoryFormComponent {
   private readonly _router = inject(Router);
   private readonly _categoryService = inject(CategoryService);
   private readonly _subscription = new Subscription();
+  public categoryId: number | null = null;
 
   // TODO: Generate dinamicly the category slug
   public categoryForm = inject(FormBuilder).nonNullable.group({
@@ -46,10 +47,12 @@ export class CategoryFormComponent {
   public getCategoryDetails(): Observable<Category | null> {
     return this._activatedRoute.paramMap.pipe(
       switchMap((params) => {
-        const categoryId = params.get('id');
+        const id = params.get('id');
 
-        if (!categoryId) return of(null);
-        return this._categoryService.getCategoryById(parseInt(categoryId));
+        if (!id) return of(null);
+
+        this.categoryId = parseInt(id);
+        return this._categoryService.getCategoryById(this.categoryId);
       }),
     );
   }
