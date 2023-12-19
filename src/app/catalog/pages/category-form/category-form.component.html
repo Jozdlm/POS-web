@@ -1,6 +1,10 @@
 <div class="wrapper">
   <h1 class="fs-3 mb-4">Crear categoría</h1>
-  <form [formGroup]="categoryForm" (ngSubmit)="saveChanges()">
+  <form
+    [formGroup]="categoryForm"
+    (ngSubmit)="saveChanges()"
+    autocomplete="off"
+  >
     <div class="form-floating mb-3">
       <input
         type="text"
@@ -42,9 +46,7 @@
       <button type="button" class="btn" (click)="cancelAndReset()">
         Cancelar
       </button>
-      <button type="submit" class="btn btn-primary">
-        Guardar cambios
-      </button>
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
     </div>
   </form>
 </div>
