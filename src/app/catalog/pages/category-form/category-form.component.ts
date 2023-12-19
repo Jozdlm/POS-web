@@ -66,4 +66,10 @@ export class CategoryFormComponent {
     this.categoryForm.reset();
     this._router.navigateByUrl('categories');
   }
+
+  public saveChanges(): void {
+    if (!this.categoryId) {
+      console.log('crear');
+    }
+  }
 }
