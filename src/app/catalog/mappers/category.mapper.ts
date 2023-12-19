@@ -15,5 +15,12 @@ export class CategoryMapper {
     };
   }
 
-  // TODO: Define method to map from Entity to Dto
+  public static toDto(src: Category): CategoryDto {
+    return {
+      name: src.name,
+      description: src.description,
+      slug: src.slug,
+      is_active: src.isActive,
+    };
+  }
 }
