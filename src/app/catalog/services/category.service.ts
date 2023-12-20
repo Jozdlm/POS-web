@@ -45,7 +45,24 @@ export class CategoryService {
       map(({ status, error }) => {
         if (error) throw new Error(error.message);
 
-        return (status === 201) ? true : false;
+        return status === 201 ? true : false;
+      }),
+    );
+  }
+
+  public updateCategory(
+    data: Category,
+    categoryId: number,
+  ): Observable<boolean> {
+    const dto = CategoryMapper.toDto(data);
+
+    return from(
+      this._db.from(DbTables.CATEGORIES).update(dto).eq('id', categoryId),
+    ).pipe(
+      map(({ status, error }) => {
+        if (error) throw new Error(error.message);
+
+        return status === 204 ? true : false;
       }),
     );
   }
