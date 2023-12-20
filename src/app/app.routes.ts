@@ -40,6 +40,10 @@ export const APP_ROUTES: Routes = [
         path: PagePrefix.PRODUCTS,
         loadChildren: () => import('./catalog/products.routes'),
       },
+      {
+        path: PagePrefix.SCHOOLS,
+        loadChildren: () => import('./schools/schools.routes'),
+      },
     ],
   },
   {
