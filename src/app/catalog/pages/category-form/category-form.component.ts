@@ -82,6 +82,17 @@ export class CategoryFormComponent {
             error: (err) => console.error(err),
           }),
       );
+    } else {
+      this._subscription.add(
+        this._categoryService
+          .updateCategory({ ...category }, this.categoryId)
+          .subscribe({
+            next: (_) => {
+              this.cancelAndReset();
+            },
+            error: (err) => console.error(err),
+          }),
+      );
     }
   }
 }
