@@ -67,32 +67,43 @@ export class CategoryFormComponent {
     this._router.navigateByUrl('categories');
   }
 
-  public saveChanges(): void {
+  public createCategory(): void {
     const category = this.categoryForm.getRawValue();
 
+    this._subscription.add(
+      this._categoryService
+        .createCategory({ ...category })
+        // TODO: Shows a toats notification of success
+        .subscribe({
+          next: (_) => {
+            this.cancelAndReset();
+          },
+          error: (err) => console.error(err),
+        }),
+    );
+  }
+
+  public updateCategory(): void {
+    const category = this.categoryForm.getRawValue();
+
+    this._subscription.add(
+      this._categoryService
+        .updateCategory({ ...category }, this.categoryId!)
+        .subscribe({
+          next: (_) => {
+            this.cancelAndReset();
+          },
+          // TODO: Shows a toats notification of error
+          error: (err) => console.error(err),
+        }),
+    );
+  }
+
+  public saveChanges(): void {
     if (!this.categoryId) {
-      this._subscription.add(
-        this._categoryService
-          .createCategory({ ...category })
-          // TODO: Shows a toats notification of success
-          .subscribe({
-            next: (_) => {
-              this.cancelAndReset();
-            },
-            error: (err) => console.error(err),
-          }),
-      );
+      this.createCategory();
     } else {
-      this._subscription.add(
-        this._categoryService
-          .updateCategory({ ...category }, this.categoryId)
-          .subscribe({
-            next: (_) => {
-              this.cancelAndReset();
-            },
-            error: (err) => console.error(err),
-          }),
-      );
+      this.updateCategory();
     }
   }
 }
