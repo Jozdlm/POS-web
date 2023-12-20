@@ -68,8 +68,20 @@ export class CategoryFormComponent {
   }
 
   public saveChanges(): void {
+    const category = this.categoryForm.getRawValue();
+
     if (!this.categoryId) {
-      console.log('crear');
+      this._subscription.add(
+        this._categoryService
+          .createCategory({ ...category })
+          // TODO: Shows a toats notification of success
+          .subscribe({
+            next: (_) => {
+              this.cancelAndReset();
+            },
+            error: (err) => console.error(err),
+          }),
+      );
     }
   }
 }
