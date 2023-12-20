@@ -41,11 +41,11 @@ export class CategoryService {
   public createCategory(data: Category): Observable<boolean> {
     const dto = CategoryMapper.toDto(data);
 
-    return from(this._db.from(DbTables.CATEGORIES).insert(dto).select()).pipe(
+    return from(this._db.from(DbTables.CATEGORIES).insert(dto)).pipe(
       map(({ status, error }) => {
         if (error) throw new Error(error.message);
 
-        return status === 201;
+        return (status === 201) ? true : false;
       }),
     );
   }
