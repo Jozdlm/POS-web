@@ -44,6 +44,13 @@ export const APP_ROUTES: Routes = [
         path: PagePrefix.SCHOOLS,
         loadChildren: () => import('./schools/schools.routes'),
       },
+      {
+        path: PagePrefix.GRADES,
+        loadComponent: () =>
+          import('./schools/pages/school-grades/school-grades.component').then(
+            (c) => c.SchoolGradesComponent,
+          ),
+      },
     ],
   },
   {
