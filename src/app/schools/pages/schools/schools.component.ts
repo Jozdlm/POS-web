@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SchoolService } from '@app/schools/services/school.service';
 
 @Component({
   selector: 'app-schools',
@@ -8,4 +9,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './schools.component.html',
   styleUrl: './schools.component.scss',
 })
-export class SchoolsComponent {}
+export class SchoolsComponent {
+  public readonly schools$ = inject(SchoolService).getSchools();
+}
