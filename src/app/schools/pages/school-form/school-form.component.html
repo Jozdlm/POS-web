@@ -1,20 +1,21 @@
 <div class="wrapper">
   <h1 class="fs-3 mb-4">{{pageTitle}}</h1>
 
-  <form>
+  <form [formGroup]="schoolForm" (ngSubmit)="onSubmitForm()">
     <div class="form-floating mb-3">
       <input
         type="text"
         class="form-control"
         id="schoolName"
-        placeholder="Some school name"
+        placeholder="School Name"
+        formControlName="name"
       />
       <label for="schoolName">Centro educativo</label>
     </div>
     <div class="form-floating mb-3">
-      <select class="form-select" id="schoolState">
-        <option value="false">Activo</option>
-        <option value="true">Inactivo</option>
+      <select class="form-select" id="schoolState" formControlName="isActive">
+        <option value="true">Activo</option>
+        <option value="false">Inactivo</option>
       </select>
       <label for="schoolState">Estado</label>
     </div>
