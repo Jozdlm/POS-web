@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SchoolService } from '@app/schools/services/school.service';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-school-form',
@@ -24,14 +25,28 @@ export class SchoolFormComponent {
   });
 
   constructor() {
-    this._activatedRoute.paramMap.subscribe((params) => {
-      const id = params.get('id');
+    this._activatedRoute.paramMap
+      .pipe(
+        switchMap((params) => {
+          const id = params.get('id');
 
-      if (id) {
-        this.pageTitle = 'Editar colegio';
-        this.categoryId = parseInt(id);
-      }
-    });
+          if (id) {
+            this.pageTitle = 'Editar colegio';
+            this.categoryId = parseInt(id);
+            return this._schoolService.getSchoolById(this.categoryId);
+          }
+
+          return of(null);
+        }),
+      )
+      .subscribe((resp) => {
+        if (resp) {
+          this.schoolForm.setValue({
+            name: resp.name,
+            isActive: resp.isActive,
+          });
+        }
+      });
   }
 
   public resetAndReturn(): void {
