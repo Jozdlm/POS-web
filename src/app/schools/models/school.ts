@@ -4,7 +4,8 @@ export interface School {
   isActive: boolean;
 }
 
-// TODO: Make the id property optional for both interfaces
+export type CreateSchool = Omit<School, 'id'>;
+
 export interface SchoolDto {
   id?: number;
   name: string;
