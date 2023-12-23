@@ -1,108 +1,115 @@
-<h1 class="fs-3 mb-3">Productos</h1>
+<div class="view-wrapper">
+  <h1 class="fs-3 mb-3">Productos</h1>
 
-<!-- TODO: Make an accordions for each filter sections -->
-<div class="product-content">
-  <div>
-    <p class="fs-5">Filtrar</p>
-    <div class="mb-3">
-      <p class="fw-medium mb-1">Categorías</p>
-      <!-- TODO: Make the categories filter form  -->
-      <form>
-        @for (item of categories$ | async; track item.id) {
+  <!-- TODO: Make an accordions for each filter sections -->
+  <div class="product-content">
+    <div>
+      <p class="fs-5">Filtrar</p>
+      <div class="mb-3">
+        <p class="fw-medium mb-1">Categorías</p>
+        <!-- TODO: Make the categories filter form  -->
+        <form>
+          @for (item of categories$ | async; track item.id) {
+            <div class="form-check">
+              <input
+                type="checkbox"
+                [id]="item.name"
+                title="category checkbox"
+                class="form-check-input"
+              />
+              <label [for]="item.name" class="form-check-label">
+                {{ item.name }}
+              </label>
+            </div>
+          }
+        </form>
+      </div>
+      <div class="mb-3">
+        <p class="fw-medium mb-1">Existencias</p>
+        <!-- TODO: Make the stock filter form  -->
+        <form>
+          <div class="form-check">
+            <input type="checkbox" id="inStockCheck" class="form-check-input" />
+            <label for="inStockCheck" class="form-check-label">
+              En existencia
+            </label>
+          </div>
           <div class="form-check">
             <input
               type="checkbox"
-              [id]="item.name"
-              title="category checkbox"
+              id="outStockCheck"
               class="form-check-input"
             />
-            <label [for]="item.name" class="form-check-label">
-              {{ item.name }}
+            <label for="outStockCheck" class="form-check-label">
+              Sin existencia
             </label>
           </div>
-        }
-      </form>
-    </div>
-    <div class="mb-3">
-      <p class="fw-medium mb-1">Existencias</p>
-      <!-- TODO: Make the stock filter form  -->
-      <form>
-        <div class="form-check">
-          <input type="checkbox" id="inStockCheck" class="form-check-input" />
-          <label for="inStockCheck" class="form-check-label">
-            En existencia
-          </label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" id="outStockCheck" class="form-check-input" />
-          <label for="outStockCheck" class="form-check-label">
-            Sin existencia
-          </label>
-        </div>
-      </form>
-    </div>
-    <div class="mb-3">
-      <p class="fw-medium mb-1">Estado</p>
-      <!-- TODO: Make the status filter form  -->
-      <form>
-        <div class="form-check">
-          <input type="checkbox" id="activeCheck" class="form-check-input" />
-          <label for="activeCheck" class="form-check-label">
-            Activo
-          </label>
-        </div>
-        <div class="form-check">
-          <input type="checkbox" id="disableCheck" class="form-check-input" />
-          <label for="disableCheck" class="form-check-label">
-            Inactivo
-          </label>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div>
-    <div class="d-flex justify-content-between">
-      <div>
-        <input
-          type="text"
-          placeholder="Buscar producto"
-          [formControl]="searchControl"
-          class="form-control form-control-sm mb-2"
-        />
-        <!-- TODO: Shows dinamicly the number of records -->
-        <p class="small-text">
-          Mostrando 50 productos de {{ productCount$ | async }}
-        </p>
+        </form>
       </div>
-      <div>
-        <button class="btn btn-sm btn-primary" routerLink="add">Nuevo Producto</button>
+      <div class="mb-3">
+        <p class="fw-medium mb-1">Estado</p>
+        <!-- TODO: Make the status filter form  -->
+        <form>
+          <div class="form-check">
+            <input type="checkbox" id="activeCheck" class="form-check-input" />
+            <label for="activeCheck" class="form-check-label"> Activo </label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="disableCheck" class="form-check-input" />
+            <label for="disableCheck" class="form-check-label">
+              Inactivo
+            </label>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Código</th>
-            <th>Nombre</th>
-            <th>Precio Venta</th>
-            <th>En Existencia</th>
-            <th>Está Activo</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (item of products$ | async; track item.id) {
-            <!-- TODO: Shows the product category -->
+    <div>
+      <div class="d-flex justify-content-between">
+        <div>
+          <input
+            type="text"
+            placeholder="Buscar producto"
+            [formControl]="searchControl"
+            class="form-control form-control-sm mb-2"
+          />
+          <!-- TODO: Shows dinamicly the number of records -->
+          <p class="small-text">
+            Mostrando 50 productos de {{ productCount$ | async }}
+          </p>
+        </div>
+        <div>
+          <button class="btn btn-sm btn-primary" routerLink="add">
+            Nuevo Producto
+          </button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
             <tr>
-              <td>{{ item.barcode }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.sellingPrice }}</td>
-              <!-- TODO: Make a directive to shows properly the boolean values of a product -->
-              <td>{{ item.inStock }}</td>
-              <td>{{ item.isActive }}</td>
+              <th>Nombre</th>
+              <th>Precio Venta</th>
+              <th>En Existencia</th>
+              <th>Está Activo</th>
             </tr>
-          }
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            @for (item of products$ | async; track item.id) {
+              <!-- TODO: Shows the product category -->
+              <tr>
+                <td>
+                  <p class="mb-0">{{ item.barcode }}</p>
+                  <p>{{ item.name }}</p>
+                </td>
+                <td>{{ item.sellingPrice }}</td>
+                <!-- TODO: Make a directive to shows properly the boolean values of a product -->
+                <td>{{ item.inStock }}</td>
+                <td>{{ item.isActive }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

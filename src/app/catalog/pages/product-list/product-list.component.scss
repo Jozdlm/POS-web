@@ -1,3 +1,8 @@
+.view-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 .product-content {
   display: grid;
   grid-template-columns: 260px 1fr;
