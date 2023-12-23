@@ -5,6 +5,8 @@ export interface School {
 }
 
 export type CreateSchool = Omit<School, 'id'>;
+export type UpdateSchool = Omit<School, 'id'>;
+export type SchoolMutation = CreateSchool | UpdateSchool;
 
 export interface SchoolDto {
   id?: number;

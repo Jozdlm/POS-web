@@ -1,7 +1,7 @@
-import { CreateSchool, School, SchoolDto } from '../models/school';
+import { School, SchoolDto, SchoolMutation } from '../models/school';
 
 export class SchoolMapper {
-  public static toDto(src: CreateSchool): SchoolDto {
+  public static toDto(src: SchoolMutation): SchoolDto {
     return {
       name: src.name,
       is_active: src.isActive,
