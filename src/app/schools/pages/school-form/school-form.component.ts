@@ -1,9 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SchoolService } from '@app/schools/services/school.service';
-import { of, switchMap } from 'rxjs';
+import { Subscription, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-school-form',
@@ -16,6 +16,7 @@ export class SchoolFormComponent {
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   private readonly _schoolService = inject(SchoolService);
+  private readonly _subscriptions = new Subscription();
   public pageTitle: string = 'Crear colegio';
   public categoryId: number | null = null;
 
@@ -25,7 +26,12 @@ export class SchoolFormComponent {
   });
 
   constructor() {
-    this._activatedRoute.paramMap
+    this._subscriptions.add(this.setInitialValues());
+    inject(DestroyRef).onDestroy(() => this._subscriptions.unsubscribe());
+  }
+
+  public setInitialValues(): Subscription {
+    return this._activatedRoute.paramMap
       .pipe(
         switchMap((params) => {
           const id = params.get('id');
