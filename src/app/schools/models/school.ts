@@ -6,7 +6,7 @@ export interface School {
 
 // TODO: Make the id property optional for both interfaces
 export interface SchoolDto {
-  id: number;
+  id?: number;
   name: string;
   is_active: boolean;
 }
