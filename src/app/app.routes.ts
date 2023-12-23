@@ -3,8 +3,8 @@ import { AddQuotationComponent } from './quotations/pages/add-quotation/add-quot
 import { anonClientGuard } from './auth/guards/anon-client.guard';
 import { loggedClientGuard } from './auth/guards/logged-client.guard';
 import { QuotationDetailsComponent } from './quotations/pages/quotation-details/quotation-details.component';
-import { ViewsShellComponent } from './core/layout/views-shell/views-shell.component';
-import { PagePrefix } from './core/enums/pages';
+import { ViewsShellComponent } from './common/layout/views-shell/views-shell.component';
+import { PagePrefix } from './common/enums/pages';
 
 // TODO: Set title property to each route
 export const APP_ROUTES: Routes = [

@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { SupabaseService } from '@app/core/services/supabase.service';
+import { SupabaseService } from '@app/common/services/supabase.service';
 import { LoginCredentials } from '../models/login-credentials';
 import { BehaviorSubject, Observable, filter, map } from 'rxjs';
 

@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, from, map, of } from 'rxjs';
-import { SupabaseService } from '@app/core/services/supabase.service';
-import { DbTables } from '@app/core/enums/db-tables';
+import { SupabaseService } from '@app/common/services/supabase.service';
+import { DbTables } from '@app/common/enums/db-tables';
 import { Category, CategoryDto } from '../models/category';
 import { CategoryMapper } from '../mappers/category.mapper';
 

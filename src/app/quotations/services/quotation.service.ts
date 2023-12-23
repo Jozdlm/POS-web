@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { Quotation, QuotationDto } from '../models/quotation';
-import { SupabaseService } from '@app/core/services/supabase.service';
+import { SupabaseService } from '@app/common/services/supabase.service';
 import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
 import { QuotationMapper } from '../mappers/quotation.mapper';
 import { QuotationItemMapper } from '../mappers/quotation-item.mapper';
-import { DbTables } from '@app/core/enums/db-tables';
+import { DbTables } from '@app/common/enums/db-tables';
 
 @Injectable({
   providedIn: 'root',

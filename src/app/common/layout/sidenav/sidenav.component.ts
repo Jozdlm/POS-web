@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SessionService } from '@app/auth/services/session.service';
-import { NavItem } from '@app/core/interfaces/nav-item';
+import { NavItem } from '@app/common/interfaces/nav-item';
 import { RouterModule } from '@angular/router';
 
 @Component({

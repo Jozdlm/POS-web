@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { SupabaseService } from '@app/core/services/supabase.service';
+import { SupabaseService } from '@app/common/services/supabase.service';
 import { Observable, from, map } from 'rxjs';
 import { School } from '../models/school';
-import { DbTables } from '@app/core/enums/db-tables';
+import { DbTables } from '@app/common/enums/db-tables';
 
 @Injectable({
   providedIn: 'root',
