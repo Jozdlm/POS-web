@@ -9,7 +9,7 @@
           type="text"
           placeholder="Buscar producto"
           [formControl]="searchControl"
-          class="form-control form-control-sm mb-2"
+          class="form-control mb-2"
         />
         <!-- TODO: Shows dinamicly the number of records -->
         <p class="small-text">
@@ -17,16 +17,12 @@
         </p>
       </div>
 
-      <div>
-        <button class="btn btn-sm btn-outline-secondary">
-          Filtrar
-        </button>
-        <button class="btn btn-sm btn-primary" routerLink="add">
-          Nuevo Producto
-        </button>
+      <div class="d-flex column-gap-2 align-items-start">
+        <button class="btn btn-outline-secondary">Filtrar</button>
+        <button class="btn btn-primary" routerLink="add">Nuevo Producto</button>
       </div>
     </div>
-    <div>
+    <div class="mb-4">
       <div class="mb-3">
         <p class="fw-medium mb-1">Categorías</p>
         <!-- TODO: Make the categories filter form  -->
@@ -46,28 +42,30 @@
           }
         </form>
       </div>
-      <label for="stockSelect" class="form-label">Existencias</label>
-      <select
-        class="form-select form-select-sm"
-        aria-label="Stock select"
-        id="stockSelect"
-      >
-        <option selected>Todos los registros</option>
-        <option value="true">En existencia</option>
-        <option value="false">Sin existencias</option>
-      </select>
-    </div>
-    <div>
-      <label for="stateSelect" class="form-label">Estado</label>
-      <select
-        class="form-select form-select-sm"
-        aria-label="State select"
-        id="stateSelect"
-      >
-        <option selected>Todos los registros</option>
-        <option value="true">Activo</option>
-        <option value="false">Inactivo</option>
-      </select>
+      <div class="mb-3">
+        <label for="stockSelect" class="form-label fw-medium">Existencias</label>
+        <select
+          class="form-select form-select-sm"
+          aria-label="Stock select"
+          id="stockSelect"
+        >
+          <option selected>Todos los registros</option>
+          <option value="true">En existencia</option>
+          <option value="false">Sin existencias</option>
+        </select>
+      </div>
+      <div>
+        <label for="stateSelect" class="form-label fw-medium">Estado</label>
+        <select
+          class="form-select form-select-sm"
+          aria-label="State select"
+          id="stateSelect"
+        >
+          <option selected>Todos los registros</option>
+          <option value="true">Activo</option>
+          <option value="false">Inactivo</option>
+        </select>
+      </div>
     </div>
     <div class="list-group">
       @for (item of products$ | async; track item.id) {
