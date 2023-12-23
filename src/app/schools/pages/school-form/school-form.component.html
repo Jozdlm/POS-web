@@ -1,7 +1,7 @@
 <div class="wrapper">
   <h1 class="fs-3 mb-4">{{pageTitle}}</h1>
 
-  <form [formGroup]="schoolForm" (ngSubmit)="onSubmitForm()">
+  <form [formGroup]="schoolForm" (ngSubmit)="onSubmitForm()" autocomplete="off">
     <div class="form-floating mb-3">
       <input
         type="text"
