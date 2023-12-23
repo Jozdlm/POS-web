@@ -34,15 +34,17 @@ export class SchoolFormComponent {
     });
   }
 
+  public resetAndReturn(): void {
+    this.schoolForm.reset();
+    this._router.navigateByUrl('schools');
+  }
+
   public onSubmitForm(): void {
     if (this.categoryId) {
     } else {
       const school = this.schoolForm.getRawValue();
       this._schoolService.createSchool({ ...school }).subscribe({
-        next: (_) => {
-          this.schoolForm.reset();
-          this._router.navigateByUrl('schools');
-        },
+        next: (_) => this.resetAndReturn(),
         error: (err) => console.error(err),
       });
     }
