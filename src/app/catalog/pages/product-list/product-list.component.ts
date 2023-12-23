@@ -17,5 +17,10 @@ export class ProductListComponent {
   public readonly categories$ = inject(CategoryService).getCategories();
   public readonly productCount$ = this._productService.getProductCount();
   public readonly products$ = this._productService.getProducts();
+  public diplayFilters: boolean = false;
   public searchControl = new FormControl('');
+
+  public toggleDisplayFilters(): void {
+    this.diplayFilters = !this.diplayFilters;
+  }
 }
