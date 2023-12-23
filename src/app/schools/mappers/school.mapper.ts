@@ -1,10 +1,22 @@
-import { CreateSchool, SchoolDto } from '../models/school';
+import { CreateSchool, School, SchoolDto } from '../models/school';
 
 export class SchoolMapper {
   public static toDto(src: CreateSchool): SchoolDto {
     return {
       name: src.name,
       is_active: src.isActive,
+    };
+  }
+
+  public static toEntity(dto: SchoolDto): School {
+    if (!dto.id) {
+      throw new Error('The Id should be provided to map from Dto to Entity');
+    }
+
+    return {
+      id: dto.id,
+      name: dto.name,
+      isActive: dto.is_active,
     };
   }
 }
