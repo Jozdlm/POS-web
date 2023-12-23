@@ -1,7 +1,12 @@
 import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from '@app/common/services/supabase.service';
 import { Observable, from, map } from 'rxjs';
-import { CreateSchool, School, SchoolDto } from '../models/school';
+import {
+  CreateSchool,
+  School,
+  SchoolDto,
+  UpdateSchool,
+} from '../models/school';
 import { DbTables } from '@app/common/enums/db-tables';
 import { SchoolMapper } from '../mappers/school.mapper';
 
@@ -43,6 +48,23 @@ export class SchoolService {
         if (error) throw new Error(error.message);
 
         return status === 201 ? true : false;
+      }),
+    );
+  }
+
+  public updateSchool(
+    data: UpdateSchool,
+    schoolId: number,
+  ): Observable<boolean> {
+    const dto = SchoolMapper.toDto(data);
+
+    return from(
+      this._db.from(DbTables.SCHOOLS).update(dto).eq('id', schoolId),
+    ).pipe(
+      map(({ status, error }) => {
+        if (error) throw new Error(error.message);
+
+        return status === 204 ? true : false;
       }),
     );
   }
