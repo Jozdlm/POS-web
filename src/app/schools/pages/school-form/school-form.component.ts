@@ -12,7 +12,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class SchoolFormComponent {
   private readonly _activatedRoute = inject(ActivatedRoute);
-  public pageTitle: string = '';
+  public pageTitle: string = 'Crear colegio';
+  public categoryId: number | null = null;
 
   public schoolForm = inject(FormBuilder).nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -22,7 +23,11 @@ export class SchoolFormComponent {
   constructor() {
     this._activatedRoute.paramMap.subscribe((params) => {
       const id = params.get('id');
-      this.pageTitle = id ? 'Editar colegio' : 'Agregar colegio';
+
+      if (id) {
+        this.pageTitle = 'Editar colegio';
+        this.categoryId = parseInt(id);
+      }
     });
   }
 
