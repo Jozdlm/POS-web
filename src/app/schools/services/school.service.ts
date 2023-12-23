@@ -23,6 +23,18 @@ export class SchoolService {
     );
   }
 
+  public getSchoolById(schoolId: number): Observable<School> {
+    return from(
+      this._db.from(DbTables.SCHOOLS).select('*').eq('id', schoolId),
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw new Error(error.message);
+
+        return SchoolMapper.toEntity(data[0] as SchoolDto);
+      }),
+    );
+  }
+
   public createSchool(data: CreateSchool): Observable<boolean> {
     const dto = SchoolMapper.toDto(data);
 
