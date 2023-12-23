@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { SupabaseService } from '@app/common/services/supabase.service';
 import { Observable, from, map } from 'rxjs';
-import { CreateSchool, School } from '../models/school';
+import { CreateSchool, School, SchoolDto } from '../models/school';
 import { DbTables } from '@app/common/enums/db-tables';
 import { SchoolMapper } from '../mappers/school.mapper';
 
@@ -18,7 +18,7 @@ export class SchoolService {
       map(({ data, error }) => {
         if (error) throw new Error(error.message);
 
-        return data as School[];
+        return (data as SchoolDto[]).map((item) => SchoolMapper.toEntity(item));
       }),
     );
   }
