@@ -62,6 +62,13 @@ export class SchoolFormComponent {
 
   public onSubmitForm(): void {
     if (this.categoryId) {
+      const school = this.schoolForm.getRawValue();
+      this._schoolService
+        .updateSchool({ ...school }, this.categoryId)
+        .subscribe({
+          next: (_) => this.resetAndReturn(),
+          error: (err) => console.error(err),
+        });
     } else {
       const school = this.schoolForm.getRawValue();
       this._schoolService.createSchool({ ...school }).subscribe({
