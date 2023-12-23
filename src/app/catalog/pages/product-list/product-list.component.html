@@ -79,17 +79,24 @@
     <div class="list-group">
       @for (item of products$ | async; track item.id) {
         <div
-          class="list-group-item d-flex justify-content-between align-items-start"
+          class="list-group-item d-flex justify-content-between align-items-center"
         >
           <div class="ms-2 me-auto">
             <div class="fw-medium">{{ item.name }}</div>
-            {{ item.barcode }}
+            <div class="small-text">{{ item.barcode }}</div>
           </div>
-          <div>
-            <span class="badge bg-success rounded-pill">{{
-              item.isActive ? "Activo" : "Inactivo"
-            }}</span>
-            <p class="mb-0">{{ item.sellingPrice }}</p>
+          <div class="d-flex column-gap-5 align-items-start">
+            <p class="mb-0">{{ item.sellingPrice | currency: "GTQ" }}</p>
+            <div>
+              <span class="badge bg-success rounded-pill">{{
+                item.inStock ? "En Stock" : "Sin Stock"
+              }}</span>
+            </div>
+            <div>
+              <span class="badge bg-success rounded-pill">{{
+                item.isActive ? "Activo" : "Inactivo"
+              }}</span>
+            </div>
           </div>
         </div>
       }
