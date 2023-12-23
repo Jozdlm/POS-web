@@ -19,10 +19,6 @@ export class SidenavComponent {
       placeholder: 'Inicio',
     },
     {
-      path: '/dashboard',
-      placeholder: 'Dashboard',
-    },
-    {
       path: '/quotations',
       placeholder: 'Cotizaciones',
     },
