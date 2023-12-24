@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '@app/catalog/services/category.service';
 import { Router } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
@@ -15,14 +15,13 @@ export class ProductFormComponent {
   private readonly _router = inject(Router);
   public readonly categories$ = inject(CategoryService).getCategories();
 
-  // TODO: Define the reactive form to a product
   public productForm = inject(FormBuilder).nonNullable.group({
-    name: [''],
+    name: ['', [Validators.required, Validators.minLength(3)]],
     barcode: [''],
-    sellingPrice: [0],
-    categoryId: [0],
-    inStock: [true],
-    isActive: [true],
+    sellingPrice: [0, [Validators.required, Validators.min(0.01)]],
+    categoryId: [0, [Validators.required, Validators.min(1)]],
+    inStock: [true, Validators.required],
+    isActive: [true, Validators.required],
   });
 
   // TODO: Create a method that allows to create a product
