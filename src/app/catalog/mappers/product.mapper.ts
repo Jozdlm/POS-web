@@ -13,6 +13,7 @@ export class ProductMapper {
       sellingPrice: dto.selling_price,
       inStock: dto.in_stock,
       isActive: dto.is_active,
+      categoryId: dto.category_id,
     };
   }
 

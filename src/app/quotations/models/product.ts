@@ -5,6 +5,7 @@ export interface Product {
   sellingPrice: number;
   isActive: boolean;
   inStock: boolean;
+  categoryId: number;
 }
 
 export interface ProductDto {
