@@ -19,7 +19,7 @@ export class ProductFormComponent {
   // TODO: Create a method that allows to create a product
 
   // TODO: Create a method that cancel the operation and reset values
-  public cancelAndReset(): void {
+  public resetAndReturn(): void {
     this._router.navigateByUrl("products");
   }
 }
