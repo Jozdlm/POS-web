@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '@app/catalog/services/category.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -12,6 +12,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrl: './product-form.component.scss',
 })
 export class ProductFormComponent {
+  private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   public readonly categories$ = inject(CategoryService).getCategories();
 
@@ -23,6 +24,12 @@ export class ProductFormComponent {
     inStock: [true, Validators.required],
     isActive: [true, Validators.required],
   });
+
+  constructor() {
+    this._activatedRoute.paramMap.subscribe((params) => {
+      console.log(params.get('id'));
+    });
+  }
 
   // TODO: Create a method that allows to create a product
   public onSubmitForm(): void {
