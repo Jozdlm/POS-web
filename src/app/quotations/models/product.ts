@@ -8,6 +8,8 @@ export interface Product {
   categoryId: number;
 }
 
+export type ProductMutation = Omit<Product, 'id'>;
+
 export interface ProductDto {
   id?: number;
   barcode: string;
