@@ -1,10 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '@app/catalog/services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '@app/catalog/services/product.service';
-import { of, switchMap } from 'rxjs';
+import { Subscription, of, switchMap } from 'rxjs';
 import { Product } from '@app/quotations/models/product';
 
 @Component({
@@ -18,6 +18,7 @@ export class ProductFormComponent {
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   private readonly _productService = inject(ProductService);
+  private readonly _subscriptions = new Subscription();
   public readonly categories$ = inject(CategoryService).getCategories();
   public productId: number | null = null;
 
@@ -31,7 +32,12 @@ export class ProductFormComponent {
   });
 
   constructor() {
-    this._activatedRoute.paramMap
+    this._subscriptions.add(this.getProductDetails());
+    inject(DestroyRef).onDestroy(() => this._subscriptions.unsubscribe());
+  }
+
+  public getProductDetails(): Subscription {
+    return this._activatedRoute.paramMap
       .pipe(
         switchMap((params) => {
           const id = params.get('id');
