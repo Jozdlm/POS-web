@@ -74,8 +74,8 @@ export class ProductFormComponent {
     console.log('submitted');
   }
 
-  // TODO: Create a method that cancel the operation and reset values
   public resetAndReturn(): void {
+    this.productForm.reset();
     this._router.navigateByUrl('products');
   }
 }
