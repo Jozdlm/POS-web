@@ -3,7 +3,11 @@ import { Observable, from, map } from 'rxjs';
 import { SupabaseService } from '@app/common/services/supabase.service';
 import { DbTables } from '@app/common/enums/db-tables';
 import { ProductMapper } from '../mappers/product.mapper';
-import { Product, ProductDto } from '@app/quotations/models/product';
+import {
+  Product,
+  ProductDto,
+  ProductMutation,
+} from '@app/quotations/models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -71,6 +75,23 @@ export class ProductService {
         if (error) throw new Error(error.message);
 
         return ProductMapper.toEntity(data[0] as ProductDto);
+      }),
+    );
+  }
+
+  public updateProduct(
+    productId: number,
+    data: ProductMutation,
+  ): Observable<boolean> {
+    const dto: ProductDto = ProductMapper.toDto(data);
+
+    return from(
+      this._db.from(DbTables.PRODUCTS).update(dto).eq('id', productId),
+    ).pipe(
+      map(({ status, error }) => {
+        if (error) throw new Error(error.message);
+
+        return status === 204 ? true : false;
       }),
     );
   }
