@@ -1,4 +1,8 @@
-import { Product, ProductDto } from '@app/quotations/models/product';
+import {
+  Product,
+  ProductDto,
+  ProductMutation,
+} from '@app/quotations/models/product';
 
 export class ProductMapper {
   public static toEntity(dto: ProductDto): Product {
@@ -17,5 +21,14 @@ export class ProductMapper {
     };
   }
 
-  public static toDto() {}
+  public static toDto(src: ProductMutation): ProductDto {
+    return {
+      name: src.name,
+      barcode: src.barcode,
+      selling_price: src.sellingPrice,
+      in_stock: src.inStock,
+      is_active: src.isActive,
+      category_id: src.categoryId,
+    };
+  }
 }
