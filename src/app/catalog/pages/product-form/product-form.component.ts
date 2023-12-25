@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '@app/catalog/services/product.service';
 import { of, switchMap } from 'rxjs';
+import { Product } from '@app/quotations/models/product';
 
 @Component({
   selector: 'app-product-form',
@@ -44,8 +45,22 @@ export class ProductFormComponent {
         }),
       )
       .subscribe((resp) => {
-        console.log(resp);
+        if (resp) {
+          this.setInitialValues(resp);
+        }
       });
+  }
+
+  public setInitialValues(src: Product): void {
+    const { name, barcode, sellingPrice, categoryId, inStock, isActive } = src;
+    this.productForm.setValue({
+      name,
+      barcode,
+      sellingPrice,
+      categoryId,
+      inStock,
+      isActive,
+    });
   }
 
   // TODO: Create a method that allows to create a product
