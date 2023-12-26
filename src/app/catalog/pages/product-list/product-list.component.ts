@@ -5,7 +5,14 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CategoryService } from '@app/catalog/services/category.service';
 import { RouterModule } from '@angular/router';
 import { Product } from '@app/quotations/models/product';
-import { Subscription } from 'rxjs';
+import {
+  Subscription,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  switchMap,
+} from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -26,6 +33,7 @@ export class ProductListComponent {
 
   constructor() {
     this._subscriptions.add(this.getProductList());
+    this._subscriptions.add(this.searchProduct());
     inject(DestroyRef).onDestroy(() => this._subscriptions.unsubscribe());
   }
 
@@ -34,6 +42,22 @@ export class ProductListComponent {
       this.products = values;
       this.listState = values;
     });
+  }
+
+  public searchProduct(): Subscription {
+    return this.searchControl.valueChanges
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        filter((value) => typeof value === 'string'),
+        map((query) => query as string),
+        switchMap((query) => {
+          return this._productService.getProductsBy(query, 'name');
+        }),
+      )
+      .subscribe((products) => {
+        this.listState = products;
+      });
   }
 
   public toggleDisplayFilters(): void {
