@@ -85,6 +85,18 @@ export class ProductService {
     );
   }
 
+  public createProduct(data: ProductMutation): Observable<boolean> {
+    const dto: ProductDto = ProductMapper.toDto(data);
+
+    return from(this._db.from(DbTables.PRODUCTS).insert(dto)).pipe(
+      map(({ status, error }) => {
+        if (error) throw new Error(error.message);
+
+        return status === 201 ? true : false;
+      }),
+    );
+  }
+
   public updateProduct(
     productId: number,
     data: ProductMutation,
