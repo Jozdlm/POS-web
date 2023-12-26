@@ -3,3 +3,9 @@
   display: grid;
   grid-template-rows: 1fr max-content;
 }
+
+.nav-item-icon {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
