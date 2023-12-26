@@ -33,7 +33,13 @@ export class ProductService {
 
   // TODO: Implements pagination and order by
   public getProducts(): Observable<Product[]> {
-    return from(this._db.from(DbTables.PRODUCTS).select('*').range(0, 49)).pipe(
+    return from(
+      this._db
+        .from(DbTables.PRODUCTS)
+        .select('*')
+        .order('id', { ascending: true })
+        .range(0, 49),
+    ).pipe(
       map(({ data, error }) => {
         if (error) {
           throw new Error(error.message);
