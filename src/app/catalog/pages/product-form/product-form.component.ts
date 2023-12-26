@@ -71,7 +71,15 @@ export class ProductFormComponent {
 
   // TODO: Create a method that allows to create a product
   public onSubmitForm(): void {
-    console.log('submitted');
+    if (this.productId) {
+      const values = this.productForm.getRawValue();
+      this._productService
+        .updateProduct(this.productId, { ...values })
+        .subscribe({
+          next: (_) => this.resetAndReturn(),
+          error: (err) => console.log(err),
+        });
+    }
   }
 
   public resetAndReturn(): void {
