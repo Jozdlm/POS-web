@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { QuotationComponent } from './quotation.component';
+import { QuotationComponent } from './pages/quotation-list/quotation.component';
 import { AddQuotationComponent } from './pages/add-quotation/add-quotation.component';
 import { QuotationDetailsComponent } from './pages/quotation-details/quotation-details.component';
 
