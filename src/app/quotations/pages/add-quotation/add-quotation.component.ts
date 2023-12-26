@@ -23,10 +23,11 @@ import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ProductService } from '@app/catalog/services/product.service';
 import { getCurrentDate } from '@app/quotations/utils/current-date';
 import { SchoolService } from '@app/schools/services/school.service';
+import { IconComponent } from '@app/common/components/icon.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, IconComponent],
   templateUrl: './add-quotation.component.html',
   styleUrl: './add-quotation.component.scss',
 })
