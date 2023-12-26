@@ -16,7 +16,8 @@
         </div>
         <!-- TODO: Shows dinamicly the number of records -->
         <p class="small-text">
-          Mostrando 50 productos de {{ productCount$ | async }}
+          Mostrando {{ listState.length }} resultados de
+          {{ productCount$ | async }}
         </p>
       </div>
 

@@ -48,8 +48,6 @@ export class QuotationStateService {
     this.emmitStateChanges();
   }
 
-  // TODO: Improve the code readability
-
   public increaseQuantity(itemId: number): void {
     const itemIndex = this._items.findIndex(
       (item) => item.productId === itemId,
