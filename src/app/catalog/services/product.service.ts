@@ -7,7 +7,7 @@ import {
   Product,
   ProductDto,
   ProductMutation,
-} from '@app/quotations/models/product';
+} from '@app/catalog/models/product';
 
 @Injectable({
   providedIn: 'root',

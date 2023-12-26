@@ -17,7 +17,7 @@ import {
 } from 'rxjs';
 import { SchoolGradeService } from '@app/schools/services/school-grade.service';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
-import { Product } from '@app/quotations/models/product';
+import { Product } from '@app/catalog/models/product';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ProductService } from '@app/catalog/services/product.service';

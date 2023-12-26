@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '@app/catalog/services/product.service';
 import { Subscription, of, switchMap } from 'rxjs';
-import { Product } from '@app/quotations/models/product';
+import { Product } from '@app/catalog/models/product';
 
 @Component({
   selector: 'app-product-form',

@@ -4,7 +4,7 @@ import { ProductService } from '@app/catalog/services/product.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CategoryService } from '@app/catalog/services/category.service';
 import { RouterModule } from '@angular/router';
-import { Product } from '@app/quotations/models/product';
+import { Product } from '@app/catalog/models/product';
 import {
   Subscription,
   debounceTime,
