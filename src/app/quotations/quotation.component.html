@@ -1,9 +1,10 @@
-<h1 class="fs-2">Cotizaciones</h1>
-
-<a routerLink="./add">Nueva Cotización</a>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="fs-3">Cotizaciones</h1>
+  <a routerLink="./add" class="btn btn-primary">Nueva Cotización</a>
+</div>
 
 <div>
-  <table class="table">
+  <table class="table align-middle">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -25,7 +26,11 @@
           <td>{{ item.gradeName }}</td>
           <td>{{ item.date }}</td>
           <td>{{ item.totalAmmount | currency: "GTQ" }}</td>
-          <td><a [routerLink]="['/quotations', item.id]">Ver detalles</a></td>
+          <td>
+            <a [routerLink]="['/quotations', item.id]" class="btn"
+              >Ver detalles</a
+            >
+          </td>
         </tr>
       }
     </tbody>
