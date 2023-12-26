@@ -5,12 +5,15 @@
   <div>
     <div class="d-flex justify-content-between">
       <div>
-        <input
-          type="text"
-          placeholder="Buscar producto"
-          [formControl]="searchControl"
-          class="form-control mb-2"
-        />
+        <div class="d-flex mb-2 align-items-center">
+          <input
+            type="text"
+            placeholder="Buscar producto"
+            [formControl]="searchControl"
+            class="form-control"
+          />
+          <button class="btn" (click)="clearSearchQuery()">Limpiar</button>
+        </div>
         <!-- TODO: Shows dinamicly the number of records -->
         <p class="small-text">
           Mostrando 50 productos de {{ productCount$ | async }}

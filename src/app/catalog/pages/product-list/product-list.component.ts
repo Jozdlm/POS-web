@@ -24,7 +24,6 @@ import {
 export class ProductListComponent {
   private readonly _productService = inject(ProductService);
   private _subscriptions = new Subscription();
-  private products: Product[] = [];
   public readonly categories$ = inject(CategoryService).getCategories();
   public readonly productCount$ = this._productService.getProductCount();
   public listState: Product[] = [];
@@ -39,7 +38,6 @@ export class ProductListComponent {
 
   public getProductList(): Subscription {
     return this._productService.getProducts().subscribe((values) => {
-      this.products = values;
       this.listState = values;
     });
   }
@@ -52,12 +50,20 @@ export class ProductListComponent {
         filter((value) => typeof value === 'string'),
         map((query) => query as string),
         switchMap((query) => {
+          if (query.trim() === '') {
+            return this._productService.getProducts();
+          }
+
           return this._productService.getProductsBy(query, 'name');
         }),
       )
       .subscribe((products) => {
         this.listState = products;
       });
+  }
+
+  public clearSearchQuery(): void {
+    this.searchControl.setValue('');
   }
 
   public toggleDisplayFilters(): void {
