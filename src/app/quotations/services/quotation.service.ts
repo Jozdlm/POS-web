@@ -10,13 +10,12 @@ import { DbTables } from '@app/common/enums/db-tables';
   providedIn: 'root',
 })
 export class QuotationService {
-  private readonly _supabaseService = inject(SupabaseService);
-  private readonly _supabase = this._supabaseService.supabase;
+  private readonly _db = inject(SupabaseService).supabase;
 
   constructor() {}
 
   private async _insertHeader(header: QuotationDto): Promise<any> {
-    const { data, error } = await this._supabase
+    const { data, error } = await this._db
       .from(DbTables.QUOTATIONS)
       .insert(header)
       .select();
@@ -29,7 +28,7 @@ export class QuotationService {
   }
 
   private async _insertItems(items: QuotationItemDto[]): Promise<void> {
-    const { error } = await this._supabase
+    const { error } = await this._db
       .from(DbTables.QUOTATION_ITEMS)
       .insert(items);
 
@@ -56,7 +55,7 @@ export class QuotationService {
   public async getQuotationItems(
     quotationId: number,
   ): Promise<QuotationItem[]> {
-    let { data: quotation_items, error } = await this._supabase
+    let { data: quotation_items, error } = await this._db
       .from(DbTables.QUOTATION_ITEMS)
       .select(`*, ${DbTables.PRODUCTS}(name)`)
       .eq('quotation_id', quotationId);
@@ -73,7 +72,7 @@ export class QuotationService {
   }
 
   public async getQuotations(): Promise<Quotation[]> {
-    let { data: items, error } = await this._supabase
+    let { data: items, error } = await this._db
       .from(DbTables.QUOTATIONS)
       .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`)
       .order('id', { ascending: true });
@@ -92,7 +91,7 @@ export class QuotationService {
   public async getQuotationById(
     quotationId: number,
   ): Promise<Quotation | null> {
-    let { data: quotation_header, error } = await this._supabase
+    let { data: quotation_header, error } = await this._db
       .from(DbTables.QUOTATIONS)
       .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`)
       .eq('id', quotationId);
