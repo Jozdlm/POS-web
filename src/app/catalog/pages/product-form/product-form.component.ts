@@ -71,7 +71,6 @@ export class ProductFormComponent {
     });
   }
 
-  // TODO: Create a method that allows to create a product
   public onSubmitForm(): void {
     if (this.productId) {
       const values = this.productForm.getRawValue();
@@ -81,6 +80,12 @@ export class ProductFormComponent {
           next: (_) => this.resetAndReturn(),
           error: (err) => console.log(err),
         });
+    } else {
+      const values = this.productForm.getRawValue();
+      this._productService.createProduct({ ...values }).subscribe({
+        next: (_) => this.resetAndReturn(),
+        error: (err) => console.log(err),
+      });
     }
   }
 
