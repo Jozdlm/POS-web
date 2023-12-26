@@ -31,7 +31,6 @@ export class ProductService {
     );
   }
 
-  // TODO: Implements pagination and order by
   public getProducts(): Observable<Product[]> {
     return from(
       this._db

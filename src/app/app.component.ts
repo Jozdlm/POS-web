@@ -10,8 +10,5 @@ import { NavbarComponent } from './common/layout/navbar/navbar.component';
   imports: [NavbarComponent, RouterOutlet],
 })
 export class AppComponent {
-  // TODO: Create a list group component, because it is reated in three components
-
-  // TODO: Verify if the current client is logged
   title = 'pos-web-client';
 }
