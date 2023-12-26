@@ -15,14 +15,7 @@
           </p>
           <p class="mb-2">{{ item.description }}</p>
           <!-- TODO: Make a pipe or directive to shows the category state -->
-          <span
-            class="badge rounded-pill"
-            [ngClass]="{
-              'text-bg-success': item.isActive,
-              'text-bg-secondary': !item.isActive
-            }"
-          >
-            {{ item.isActive ? "Activo" : "Desactivado" }}
+          <span class="badge rounded-pill" [recordStatus]="item.isActive">
           </span>
         </div>
         <div>
