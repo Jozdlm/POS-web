@@ -1,38 +1,36 @@
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h1 class="fs-3">Cotizaciones</h1>
-  <a routerLink="./add" class="btn btn-primary">Nueva Cotización</a>
-</div>
+<div class="view-wrapper">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="fs-3">Cotizaciones</h1>
+    <a routerLink="./add" class="btn btn-primary">Nueva Cotización</a>
+  </div>
 
-<div>
-  <table class="table align-middle">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Cliente</th>
-        <th scope="col">Estudiante</th>
-        <th scope="col">Colegio</th>
-        <th scope="col">Grado</th>
-        <th scope="col">Fecha</th>
-        <th scope="col" colspan="2">Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (item of quotations; track item.id) {
+  <div>
+    <table class="table table-responsive align-middle">
+      <thead>
         <tr>
-          <td>{{ item.id }}</td>
-          <td>{{ item.customerName }}</td>
-          <td>{{ item.studentName }}</td>
-          <td>{{ item.schoolName }}</td>
-          <td>{{ item.gradeName }}</td>
-          <td>{{ item.date }}</td>
-          <td>{{ item.totalAmmount | currency: "GTQ" }}</td>
-          <td>
-            <a [routerLink]="['/quotations', item.id]" class="btn"
-              >Ver detalles</a
-            >
-          </td>
+          <th scope="col">#</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Grado</th>
+          <th scope="col">Fecha</th>
+          <th scope="col" colspan="2">Total</th>
         </tr>
-      }
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        @for (item of quotations; track item.id) {
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.customerName }}</td>
+            <td>{{ item.gradeName }}</td>
+            <td>{{ item.date }}</td>
+            <td>{{ item.totalAmmount | currency: "GTQ" }}</td>
+            <td>
+              <a [routerLink]="['/quotations', item.id]" class="btn"
+                >Ver detalles</a
+              >
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
 </div>
