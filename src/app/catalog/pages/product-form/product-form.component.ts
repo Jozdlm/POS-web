@@ -21,6 +21,7 @@ export class ProductFormComponent {
   private readonly _subscriptions = new Subscription();
   public readonly categories$ = inject(CategoryService).getCategories();
   public productId: number | null = null;
+  public pageTitle: string = 'Crear producto';
 
   public productForm = inject(FormBuilder).nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -44,6 +45,7 @@ export class ProductFormComponent {
 
           if (id) {
             this.productId = parseInt(id);
+            this.pageTitle = 'Editar producto';
             return this._productService.getProductById(this.productId);
           }
 
