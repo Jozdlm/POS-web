@@ -75,7 +75,8 @@ export class QuotationService {
   public async getQuotations(): Promise<Quotation[]> {
     let { data: items, error } = await this._supabase
       .from(DbTables.QUOTATIONS)
-      .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`);
+      .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`)
+      .order('id', { ascending: true });
 
     if (error) {
       throw new Error(error.message);

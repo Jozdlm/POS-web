@@ -14,7 +14,12 @@ export class CategoryService {
   constructor() {}
 
   public getCategories(): Observable<Category[]> {
-    return from(this._db.from(DbTables.CATEGORIES).select('*')).pipe(
+    return from(
+      this._db
+        .from(DbTables.CATEGORIES)
+        .select('*')
+        .order('id', { ascending: true }),
+    ).pipe(
       map(({ data, error }) => {
         if (error) throw new Error(error.message);
 

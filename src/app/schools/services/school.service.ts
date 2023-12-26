@@ -19,7 +19,12 @@ export class SchoolService {
   constructor() {}
 
   public getSchools(): Observable<School[]> {
-    return from(this._db.from(DbTables.SCHOOLS).select('*')).pipe(
+    return from(
+      this._db
+        .from(DbTables.SCHOOLS)
+        .select('*')
+        .order('id', { ascending: true }),
+    ).pipe(
       map(({ data, error }) => {
         if (error) throw new Error(error.message);
 
