@@ -8,6 +8,7 @@ import {
   ProductDto,
   ProductMutation,
 } from '@app/catalog/models/product';
+import { FilterRequest } from '@app/common/interfaces/filter-request';
 
 @Injectable({
   providedIn: 'root',
@@ -52,13 +53,17 @@ export class ProductService {
   }
 
   // TODO: Make a type that set the columns that user can search (property: SearchableCols)
-  public getProductsBy(query: string, property: string): Observable<Product[]> {
+  public getProductsBy({
+    query,
+    field,
+    limit,
+  }: FilterRequest): Observable<Product[]> {
     return from(
       this._db
         .from(DbTables.PRODUCTS)
         .select('*')
-        .like(property, `%${query}%`)
-        .range(0, 7),
+        .like(field, `%${query}%`)
+        .range(0, limit - 1),
     ).pipe(
       map(({ data, error }) => {
         if (error) {

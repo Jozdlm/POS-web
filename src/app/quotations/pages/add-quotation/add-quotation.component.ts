@@ -69,7 +69,11 @@ export class AddQuotationComponent {
           filter((value) => typeof value === 'string'),
           map((value) => value as string),
           switchMap((value) => {
-            return this._productService.getProductsBy(value, 'name');
+            return this._productService.getProductsBy({
+              query: value,
+              field: 'name',
+              limit: 5,
+            });
           }),
         )
         .subscribe((items) => {
