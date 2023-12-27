@@ -8,7 +8,7 @@ import {
   ProductDto,
   ProductMutation,
 } from '@app/catalog/models/product';
-import { FilterData } from '@app/common/interfaces/filter-request';
+import { FilterData } from '@app/common/interfaces/filter-data';
 
 @Injectable({
   providedIn: 'root',
