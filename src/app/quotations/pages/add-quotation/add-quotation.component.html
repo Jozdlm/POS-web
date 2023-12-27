@@ -16,7 +16,10 @@
           />
           <label for="search-field">Buscar Producto</label>
         </div>
-        <button class="btn btn-outline-secondary" (click)="clearSearchControl()">
+        <button
+          class="btn btn-outline-secondary"
+          (click)="clearSearchControl()"
+        >
           Limpiar
         </button>
       </div>
@@ -143,16 +146,6 @@
         </div>
         <div class="form-floating mb-3">
           <input
-            type="text"
-            class="form-control"
-            id="student-field"
-            placeholder=""
-            formControlName="studentName"
-          />
-          <label for="student-field">Estudiante</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input
             type="date"
             class="form-control"
             id="date-field"
@@ -186,6 +179,41 @@
             }
           </select>
           <label for="schoolName">Centro Educativo</label>
+        </div>
+        <div>
+          <p class="fw-medium">Promoción</p>
+          <div class="form-check mb-3">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="promotionType"
+              id="promotionType1"
+            />
+            <label class="form-check-label" for="promotionType1">
+              Descuento (10%)
+            </label>
+          </div>
+          <div class="form-check mb-3">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="promotionType"
+              id="promotionType2"
+            />
+            <label class="form-check-label" for="promotionType2">
+              Forro de cuadernos
+            </label>
+          </div>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="studentName"
+            placeholder=""
+            formControlName="studentName"
+          />
+          <label for="studentName">Estudiante</label>
         </div>
         <div class="d-flex justify-content-end column-gap-2">
           <button
