@@ -54,7 +54,11 @@ export class ProductListComponent {
             return this._productService.getProducts();
           }
 
-          return this._productService.getProductsBy(query, 'name');
+          return this._productService.getProductsBy({
+            query,
+            field: 'name',
+            limit: 50,
+          });
         }),
       )
       .subscribe((products) => {
