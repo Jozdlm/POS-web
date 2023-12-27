@@ -8,7 +8,7 @@ import {
   ProductDto,
   ProductMutation,
 } from '@app/catalog/models/product';
-import { FilterRequest } from '@app/common/interfaces/filter-request';
+import { FilterData } from '@app/common/interfaces/filter-request';
 
 @Injectable({
   providedIn: 'root',
@@ -57,7 +57,7 @@ export class ProductService {
     query,
     field,
     limit,
-  }: FilterRequest): Observable<Product[]> {
+  }: FilterData): Observable<Product[]> {
     return from(
       this._db
         .from(DbTables.PRODUCTS)
