@@ -33,19 +33,16 @@ export interface QuotationDto {
   promotion_type: number;
 }
 
-export interface QuotationDto {
-  id?: number;
-  customer_name: string;
-  student_name: string;
-  date: string;
-  grade_id: number;
-  school_id: number;
-  total_ammount: number;
-  created_at?: string;
-  school_grades?: {
+export interface QuoteWithRefTables extends QuotationDto {
+  id: number;
+  school_grades: {
     name: string;
   };
-  schools?: {
+  schools: {
     name: string;
   };
+  quote_promotion: {
+    description: string;
+  };
+  created_at: string;
 }

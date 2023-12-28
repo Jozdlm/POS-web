@@ -1,15 +1,15 @@
-import { Quotation, QuotationDto } from '../models/quotation';
+import { Quotation, QuotationDto, QuoteWithRefTables } from '../models/quotation';
 
 export class QuotationMapper {
-  public static toEntity(dto: QuotationDto): Quotation {
+  public static toEntity(dto: QuoteWithRefTables): Quotation {
     return {
-      id: dto.id || 0,
+      id: dto.id,
       customerName: dto.customer_name,
       studentName: dto.student_name,
       date: dto.date,
       schoolGrade: dto.grade_id,
-      gradeName: dto.school_grades?.name || '',
-      schoolName: dto.schools?.name || '',
+      gradeName: dto.school_grades.name,
+      schoolName: dto.schools.name,
       totalAmmount: dto.total_ammount,
     };
   }
