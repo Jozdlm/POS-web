@@ -17,9 +17,9 @@ export interface QuoteMutation {
   customerName: string;
   studentName: string;
   date: string;
-  schoolGradeId: number;
+  gradeId: number;
   schoolId: number;
-  promotionTypeId: number;
+  promotionType: number;
   totalAmmount: number;
 }
 

@@ -1,4 +1,9 @@
-import { Quotation, QuotationDto, QuoteWithRefTables } from '../models/quotation';
+import {
+  Quotation,
+  QuotationDto,
+  QuoteMutation,
+  QuoteWithRefTables,
+} from '../models/quotation';
 
 export class QuotationMapper {
   public static toEntity(dto: QuoteWithRefTables): Quotation {
@@ -14,14 +19,15 @@ export class QuotationMapper {
     };
   }
 
-  public static toDto(src: Quotation): QuotationDto {
+  public static toDto(src: QuoteMutation): QuotationDto {
     return {
       customer_name: src.customerName,
       student_name: src.studentName,
       date: src.date,
-      grade_id: src.schoolGrade,
-      school_id: src.schoolName,
+      grade_id: src.gradeId,
+      school_id: src.schoolId,
       total_ammount: src.totalAmmount,
+      promotion_type: src.promotionType,
     };
   }
 }
