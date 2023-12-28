@@ -24,12 +24,22 @@ export interface QuoteMutation {
 }
 
 export interface QuotationDto {
+  customer_name: string;
+  student_name: string;
+  date: string;
+  grade_id: number;
+  school_id: number;
+  total_ammount: number;
+  promotion_type: number;
+}
+
+export interface QuotationDto {
   id?: number;
   customer_name: string;
   student_name: string;
   date: string;
   grade_id: number;
-  school_id: string;
+  school_id: number;
   total_ammount: number;
   created_at?: string;
   school_grades?: {
