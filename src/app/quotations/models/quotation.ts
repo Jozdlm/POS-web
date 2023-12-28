@@ -13,6 +13,16 @@ export interface Quotation {
   createdAt?: string;
 }
 
+export interface QuoteMutation {
+  customerName: string;
+  studentName: string;
+  date: string;
+  schoolGradeId: number;
+  schoolId: number;
+  promotionTypeId: number;
+  totalAmmount: number;
+}
+
 export interface QuotationDto {
   id?: number;
   customer_name: string;
