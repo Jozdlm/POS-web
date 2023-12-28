@@ -49,7 +49,8 @@ export class AddQuotationComponent {
     studentName: ['', [Validators.required, Validators.minLength(3)]],
     date: [getCurrentDate(), Validators.required],
     schoolGrade: ['', [Validators.required, Validators.min(1)]],
-    schoolName: ['', [Validators.required, Validators.minLength(3)]],
+    schoolName: ['', [Validators.required, Validators.min(1)]],
+    promotionType: ['', [Validators.required, Validators.min(1)]],
   });
 
   constructor() {

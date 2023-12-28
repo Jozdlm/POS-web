@@ -160,7 +160,7 @@
             id="school-grade-field"
             formControlName="schoolGrade"
           >
-            <option value="">Selecciona un grado</option>
+            <option value="">Escoge un grado</option>
             @for (op of schoolGrades$ | async; track op.id) {
               <option [value]="op.id">{{ op.name }}</option>
             }
@@ -173,37 +173,24 @@
             id="schoolName"
             formControlName="schoolName"
           >
-            <option value="">Selecciona un centro educativo</option>
+            <option value="">Escoge un centro educativo</option>
             @for (op of schools$ | async; track op.id) {
               <option [value]="op.id">{{ op.name }}</option>
             }
           </select>
           <label for="schoolName">Centro Educativo</label>
         </div>
-        <div>
-          <p class="fw-medium">Promoción</p>
-          <div class="form-check mb-3">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="promotionType"
-              id="promotionType1"
-            />
-            <label class="form-check-label" for="promotionType1">
-              Descuento (10%)
-            </label>
-          </div>
-          <div class="form-check mb-3">
-            <input
-              class="form-check-input"
-              type="radio"
-              name="promotionType"
-              id="promotionType2"
-            />
-            <label class="form-check-label" for="promotionType2">
-              Forro de cuadernos
-            </label>
-          </div>
+        <div class="form-floating mb-3">
+          <select
+            class="form-select"
+            id="promotionType"
+            formControlName="promotionType"
+          >
+            <option value="">Escoge una promoción</option>
+            <option value="1">Descuento (10%)</option>
+            <option value="2">Forro de cuadernos</option>
+          </select>
+          <label for="promotionType">Promoción</label>
         </div>
         <div class="form-floating mb-3">
           <input
