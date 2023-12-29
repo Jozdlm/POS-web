@@ -12,12 +12,7 @@ import { Quotation } from '../../models/quotation';
 })
 export class QuotationComponent {
   private readonly _quotationService = inject(QuotationService);
-  public quotations: Quotation[] = [];
+  public quotations$ = inject(QuotationService).getQuotations();
 
-  constructor() {
-    this._quotationService
-      .getQuotations()
-      .then((values) => (this.quotations = values))
-      .catch((err) => console.error(err));
-  }
+  constructor() {}
 }

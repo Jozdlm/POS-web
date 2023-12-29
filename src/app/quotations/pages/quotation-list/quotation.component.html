@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (item of quotations; track item.id) {
+        @for (item of quotations$ | async; track item.id) {
           <tr>
             <td>{{ item.id }}</td>
             <td>{{ item.customerName }}</td>
