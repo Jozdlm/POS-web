@@ -1,4 +1,4 @@
 export enum QuotePromotionType {
-  Discount = 1,
-  NotebookCover = 2,
+  Discount = "Descuento (10)%",
+  NotebookCover = "Forro de cuadernos",
 }
