@@ -24,6 +24,7 @@ import { ProductService } from '@app/catalog/services/product.service';
 import { getCurrentDate } from '@app/quotations/utils/current-date';
 import { SchoolService } from '@app/schools/services/school.service';
 import { IconComponent } from '@app/common/components/icon.component';
+import { QuoteMutation } from '@app/quotations/models/quotation';
 
 @Component({
   standalone: true,
@@ -48,9 +49,9 @@ export class AddQuotationComponent {
     customerName: ['', [Validators.required, Validators.minLength(3)]],
     studentName: ['', [Validators.required, Validators.minLength(3)]],
     date: [getCurrentDate(), Validators.required],
-    schoolGrade: ['', [Validators.required, Validators.min(1)]],
-    schoolName: ['', [Validators.required, Validators.min(1)]],
-    promotionType: ['', [Validators.required, Validators.min(1)]],
+    schoolGrade: [0, [Validators.required, Validators.min(1)]],
+    schoolName: [0, [Validators.required, Validators.min(1)]],
+    promotionType: [0, [Validators.required, Validators.min(1)]],
   });
 
   constructor() {
@@ -120,14 +121,20 @@ export class AddQuotationComponent {
   }
 
   public createQuotation(): void {
-    const quotationHeader = this.quotationInfo.getRawValue();
-    const quotationSnapshot = this._quotationState.getStateSnapshot();
+    const raw = this.quotationInfo.getRawValue();
+    const snapshot = this._quotationState.getStateSnapshot();
 
-    this._quotationService.createQuotation({
-      ...quotationHeader,
-      schoolGrade: parseInt(quotationHeader.schoolGrade),
-      items: quotationSnapshot.items,
-      totalAmmount: quotationSnapshot.totalAmmount,
-    });
+    const quote: QuoteMutation = {
+      customerName: raw.customerName,
+      studentName: raw.studentName,
+      date: raw.date,
+      gradeId: raw.schoolGrade,
+      schoolId: raw.schoolName,
+      totalAmmount: snapshot.totalAmmount,
+      promotionId: raw.promotionType,
+    };
+    const items: QuotationItem[] = snapshot.items;
+
+    this._quotationService.createQuotation(quote, items);
   }
 }

@@ -160,7 +160,7 @@
             id="school-grade-field"
             formControlName="schoolGrade"
           >
-            <option value="">Escoge un grado</option>
+            <option value="0">Escoge un grado</option>
             @for (op of schoolGrades$ | async; track op.id) {
               <option [value]="op.id">{{ op.name }}</option>
             }
@@ -173,7 +173,7 @@
             id="schoolName"
             formControlName="schoolName"
           >
-            <option value="">Escoge un centro educativo</option>
+            <option value="0">Escoge un centro educativo</option>
             @for (op of schools$ | async; track op.id) {
               <option [value]="op.id">{{ op.name }}</option>
             }
@@ -186,7 +186,7 @@
             id="promotionType"
             formControlName="promotionType"
           >
-            <option value="">Escoge una promoción</option>
+            <option value="0">Escoge una promoción</option>
             <option value="1">Descuento (10%)</option>
             <option value="2">Forro de cuadernos</option>
           </select>
