@@ -170,15 +170,15 @@
         <div class="form-floating mb-3">
           <select
             class="form-select"
-            id="schoolName"
-            formControlName="schoolName"
+            id="school"
+            formControlName="school"
           >
             <option value="0">Escoge un centro educativo</option>
             @for (op of schools$ | async; track op.id) {
               <option [value]="op.id">{{ op.name }}</option>
             }
           </select>
-          <label for="schoolName">Centro Educativo</label>
+          <label for="school">Centro Educativo</label>
         </div>
         <div class="form-floating mb-3">
           <select

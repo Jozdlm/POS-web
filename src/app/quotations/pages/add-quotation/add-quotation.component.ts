@@ -50,7 +50,7 @@ export class AddQuotationComponent {
     studentName: ['', [Validators.required, Validators.minLength(3)]],
     date: [getCurrentDate(), Validators.required],
     schoolGrade: [0, [Validators.required, Validators.min(1)]],
-    schoolName: [0, [Validators.required, Validators.min(1)]],
+    school: [0, [Validators.required, Validators.min(1)]],
     promotionType: [0, [Validators.required, Validators.min(1)]],
   });
 
@@ -129,7 +129,7 @@ export class AddQuotationComponent {
       studentName: raw.studentName,
       date: raw.date,
       gradeId: raw.schoolGrade,
-      schoolId: raw.schoolName,
+      schoolId: raw.school,
       totalAmmount: snapshot.totalAmmount,
       promotionId: raw.promotionType,
     };
