@@ -1,10 +1,15 @@
 import { Injectable, inject } from '@angular/core';
-import { Quotation, QuotationDto } from '../models/quotation';
+import {
+  Quotation,
+  QuotationDto,
+  QuoteWithRefTables,
+} from '../models/quotation';
 import { SupabaseService } from '@app/common/services/supabase.service';
 import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
 import { QuotationMapper } from '../mappers/quotation.mapper';
 import { QuotationItemMapper } from '../mappers/quotation-item.mapper';
 import { DbTables } from '@app/common/enums/db-tables';
+import { Observable, from, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -71,21 +76,21 @@ export class QuotationService {
     return items;
   }
 
-  public async getQuotations(): Promise<Quotation[]> {
-    let { data: items, error } = await this._db
-      .from(DbTables.QUOTATIONS)
-      .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`)
-      .order('id', { ascending: true });
+  public getQuotations(): Observable<Quotation[]> {
+    return from(
+      this._db
+        .from(DbTables.QUOTATIONS)
+        .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`)
+        .order('id', { ascending: true }),
+    ).pipe(
+      map(({ error, data }) => {
+        if (error) throw new Error(error.message);
 
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    const quotations = items
-      ? items.map((item) => QuotationMapper.toEntity(item))
-      : ([] as Quotation[]);
-
-    return quotations;
+        return (data as QuoteWithRefTables[]).map((item) =>
+          QuotationMapper.toEntity(item),
+        );
+      }),
+    );
   }
 
   public async getQuotationById(
