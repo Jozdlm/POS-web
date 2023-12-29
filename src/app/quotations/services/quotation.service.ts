@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import {
   Quotation,
   QuotationDto,
+  QuoteMutation,
   QuoteWithRefTables,
 } from '../models/quotation';
 import { SupabaseService } from '@app/common/services/supabase.service';
@@ -42,15 +43,16 @@ export class QuotationService {
     }
   }
 
-  public async createQuotation(quotation: Quotation): Promise<void> {
+  public async createQuotation(
+    quotation: QuoteMutation,
+    items: QuotationItem[],
+  ): Promise<void> {
     const quotationDto: QuotationDto = QuotationMapper.toDto(quotation);
 
     const insertedHeader = await this._insertHeader(quotationDto);
     const quotationId: number = insertedHeader.id;
 
-    quotation.items = quotation.items ? quotation.items : [];
-
-    const quotationItems: QuotationItemDto[] = quotation.items.map((item) =>
+    const quotationItems: QuotationItemDto[] = items.map((item) =>
       QuotationItemMapper.toDto(item, quotationId),
     );
 
