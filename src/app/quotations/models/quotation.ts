@@ -1,6 +1,3 @@
-import { QuotePromotionType } from './promotion-type.enum';
-import { QuotationItem } from './quotation-item';
-
 export interface Quotation {
   id?: number;
   customerName: string;
@@ -10,7 +7,6 @@ export interface Quotation {
   gradeName?: string;
   schoolName: string;
   totalAmmount: number;
-  items?: QuotationItem[];
 }
 
 export interface QuoteMutation {
@@ -19,7 +15,7 @@ export interface QuoteMutation {
   date: string;
   gradeId: number;
   schoolId: number;
-  promotionType: QuotePromotionType;
+  promotionId: number;
   totalAmmount: number;
 }
 
@@ -30,7 +26,7 @@ export interface QuotationDto {
   grade_id: number;
   school_id: number;
   total_ammount: number;
-  promotion_type: QuotePromotionType;
+  promotion_id: number;
 }
 
 export interface QuoteWithRefTables extends QuotationDto {
@@ -41,5 +37,7 @@ export interface QuoteWithRefTables extends QuotationDto {
   schools: {
     name: string;
   };
-  promotion_type: QuotePromotionType;
+  promotion_type: {
+    description: string;
+  };
 }

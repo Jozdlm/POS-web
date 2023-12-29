@@ -27,7 +27,7 @@ export class QuotationMapper {
       grade_id: src.gradeId,
       school_id: src.schoolId,
       total_ammount: src.totalAmmount,
-      promotion_type: src.promotionType,
+      promotion_id: src.promotionId,
     };
   }
 }
