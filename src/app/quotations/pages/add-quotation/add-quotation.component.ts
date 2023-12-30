@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import {
+  BehaviorSubject,
   Subscription,
   debounceTime,
   distinctUntilChanged,
@@ -44,6 +45,8 @@ export class AddQuotationComponent {
   public filteredProducts: Product[] = [];
   public quotationItems$ = this._quotationState.items$;
   public totalAmmount$ = this._quotationState.ammount$;
+  private _promotionState = new BehaviorSubject<boolean>(false);
+  public readonly displayStudentControl = this._promotionState.asObservable();
 
   public quotationInfo = this._formBuilder.nonNullable.group({
     customerName: ['', [Validators.required, Validators.minLength(3)]],
@@ -56,10 +59,25 @@ export class AddQuotationComponent {
 
   constructor() {
     this.subscribeToSearchChanges();
+    this.subscribeToPromotionControl();
     inject(DestroyRef).onDestroy(() => {
       this._subscriptions.unsubscribe();
       this._quotationState.clearQuotationState();
     });
+  }
+
+  private subscribeToPromotionControl(): void {
+    this._subscriptions.add(
+      this.quotationInfo.controls.promotionType.valueChanges.subscribe(
+        (value) => {
+          if (value * 1 === 2) {
+            this._promotionState.next(true);
+          } else {
+            this._promotionState.next(false);
+          }
+        },
+      ),
+    );
   }
 
   private subscribeToSearchChanges(): void {

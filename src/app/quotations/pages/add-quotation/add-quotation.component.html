@@ -168,11 +168,7 @@
           <label for="school-grade-field">Grado Academico</label>
         </div>
         <div class="form-floating mb-3">
-          <select
-            class="form-select"
-            id="school"
-            formControlName="school"
-          >
+          <select class="form-select" id="school" formControlName="school">
             <option value="0">Escoge un centro educativo</option>
             @for (op of schools$ | async; track op.id) {
               <option [value]="op.id">{{ op.name }}</option>
@@ -192,16 +188,18 @@
           </select>
           <label for="promotionType">Promoción</label>
         </div>
-        <div class="form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
-            id="studentName"
-            placeholder=""
-            formControlName="studentName"
-          />
-          <label for="studentName">Estudiante</label>
-        </div>
+        @if (displayStudentControl | async) {
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="studentName"
+              placeholder=""
+              formControlName="studentName"
+            />
+            <label for="studentName">Estudiante</label>
+          </div>
+        }
         <div class="d-flex justify-content-end column-gap-2">
           <button
             type="button"
