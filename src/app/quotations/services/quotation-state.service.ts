@@ -9,18 +9,38 @@ export class QuotationStateService {
   private _items: QuotationItem[] = [];
   private _ammountEmitter = new BehaviorSubject<number>(0);
   private _stateEmitter = new BehaviorSubject<QuotationItem[]>([]);
+  private _quoteWithDiscount: boolean = false;
   public readonly items$ = this._stateEmitter.asObservable();
   public readonly ammount$ = this._ammountEmitter.asObservable();
 
   constructor() {}
 
   private getTotalAmmount(): number {
-    return this._items.reduce((prev, curr) => prev * 1 + curr.ammount, 0.0);
+    const ammount: number = this._items.reduce(
+      (prev, curr) => prev * 1 + curr.ammount,
+      0.0,
+    );
+
+    if (this._quoteWithDiscount) {
+      return ammount * 0.9;
+    }
+
+    return ammount;
   }
 
   private emmitStateChanges(): void {
     this._stateEmitter.next(this._items);
     this._ammountEmitter.next(this.getTotalAmmount());
+  }
+
+  public addDiscount(): void {
+    this._quoteWithDiscount = true;
+    this.emmitStateChanges();
+  }
+
+  public removeDiscount(): void {
+    this._quoteWithDiscount = false;
+    this.emmitStateChanges();
   }
 
   public getStateSnapshot(): { items: QuotationItem[]; totalAmmount: number } {

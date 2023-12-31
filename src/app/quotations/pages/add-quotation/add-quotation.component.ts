@@ -72,8 +72,13 @@ export class AddQuotationComponent {
         (value) => {
           if (value * 1 === 2) {
             this._promotionState.next(true);
+            this._quotationState.removeDiscount();
+          } else if (value * 1 === 1) {
+            this._promotionState.next(false);
+            this._quotationState.addDiscount();
           } else {
             this._promotionState.next(false);
+            this._quotationState.removeDiscount();
           }
         },
       ),
