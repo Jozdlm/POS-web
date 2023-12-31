@@ -115,6 +115,7 @@ export class AddQuotationComponent {
       description: item.name,
       quantity: 1,
       price: item.sellingPrice,
+      discount: 0,
       ammount: item.sellingPrice,
     };
 

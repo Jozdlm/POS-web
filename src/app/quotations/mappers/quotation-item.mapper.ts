@@ -7,7 +7,8 @@ export class QuotationItemMapper {
       description: dto.products?.name || '',
       quantity: dto.quantity,
       price: dto.price,
-      ammount: dto.quantity * dto.price,
+      discount: dto.discount,
+      ammount: dto.quantity * dto.price - dto.discount,
     };
   }
 
@@ -19,6 +20,7 @@ export class QuotationItemMapper {
       product_id: src.productId,
       quantity: src.quantity,
       price: src.price,
+      discount: src.discount,
       quotation_id: quotationId,
     };
   }
