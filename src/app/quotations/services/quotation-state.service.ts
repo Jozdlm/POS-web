@@ -46,6 +46,18 @@ export class QuotationStateService {
     this._ammountEmitter.next(this.getTotalAmmount());
   }
 
+  private updateItemValues(
+    itemIndex: number,
+    item: QuotationItem,
+    newQuantity: number,
+  ): void {
+    this._items[itemIndex] = {
+      ...item,
+      quantity: newQuantity,
+      ammount: newQuantity * item.price,
+    };
+  }
+
   public addDiscount(): void {
     this._quoteWithDiscount = true;
     this.emmitStateChanges();
@@ -90,12 +102,7 @@ export class QuotationStateService {
       const item = this._items[itemIndex];
       const newQuantity = item.quantity + 1;
 
-      this._items[itemIndex] = {
-        ...item,
-        quantity: newQuantity,
-        ammount: newQuantity * item.price,
-      };
-
+      this.updateItemValues(itemIndex, item, newQuantity);
       this.emmitStateChanges();
     }
   }
@@ -110,12 +117,7 @@ export class QuotationStateService {
       const newQuantity = item.quantity - 1;
 
       if (item.quantity > 1) {
-        this._items[itemIndex] = {
-          ...item,
-          quantity: newQuantity,
-          ammount: newQuantity * item.price,
-        };
-
+        this.updateItemValues(itemIndex, item, newQuantity);
         this.emmitStateChanges();
       }
       // TODO: Otherwise ask to the user if their wants to delete an item
