@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,9 +9,21 @@ export class QuotationStateService {
   private _items: QuotationItem[] = [];
   private _ammountEmitter = new BehaviorSubject<number>(0);
   private _stateEmitter = new BehaviorSubject<QuotationItem[]>([]);
+  private _discountEmitter = new BehaviorSubject<number>(0);
   private _quoteWithDiscount: boolean = false;
   public readonly items$ = this._stateEmitter.asObservable();
-  public readonly ammount$ = this._ammountEmitter.asObservable();
+  public readonly discount$ = this._discountEmitter.asObservable();
+  public readonly ammount$ = this._ammountEmitter.asObservable().pipe(
+    map((value) => {
+      if (this._quoteWithDiscount) {
+        const discount = value * 0.1;
+        this._discountEmitter.next(discount);
+        return value - discount;
+      }
+
+      return value;
+    }),
+  );
 
   constructor() {}
 
@@ -20,10 +32,6 @@ export class QuotationStateService {
       (prev, curr) => prev * 1 + curr.ammount,
       0.0,
     );
-
-    if (this._quoteWithDiscount) {
-      return ammount * 0.9;
-    }
 
     return ammount;
   }
