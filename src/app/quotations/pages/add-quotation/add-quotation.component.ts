@@ -44,6 +44,8 @@ export class AddQuotationComponent {
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];
   public quotationItems$ = this._quotationState.items$;
+  public subtotal$ = this._quotationState.subtotal$;
+  public discount$ = this._quotationState.discount$;
   public totalAmmount$ = this._quotationState.ammount$;
   private _promotionState = new BehaviorSubject<boolean>(false);
   public readonly displayStudentControl = this._promotionState.asObservable();

@@ -10,17 +10,22 @@ export class QuotationStateService {
   private _ammountEmitter = new BehaviorSubject<number>(0);
   private _stateEmitter = new BehaviorSubject<QuotationItem[]>([]);
   private _discountEmitter = new BehaviorSubject<number>(0);
+  private _subtotalEmitter = new BehaviorSubject<number>(0);
   private _quoteWithDiscount: boolean = false;
   public readonly items$ = this._stateEmitter.asObservable();
+  public readonly subtotal$ = this._subtotalEmitter.asObservable();
   public readonly discount$ = this._discountEmitter.asObservable();
   public readonly ammount$ = this._ammountEmitter.asObservable().pipe(
     map((value) => {
       if (this._quoteWithDiscount) {
         const discount = value * 0.1;
+        this._subtotalEmitter.next(value);
         this._discountEmitter.next(discount);
         return value - discount;
       }
 
+      this._subtotalEmitter.next(value);
+      this._discountEmitter.next(0);
       return value;
     }),
   );

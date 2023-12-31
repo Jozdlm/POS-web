@@ -125,8 +125,14 @@
       </table>
 
       <div>
-        <p class="fs-5 text-end">
-          Total: {{ totalAmmount$ | async | currency: "GTQ" }}
+        <p class="text-end">
+          <span class="d-block">Subtotal: {{ subtotal$ | async | currency: "GTQ" }}</span>
+          <span class="d-block"
+            >Descuento: {{ discount$ | async | currency: "GTQ" }}</span
+          >
+          <span class="fs-5 d-block fw-medium"
+            >Total: {{ totalAmmount$ | async | currency: "GTQ" }}</span
+          >
         </p>
       </div>
     </div>
