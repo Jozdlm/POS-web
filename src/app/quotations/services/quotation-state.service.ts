@@ -15,6 +15,7 @@ export class QuotationStateService {
   public readonly items$ = this._stateEmitter.asObservable();
   public readonly subtotal$ = this._subtotalEmitter.asObservable();
   public readonly discount$ = this._discountEmitter.asObservable();
+
   public readonly ammount$ = this._ammountEmitter.asObservable().pipe(
     map((value) => {
       if (this._quoteWithDiscount) {
@@ -72,21 +73,31 @@ export class QuotationStateService {
     };
   }
 
-  private mutateItem(type: '+Qty' | '-Qty', itemIndex: number): void {
+  private mutateItem(
+    type: '+Qty' | '-Qty' | 'updPrice',
+    itemIndex: number,
+    newPrice?: number,
+  ): void {
     const item = this._items[itemIndex];
     let updatedQty: number = item.quantity;
+    let updatedPrice: number = item.price;
 
     if (type === '-Qty') {
-      updatedQty = item.quantity > 1 ? item.quantity - 1 : 1;
+      updatedQty = item.quantity > 1 ? item.quantity - 1 : updatedQty;
     } else if (type === '+Qty') {
       updatedQty = item.quantity + 1;
+    } else if (type === 'updPrice' && newPrice) {
+      updatedPrice = newPrice > 0.01 ? newPrice * item.quantity : updatedPrice;
     }
 
     this._items[itemIndex] = {
       ...item,
+      price: updatedPrice,
       quantity: updatedQty,
-      ammount: updatedQty * item.price,
+      ammount: updatedQty * updatedPrice,
     };
+
+    this.emmitStateChanges();
   }
 
   public addItem(newItem: QuotationItem): void {
@@ -116,7 +127,6 @@ export class QuotationStateService {
 
     if (itemIndex !== -1) {
       this.mutateItem('+Qty', itemIndex);
-      this.emmitStateChanges();
     }
   }
 
@@ -127,27 +137,16 @@ export class QuotationStateService {
 
     if (itemIndex !== -1) {
       this.mutateItem('-Qty', itemIndex);
-      this.emmitStateChanges();
     }
   }
 
   public updateSellingPrice(itemId: number, newPrice: number): void {
-    if (newPrice < 0.01) return;
-
     const itemIndex = this._items.findIndex(
       (item) => item.productId === itemId,
     );
 
     if (itemIndex !== -1) {
-      const item = this._items[itemIndex];
-
-      this._items[itemIndex] = {
-        ...item,
-        price: newPrice,
-        ammount: newPrice * item.quantity,
-      };
-
-      this.emmitStateChanges();
+      this.mutateItem('updPrice', itemIndex, newPrice);
     }
   }
 
