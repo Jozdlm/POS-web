@@ -29,23 +29,12 @@ export class QuotationDetailsComponent {
   public quotationId: number = 0;
   public quotationHeader: Quotation | undefined = undefined;
   public quotationItems: QuotationItem[] = [];
-  public showButtons: boolean = true;
 
   @ViewChild('quote') public quoteElement!: ElementRef;
 
-  public get printQuote(): boolean {
-    return this._activedRoute.snapshot.url.some(
-      (segment) => segment.path === 'quotation',
-    );
-  }
-
   constructor() {
-    if (this.printQuote) {
-      this.showButtons = false;
-    }
-
     this.watchUrlParams();
-    this.getQuotationAndItems();
+    this.getQuoteDetails();
 
     inject(DestroyRef).onDestroy(() => this._subscription.unsubscribe());
   }
@@ -59,16 +48,16 @@ export class QuotationDetailsComponent {
   }
 
   public makeAndDownloadPDF(): void {
-    if (
-      this.quoteElement &&
-      this.quotationItems.length > 1
-    ) {
+    if (this.quoteElement && this.quotationItems.length > 1) {
       const htmlElement = this.quoteElement.nativeElement as HTMLElement;
-      this._pdfMaker.generatePDF(htmlElement, `quote-${this.quotationId}`);
+      this._pdfMaker.generatePDF(
+        htmlElement,
+        `Cotización #${this.quotationId}`,
+      );
     }
   }
 
-  public async getQuotationAndItems(): Promise<void> {
+  public async getQuoteDetails(): Promise<void> {
     const quotation = await this._quotationService.getQuotationById(
       this.quotationId,
     );
