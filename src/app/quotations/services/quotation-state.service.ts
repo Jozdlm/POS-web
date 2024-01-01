@@ -86,15 +86,19 @@ export class QuotationStateService {
 
   private mutateItem(type: '+Qty' | '-Qty', itemIndex: number): void {
     const item = this._items[itemIndex];
+    let updatedQty: number = 0;
 
     if (type === '-Qty') {
-      const newQuantity = item.quantity > 1 ? item.quantity - 1 : 1;
-      this._items[itemIndex] = {
-        ...item,
-        quantity: newQuantity,
-        ammount: newQuantity * item.price,
-      };
+      updatedQty = item.quantity > 1 ? item.quantity - 1 : 1;
+    } else if (type === '+Qty') {
+      updatedQty = item.quantity + 1;
     }
+
+    this._items[itemIndex] = {
+      ...item,
+      quantity: updatedQty,
+      ammount: updatedQty * item.price,
+    };
   }
 
   public addItem(newItem: QuotationItem): void {
@@ -123,10 +127,7 @@ export class QuotationStateService {
     );
 
     if (itemIndex !== -1) {
-      const item = this._items[itemIndex];
-      const newQuantity = item.quantity + 1;
-
-      this.updateItemValues(itemIndex, item, newQuantity);
+      this.mutateItem('+Qty', itemIndex);
       this.emmitStateChanges();
     }
   }
