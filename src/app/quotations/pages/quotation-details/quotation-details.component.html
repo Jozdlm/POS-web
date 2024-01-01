@@ -1,11 +1,17 @@
 @if (showButtons) {
   <div class="d-flex justify-content-center my-4 column-gap-2">
-    <a routerLink="../"  class="btn btn-outline-secondary">Regresar</a>
-    <a [routerLink]="['/print/quotation', this.quotationId]" class="btn btn-primary" target="_blank">Imprimir</a>
+    <a routerLink="../" class="btn btn-outline-secondary">Regresar</a>
+    <button
+      (click)="makeAndDownloadPDF()"
+      class="btn btn-primary"
+      target="_blank"
+    >
+      Generar PDF
+    </button>
   </div>
 }
 
-<div class="quotation">
+<div class="quotation" #quote>
   <section class="d-flex justify-content-between">
     <div>
       <p class="fs-3 fw-medium">Librería La Joya</p>
@@ -81,7 +87,8 @@
   <section class="text-center">
     <p class="metadata">
       <span class="fw-medium">Observaciones:</span>
-      La vigencia de esta cotización es de 15 días hábiles a partir de la fecha de emisión.
+      La vigencia de esta cotización es de 15 días hábiles a partir de la fecha
+      de emisión.
     </p>
   </section>
 </div>

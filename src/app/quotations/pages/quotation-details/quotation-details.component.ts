@@ -1,10 +1,17 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Quotation } from '@app/quotations/models/quotation';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { Subscription } from 'rxjs';
+import { PdfMakerService } from '@app/common/services/pdf-maker.service';
 
 @Component({
   selector: 'app-quotation-details',
@@ -17,11 +24,14 @@ export class QuotationDetailsComponent {
   private readonly _quotationService = inject(QuotationService);
   private readonly _activedRoute = inject(ActivatedRoute);
   private readonly _router = inject(Router);
+  private readonly _pdfMaker = inject(PdfMakerService);
   private _subscription = new Subscription();
   public quotationId: number = 0;
   public quotationHeader: Quotation | undefined = undefined;
   public quotationItems: QuotationItem[] = [];
   public showButtons: boolean = true;
+
+  @ViewChild('quote') public quoteElement!: ElementRef;
 
   public get printQuote(): boolean {
     return this._activedRoute.snapshot.url.some(
@@ -30,7 +40,7 @@ export class QuotationDetailsComponent {
   }
 
   constructor() {
-    if(this.printQuote) {
+    if (this.printQuote) {
       this.showButtons = false;
     }
 
@@ -46,6 +56,16 @@ export class QuotationDetailsComponent {
         (params) => (this.quotationId = Number(params.get('id'))),
       ),
     );
+  }
+
+  public makeAndDownloadPDF(): void {
+    if (
+      this.quoteElement &&
+      this.quotationItems.length > 1
+    ) {
+      const htmlElement = this.quoteElement.nativeElement as HTMLElement;
+      this._pdfMaker.generatePDF(htmlElement, `quote-${this.quotationId}`);
+    }
   }
 
   public async getQuotationAndItems(): Promise<void> {
