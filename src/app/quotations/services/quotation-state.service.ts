@@ -1,13 +1,7 @@
 import { Injectable } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
-import { BehaviorSubject, map } from 'rxjs';
-
-interface QuoteState {
-  items: QuotationItem[];
-  subtotal: number;
-  discount: number;
-  total: number;
-}
+import { BehaviorSubject } from 'rxjs';
+import { QuoteState } from '../models/quote-state';
 
 @Injectable({
   providedIn: 'root',
