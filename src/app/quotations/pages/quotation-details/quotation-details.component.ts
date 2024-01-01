@@ -23,18 +23,24 @@ export class QuotationDetailsComponent {
   public quotationItems: QuotationItem[] = [];
   public showButtons: boolean = true;
 
-  constructor() {
-    this.showButtons = !this._activedRoute.snapshot.url.some(
+  public get printQuote(): boolean {
+    return this._activedRoute.snapshot.url.some(
       (segment) => segment.path === 'quotation',
     );
+  }
 
-    this.subscribeToObservables();
+  constructor() {
+    if(this.printQuote) {
+      this.showButtons = false;
+    }
+
+    this.watchUrlParams();
     this.getQuotationAndItems();
 
     inject(DestroyRef).onDestroy(() => this._subscription.unsubscribe());
   }
 
-  public subscribeToObservables(): void {
+  public watchUrlParams(): void {
     this._subscription.add(
       this._activedRoute.paramMap.subscribe(
         (params) => (this.quotationId = Number(params.get('id'))),
