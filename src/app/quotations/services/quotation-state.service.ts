@@ -46,6 +46,15 @@ export class QuotationStateService {
     this._ammountEmitter.next(this.getTotalAmmount());
   }
 
+  private calculateInitialValues(item: QuotationItem): QuotationItem {
+    if (this._quoteWithDiscount) {
+      item.discount = item.price * 0.1;
+      item.ammount = item.price - item.discount;
+    }
+
+    return { ...item };
+  }
+
   private updateItemValues(
     itemIndex: number,
     item: QuotationItem,
@@ -79,6 +88,8 @@ export class QuotationStateService {
     const inArray = this._items.find(
       (item) => item.productId == newItem.productId,
     );
+
+    newItem = this.calculateInitialValues(newItem);
 
     if (inArray) {
       this.increaseQuantity(newItem.productId);
