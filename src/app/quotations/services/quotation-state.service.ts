@@ -84,6 +84,19 @@ export class QuotationStateService {
     };
   }
 
+  private mutateItem(type: '+Qty' | '-Qty', itemIndex: number): void {
+    const item = this._items[itemIndex];
+
+    if (type === '-Qty') {
+      const newQuantity = item.quantity > 1 ? item.quantity - 1 : 1;
+      this._items[itemIndex] = {
+        ...item,
+        quantity: newQuantity,
+        ammount: newQuantity * item.price,
+      };
+    }
+  }
+
   public addItem(newItem: QuotationItem): void {
     const inArray = this._items.find(
       (item) => item.productId == newItem.productId,
@@ -124,14 +137,8 @@ export class QuotationStateService {
     );
 
     if (itemIndex !== -1) {
-      const item = this._items[itemIndex];
-      const newQuantity = item.quantity - 1;
-
-      if (item.quantity > 1) {
-        this.updateItemValues(itemIndex, item, newQuantity);
-        this.emmitStateChanges();
-      }
-      // TODO: Otherwise ask to the user if their wants to delete an item
+      this.mutateItem('-Qty', itemIndex);
+      this.emmitStateChanges();
     }
   }
 
