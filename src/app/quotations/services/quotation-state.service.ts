@@ -2,36 +2,44 @@ import { Injectable } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
 import { BehaviorSubject, map } from 'rxjs';
 
+interface QuoteState {
+  items: QuotationItem[];
+  subtotal: number;
+  discount: number;
+  total: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class QuotationStateService {
   private _items: QuotationItem[] = [];
-  private _ammountEmitter = new BehaviorSubject<number>(0);
-  private _stateEmitter = new BehaviorSubject<QuotationItem[]>([]);
-  private _discountEmitter = new BehaviorSubject<number>(0);
-  private _subtotalEmitter = new BehaviorSubject<number>(0);
+  private _subtotal: number = 0;
+  private _discount: number = 0;
+  private _total: number = 0;
   private _quoteWithDiscount: boolean = false;
-  public readonly items$ = this._stateEmitter.asObservable();
-  public readonly subtotal$ = this._subtotalEmitter.asObservable();
-  public readonly discount$ = this._discountEmitter.asObservable();
 
-  public readonly ammount$ = this._ammountEmitter.asObservable().pipe(
-    map((value) => {
-      if (this._quoteWithDiscount) {
-        const discount = value * 0.1;
-        this._subtotalEmitter.next(value);
-        this._discountEmitter.next(discount);
-        return value - discount;
-      }
+  private _quoteState$ = new BehaviorSubject<QuoteState>({
+    items: this._items,
+    subtotal: this._subtotal,
+    discount: this._discount,
+    total: this._total,
+  });
 
-      this._subtotalEmitter.next(value);
-      this._discountEmitter.next(0);
-      return value;
-    }),
-  );
+  public readonly quoteState$ = this._quoteState$.asObservable();
 
   constructor() {}
+
+  private getSubtotal(): number {
+    return this._items.reduce(
+      (prev, curr) => +prev + curr.price * curr.quantity,
+      0,
+    );
+  }
+
+  private getTotalDiscount(): number {
+    return this._items.reduce((prev, curr) => +prev + curr.discount, 0);
+  }
 
   private getTotalAmmount(): number {
     const ammount: number = this._items.reduce(
@@ -43,8 +51,12 @@ export class QuotationStateService {
   }
 
   private emmitStateChanges(): void {
-    this._stateEmitter.next(this._items);
-    this._ammountEmitter.next(this.getTotalAmmount());
+    this._quoteState$.next({
+      items: this._items,
+      subtotal: this.getSubtotal(),
+      discount: this.getTotalDiscount(),
+      total: this.getTotalAmmount(),
+    });
   }
 
   private calculateInitialValues(item: QuotationItem): QuotationItem {
