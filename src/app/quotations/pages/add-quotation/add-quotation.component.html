@@ -64,13 +64,14 @@
           <tr>
             <th>Descripción</th>
             <th>Cantidad</th>
-            <th>Precio</th>
+            <th>Valor Unitario</th>
+            <th>Descuento</th>
             <th>Importe</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          @for (item of quotationItems$ | async; track item.productId) {
+          @for (item of (quoteState$ | async)!.items; track item.productId) {
             <tr>
               <td>{{ item.description }}</td>
               <td>
@@ -101,6 +102,7 @@
                   (input)="updateItemPrice($event, item.productId)"
                 />
               </td>
+              <td>{{ item.discount | number: "1.0-2" }}</td>
               <td>{{ item.ammount | currency: "GTQ" }}</td>
               <td>
                 <button
@@ -124,15 +126,19 @@
 
       <div>
         <p class="text-end">
-          <span class="d-block"
-            >Subtotal: {{ subtotal$ | async | currency: "GTQ" }}</span
-          >
-          <span class="d-block"
-            >Descuento: {{ discount$ | async | currency: "GTQ" }}</span
-          >
-          <span class="fs-5 d-block fw-medium"
-            >Total: {{ totalAmmount$ | async | currency: "GTQ" }}</span
-          >
+          @if (quoteState$ | async) {
+            <span class="d-block"
+              >Subtotal:
+              {{ (quoteState$ | async)!.subtotal | currency: "GTQ" }}</span
+            >
+            <span class="d-block"
+              >Descuento:
+              {{ (quoteState$ | async)!.discount | currency: "GTQ" }}</span
+            >
+            <span class="fs-5 d-block fw-medium"
+              >Total: {{ (quoteState$ | async)!.total | currency: "GTQ" }}</span
+            >
+          }
         </p>
       </div>
     </div>
