@@ -9,6 +9,7 @@ import {
   ProductMutation,
 } from '@app/catalog/models/product';
 import { FilterData } from '@app/common/interfaces/filter-data';
+import { stringToTitleCase } from '@app/common/utils/string-title-case';
 
 @Injectable({
   providedIn: 'root',
@@ -58,6 +59,8 @@ export class ProductService {
     field,
     limit,
   }: FilterData): Observable<Product[]> {
+    query = stringToTitleCase(query);
+
     return from(
       this._db
         .from(DbTables.PRODUCTS)
