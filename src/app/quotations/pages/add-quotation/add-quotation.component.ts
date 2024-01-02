@@ -1,22 +1,12 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-  BehaviorSubject,
-  Subscription,
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-} from 'rxjs';
+import { ReactiveFormsModule } from '@angular/forms';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { SchoolGradeService } from '@app/schools/services/school-grade.service';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
-import { Product } from '@app/catalog/models/product';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { QuotationService } from '@app/quotations/services/quotation.service';
-import { ProductService } from '@app/catalog/services/product.service';
 import { SchoolService } from '@app/schools/services/school.service';
 import { IconComponent } from '@app/common/components/icon.component';
 import { QuoteHeaderComponent } from './quote-header/quote-header.component';
@@ -38,7 +28,6 @@ import { QuoteItemsComponent } from './quote-items/quote-items.component';
 export class AddQuotationComponent {
   private readonly _quotationState = inject(QuotationStateService);
   private readonly _quotationService = inject(QuotationService);
-  private readonly _productService = inject(ProductService);
   private _subscriptions = new Subscription();
   public readonly schools$ = inject(SchoolService).getSchools();
   public readonly schoolGrades$ = inject(SchoolGradeService).getSchoolGrades();
@@ -67,38 +56,6 @@ export class AddQuotationComponent {
       this._subscriptions.unsubscribe();
       this._quotationState.clearQuotationState();
     });
-  }
-
-  public addItemToQuotation(item: Product): void {
-    const quotationItem: QuotationItem = {
-      productId: item.id,
-      description: item.name,
-      quantity: 1,
-      price: item.sellingPrice,
-      discount: 0,
-      ammount: item.sellingPrice,
-    };
-
-    this._quotationState.addItem(quotationItem);
-  }
-
-  public removeItemOfQuotation(itemId: number): void {
-    this._quotationState.removeItem(itemId);
-  }
-
-  public increaseQuantity(itemId: number): void {
-    this._quotationState.increaseQuantity(itemId);
-  }
-
-  public decreaseQuantity(itemId: number): void {
-    this._quotationState.decreaseQuantity(itemId);
-  }
-
-  public updateItemPrice(event: Event, itemId: number): void {
-    const inputValue = (event.target as HTMLInputElement).value;
-    const sellinPrice = parseFloat(inputValue);
-
-    this._quotationState.updateSellingPrice(itemId, sellinPrice);
   }
 
   public createQuotation(): void {
