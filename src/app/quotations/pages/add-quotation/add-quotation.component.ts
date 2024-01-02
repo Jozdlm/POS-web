@@ -1,12 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import {
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   BehaviorSubject,
   Subscription,
@@ -22,16 +17,21 @@ import { Product } from '@app/catalog/models/product';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ProductService } from '@app/catalog/services/product.service';
-import { getCurrentDate } from '@app/quotations/utils/current-date';
 import { SchoolService } from '@app/schools/services/school.service';
 import { IconComponent } from '@app/common/components/icon.component';
-import { QuoteMutation } from '@app/quotations/models/quotation';
+import { QuoteHeaderComponent } from './quote-header/quote-header.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, ReactiveFormsModule, IconComponent],
   templateUrl: './add-quotation.component.html',
   styleUrl: './add-quotation.component.scss',
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    IconComponent,
+    QuoteHeaderComponent,
+  ],
 })
 export class AddQuotationComponent {
   private readonly _quotationState = inject(QuotationStateService);
@@ -54,15 +54,6 @@ export class AddQuotationComponent {
   ];
   public currentTab: string = this.tabItems[0];
 
-  public quotationInfo = this._formBuilder.nonNullable.group({
-    customerName: ['', [Validators.required, Validators.minLength(3)]],
-    studentName: ['', [Validators.required, Validators.minLength(3)]],
-    date: [getCurrentDate(), Validators.required],
-    schoolGrade: [0, [Validators.required, Validators.min(1)]],
-    school: [0, [Validators.required, Validators.min(1)]],
-    promotionType: [0, [Validators.required, Validators.min(1)]],
-  });
-
   public setCurrentTab(tab: string): void {
     this.currentTab = tab;
   }
@@ -73,30 +64,10 @@ export class AddQuotationComponent {
 
   constructor() {
     this.subscribeToSearchChanges();
-    this.subscribeToPromotionControl();
     inject(DestroyRef).onDestroy(() => {
       this._subscriptions.unsubscribe();
       this._quotationState.clearQuotationState();
     });
-  }
-
-  private subscribeToPromotionControl(): void {
-    this._subscriptions.add(
-      this.quotationInfo.controls.promotionType.valueChanges.subscribe(
-        (value) => {
-          if (value * 1 === 2) {
-            this._promotionState.next(true);
-            this._quotationState.removeDiscount();
-          } else if (value * 1 === 1) {
-            this._promotionState.next(false);
-            this._quotationState.addDiscount();
-          } else {
-            this._promotionState.next(false);
-            this._quotationState.removeDiscount();
-          }
-        },
-      ),
-    );
   }
 
   private subscribeToSearchChanges(): void {
@@ -159,20 +130,20 @@ export class AddQuotationComponent {
   }
 
   public createQuotation(): void {
-    const raw = this.quotationInfo.getRawValue();
+    // const raw = this.quotationInfo.getRawValue();
     const snapshot = this._quotationState.getStateSnapshot();
 
-    const quote: QuoteMutation = {
-      customerName: raw.customerName,
-      studentName: raw.studentName,
-      date: raw.date,
-      gradeId: raw.schoolGrade,
-      schoolId: raw.school,
-      totalAmmount: snapshot.totalAmmount,
-      promotionId: raw.promotionType,
-    };
+    // const quote: QuoteMutation = {
+    //   customerName: raw.customerName,
+    //   studentName: raw.studentName,
+    //   date: raw.date,
+    //   gradeId: raw.schoolGrade,
+    //   schoolId: raw.school,
+    //   totalAmmount: snapshot.totalAmmount,
+    //   promotionId: raw.promotionType,
+    // };
     const items: QuotationItem[] = snapshot.items;
 
-    this._quotationService.createQuotation(quote, items);
+    // this._quotationService.createQuotation(quote, items);
   }
 }
