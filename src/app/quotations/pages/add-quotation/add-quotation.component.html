@@ -4,7 +4,12 @@
 
     <div class="d-flex column-gap-3">
       @for (item of tabItems; track $index) {
-        <button type="button" class="btn btn-sm" (click)="setCurrentTab(item)">
+        <button
+          type="button"
+          class="btn btn-sm"
+          (click)="setCurrentTab(item)"
+          [class]="getActiveTabClassName(item)"
+        >
           {{ item }}
         </button>
       }
