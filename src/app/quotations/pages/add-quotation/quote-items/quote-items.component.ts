@@ -14,6 +14,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { IconComponent } from '@app/common/components/icon.component';
 import { Product } from '@app/catalog/models/product';
 import { ProductService } from '@app/catalog/services/product.service';
+import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
+import { QuotationItem } from '@app/quotations/models/quotation-item';
 
 @Component({
   selector: 'app-quote-items',
@@ -23,24 +25,12 @@ import { ProductService } from '@app/catalog/services/product.service';
   styleUrl: './quote-items.component.scss',
 })
 export class QuoteItemsComponent {
-addItemToQuotation(_t12: Product) {
-throw new Error('Method not implemented.');
-}
-increaseQuantity(arg0: number) {
-throw new Error('Method not implemented.');
-}
-removeItemOfQuotation(arg0: number) {
-throw new Error('Method not implemented.');
-}
-updateItemPrice($event: Event,arg1: number) {
-throw new Error('Method not implemented.');
-}
   private readonly _productService = inject(ProductService);
+  private readonly _quoteStateService = inject(QuotationStateService);
   private readonly _subscriptions = new Subscription();
+  public quoteState$ = this._quoteStateService.quoteState$;
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];
-
-  @Input({ required: true }) quoteState$!: Observable<QuoteState>;
 
   constructor() {
     this.watchToQuerySearch();
@@ -66,6 +56,38 @@ throw new Error('Method not implemented.');
           this.filteredProducts = items;
         }),
     );
+  }
+
+  public addItemToQuotation(item: Product): void {
+    const quotationItem: QuotationItem = {
+      productId: item.id,
+      description: item.name,
+      quantity: 1,
+      price: item.sellingPrice,
+      discount: 0,
+      ammount: item.sellingPrice,
+    };
+
+    this._quoteStateService.addItem(quotationItem);
+  }
+
+  public increaseQuantity(itemId: number): void {
+    this._quoteStateService.increaseQuantity(itemId);
+  }
+
+  public decreaseQuantity(itemId: number): void {
+    this._quoteStateService.decreaseQuantity(itemId);
+  }
+
+  public removeItemOfQuotation(itemId: number): void {
+    this._quoteStateService.removeItem(itemId);
+  }
+
+  public updateItemPrice(event: Event, itemId: number): void {
+    const inputValue = (event.target as HTMLInputElement).value;
+    const sellinPrice = parseFloat(inputValue);
+
+    this._quoteStateService.updateSellingPrice(itemId, sellinPrice);
   }
 
   public clearSearchControl(): void {
