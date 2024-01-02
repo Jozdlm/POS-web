@@ -93,7 +93,7 @@ export class QuotationStateService {
     } else if (type === '+Qty') {
       updatedQty = item.quantity + 1;
     } else if (type === 'updPrice' && newPrice) {
-      updatedPrice = newPrice > 0.01 ? newPrice * item.quantity : updatedPrice;
+      updatedPrice = newPrice > 0.01 ? newPrice : updatedPrice;
     }
 
     this._items[itemIndex] = {
