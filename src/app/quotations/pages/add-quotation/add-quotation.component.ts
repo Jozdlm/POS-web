@@ -20,6 +20,7 @@ import { ProductService } from '@app/catalog/services/product.service';
 import { SchoolService } from '@app/schools/services/school.service';
 import { IconComponent } from '@app/common/components/icon.component';
 import { QuoteHeaderComponent } from './quote-header/quote-header.component';
+import { QuoteItemsComponent } from './quote-items/quote-items.component';
 
 @Component({
   standalone: true,
@@ -31,18 +32,17 @@ import { QuoteHeaderComponent } from './quote-header/quote-header.component';
     ReactiveFormsModule,
     IconComponent,
     QuoteHeaderComponent,
+    QuoteItemsComponent,
   ],
 })
 export class AddQuotationComponent {
   private readonly _quotationState = inject(QuotationStateService);
   private readonly _quotationService = inject(QuotationService);
-  private readonly _formBuilder = inject(FormBuilder);
   private readonly _productService = inject(ProductService);
   private _subscriptions = new Subscription();
   public readonly schools$ = inject(SchoolService).getSchools();
   public readonly schoolGrades$ = inject(SchoolGradeService).getSchoolGrades();
-  public searchControl = new FormControl('');
-  public filteredProducts: Product[] = [];
+
   public quoteState$ = this._quotationState.quoteState$;
   private _promotionState = new BehaviorSubject<boolean>(false);
   public readonly displayStudentControl = this._promotionState.asObservable();
@@ -63,33 +63,10 @@ export class AddQuotationComponent {
   }
 
   constructor() {
-    this.subscribeToSearchChanges();
     inject(DestroyRef).onDestroy(() => {
       this._subscriptions.unsubscribe();
       this._quotationState.clearQuotationState();
     });
-  }
-
-  private subscribeToSearchChanges(): void {
-    this._subscriptions.add(
-      this.searchControl.valueChanges
-        .pipe(
-          debounceTime(400),
-          distinctUntilChanged(),
-          filter((value) => typeof value === 'string'),
-          map((value) => value as string),
-          switchMap((value) => {
-            return this._productService.getProductsBy({
-              query: value,
-              field: 'name',
-              limit: 5,
-            });
-          }),
-        )
-        .subscribe((items) => {
-          this.filteredProducts = items;
-        }),
-    );
   }
 
   public addItemToQuotation(item: Product): void {
@@ -115,11 +92,6 @@ export class AddQuotationComponent {
 
   public decreaseQuantity(itemId: number): void {
     this._quotationState.decreaseQuantity(itemId);
-  }
-
-  public clearSearchControl(): void {
-    this.searchControl.reset();
-    this.filteredProducts = [];
   }
 
   public updateItemPrice(event: Event, itemId: number): void {
