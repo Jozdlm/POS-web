@@ -3,9 +3,11 @@
     <h1 class="fs-3 mb-lg-3">Nueva Cotización</h1>
 
     <div class="d-flex column-gap-3">
-      <button type="button" class="btn btn-sm">Articulos</button>
-      <button type="button" class="btn btn-sm">Datos del cliente</button>
-      <button type="button" class="btn btn-sm">Confirmación</button>
+      @for (item of tabItems; track $index) {
+        <button type="button" class="btn btn-sm" (click)="setCurrentTab(item)">
+          {{ item }}
+        </button>
+      }
     </div>
   </div>
   <div class="row w-100">

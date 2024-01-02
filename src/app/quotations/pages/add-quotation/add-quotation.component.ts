@@ -47,6 +47,9 @@ export class AddQuotationComponent {
   private _promotionState = new BehaviorSubject<boolean>(false);
   public readonly displayStudentControl = this._promotionState.asObservable();
 
+  public tabItems: string[] = ['Carrito', 'Datos del cliente', 'Confirmación'];
+  public currentTab: string = 'Carrito';
+
   public quotationInfo = this._formBuilder.nonNullable.group({
     customerName: ['', [Validators.required, Validators.minLength(3)]],
     studentName: ['', [Validators.required, Validators.minLength(3)]],
@@ -55,6 +58,10 @@ export class AddQuotationComponent {
     school: [0, [Validators.required, Validators.min(1)]],
     promotionType: [0, [Validators.required, Validators.min(1)]],
   });
+
+  public setCurrentTab(tab: string): void {
+    this.currentTab = tab;
+  }
 
   constructor() {
     this.subscribeToSearchChanges();
