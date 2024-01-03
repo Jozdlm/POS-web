@@ -112,21 +112,22 @@
     </tbody>
   </table>
 
-  <div>
+  <div class="d-flex flex-column align-items-end">
     <p class="text-end">
       @if (quoteState$ | async) {
-        <span class="d-block"
+        <span class="d-block fs-5"
           >Subtotal:
           {{ (quoteState$ | async)!.subtotal | currency: "GTQ" }}</span
         >
-        <span class="d-block"
-          >Descuento:
-          {{ (quoteState$ | async)!.discount | currency: "GTQ" }}</span
-        >
-        <span class="fs-5 d-block fw-medium"
-          >Total: {{ (quoteState$ | async)!.total | currency: "GTQ" }}</span
-        >
       }
     </p>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="handleClickToContinue()"
+    >
+      Continuar
+    </button>
   </div>
 </div>

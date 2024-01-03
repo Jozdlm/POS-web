@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   Observable,
@@ -31,6 +31,8 @@ export class QuoteItemsComponent {
   public quoteState$ = this._quoteStateService.quoteState$;
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];
+
+  @Output() onClickToContinue = new EventEmitter<string>();
 
   constructor() {
     this.watchToQuerySearch();
@@ -93,5 +95,9 @@ export class QuoteItemsComponent {
   public clearSearchControl(): void {
     this.searchControl.reset();
     this.filteredProducts = [];
+  }
+
+  public handleClickToContinue(): void {
+    this.onClickToContinue.next('next');
   }
 }
