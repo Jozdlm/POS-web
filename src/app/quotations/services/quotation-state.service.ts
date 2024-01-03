@@ -3,7 +3,7 @@ import { QuotationItem } from '../models/quotation-item';
 import { BehaviorSubject } from 'rxjs';
 import { QuoteState } from '../models/quote-state';
 import { FormBuilder, Validators } from '@angular/forms';
-import { getCurrentDate } from '../utils/current-date';
+import { getCurrentDate } from '@app/common';
 
 @Injectable({
   providedIn: 'root',
