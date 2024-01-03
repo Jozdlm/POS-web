@@ -1,4 +1,10 @@
-import { Component, DestroyRef, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Output,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -22,6 +28,8 @@ export class QuoteHeaderComponent {
 
   public quoteHeaderForm = inject(QuotationStateService).quoteHeaderForm;
 
+  @Output() onClickToReturn = new EventEmitter<any>();
+
   constructor() {
     this.watchPromotionType();
     inject(DestroyRef).onDestroy(() => {
@@ -41,6 +49,10 @@ export class QuoteHeaderComponent {
         },
       ),
     );
+  }
+
+  public handleClickToReturn(): void {
+    this.onClickToReturn.emit(null);
   }
 
   public onSubmitQuote(): void {

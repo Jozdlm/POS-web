@@ -23,7 +23,7 @@
         />
       }
       @case ("2. Datos del cliente") {
-        <app-quote-header />
+        <app-quote-header (onClickToReturn)="setCurrentTab('1. Carrito')" />
       }
     }
   </div>
