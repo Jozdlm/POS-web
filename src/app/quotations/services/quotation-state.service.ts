@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
 import { BehaviorSubject } from 'rxjs';
 import { QuoteState } from '../models/quote-state';
+import { FormBuilder, Validators } from '@angular/forms';
+import { getCurrentDate } from '../utils/current-date';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +20,15 @@ export class QuotationStateService {
     subtotal: this._subtotal,
     discount: this._discount,
     total: this._total,
+  });
+
+  public quoteHeaderForm = inject(FormBuilder).nonNullable.group({
+    customerName: ['', [Validators.required, Validators.minLength(3)]],
+    studentName: ['', [Validators.required, Validators.minLength(3)]],
+    date: [getCurrentDate(), Validators.required],
+    schoolGrade: [0, [Validators.required, Validators.min(1)]],
+    school: [0, [Validators.required, Validators.min(1)]],
+    promotionType: [0, [Validators.required, Validators.min(1)]],
   });
 
   public readonly quoteState$ = this._quoteState$.asObservable();

@@ -1,11 +1,11 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { getCurrentDate } from '@app/quotations/utils/current-date';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SchoolGradeService } from '@app/schools/services/school-grade.service';
 import { SchoolService } from '@app/schools/services/school.service';
 import { RouterModule } from '@angular/router';
+import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
 
 @Component({
   selector: 'app-quote-header',
@@ -15,20 +15,12 @@ import { RouterModule } from '@angular/router';
   styleUrl: './quote-header.component.scss',
 })
 export class QuoteHeaderComponent {
-  private readonly _fb = inject(FormBuilder);
   private readonly _subscriptions = new Subscription();
   public schools$ = inject(SchoolService).getSchools();
   public schoolGrades$ = inject(SchoolGradeService).getSchoolGrades();
   public diplayStudentControl = false;
 
-  public quotationInfo = this._fb.nonNullable.group({
-    customerName: ['', [Validators.required, Validators.minLength(3)]],
-    studentName: ['', [Validators.required, Validators.minLength(3)]],
-    date: [getCurrentDate(), Validators.required],
-    schoolGrade: [0, [Validators.required, Validators.min(1)]],
-    school: [0, [Validators.required, Validators.min(1)]],
-    promotionType: [0, [Validators.required, Validators.min(1)]],
-  });
+  public quoteHeaderForm = inject(QuotationStateService).quoteHeaderForm;
 
   constructor() {
     this.watchPromotionType();
@@ -39,7 +31,7 @@ export class QuoteHeaderComponent {
 
   private watchPromotionType(): void {
     this._subscriptions.add(
-      this.quotationInfo.controls.promotionType.valueChanges.subscribe(
+      this.quoteHeaderForm.controls.promotionType.valueChanges.subscribe(
         (value) => {
           if (value * 1 === 2) {
             this.diplayStudentControl = true;
@@ -52,7 +44,7 @@ export class QuoteHeaderComponent {
   }
 
   public onSubmitQuote(): void {
-    const raw = this.quotationInfo.getRawValue();
+    const raw = this.quoteHeaderForm.getRawValue();
     console.log(raw);
   }
 }
