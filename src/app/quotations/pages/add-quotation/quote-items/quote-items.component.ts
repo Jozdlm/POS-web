@@ -32,7 +32,7 @@ export class QuoteItemsComponent {
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];
 
-  @Output() onClickToContinue = new EventEmitter<string>();
+  @Output() onClickToContinue = new EventEmitter<any>();
 
   constructor() {
     this.watchToQuerySearch();
@@ -98,6 +98,6 @@ export class QuoteItemsComponent {
   }
 
   public handleClickToContinue(): void {
-    this.onClickToContinue.next('next');
+    this.onClickToContinue.emit(null);
   }
 }
