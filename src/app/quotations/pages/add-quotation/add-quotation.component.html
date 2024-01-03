@@ -18,7 +18,9 @@
   <div class="row w-100">
     @switch (currentTab) {
       @case ("1. Carrito") {
-        <app-quote-items />
+        <app-quote-items
+          (onClickToContinue)="setCurrentTab('2. Datos del cliente')"
+        />
       }
       @case ("2. Datos del cliente") {
         <app-quote-header />
