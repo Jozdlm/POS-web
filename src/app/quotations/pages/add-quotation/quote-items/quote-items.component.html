@@ -57,7 +57,6 @@
         <th>Descripción</th>
         <th>Cantidad</th>
         <th>Valor Unitario</th>
-        <th>Descuento</th>
         <th>Importe</th>
         <th></th>
       </tr>
@@ -94,7 +93,6 @@
               (input)="updateItemPrice($event, item.productId)"
             />
           </td>
-          <td>{{ item.discount | number: "1.0-2" }}</td>
           <td>{{ item.ammount | currency: "GTQ" }}</td>
           <td>
             <button
