@@ -11,6 +11,7 @@ import { SchoolService } from '@app/schools/services/school.service';
 import { IconComponent } from '@app/common/components/icon.component';
 import { QuoteHeaderComponent } from './quote-header/quote-header.component';
 import { QuoteItemsComponent } from './quote-items/quote-items.component';
+import { QuoteConfirmationComponent } from './quote-confirmation/quote-confirmation.component';
 
 @Component({
   standalone: true,
@@ -23,6 +24,7 @@ import { QuoteItemsComponent } from './quote-items/quote-items.component';
     IconComponent,
     QuoteHeaderComponent,
     QuoteItemsComponent,
+    QuoteConfirmationComponent,
   ],
 })
 export class AddQuotationComponent {
