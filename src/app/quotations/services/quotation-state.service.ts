@@ -83,10 +83,13 @@ export class QuotationStateService {
     this.emmitStateChanges();
   }
 
-  public getStateSnapshot(): { items: QuotationItem[]; totalAmmount: number } {
+  public getStateSnapshot() {
     return {
       items: this._items,
-      totalAmmount: this.getTotalAmmount(),
+      subtotal: this.getSubtotal(),
+      discount: this.getTotalDiscount(),
+      total: this.getTotalAmmount(),
+      ...this.quoteHeaderForm.getRawValue(),
     };
   }
 
