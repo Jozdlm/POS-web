@@ -18,12 +18,13 @@
   <div class="row w-100">
     @switch (currentTab) {
       @case ("1. Carrito") {
-        <app-quote-items
-          (onClickToContinue)="setCurrentTab('2. Datos del cliente')"
-        />
+        <app-quote-items (onClickToContinue)="setCurrentTab(tabItems[1])" />
       }
       @case ("2. Datos del cliente") {
-        <app-quote-header (onClickToReturn)="setCurrentTab('1. Carrito')" />
+        <app-quote-header
+          (onClickToReturn)="setCurrentTab(tabItems[0])"
+          (onClickToContinue)="setCurrentTab(tabItems[2])"
+        />
       }
     }
   </div>

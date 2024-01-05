@@ -29,6 +29,7 @@ export class QuoteHeaderComponent {
   public quoteHeaderForm = inject(QuotationStateService).quoteHeaderForm;
 
   @Output() onClickToReturn = new EventEmitter<any>();
+  @Output() onClickToContinue = new EventEmitter<any>();
 
   constructor() {
     this.watchPromotionType();
@@ -58,5 +59,7 @@ export class QuoteHeaderComponent {
   public onSubmitQuote(): void {
     const raw = this.quoteHeaderForm.getRawValue();
     console.log(raw);
+
+    this.onClickToContinue.emit(null);
   }
 }
