@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Input,
+  Output,
+  inject,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   Observable,
@@ -36,6 +43,7 @@ export class QuoteItemsComponent {
 
   constructor() {
     this.watchToQuerySearch();
+    inject(DestroyRef).onDestroy(() => this._subscriptions.unsubscribe());
   }
 
   private watchToQuerySearch(): void {
