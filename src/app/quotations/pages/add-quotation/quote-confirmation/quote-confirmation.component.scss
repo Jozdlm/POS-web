@@ -1,0 +1,9 @@
+.quote-details {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  column-gap: 32px;
+}
+
+.small-text {
+  font-size: 14px;
+}

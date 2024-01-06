@@ -10,5 +10,6 @@ import { QuotationStateService } from '@app/quotations/services/quotation-state.
   styleUrl: './quote-confirmation.component.scss',
 })
 export class QuoteConfirmationComponent {
-  public readonly quoteState = inject(QuotationStateService).getStateSnapshot();
+  private readonly _stateService = inject(QuotationStateService);
+  public readonly quoteState = this._stateService.getStateSnapshot();
 }
