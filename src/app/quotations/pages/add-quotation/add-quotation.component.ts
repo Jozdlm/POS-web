@@ -29,13 +29,9 @@ import { QuoteConfirmationComponent } from './quote-confirmation/quote-confirmat
 })
 export class AddQuotationComponent {
   private readonly _quotationState = inject(QuotationStateService);
-  private readonly _quotationService = inject(QuotationService);
-  private _subscriptions = new Subscription();
+  private _promotionState = new BehaviorSubject<boolean>(false);
   public readonly schools$ = inject(SchoolService).getSchools();
   public readonly schoolGrades$ = inject(SchoolGradeService).getSchoolGrades();
-
-  public quoteState$ = this._quotationState.quoteState$;
-  private _promotionState = new BehaviorSubject<boolean>(false);
   public readonly displayStudentControl = this._promotionState.asObservable();
 
   public tabItems: string[] = [
@@ -55,26 +51,7 @@ export class AddQuotationComponent {
 
   constructor() {
     inject(DestroyRef).onDestroy(() => {
-      this._subscriptions.unsubscribe();
       this._quotationState.clearQuotationState();
     });
-  }
-
-  public createQuotation(): void {
-    // const raw = this.quotationInfo.getRawValue();
-    const snapshot = this._quotationState.getStateSnapshot();
-
-    // const quote: QuoteMutation = {
-    //   customerName: raw.customerName,
-    //   studentName: raw.studentName,
-    //   date: raw.date,
-    //   gradeId: raw.schoolGrade,
-    //   schoolId: raw.school,
-    //   totalAmmount: snapshot.totalAmmount,
-    //   promotionId: raw.promotionType,
-    // };
-    const items: QuotationItem[] = snapshot.items;
-
-    // this._quotationService.createQuotation(quote, items);
   }
 }
