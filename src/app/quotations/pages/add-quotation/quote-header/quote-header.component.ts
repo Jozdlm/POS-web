@@ -57,9 +57,6 @@ export class QuoteHeaderComponent {
   }
 
   public onSubmitQuote(): void {
-    const raw = this.quoteHeaderForm.getRawValue();
-    console.log(raw);
-
     this.onClickToContinue.emit(null);
   }
 }
