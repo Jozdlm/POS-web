@@ -65,7 +65,7 @@ export class ProductService {
       this._db
         .from(DbTables.PRODUCTS)
         .select('*')
-        .like(field, `%${query}%`)
+        .ilike(field, `%${query}%`)
         .range(0, limit - 1),
     ).pipe(
       map(({ data, error }) => {
