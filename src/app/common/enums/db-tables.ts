@@ -6,4 +6,5 @@ export enum DbTables {
   CATEGORIES = 'categories',
   SCHOOL_GRADES = 'school_grades',
   SCHOOLS = 'schools',
+  PROMOTION_TYPE = 'promotion_type',
 }
