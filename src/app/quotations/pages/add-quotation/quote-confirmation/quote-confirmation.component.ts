@@ -6,6 +6,7 @@ import { QuoteMutation } from '@app/quotations/models/quotation';
 import { SchoolService } from '@app/schools/services/school.service';
 import { SchoolGradeService } from '@app/schools/services/school-grade.service';
 import { PromotionTypeService } from '@app/quotations/services/promotion-type.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quote-confirmation',
@@ -17,6 +18,7 @@ import { PromotionTypeService } from '@app/quotations/services/promotion-type.se
 export class QuoteConfirmationComponent implements OnInit {
   private readonly _stateService = inject(QuotationStateService);
   private readonly _quoteService = inject(QuotationService);
+  private readonly _router = inject(Router);
   private readonly schoolService = inject(SchoolService);
   private readonly gradeService = inject(SchoolGradeService);
   private readonly promoService = inject(PromotionTypeService);
@@ -57,6 +59,11 @@ export class QuoteConfirmationComponent implements OnInit {
     };
     const items = this.quoteState.items;
 
-    this._quoteService.createQuotation({ ...header }, items);
+    this._quoteService
+      .createQuotation({ ...header }, items)
+      .then((_) => {
+        this._router.navigateByUrl('/');
+      })
+      .catch((err) => console.error(err));
   }
 }
