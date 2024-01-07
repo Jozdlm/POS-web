@@ -14,6 +14,7 @@ export class QuotationMapper {
       date: dto.date,
       schoolGrade: dto.grade_id,
       gradeName: dto.school_grades.name,
+      promotionDescription: dto.promotion_type.description,
       schoolName: dto.schools.name,
       totalAmmount: dto.total_ammount,
     };

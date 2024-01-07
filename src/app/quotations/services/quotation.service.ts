@@ -100,7 +100,9 @@ export class QuotationService {
   ): Promise<Quotation | null> {
     let { data: quotation_header, error } = await this._db
       .from(DbTables.QUOTATIONS)
-      .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`)
+      .select(
+        `*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name), ${DbTables.PROMOTION_TYPE}(description)`,
+      )
       .eq('id', quotationId);
 
     if (error) {

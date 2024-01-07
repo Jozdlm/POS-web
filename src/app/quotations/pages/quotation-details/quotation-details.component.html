@@ -15,7 +15,9 @@
       <p class="fs-3 fw-medium">Librería La Joya</p>
     </div>
     <div class="text-end">
-      <p class="fs-4 fw-medium">{{ "cotización" | uppercase }}</p>
+      <p class="fs-4 fw-medium">
+        {{ "cotización" | uppercase }} #{{ quotationHeader?.id }}
+      </p>
     </div>
   </section>
   <hr class="mb-4 mt-2" />
@@ -42,11 +44,12 @@
     <div class="text-end">
       <p class="fs-5 fw-medium">Datos Documento</p>
       <p class="metadata">
-        <span class="fw-medium">Cotización #:</span> {{ quotationHeader?.id }}
-      </p>
-      <p class="metadata">
         <span class="fw-medium">Fecha Cotización:</span>
         {{ quotationHeader?.date | date: "dd/MM/yyyy" }}
+      </p>
+      <p class="metadata">
+        <span class="fw-medium">Promoción:</span>
+        {{ quotationHeader?.promotionDescription }}
       </p>
     </div>
   </section>

@@ -4,7 +4,8 @@ export interface Quotation {
   studentName: string;
   date: string;
   schoolGrade: number;
-  gradeName?: string;
+  gradeName: string;
+  promotionDescription: string;
   schoolName: string;
   totalAmmount: number;
 }
