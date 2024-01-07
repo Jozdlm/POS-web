@@ -24,7 +24,7 @@ export class QuotationStateService {
 
   public quoteHeaderForm = inject(FormBuilder).nonNullable.group({
     customerName: ['', [Validators.required, Validators.minLength(3)]],
-    studentName: ['', [Validators.required, Validators.minLength(3)]],
+    studentName: ['N/A', [Validators.required, Validators.minLength(3)]],
     date: [getCurrentDate(), Validators.required],
     schoolGrade: [0, [Validators.required, Validators.min(1)]],
     school: [0, [Validators.required, Validators.min(1)]],
