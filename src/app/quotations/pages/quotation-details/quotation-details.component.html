@@ -70,14 +70,15 @@
             <td>{{ item.description | titlecase }}</td>
             <td class="text-end">{{ item.quantity }}</td>
             <td class="text-end">{{ item.price | number: "1.2-3" }}</td>
-            <td class="text-end"></td>
+            <td class="text-end">{{ item.discount | number: "1.2-3" }}</td>
             <td class="text-end">{{ item.ammount | number: "1.2-3" }}</td>
           </tr>
         }
       </tbody>
       <tfoot>
         <tr class="table-light text-dark-emphasis">
-          <td colspan="4" class="fw-medium">Total</td>
+          <td colspan="3" class="fw-medium">Total</td>
+          <td class="text-end">{{ totalDiscount | currency: "GTQ" }}</td>
           <td class="fw-medium text-end">
             {{ quotationHeader?.totalAmmount | currency: "GTQ" }}
           </td>

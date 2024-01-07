@@ -32,6 +32,10 @@ export class QuotationDetailsComponent {
 
   @ViewChild('quote') public quoteElement!: ElementRef;
 
+  public get totalDiscount(): number {
+    return this.quotationItems.reduce((prev, curr) => prev + curr.discount, 0);
+  }
+
   constructor() {
     this.watchUrlParams();
     this.getQuoteDetails();
