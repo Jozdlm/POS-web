@@ -2,6 +2,41 @@
 
 <div class="quote-details">
   <div>
+    <div class="list-group list-items">
+      @for (item of quoteState.items; track $index) {
+        <div
+          class="list-group-item d-flex justify-content-between align-items-end"
+        >
+          <div class="me-2 small-text">
+            <span>{{ item.description }}</span>
+            <div class="fw-bold">Qty: {{ item.quantity }}</div>
+          </div>
+          <span class="badge bg-primary rounded-pill">{{
+            item.ammount | currency: "GTQ"
+          }}</span>
+        </div>
+      }
+    </div>
+
+    <hr />
+
+    <div>
+      <div class="mb-1 d-flex justify-content-between">
+        <span class="fw-medium">Subtotal:</span>
+        <span>{{ quoteState.subtotal | currency: "GTQ" }}</span>
+      </div>
+      <div class="mb-1 d-flex justify-content-between">
+        <span class="fw-medium">Descuento:</span>
+        <span>{{ quoteState.discount | currency: "GTQ" }}</span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span class="fw-medium">Total:</span>
+        <span>{{ quoteState.total | currency: "GTQ" }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
     <p><span class="fw-medium">Cliente:</span> {{ quoteState.customerName }}</p>
     <p><span class="fw-medium">Fecha:</span> {{ quoteState.date }}</p>
     <p>
@@ -12,30 +47,9 @@
     </p>
     <p><span class="fw-medium">Colegio:</span> {{ quoteState.school }}</p>
     <p><span class="fw-medium">Grado:</span> {{ quoteState.schoolGrade }}</p>
-    <p><span class="fw-medium">Subtotal:</span> {{ quoteState.subtotal }}</p>
-    <p><span class="fw-medium">Descuento:</span> {{ quoteState.discount }}</p>
-    <p><span class="fw-medium">Total:</span> {{ quoteState.total }}</p>
 
     <div class="d-grid">
       <button (click)="onCreateQuote()" class="btn btn-primary">Guardar</button>
-    </div>
-  </div>
-
-  <div class="list-items">
-    <div class="list-group">
-      @for (item of quoteState.items; track $index) {
-        <div
-          class="list-group-item d-flex justify-content-between align-items-start"
-        >
-          <div class="me-2 small-text">
-            <div class="fw-bold">Qty: {{ item.quantity }}</div>
-            <span>{{ item.description }}</span>
-          </div>
-          <span class="badge bg-primary rounded-pill">{{
-            item.ammount | currency: "GTQ"
-          }}</span>
-        </div>
-      }
     </div>
   </div>
 </div>
