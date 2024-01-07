@@ -21,7 +21,10 @@ export const APP_ROUTES: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        component: AddQuotationComponent,
+        loadComponent: () =>
+          import(
+            './quotations/pages/add-quotation/add-quotation.component'
+          ).then((c) => c.AddQuotationComponent),
       },
       {
         path: PagePrefix.QUOTATIONS,
@@ -45,18 +48,6 @@ export const APP_ROUTES: Routes = [
           import('./schools/pages/school-grades/school-grades.component').then(
             (c) => c.SchoolGradesComponent,
           ),
-      },
-    ],
-  },
-  {
-    path: PagePrefix.PRINT,
-    canActivate: [loggedClientGuard],
-    children: [
-      {
-        path: `quotation/:id`,
-        // TODO: Concatenate the app name with the title page
-        title: 'Librería La Joya - Imprimir Cotización',
-        component: QuotationDetailsComponent,
       },
     ],
   },
