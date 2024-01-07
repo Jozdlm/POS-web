@@ -1,15 +1,53 @@
-<p class="fs-5 fw-medium">Resumen de la cotización</p>
-
 <div class="quote-details">
   <div>
-    <div class="list-group list-items">
+    <p class="fw-medium mb-3">Detalles</p>
+
+    <div class="mb-3 small-text">
+      <div class="d-flex justify-content-between">
+        <span>Fecha:</span>
+        <span>{{ quoteState.date }}</span>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <span>Cliente:</span>
+        <span>{{ quoteState.customerName }}</span>
+      </div>
+    </div>
+
+    <div class="mb-3 small-text">
+      <div class="d-flex justify-content-between">
+        <span>Colegio:</span>
+        <span>{{ schoolName }}</span>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <span>Grado:</span>
+        <span>{{ gradeName }}</span>
+      </div>
+    </div>
+
+    <div class="small-text">
+      <div class="d-flex justify-content-between">
+        <span>Promoción:</span>
+        <span>{{ promoDescription }}</span>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <span>Estudiante:</span>
+        <span>{{ quoteState.studentName }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="mb-3 fw-medium">Resumen:</p>
+    <div class="list-group">
       @for (item of quoteState.items; track $index) {
         <div
-          class="list-group-item d-flex justify-content-between align-items-end"
+          class="list-group-item d-flex justify-content-between align-items-center"
         >
-          <div class="me-2 small-text">
-            <span>{{ item.description }}</span>
-            <div class="fw-bold">Qty: {{ item.quantity }}</div>
+          <div class="me-4 small-text text-truncate">
+            {{ item.quantity }} x {{ item.description }}
           </div>
           <span class="badge bg-primary rounded-pill">{{
             item.ammount | currency: "GTQ"
@@ -20,32 +58,20 @@
 
     <hr />
 
-    <div>
-      <div class="mb-1 d-flex justify-content-between">
-        <span class="fw-medium">Subtotal:</span>
+    <div class="mb-3">
+      <div class="mb-1 d-flex justify-content-between small-text">
+        <span>Subtotal:</span>
         <span>{{ quoteState.subtotal | currency: "GTQ" }}</span>
       </div>
-      <div class="mb-1 d-flex justify-content-between">
-        <span class="fw-medium">Descuento:</span>
+      <div class="mb-3 d-flex justify-content-between small-text">
+        <span>Descuento:</span>
         <span>{{ quoteState.discount | currency: "GTQ" }}</span>
       </div>
-      <div class="d-flex justify-content-between">
-        <span class="fw-medium">Total:</span>
+      <div class="d-flex justify-content-between fw-medium total-label">
+        <span>TOTAL:</span>
         <span>{{ quoteState.total | currency: "GTQ" }}</span>
       </div>
     </div>
-  </div>
-
-  <div>
-    <p><span class="fw-medium">Cliente:</span> {{ quoteState.customerName }}</p>
-    <p><span class="fw-medium">Fecha:</span> {{ quoteState.date }}</p>
-    <p><span class="fw-medium">Promoción:</span> {{ promoDescription }}</p>
-    <p>
-      <span class="fw-medium">Estudiante:</span>
-      {{ quoteState.studentName }}
-    </p>
-    <p><span class="fw-medium">Colegio:</span> {{ schoolName }}</p>
-    <p><span class="fw-medium">Grado:</span> {{ gradeName }}</p>
 
     <div class="d-grid">
       <button (click)="onCreateQuote()" class="btn btn-primary">Guardar</button>
