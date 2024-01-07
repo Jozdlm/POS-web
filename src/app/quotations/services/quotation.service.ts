@@ -82,7 +82,9 @@ export class QuotationService {
     return from(
       this._db
         .from(DbTables.QUOTATIONS)
-        .select(`*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name)`)
+        .select(
+          `*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name), ${DbTables.PROMOTION_TYPE}(description)`,
+        )
         .order('id', { ascending: true }),
     ).pipe(
       map(({ error, data }) => {
