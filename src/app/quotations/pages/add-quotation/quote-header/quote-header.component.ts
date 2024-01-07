@@ -22,6 +22,7 @@ import { QuotationStateService } from '@app/quotations/services/quotation-state.
 })
 export class QuoteHeaderComponent {
   private readonly _subscriptions = new Subscription();
+  private readonly _quoteState = inject(QuotationStateService);
   public schools$ = inject(SchoolService).getSchools();
   public schoolGrades$ = inject(SchoolGradeService).getSchoolGrades();
   public diplayStudentControl = false;
@@ -30,6 +31,10 @@ export class QuoteHeaderComponent {
 
   @Output() onClickToReturn = new EventEmitter<any>();
   @Output() onClickToContinue = new EventEmitter<any>();
+
+  public get denyToSubmit(): boolean {
+    return !this._quoteState.quoteHeaderForm.valid;
+  }
 
   constructor() {
     this.watchPromotionType();

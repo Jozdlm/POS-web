@@ -78,6 +78,8 @@
     >
       Regresar
     </button>
-    <button type="submit" class="btn btn-primary">Continuar</button>
+    <button type="submit" class="btn btn-primary" [disabled]="denyToSubmit">
+      Continuar
+    </button>
   </div>
 </form>
