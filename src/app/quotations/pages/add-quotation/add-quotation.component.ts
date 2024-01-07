@@ -42,4 +42,14 @@ export class AddQuotationComponent {
   public getActiveTabClassName(tabName: string): string {
     return this.currentTab == tabName ? 'btn-primary' : '';
   }
+
+  public disableTab(tabName: string): boolean {
+    const items = this._quotationState.getStateSnapshot().items;
+
+    if (tabName === this.tabItems[2] && items.length === 0) {
+      return true;
+    }
+
+    return false;
+  }
 }

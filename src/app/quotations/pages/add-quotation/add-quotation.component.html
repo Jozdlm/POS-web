@@ -9,6 +9,7 @@
           class="btn btn-sm"
           (click)="setCurrentTab(item)"
           [class]="getActiveTabClassName(item)"
+          [disabled]="disableTab(item)"
         >
           {{ item }}
         </button>
