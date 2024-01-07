@@ -43,10 +43,11 @@
       <span class="fw-medium">Promoción:</span> {{ quoteState.promotionType }}
     </p>
     <p>
-      <span class="fw-medium">Estudiante:</span> {{ quoteState.studentName }}
+      <span class="fw-medium">Estudiante:</span>
+      {{ quoteState.studentName == "" ? "N/A" : quoteState.studentName }}
     </p>
-    <p><span class="fw-medium">Colegio:</span> {{ quoteState.school }}</p>
-    <p><span class="fw-medium">Grado:</span> {{ quoteState.schoolGrade }}</p>
+    <p><span class="fw-medium">Colegio:</span> {{ schoolName }}</p>
+    <p><span class="fw-medium">Grado:</span> {{ gradeName }}</p>
 
     <div class="d-grid">
       <button (click)="onCreateQuote()" class="btn btn-primary">Guardar</button>

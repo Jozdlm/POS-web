@@ -1,8 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { QuoteMutation } from '@app/quotations/models/quotation';
+import { SchoolService } from '@app/schools/services/school.service';
+import { SchoolGradeService } from '@app/schools/services/school-grade.service';
 
 @Component({
   selector: 'app-quote-confirmation',
@@ -11,10 +13,28 @@ import { QuoteMutation } from '@app/quotations/models/quotation';
   templateUrl: './quote-confirmation.component.html',
   styleUrl: './quote-confirmation.component.scss',
 })
-export class QuoteConfirmationComponent {
+export class QuoteConfirmationComponent implements OnInit {
   private readonly _stateService = inject(QuotationStateService);
   private readonly _quoteService = inject(QuotationService);
+  private readonly schoolService = inject(SchoolService);
+  private readonly gradeService = inject(SchoolGradeService);
   public readonly quoteState = this._stateService.getStateSnapshot();
+  public schoolName: string = '';
+  public gradeName: string = '';
+
+  ngOnInit(): void {
+    if (this.quoteState.school > 0) {
+      this.schoolService
+        .getSchoolById(this.quoteState.school)
+        .subscribe((item) => (this.schoolName = item.name));
+    }
+
+    if (this.quoteState.schoolGrade > 0) {
+      this.gradeService
+        .getGradeById(this.quoteState.schoolGrade)
+        .subscribe((item) => (this.gradeName = item.name));
+    }
+  }
 
   public onCreateQuote(): void {
     const header: QuoteMutation = {
