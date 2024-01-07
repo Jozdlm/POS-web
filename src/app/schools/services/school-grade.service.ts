@@ -21,4 +21,16 @@ export class SchoolGradeService {
       }),
     );
   }
+
+  public getGradeById(gradeId: number): Observable<SchoolGrade> {
+    return from(
+      this._db.from(DbTables.SCHOOL_GRADES).select('*').eq('id', gradeId),
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw new Error(error.message);
+
+        return data[0] as SchoolGrade;
+      }),
+    );
+  }
 }
