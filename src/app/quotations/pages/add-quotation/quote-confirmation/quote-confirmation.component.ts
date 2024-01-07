@@ -62,7 +62,7 @@ export class QuoteConfirmationComponent implements OnInit {
     this._quoteService
       .createQuotation({ ...header }, items)
       .then((_) => {
-        this._router.navigateByUrl('/');
+        this._router.navigateByUrl('/quotations');
       })
       .catch((err) => console.error(err));
   }
