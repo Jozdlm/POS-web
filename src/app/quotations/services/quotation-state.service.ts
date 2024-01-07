@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { QuoteState } from '../models/quote-state';
 import { FormBuilder, Validators } from '@angular/forms';
 import { getCurrentDate } from '@app/common';
@@ -9,6 +9,7 @@ import { getCurrentDate } from '@app/common';
   providedIn: 'root',
 })
 export class QuotationStateService {
+  private readonly _subscriptions = new Subscription();
   private _items: QuotationItem[] = [];
   private _subtotal: number = 0;
   private _discount: number = 0;
@@ -74,11 +75,33 @@ export class QuotationStateService {
   }
 
   public addDiscount(): void {
+    this._items = this._items.map((item) => {
+      const discount = item.ammount * 0.1;
+      const ammount = item.ammount - discount;
+
+      return {
+        ...item,
+        discount,
+        ammount,
+      };
+    });
+
     this._quoteWithDiscount = true;
     this.emmitStateChanges();
   }
 
   public removeDiscount(): void {
+    this._items = this._items.map((item) => {
+      const discount = 0;
+      const ammount = item.quantity * item.price;
+
+      return {
+        ...item,
+        discount,
+        ammount,
+      };
+    });
+
     this._quoteWithDiscount = false;
     this.emmitStateChanges();
   }

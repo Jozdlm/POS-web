@@ -49,7 +49,9 @@ export class QuoteHeaderComponent {
         (value) => {
           if (value * 1 === 2) {
             this.diplayStudentControl = true;
+            this._quoteState.removeDiscount();
           } else {
+            this._quoteState.addDiscount();
             this.diplayStudentControl = false;
           }
         },
