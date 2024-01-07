@@ -5,6 +5,7 @@ import { QuotationService } from '@app/quotations/services/quotation.service';
 import { QuoteMutation } from '@app/quotations/models/quotation';
 import { SchoolService } from '@app/schools/services/school.service';
 import { SchoolGradeService } from '@app/schools/services/school-grade.service';
+import { PromotionTypeService } from '@app/quotations/services/promotion-type.service';
 
 @Component({
   selector: 'app-quote-confirmation',
@@ -18,9 +19,11 @@ export class QuoteConfirmationComponent implements OnInit {
   private readonly _quoteService = inject(QuotationService);
   private readonly schoolService = inject(SchoolService);
   private readonly gradeService = inject(SchoolGradeService);
+  private readonly promoService = inject(PromotionTypeService);
   public readonly quoteState = this._stateService.getStateSnapshot();
   public schoolName: string = '';
   public gradeName: string = '';
+  public promoDescription: string = '';
 
   ngOnInit(): void {
     if (this.quoteState.school > 0) {
@@ -33,6 +36,12 @@ export class QuoteConfirmationComponent implements OnInit {
       this.gradeService
         .getGradeById(this.quoteState.schoolGrade)
         .subscribe((item) => (this.gradeName = item.name));
+    }
+
+    if (this.quoteState.promotionType > 0) {
+      this.promoService
+        .getPromotionById(this.quoteState.promotionType)
+        .subscribe((item) => (this.promoDescription = item.description));
     }
   }
 

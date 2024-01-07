@@ -39,9 +39,7 @@
   <div>
     <p><span class="fw-medium">Cliente:</span> {{ quoteState.customerName }}</p>
     <p><span class="fw-medium">Fecha:</span> {{ quoteState.date }}</p>
-    <p>
-      <span class="fw-medium">Promoción:</span> {{ quoteState.promotionType }}
-    </p>
+    <p><span class="fw-medium">Promoción:</span> {{ promoDescription }}</p>
     <p>
       <span class="fw-medium">Estudiante:</span>
       {{ quoteState.studentName == "" ? "N/A" : quoteState.studentName }}
