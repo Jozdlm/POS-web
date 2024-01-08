@@ -21,23 +21,10 @@ export class PdfMakerService {
   public generatePDF(element: HTMLElement, docName: string): void {
     const pdf = new jsPDF(this._pdfOptions);
 
-    html2canvas(element, { scale: 1 }).then((canvas) => {
-      const imgElement = canvas.toDataURL('image/png');
-      const pdfHeight = (canvas.height * this.docWidth) / canvas.width;
-
-      // pdf.addImage(
-      //   imgElement,
-      //   'PNG',
-      //   this.leftMargin,
-      //   this.topMargin,
-      //   this.docWidth,
-      //   pdfHeight,
-      // );
-      pdf.html(element, {
-        callback: (pdf: jsPDF) => {
-          pdf.save(docName);
-        },
-      });
+    pdf.html(element, {
+      callback: (pdf: jsPDF) => {
+        pdf.save(docName);
+      },
     });
   }
 }
