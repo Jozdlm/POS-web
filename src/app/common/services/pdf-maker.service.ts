@@ -14,10 +14,6 @@ export class PdfMakerService {
     compress: true,
   };
 
-  public readonly docWidth: number = 594;
-  public readonly topMargin: number = 24;
-  public readonly leftMargin: number = 24;
-
   public generatePDF(element: HTMLElement, docName: string): void {
     const pdf = new jsPDF(this._pdfOptions);
 
