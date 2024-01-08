@@ -16,8 +16,14 @@ export class PdfMakerService {
 
   public generatePDF(element: HTMLElement, docName: string): void {
     const pdf = new jsPDF(this._pdfOptions);
+    const scale = (596 - 18 * 2) / element.scrollWidth;
 
     pdf.html(element, {
+      margin: 18,
+      x: 7.086614173228346,
+      html2canvas: {
+        scale,
+      },
       callback: (pdf: jsPDF) => {
         pdf.save(docName);
       },
