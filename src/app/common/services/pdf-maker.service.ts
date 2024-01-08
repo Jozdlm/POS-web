@@ -25,6 +25,13 @@ export class PdfMakerService {
         scale,
       },
       callback: (pdf: jsPDF) => {
+        const totalPages = pdf.getNumberOfPages();
+        const pagesToDelate = 9;
+
+        for (let i = 0; i < pagesToDelate; i++) {
+          pdf.deletePage(totalPages - i);
+        }
+
         pdf.save(docName);
       },
     });
