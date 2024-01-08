@@ -19,13 +19,13 @@ export class PdfMakerService {
   public readonly leftMargin: number = 10;
 
   public generatePDF(element: HTMLElement, docName: string): void {
-    const maker = new jsPDF(this._pdfOptions);
+    const pdf = new jsPDF(this._pdfOptions);
 
     html2canvas(element, { scale: 3 }).then((canvas) => {
       const imgElement = canvas.toDataURL('image/png');
       const pdfHeight = (canvas.height * this.docWidth) / canvas.width;
 
-      maker.addImage(
+      pdf.addImage(
         imgElement,
         'PNG',
         this.leftMargin,
@@ -33,8 +33,8 @@ export class PdfMakerService {
         this.docWidth,
         pdfHeight,
       );
-      maker.html(element.innerHTML);
-      maker.save(docName);
+      pdf.html(element.innerHTML);
+      pdf.save(docName);
     });
   }
 }
