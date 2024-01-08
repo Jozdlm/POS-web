@@ -8,33 +8,36 @@ import jsPDF, { jsPDFOptions } from 'jspdf';
 export class PdfMakerService {
   private _pdfOptions: jsPDFOptions = {
     orientation: 'p',
-    unit: 'mm',
+    unit: 'pt',
     format: 'letter',
     putOnlyUsedFonts: true,
     compress: true,
   };
 
-  public readonly docWidth: number = 196;
-  public readonly topMargin: number = 10;
-  public readonly leftMargin: number = 10;
+  public readonly docWidth: number = 594;
+  public readonly topMargin: number = 24;
+  public readonly leftMargin: number = 24;
 
   public generatePDF(element: HTMLElement, docName: string): void {
     const pdf = new jsPDF(this._pdfOptions);
 
-    html2canvas(element, { scale: 3 }).then((canvas) => {
+    html2canvas(element, { scale: 1 }).then((canvas) => {
       const imgElement = canvas.toDataURL('image/png');
       const pdfHeight = (canvas.height * this.docWidth) / canvas.width;
 
-      pdf.addImage(
-        imgElement,
-        'PNG',
-        this.leftMargin,
-        this.topMargin,
-        this.docWidth,
-        pdfHeight,
-      );
-      pdf.html(element.innerHTML);
-      pdf.save(docName);
+      // pdf.addImage(
+      //   imgElement,
+      //   'PNG',
+      //   this.leftMargin,
+      //   this.topMargin,
+      //   this.docWidth,
+      //   pdfHeight,
+      // );
+      pdf.html(element, {
+        callback: (pdf: jsPDF) => {
+          pdf.save(docName);
+        },
+      });
     });
   }
 }
