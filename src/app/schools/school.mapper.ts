@@ -1,4 +1,4 @@
-import { School, SchoolDto, SchoolMutation } from '../models/school';
+import { School, SchoolDto, SchoolMutation } from './models/school';
 
 export class SchoolMapper {
   public static toDto(src: SchoolMutation): SchoolDto {
