@@ -1,0 +1,1 @@
+var O=function(o){return o.QUOTATIONS="quotation_header",o.QUOTATION_ITEMS="quotation_items",o.PRODUCTS="products",o.CATEGORIES="categories",o.SCHOOL_GRADES="school_grades",o.SCHOOLS="schools",o.PROMOTION_TYPE="promotion_type",o}(O||{});export{O as a};
