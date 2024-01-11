@@ -53,7 +53,6 @@ export class ProductService {
     );
   }
 
-  // TODO: Make a type that set the columns that user can search (property: SearchableCols)
   public getProductsBy({
     query,
     field,

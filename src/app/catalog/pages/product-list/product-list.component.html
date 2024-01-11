@@ -1,7 +1,6 @@
 <div class="view-wrapper">
   <h1 class="fs-3 mb-3">Productos</h1>
 
-  <!-- TODO: Make an accordions for each filter sections -->
   <div>
     <div class="d-flex justify-content-between">
       <div>
@@ -34,7 +33,6 @@
       <div class="mb-4">
         <div class="mb-3">
           <p class="fw-medium mb-1">Categorías</p>
-          <!-- TODO: Make the categories filter form  -->
           <form>
             @for (item of categories$ | async; track item.id) {
               <div class="form-check">
