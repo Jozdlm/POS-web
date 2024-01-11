@@ -9,8 +9,12 @@ import { CommonModule } from '@angular/common';
   styles: ``,
 })
 export class IconComponent {
+  public iconCode: string = '';
+
   @Input({
     required: true,
   })
-  public iconCode: string = '';
+  public set iconName(name: string) {
+    this.iconCode = `bi bi-${name}`;
+  }
 }

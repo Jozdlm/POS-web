@@ -15,7 +15,7 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <ui-icon [iconCode]="item.icon" />
+          <ui-icon [iconName]="item.icon" />
           <span>{{ item.placeholder }}</span>
         </a>
       </div>
@@ -28,7 +28,7 @@
     class="btn nav-item-icon"
     (click)="handleLogoutEvent()"
   >
-    <ui-icon iconCode="bi bi-box-arrow-left" />
+    <ui-icon iconName="box-arrow-left" />
     Cerrar Sesión
   </button>
 </div>

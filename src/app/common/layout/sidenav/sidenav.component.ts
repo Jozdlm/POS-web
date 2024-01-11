@@ -18,32 +18,32 @@ export class SidenavComponent {
     {
       path: '',
       placeholder: 'Inicio',
-      icon: 'bi bi-house-door-fill',
+      icon: 'house-door-fill',
     },
     {
       path: '/quotations',
       placeholder: 'Cotizaciones',
-      icon: 'bi bi-wallet-fill',
+      icon: 'wallet-fill',
     },
     {
       path: '/products',
       placeholder: 'Productos',
-      icon: 'bi bi-bag-fill',
+      icon: 'bag-fill',
     },
     {
       path: '/categories',
       placeholder: 'Categorías',
-      icon: 'bi bi-tags-fill',
+      icon: 'tags-fill',
     },
     {
       path: '/schools',
       placeholder: 'Centros Educativos',
-      icon: 'bi bi-bank2',
+      icon: 'bank2',
     },
     {
       path: '/school-grades',
       placeholder: 'Grados Académicos',
-      icon: 'bi bi-bar-chart-fill',
+      icon: 'bar-chart-fill',
     },
   ];
 
