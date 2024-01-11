@@ -26,9 +26,9 @@ export class PdfMakerService {
       },
       callback: (pdf: jsPDF) => {
         const totalPages = pdf.getNumberOfPages();
-        const pagesToDelate = 9;
+        const pagesToDelete = 9;
 
-        for (let i = 0; i < pagesToDelate; i++) {
+        for (let i = 0; i < pagesToDelete; i++) {
           pdf.deletePage(totalPages - i);
         }
 
