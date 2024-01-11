@@ -7,8 +7,8 @@ import {
 } from '../models/quotation';
 import { SupabaseService } from '@app/common/services/supabase.service';
 import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
-import { QuotationMapper } from '../mappers/quotation.mapper';
-import { QuotationItemMapper } from '../mappers/quotation-item.mapper';
+import { QuotationMapper } from '../quotation.mapper';
+import { QuotationItemMapper } from '../quotation-item.mapper';
 import { DbTables } from '@app/common/enums/db-tables';
 import { Observable, from, map } from 'rxjs';
 

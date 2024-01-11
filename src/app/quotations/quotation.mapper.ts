@@ -3,7 +3,7 @@ import {
   QuotationDto,
   QuoteMutation,
   QuoteWithRefTables,
-} from '../models/quotation';
+} from './models/quotation';
 
 export class QuotationMapper {
   public static toEntity(dto: QuoteWithRefTables): Quotation {
