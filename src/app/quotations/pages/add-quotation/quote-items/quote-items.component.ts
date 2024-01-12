@@ -2,13 +2,11 @@ import {
   Component,
   DestroyRef,
   EventEmitter,
-  Input,
   Output,
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  Observable,
   Subscription,
   debounceTime,
   distinctUntilChanged,
@@ -16,7 +14,6 @@ import {
   map,
   switchMap,
 } from 'rxjs';
-import { QuoteState } from '@app/quotations/models/quote-state';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { IconComponent } from '@app/common/components/icon.component';
 import { Product } from '@app/catalog/models/product';
