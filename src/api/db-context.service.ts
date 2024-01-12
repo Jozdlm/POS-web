@@ -6,7 +6,7 @@ import { Observable, from } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiDbContext {
+export class DbContext {
   private readonly _db = inject(SupabaseService).supabase;
 
   public findAll<T>(

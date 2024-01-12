@@ -3,14 +3,14 @@ import { SupabaseService } from 'src/app/common/services/supabase.service';
 import { SchoolGrade } from '../models/school-grades';
 import { DbTables } from '@app/common/enums/db-tables';
 import { Observable, from, map } from 'rxjs';
-import { ApiDbContext } from '@api/api-db-context.service';
+import { DbContext } from '@api/db-context.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SchoolGradeService {
   private readonly _db = inject(SupabaseService).supabase;
-  private readonly _dbContext = inject(ApiDbContext);
+  private readonly _dbContext = inject(DbContext);
 
   constructor() {}
 
