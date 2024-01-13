@@ -17,9 +17,9 @@ export class DbContext {
 
   public find<T>(
     tableName: string,
-    property: string,
+    field: string,
     value: any,
   ): Observable<PostgrestSingleResponse<T[]>> {
-    return from(this._db.from(tableName).select('*').eq(property, value));
+    return from(this._db.from(tableName).select('*').eq(field, value));
   }
 }
