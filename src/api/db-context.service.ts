@@ -1,13 +1,13 @@
-import { Injectable, inject } from '@angular/core';
-import { SupabaseService } from '@app/common';
+import { Injectable } from '@angular/core';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { Observable, from } from 'rxjs';
+import { supaClient } from './constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DbContext {
-  private readonly _db = inject(SupabaseService).supabase;
+  private readonly _db = supaClient;
 
   public findAll<T>(
     tableName: string,
