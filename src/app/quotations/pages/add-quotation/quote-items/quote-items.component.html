@@ -91,7 +91,16 @@
               (input)="updateItemPrice($event, item.productId)"
             />
           </td>
-          <td>{{ item.ammount | currency: "GTQ" }}</td>
+          <td>
+            <span class="d-block">{{ item.ammount | currency: "GTQ" }}</span>
+
+            @if (item.discount > 0) {
+              <span
+                class="small-text text-dark-emphasis text-decoration-line-through"
+                >{{ item.price * item.quantity | currency: "GTQ" }}</span
+              >
+            }
+          </td>
           <td>
             <button
               class="btn btn-outline-danger btn-sm"
