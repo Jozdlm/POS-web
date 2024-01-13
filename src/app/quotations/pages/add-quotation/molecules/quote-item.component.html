@@ -1,1 +1,43 @@
-<p>quote-item works!</p>
+<tr>
+  <td>{{ quoteItem.description }}</td>
+  <td>
+    <div class="d-flex justify-content-between align-items-center">
+      <button
+        class="btn btn-light me-1 btn-sm"
+        (click)="decreaseQuantity(quoteItem.productId)"
+        aria-label="Decrease button"
+      >
+        <ui-icon iconName="dash" />
+      </button>
+      {{ quoteItem.quantity }}
+      <button
+        class="btn btn-light ms-1 btn-sm"
+        (click)="increaseQuantity(quoteItem.productId)"
+        aria-label="Increase button"
+      >
+        <ui-icon iconName="plus" />
+      </button>
+    </div>
+  </td>
+  <td>
+    <input
+      class="form-control form-control-sm price-control"
+      type="number"
+      placeholder=".form-control-sm"
+      [value]="quoteItem.price"
+      min="0.00"
+      step="0.01"
+      (input)="updateItemPrice($event, quoteItem.productId)"
+    />
+  </td>
+  <td>{{ quoteItem.ammount | currency: "GTQ" }}</td>
+  <td>
+    <button
+      class="btn btn-outline-danger btn-sm"
+      (click)="removeItemOfQuotation(quoteItem.productId)"
+      aria-label="Remove button"
+    >
+      <ui-icon iconName="x" />
+    </button>
+  </td>
+</tr>
