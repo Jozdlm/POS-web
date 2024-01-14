@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, from, map } from 'rxjs';
 import { SupabaseService } from '@app/common/services/supabase.service';
 import { DbTables } from '@app/common/enums/db-tables';
-import { ProductMapper } from '../mappers/product.mapper';
+import { ProductMapper } from '../product.mapper';
 import {
   Product,
   ProductDto,

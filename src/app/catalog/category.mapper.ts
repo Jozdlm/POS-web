@@ -1,4 +1,4 @@
-import { Category, CategoryDto } from '../models/category';
+import { Category, CategoryDto } from './models/category';
 
 export class CategoryMapper {
   public static toEntity(dto: CategoryDto): Category {

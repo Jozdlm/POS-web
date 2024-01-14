@@ -3,7 +3,7 @@ import { Observable, from, map, of } from 'rxjs';
 import { SupabaseService } from '@app/common/services/supabase.service';
 import { DbTables } from '@app/common/enums/db-tables';
 import { Category, CategoryDto } from '../models/category';
-import { CategoryMapper } from '../mappers/category.mapper';
+import { CategoryMapper } from '../category.mapper';
 
 @Injectable({
   providedIn: 'root',
