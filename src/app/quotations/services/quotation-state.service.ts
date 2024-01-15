@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { QuoteState } from '../models/quote-state';
 import { FormBuilder, Validators } from '@angular/forms';
 import { getCurrentDate } from '@app/common';
@@ -9,7 +9,6 @@ import { getCurrentDate } from '@app/common';
   providedIn: 'root',
 })
 export class QuotationStateService {
-  private readonly _subscriptions = new Subscription();
   private _items: QuotationItem[] = [];
   private _subtotal: number = 0;
   private _discount: number = 0;
