@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
 import { BehaviorSubject } from 'rxjs';
 import { QuoteState } from '../models/quote-state';
@@ -14,6 +14,24 @@ export class QuotationStateService {
   private _discount: number = 0;
   private _total: number = 0;
   private _quoteWithDiscount: boolean = false;
+
+  private _quoteItems = signal<QuotationItem[]>([]);
+  public quoteItems = this._quoteItems.asReadonly();
+
+  public quoteSubtotal = computed<number>(() => {
+    return this.quoteItems().reduce(
+      (prev, curr) => prev + curr.price * curr.quantity,
+      0,
+    );
+  });
+
+  public quoteDiscount = computed<number>(() => {
+    return this.quoteItems().reduce((prev, curr) => prev + curr.discount, 0);
+  });
+
+  public quoteAmmount = computed<number>(() => {
+    return this.quoteItems().reduce((prev, curr) => prev * 1 + curr.ammount, 0);
+  });
 
   private _quoteState$ = new BehaviorSubject<QuoteState>({
     items: this._items,
