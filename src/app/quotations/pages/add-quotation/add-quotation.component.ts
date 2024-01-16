@@ -5,7 +5,7 @@ import { QuotationStateService } from '@app/quotations/services/quotation-state.
 import { IconComponent } from '@app/common/components/icon.component';
 import { QuoteHeaderComponent } from './quote-header/quote-header.component';
 import { QuoteItemsComponent } from './molecules/quote-items.component';
-import { QuoteConfirmationComponent } from './quote-confirmation/quote-confirmation.component';
+import { QuoteConfirmationComponent } from './molecules/quote-confirmation.component';
 
 @Component({
   standalone: true,
