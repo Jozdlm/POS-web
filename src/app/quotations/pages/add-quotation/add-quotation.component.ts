@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
 import { IconComponent } from '@app/common/components/icon.component';
-import { QuoteHeaderComponent } from './quote-header/quote-header.component';
+import { QuoteHeaderComponent } from './molecules/quote-header.component';
 import { QuoteItemsComponent } from './molecules/quote-items.component';
 import { QuoteConfirmationComponent } from './molecules/quote-confirmation.component';
 
