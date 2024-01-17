@@ -2,8 +2,6 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
 import { BehaviorSubject } from 'rxjs';
 import { QuoteState } from '../models/quote-state';
-import { FormBuilder, Validators } from '@angular/forms';
-import { getCurrentDate } from '@app/common';
 import { QuoteFormStateService } from './quote-form-state.service';
 
 @Injectable({
@@ -148,7 +146,7 @@ export class QuotationStateService {
       ...item,
       price: updatedPrice,
       quantity: updatedQty,
-      ammount: updatedQty * updatedPrice,
+      ammount: updatedQty * (updatedPrice - item.discount),
     };
 
     this.emmitStateChanges();
