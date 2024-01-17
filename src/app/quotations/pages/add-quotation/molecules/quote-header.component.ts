@@ -47,11 +47,11 @@ export class QuoteHeaderComponent {
     this._subscriptions.add(
       this.quoteHeaderForm.controls.promotionType.valueChanges.subscribe(
         (value) => {
-          if (value * 1 === 2) {
-            this.diplayStudentControl = true;
-            this._quoteState.removeDiscount();
-          } else {
+          if (value * 1 === 1) {
             this._quoteState.addDiscount();
+            this.diplayStudentControl = false;
+          } else {
+            this._quoteState.removeDiscount();
             this.diplayStudentControl = false;
           }
         },
