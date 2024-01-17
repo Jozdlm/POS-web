@@ -13,7 +13,7 @@ export class QuotationStateService {
   private _subtotal: number = 0;
   private _discount: number = 0;
   private _total: number = 0;
-  private _quoteWithDiscount: boolean = false;
+  private _quoteWithDiscount = signal<boolean>(false);
 
   private _quoteItems = signal<QuotationItem[]>([]);
   public quoteItems = this._quoteItems.asReadonly();
@@ -83,7 +83,7 @@ export class QuotationStateService {
   }
 
   private calculateInitialValues(item: QuotationItem): QuotationItem {
-    if (this._quoteWithDiscount) {
+    if (this._quoteWithDiscount()) {
       item.discount = item.price * 0.1;
       item.ammount = item.price - item.discount;
     }
@@ -103,7 +103,7 @@ export class QuotationStateService {
       };
     });
 
-    this._quoteWithDiscount = true;
+    this._quoteWithDiscount.set(true);
     this.emmitStateChanges();
   }
 
@@ -119,7 +119,7 @@ export class QuotationStateService {
       };
     });
 
-    this._quoteWithDiscount = false;
+    this._quoteWithDiscount.set(false);
     this.emmitStateChanges();
   }
 
