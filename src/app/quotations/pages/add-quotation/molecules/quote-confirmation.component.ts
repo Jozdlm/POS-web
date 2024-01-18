@@ -7,6 +7,7 @@ import { SchoolService } from '@app/schools/services/school.service';
 import { SchoolGradeService } from '@app/schools/services/school-grade.service';
 import { PromotionTypeService } from '@app/quotations/services/promotion-type.service';
 import { Router } from '@angular/router';
+import { combineLatestWith, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-quote-confirmation',
@@ -28,23 +29,21 @@ export class QuoteConfirmationComponent implements OnInit {
   public promoDescription: string = '';
 
   ngOnInit(): void {
-    if (this.quoteState.school > 0) {
-      this.schoolService
-        .getSchoolById(this.quoteState.school)
-        .subscribe((item) => (this.schoolName = item.name));
-    }
+    const { school, schoolGrade, promotionType } = this.quoteState;
 
-    if (this.quoteState.schoolGrade > 0) {
-      this.gradeService
-        .getGradeById(this.quoteState.schoolGrade)
-        .subscribe((item) => (this.gradeName = item.name));
-    }
-
-    if (this.quoteState.promotionType > 0) {
-      this.promoService
-        .getPromotionById(this.quoteState.promotionType)
-        .subscribe((item) => (this.promoDescription = item.description));
-    }
+    this.schoolService
+      .getSchoolById(school)
+      .pipe(
+        combineLatestWith(
+          this.gradeService.getGradeById(schoolGrade),
+          this.promoService.getPromotionById(promotionType),
+        ),
+      )
+      .subscribe(([school, schoolGrade, promotionType]) => {
+        this.schoolName = school.name;
+        this.gradeName = schoolGrade.name;
+        this.promoDescription = promotionType.description;
+      });
   }
 
   public onCreateQuote(): void {
