@@ -12,7 +12,7 @@ export class QuotationStateService {
   private _subtotal: number = 0;
   private _discount: number = 0;
   private _total: number = 0;
-  private _quoteWithDiscount = signal<boolean>(false);
+  public quoteWithDiscount = signal<boolean>(false);
 
   private _quoteItems = signal<QuotationItem[]>([]);
   public quoteItems = this._quoteItems.asReadonly();
@@ -43,7 +43,17 @@ export class QuotationStateService {
 
   public readonly quoteState$ = this._quoteState$.asObservable();
 
-  constructor() {}
+  constructor() {
+    this.quoteHeaderForm.controls.promotionType.valueChanges.subscribe(
+      (value) => {
+        if (value * 1 === 1) {
+          this.addDiscount();
+        } else {
+          this.removeDiscount();
+        }
+      },
+    );
+  }
 
   private getSubtotal(): number {
     return this._items.reduce(
@@ -75,7 +85,7 @@ export class QuotationStateService {
   }
 
   private calculateInitialValues(item: QuotationItem): QuotationItem {
-    if (this._quoteWithDiscount()) {
+    if (this.quoteWithDiscount()) {
       item.discount = item.price * 0.1;
       item.ammount = item.price - item.discount;
     }
@@ -95,7 +105,7 @@ export class QuotationStateService {
       };
     });
 
-    this._quoteWithDiscount.set(true);
+    this.quoteWithDiscount.set(true);
     this.emmitStateChanges();
   }
 
@@ -111,7 +121,7 @@ export class QuotationStateService {
       };
     });
 
-    this._quoteWithDiscount.set(false);
+    this.quoteWithDiscount.set(false);
     this.emmitStateChanges();
   }
 
