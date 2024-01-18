@@ -11,7 +11,7 @@ import { QuotationStateService } from '@app/quotations/services/quotation-state.
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './quote-header.component.html',
-  styleUrl: './quote-header.component.scss',
+  styles: ``,
 })
 export class QuoteHeaderComponent {
   private readonly _quoteState = inject(QuotationStateService);
