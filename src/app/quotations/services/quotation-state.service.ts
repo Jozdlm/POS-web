@@ -152,6 +152,19 @@ export class QuotationStateService {
       updatedPrice = newPrice > 0.01 ? newPrice : updatedPrice;
     }
 
+    this._quoteItems.update((value) => {
+      const quoteItem = value[itemIndex];
+      const filteredArr = [
+        ...value.filter((el) => el.productId != item.productId),
+      ];
+
+      quoteItem.price = updatedPrice;
+      quoteItem.quantity = updatedQty;
+      quoteItem.ammount = updatedQty * (updatedPrice - item.discount);
+
+      return [...filteredArr, quoteItem];
+    });
+
     this._items[itemIndex] = {
       ...item,
       price: updatedPrice,
@@ -172,12 +185,18 @@ export class QuotationStateService {
     if (inArray) {
       this.increaseQuantity(newItem.productId);
     } else {
+      this._quoteItems.update((value) => {
+        return [...value, newItem];
+      });
       this._items = [...this._items, newItem];
       this.emmitStateChanges();
     }
   }
 
   public removeItem(itemId: number): void {
+    this._quoteItems.update((value) => {
+      return [...value.filter((item) => item.productId != itemId)];
+    });
     this._items = [...this._items.filter((item) => item.productId != itemId)];
     this.emmitStateChanges();
   }
@@ -213,6 +232,7 @@ export class QuotationStateService {
   }
 
   public clearQuotationState(): void {
+    this._quoteItems.set([]);
     this._items = [];
     this.emmitStateChanges();
   }
