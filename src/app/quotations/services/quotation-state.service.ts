@@ -51,10 +51,6 @@ export class QuotationStateService {
     );
   }
 
-  private emmitStateChanges(): void {
-    console.log('emit changes');
-  }
-
   private calculateInitialValues(item: QuotationItem): QuotationItem {
     if (this.quoteWithDiscount()) {
       item.discount = item.price * 0.1;
@@ -77,7 +73,6 @@ export class QuotationStateService {
     });
 
     this.quoteWithDiscount.set(true);
-    this.emmitStateChanges();
   }
 
   public removeDiscount(): void {
@@ -93,7 +88,6 @@ export class QuotationStateService {
     });
 
     this.quoteWithDiscount.set(false);
-    this.emmitStateChanges();
   }
 
   private mutateItem(
@@ -137,8 +131,6 @@ export class QuotationStateService {
       quantity: updatedQty,
       ammount: updatedQty * (updatedPrice - item.discount),
     };
-
-    this.emmitStateChanges();
   }
 
   public addItem(newItem: QuotationItem): void {
@@ -155,7 +147,6 @@ export class QuotationStateService {
         return [...value, newItem];
       });
       this._items = [...this._items, newItem];
-      this.emmitStateChanges();
     }
   }
 
@@ -164,7 +155,6 @@ export class QuotationStateService {
       return [...value.filter((item) => item.productId != itemId)];
     });
     this._items = [...this._items.filter((item) => item.productId != itemId)];
-    this.emmitStateChanges();
   }
 
   public increaseQuantity(itemId: number): void {
@@ -200,6 +190,5 @@ export class QuotationStateService {
   public clearQuotationState(): void {
     this._quoteItems.set([]);
     this._items = [];
-    this.emmitStateChanges();
   }
 }
