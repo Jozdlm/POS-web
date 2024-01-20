@@ -121,12 +121,9 @@
 
   <div class="d-flex flex-column align-items-end">
     <p class="text-end">
-      @if (quoteState$ | async) {
-        <span class="d-block fs-5"
-          >Subtotal:
-          {{ (quoteState$ | async)!.subtotal | currency: "GTQ" }}</span
-        >
-      }
+      <span class="d-block fs-5"
+        >Subtotal: {{ subtotalQuote() | currency: "GTQ" }}</span
+      >
     </p>
 
     <button

@@ -33,6 +33,7 @@ export class QuoteItemsComponent {
   private readonly _quoteStateService = inject(QuotationStateService);
   private readonly _subscriptions = new Subscription();
   public quoteState$ = this._quoteStateService.quoteState$;
+  public subtotalQuote = this._quoteStateService.quoteSubtotal;
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];
 
