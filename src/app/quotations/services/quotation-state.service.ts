@@ -153,16 +153,21 @@ export class QuotationStateService {
     }
 
     this._quoteItems.update((value) => {
-      const quoteItem = value[itemIndex];
-      const filteredArr = [
-        ...value.filter((el) => el.productId != item.productId),
-      ];
+      const quoteItem: QuotationItem | undefined = value[itemIndex];
 
-      quoteItem.price = updatedPrice;
-      quoteItem.quantity = updatedQty;
-      quoteItem.ammount = updatedQty * (updatedPrice - item.discount);
+      if (quoteItem) {
+        const filteredArr = [
+          ...value.filter((el) => el.productId != item.productId),
+        ];
 
-      return [...filteredArr, quoteItem];
+        quoteItem.price = updatedPrice;
+        quoteItem.quantity = updatedQty;
+        quoteItem.ammount = updatedQty * (updatedPrice - item.discount);
+
+        return [...filteredArr, quoteItem];
+      }
+
+      return value;
     });
 
     this._items[itemIndex] = {
