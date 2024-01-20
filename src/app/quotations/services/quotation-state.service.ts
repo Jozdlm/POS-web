@@ -99,22 +99,19 @@ export class QuotationStateService {
 
     if (itemIndex === -1) return;
 
-    const item = this._quoteItems()[itemIndex];
-    let updatedQty: number = item.quantity;
-    let updatedPrice: number = item.price;
+    const item = this.quoteItems()[itemIndex];
+    const { quantity, price } = item;
 
     if (type === '-Qty') {
-      updatedQty = item.quantity > 1 ? item.quantity - 1 : updatedQty;
+      item.quantity = quantity > 1 ? item.quantity - 1 : quantity;
     } else if (type === '+Qty') {
-      updatedQty = item.quantity + 1;
+      item.quantity = quantity + 1;
     } else if (type === 'updPrice' && newPrice) {
-      updatedPrice = newPrice > 0.01 ? newPrice : updatedPrice;
+      item.price = newPrice > 0.01 ? newPrice : price;
     }
 
     this._quoteItems.update((value) => {
-      item.price = updatedPrice;
-      item.quantity = updatedQty;
-      item.ammount = updatedQty * (updatedPrice - item.discount);
+      item.ammount = item.quantity * (item.price - item.discount);
 
       const newArr = [...value];
       newArr[itemIndex] = item;
