@@ -60,32 +60,34 @@ export class QuotationStateService {
   }
 
   public addDiscount(): void {
-    this._items = this._items.map((item) => {
-      const discount = item.ammount * 0.1;
-      const ammount = item.ammount - discount;
+    this._quoteItems.update((value) => {
+      return value.map((item) => {
+        const discount = item.ammount * 0.1;
+        const ammount = item.ammount - discount;
 
-      return {
-        ...item,
-        discount,
-        ammount,
-      };
+        return {
+          ...item,
+          discount,
+          ammount,
+        };
+      });
     });
-
     this.quoteWithDiscount.set(true);
   }
 
   public removeDiscount(): void {
-    this._items = this._items.map((item) => {
-      const discount = 0;
-      const ammount = item.quantity * item.price;
+    this._quoteItems.update((value) => {
+      return value.map((item) => {
+        const discount = 0;
+        const ammount = item.quantity * item.price;
 
-      return {
-        ...item,
-        discount,
-        ammount,
-      };
+        return {
+          ...item,
+          discount,
+          ammount,
+        };
+      });
     });
-
     this.quoteWithDiscount.set(false);
   }
 
