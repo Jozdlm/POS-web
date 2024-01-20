@@ -6,11 +6,10 @@ import { QuoteFormStateService } from './quote-form-state.service';
   providedIn: 'root',
 })
 export class QuotationStateService {
-  private _items: QuotationItem[] = [];
-  public quoteWithDiscount = signal<boolean>(false);
-
   private _quoteItems = signal<QuotationItem[]>([]);
   public quoteItems = this._quoteItems.asReadonly();
+  public quoteWithDiscount = signal<boolean>(false);
+  public quoteHeaderForm = inject(QuoteFormStateService).quoteForm;
 
   public quoteSubtotal = computed<number>(() => {
     return this.quoteItems().reduce(
@@ -36,8 +35,6 @@ export class QuotationStateService {
       ...this.quoteHeaderForm.getRawValue(),
     };
   });
-
-  public quoteHeaderForm = inject(QuoteFormStateService).quoteForm;
 
   constructor() {
     this.quoteHeaderForm.controls.promotionType.valueChanges.subscribe(
@@ -99,7 +96,10 @@ export class QuotationStateService {
     const itemIndex = this.quoteItems().findIndex(
       (item) => item.productId == itemId,
     );
-    const item = this._items[itemIndex];
+
+    if (itemIndex === -1) return;
+
+    const item = this._quoteItems()[itemIndex];
     let updatedQty: number = item.quantity;
     let updatedPrice: number = item.price;
 
@@ -112,29 +112,15 @@ export class QuotationStateService {
     }
 
     this._quoteItems.update((value) => {
-      const quoteItem: QuotationItem | undefined = value[itemIndex];
+      item.price = updatedPrice;
+      item.quantity = updatedQty;
+      item.ammount = updatedQty * (updatedPrice - item.discount);
 
-      if (quoteItem) {
-        const filteredArr = [
-          ...value.filter((el) => el.productId != item.productId),
-        ];
+      const newArr = [...value];
+      newArr[itemIndex] = item;
 
-        quoteItem.price = updatedPrice;
-        quoteItem.quantity = updatedQty;
-        quoteItem.ammount = updatedQty * (updatedPrice - item.discount);
-
-        return [...filteredArr, quoteItem];
-      }
-
-      return value;
+      return newArr;
     });
-
-    this._items[itemIndex] = {
-      ...item,
-      price: updatedPrice,
-      quantity: updatedQty,
-      ammount: updatedQty * (updatedPrice - item.discount),
-    };
   }
 
   public addItem(newItem: QuotationItem): void {
