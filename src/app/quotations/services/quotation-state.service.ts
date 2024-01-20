@@ -59,15 +59,6 @@ export class QuotationStateService {
     return itemIndex >= 0 ? true : false;
   }
 
-  private calculateInitialValues(item: QuotationItem): QuotationItem {
-    if (this.quoteWithDiscount()) {
-      item.discount = item.price * 0.1;
-      item.ammount = item.price - item.discount;
-    }
-
-    return { ...item };
-  }
-
   public addDiscount(): void {
     this._items = this._items.map((item) => {
       const discount = item.ammount * 0.1;
@@ -145,19 +136,17 @@ export class QuotationStateService {
   }
 
   public addItem(newItem: QuotationItem): void {
-    const inArray = this._items.find(
-      (item) => item.productId == newItem.productId,
-    );
+    if (this.quoteWithDiscount()) {
+      newItem.discount = newItem.price * 0.1;
+      newItem.ammount = newItem.price - newItem.discount;
+    }
 
-    newItem = this.calculateInitialValues(newItem);
-
-    if (inArray) {
+    if (this.isInQuoteItems(newItem.productId)) {
       this.increaseQuantity(newItem.productId);
     } else {
       this._quoteItems.update((value) => {
         return [...value, newItem];
       });
-      this._items = [...this._items, newItem];
     }
   }
 
