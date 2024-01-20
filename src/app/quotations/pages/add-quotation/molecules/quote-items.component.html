@@ -60,7 +60,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (item of (quoteState$ | async)!.items; track item.productId) {
+      @for (item of quoteItems(); track item.productId) {
         <tr>
           <td>{{ item.description }}</td>
           <td>

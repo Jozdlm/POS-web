@@ -32,7 +32,7 @@ export class QuoteItemsComponent {
   private readonly _productService = inject(ProductService);
   private readonly _quoteStateService = inject(QuotationStateService);
   private readonly _subscriptions = new Subscription();
-  public quoteState$ = this._quoteStateService.quoteState$;
+  public quoteItems = this._quoteStateService.quoteItems;
   public subtotalQuote = this._quoteStateService.quoteSubtotal;
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];

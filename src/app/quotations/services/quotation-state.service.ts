@@ -9,9 +9,6 @@ import { QuoteFormStateService } from './quote-form-state.service';
 })
 export class QuotationStateService {
   private _items: QuotationItem[] = [];
-  private _subtotal: number = 0;
-  private _discount: number = 0;
-  private _total: number = 0;
   public quoteWithDiscount = signal<boolean>(false);
 
   private _quoteItems = signal<QuotationItem[]>([]);
@@ -32,16 +29,7 @@ export class QuotationStateService {
     return this.quoteItems().reduce((prev, curr) => prev * 1 + curr.ammount, 0);
   });
 
-  private _quoteState$ = new BehaviorSubject<QuoteState>({
-    items: this._items,
-    subtotal: this._subtotal,
-    discount: this._discount,
-    total: this._total,
-  });
-
   public quoteHeaderForm = inject(QuoteFormStateService).quoteForm;
-
-  public readonly quoteState$ = this._quoteState$.asObservable();
 
   constructor() {
     this.quoteHeaderForm.controls.promotionType.valueChanges.subscribe(
@@ -76,12 +64,7 @@ export class QuotationStateService {
   }
 
   private emmitStateChanges(): void {
-    this._quoteState$.next({
-      items: this._items,
-      subtotal: this.getSubtotal(),
-      discount: this.getTotalDiscount(),
-      total: this.getTotalAmmount(),
-    });
+    console.log('emit changes');
   }
 
   private calculateInitialValues(item: QuotationItem): QuotationItem {
