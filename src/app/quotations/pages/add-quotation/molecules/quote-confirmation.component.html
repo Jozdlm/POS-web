@@ -5,12 +5,12 @@
     <div class="mb-3 small-text">
       <div class="d-flex justify-content-between">
         <span>Fecha:</span>
-        <span>{{ quoteState.date }}</span>
+        <span>{{ quoteState().date }}</span>
       </div>
 
       <div class="d-flex justify-content-between">
         <span>Cliente:</span>
-        <span>{{ quoteState.customerName }}</span>
+        <span>{{ quoteState().customerName }}</span>
       </div>
     </div>
 
@@ -34,7 +34,7 @@
 
       <div class="d-flex justify-content-between">
         <span>Estudiante:</span>
-        <span>{{ quoteState.studentName }}</span>
+        <span>{{ quoteState().studentName }}</span>
       </div>
     </div>
   </div>
@@ -42,7 +42,7 @@
   <div>
     <p class="mb-3 fw-medium">Resumen:</p>
     <div class="list-group">
-      @for (item of quoteState.items; track $index) {
+      @for (item of quoteState().items; track $index) {
         <div
           class="list-group-item d-flex justify-content-between align-items-center"
         >
@@ -61,15 +61,15 @@
     <div class="mb-3">
       <div class="mb-1 d-flex justify-content-between small-text">
         <span>Subtotal:</span>
-        <span>{{ quoteState.subtotal | currency: "GTQ" }}</span>
+        <span>{{ quoteState().subtotal | currency: "GTQ" }}</span>
       </div>
       <div class="mb-3 d-flex justify-content-between small-text">
         <span>Descuento:</span>
-        <span>{{ quoteState.discount | currency: "GTQ" }}</span>
+        <span>{{ quoteState().discount | currency: "GTQ" }}</span>
       </div>
       <div class="d-flex justify-content-between fw-medium total-label">
         <span>TOTAL:</span>
-        <span>{{ quoteState.total | currency: "GTQ" }}</span>
+        <span>{{ quoteState().total | currency: "GTQ" }}</span>
       </div>
     </div>
 

@@ -7,7 +7,7 @@ import { SchoolService } from '@app/schools/services/school.service';
 import { SchoolGradeService } from '@app/schools/services/school-grade.service';
 import { PromotionTypeService } from '@app/quotations/services/promotion-type.service';
 import { Router } from '@angular/router';
-import { combineLatestWith, switchMap } from 'rxjs';
+import { combineLatestWith } from 'rxjs';
 
 @Component({
   selector: 'app-quote-confirmation',
@@ -23,13 +23,13 @@ export class QuoteConfirmationComponent implements OnInit {
   private readonly schoolService = inject(SchoolService);
   private readonly gradeService = inject(SchoolGradeService);
   private readonly promoService = inject(PromotionTypeService);
-  public readonly quoteState = this._stateService.getStateSnapshot();
+  public readonly quoteState = this._stateService.quoteState;
   public schoolName: string = '';
   public gradeName: string = '';
   public promoDescription: string = '';
 
   ngOnInit(): void {
-    const { school, schoolGrade, promotionType } = this.quoteState;
+    const { school, schoolGrade, promotionType } = this.quoteState();
 
     this.schoolService
       .getSchoolById(school)
@@ -48,15 +48,15 @@ export class QuoteConfirmationComponent implements OnInit {
 
   public onCreateQuote(): void {
     const header: QuoteMutation = {
-      customerName: this.quoteState.customerName,
-      studentName: this.quoteState.studentName,
-      date: this.quoteState.date,
-      gradeId: this.quoteState.schoolGrade,
-      schoolId: this.quoteState.school,
-      promotionId: this.quoteState.promotionType,
-      totalAmmount: this.quoteState.total,
+      customerName: this.quoteState().customerName,
+      studentName: this.quoteState().studentName,
+      date: this.quoteState().date,
+      gradeId: this.quoteState().schoolGrade,
+      schoolId: this.quoteState().school,
+      promotionId: this.quoteState().promotionType,
+      totalAmmount: this.quoteState().total,
     };
-    const items = this.quoteState.items;
+    const items = this.quoteState().items;
 
     this._quoteService
       .createQuotation({ ...header }, items)

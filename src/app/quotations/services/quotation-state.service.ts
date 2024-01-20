@@ -1,7 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
-import { BehaviorSubject } from 'rxjs';
-import { QuoteState } from '../models/quote-state';
 import { QuoteFormStateService } from './quote-form-state.service';
 
 @Injectable({
@@ -29,6 +27,16 @@ export class QuotationStateService {
     return this.quoteItems().reduce((prev, curr) => prev * 1 + curr.ammount, 0);
   });
 
+  public quoteState = computed(() => {
+    return {
+      items: this.quoteItems(),
+      subtotal: this.quoteSubtotal(),
+      discount: this.quoteDiscount(),
+      total: this.quoteAmmount(),
+      ...this.quoteHeaderForm.getRawValue(),
+    };
+  });
+
   public quoteHeaderForm = inject(QuoteFormStateService).quoteForm;
 
   constructor() {
@@ -41,26 +49,6 @@ export class QuotationStateService {
         }
       },
     );
-  }
-
-  private getSubtotal(): number {
-    return this._items.reduce(
-      (prev, curr) => +prev + curr.price * curr.quantity,
-      0,
-    );
-  }
-
-  private getTotalDiscount(): number {
-    return this._items.reduce((prev, curr) => +prev + curr.discount, 0);
-  }
-
-  private getTotalAmmount(): number {
-    const ammount: number = this._items.reduce(
-      (prev, curr) => prev * 1 + curr.ammount,
-      0.0,
-    );
-
-    return ammount;
   }
 
   private emmitStateChanges(): void {
@@ -106,16 +94,6 @@ export class QuotationStateService {
 
     this.quoteWithDiscount.set(false);
     this.emmitStateChanges();
-  }
-
-  public getStateSnapshot() {
-    return {
-      items: this._items,
-      subtotal: this.getSubtotal(),
-      discount: this.getTotalDiscount(),
-      total: this.getTotalAmmount(),
-      ...this.quoteHeaderForm.getRawValue(),
-    };
   }
 
   private mutateItem(
