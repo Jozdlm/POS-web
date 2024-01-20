@@ -51,6 +51,14 @@ export class QuotationStateService {
     );
   }
 
+  private isInQuoteItems(itemId: number): boolean {
+    const itemIndex = this.quoteItems().findIndex(
+      (item) => item.productId === itemId,
+    );
+
+    return itemIndex >= 0 ? true : false;
+  }
+
   private calculateInitialValues(item: QuotationItem): QuotationItem {
     if (this.quoteWithDiscount()) {
       item.discount = item.price * 0.1;
@@ -92,9 +100,12 @@ export class QuotationStateService {
 
   private mutateItem(
     type: '+Qty' | '-Qty' | 'updPrice',
-    itemIndex: number,
+    itemId: number,
     newPrice?: number,
   ): void {
+    const itemIndex = this.quoteItems().findIndex(
+      (item) => item.productId == itemId,
+    );
     const item = this._items[itemIndex];
     let updatedQty: number = item.quantity;
     let updatedPrice: number = item.price;
@@ -178,17 +189,11 @@ export class QuotationStateService {
   }
 
   public updateSellingPrice(itemId: number, newPrice: number): void {
-    const itemIndex = this._items.findIndex(
-      (item) => item.productId === itemId,
-    );
-
-    if (itemIndex !== -1) {
-      this.mutateItem('updPrice', itemIndex, newPrice);
-    }
+    if (!this.isInQuoteItems(itemId)) return;
+    this.mutateItem('updPrice', itemId, newPrice);
   }
 
   public clearQuotationState(): void {
     this._quoteItems.set([]);
-    this._items = [];
   }
 }
