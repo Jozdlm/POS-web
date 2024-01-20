@@ -165,27 +165,16 @@ export class QuotationStateService {
     this._quoteItems.update((value) => {
       return [...value.filter((item) => item.productId != itemId)];
     });
-    this._items = [...this._items.filter((item) => item.productId != itemId)];
   }
 
   public increaseQuantity(itemId: number): void {
-    const itemIndex = this._items.findIndex(
-      (item) => item.productId === itemId,
-    );
-
-    if (itemIndex !== -1) {
-      this.mutateItem('+Qty', itemIndex);
-    }
+    if (!this.isInQuoteItems(itemId)) return;
+    this.mutateItem('+Qty', itemId);
   }
 
   public decreaseQuantity(itemId: number): void {
-    const itemIndex = this._items.findIndex(
-      (item) => item.productId === itemId,
-    );
-
-    if (itemIndex !== -1) {
-      this.mutateItem('-Qty', itemIndex);
-    }
+    if (!this.isInQuoteItems(itemId)) return;
+    this.mutateItem('-Qty', itemId);
   }
 
   public updateSellingPrice(itemId: number, newPrice: number): void {
