@@ -44,7 +44,7 @@ export class AddQuotationComponent {
   }
 
   public disableTab(tabName: string): boolean {
-    const items = this._quotationState.getStateSnapshot().items;
+    const items = this._quotationState.quoteItems();
     const isFormInvalid = this._quotationState.quoteHeaderForm.invalid;
 
     if (tabName === this.tabItems[2]) {
