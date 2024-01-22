@@ -10,5 +10,5 @@ import { NavbarComponent } from './common/layout/navbar/navbar.component';
   imports: [NavbarComponent, RouterOutlet],
 })
 export class AppComponent {
-  title = 'pos-web-client';
+  title = 'Librería La Joya - CMS';
 }
