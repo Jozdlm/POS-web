@@ -4,14 +4,15 @@
 
     <div class="d-flex column-gap-3">
       @for (item of tabItems; track $index) {
-        <a
+        <button
           type="button"
           class="btn btn-sm"
           [routerLink]="['./' + item.path]"
           routerLinkActive="btn-primary"
+          [disabled]="disableTab(item.path)"
         >
           {{ item.label }}
-        </a>
+        </button>
       }
     </div>
   </div>

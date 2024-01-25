@@ -23,6 +23,7 @@ const QUOTATION_ROUTES: Routes = [
       },
       { path: 'cart', component: QuoteItemsComponent },
       { path: 'quote-info', component: QuoteHeaderComponent },
+      // TODO: Make the isValidQuoteGuard
       { path: 'confirmation', component: QuoteConfirmationComponent },
     ],
   },
