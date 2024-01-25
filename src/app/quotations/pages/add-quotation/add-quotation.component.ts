@@ -22,12 +22,11 @@ import { QuoteConfirmationComponent } from './molecules/quote-confirmation.compo
 })
 export class AddQuotationComponent {
   private readonly _quotationState = inject(QuotationStateService);
-  public tabItems: string[] = [
-    '1. Carrito',
-    '2. Datos del cliente',
-    '3. Confirmación',
+  public tabItems = [
+    { path: '/cart', label: '1. Carrito' },
+    { path: '/quote-info', label: '2. Datos adicionales' },
+    { path: '/confirmation', label: '3. Confirmación' },
   ];
-  public currentTab: string = this.tabItems[0];
 
   constructor() {
     inject(DestroyRef).onDestroy(() => {
@@ -35,19 +34,11 @@ export class AddQuotationComponent {
     });
   }
 
-  public setCurrentTab(tab: string): void {
-    this.currentTab = tab;
-  }
-
-  public getActiveTabClassName(tabName: string): string {
-    return this.currentTab == tabName ? 'btn-primary' : '';
-  }
-
   public disableTab(tabName: string): boolean {
     const items = this._quotationState.quoteItems();
     const isFormInvalid = this._quotationState.quoteHeaderForm.invalid;
 
-    if (tabName === this.tabItems[2]) {
+    if (tabName === this.tabItems[2].path) {
       if (items.length === 0 || isFormInvalid) {
         return true;
       }
