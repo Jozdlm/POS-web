@@ -17,19 +17,6 @@
     </div>
   </div>
   <div class="row w-100">
-    @switch (currentTab) {
-      @case ("1. Carrito") {
-        <app-quote-items (onClickToContinue)="setCurrentTab(tabItems[1])" />
-      }
-      @case ("2. Datos del cliente") {
-        <app-quote-header
-          (onClickToReturn)="setCurrentTab(tabItems[0])"
-          (onClickToContinue)="setCurrentTab(tabItems[2])"
-        />
-      }
-      @case ("3. Confirmación") {
-        <app-quote-confirmation />
-      }
-    }
+    <router-outlet></router-outlet>
   </div>
 </div>
