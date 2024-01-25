@@ -1,8 +1,6 @@
 import { Routes } from '@angular/router';
-import { AddQuotationComponent } from './quotations/pages/add-quotation/add-quotation.component';
 import { anonClientGuard } from './auth/guards/anon-client.guard';
 import { loggedClientGuard } from './auth/guards/logged-client.guard';
-import { QuotationDetailsComponent } from './quotations/pages/quotation-details/quotation-details.component';
 import { ViewsShellComponent } from './common/layout/views-shell/views-shell.component';
 import { PagePrefix } from './common/enums/pages';
 
@@ -21,10 +19,7 @@ export const APP_ROUTES: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        loadComponent: () =>
-          import(
-            './quotations/pages/add-quotation/add-quotation.component'
-          ).then((c) => c.AddQuotationComponent),
+        loadComponent: () => import('./home/home.page').then((c) => c.HomePage),
       },
       {
         path: PagePrefix.QUOTATIONS,
