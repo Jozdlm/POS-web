@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SchoolGradeService } from '@app/schools/services/school-grade.service';
 import { SchoolService } from '@app/schools/services/school.service';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
 
 @Component({
@@ -15,13 +15,12 @@ import { QuotationStateService } from '@app/quotations/services/quotation-state.
 })
 export class QuoteHeaderComponent {
   private readonly _quoteState = inject(QuotationStateService);
+  private readonly _router = inject(Router);
+  public readonly _activatedRoute = inject(ActivatedRoute);
   public schools$ = inject(SchoolService).getSchools();
   public schoolGrades$ = inject(SchoolGradeService).getSchoolGrades();
 
   public quoteHeaderForm = inject(QuotationStateService).quoteHeaderForm;
-
-  @Output() onClickToReturn = new EventEmitter<any>();
-  @Output() onClickToContinue = new EventEmitter<any>();
 
   public get diplayStudentControl(): boolean {
     return !this._quoteState.quoteWithDiscount();
@@ -31,11 +30,15 @@ export class QuoteHeaderComponent {
     return !this._quoteState.quoteHeaderForm.valid;
   }
 
-  public handleClickToReturn(): void {
-    this.onClickToReturn.emit(null);
+  public onBackToPrevious(): void {
+    this._router.navigate(['../cart'], {
+      relativeTo: this._activatedRoute,
+    });
   }
 
   public onSubmitQuote(): void {
-    this.onClickToContinue.emit(null);
+    this._router.navigate(['../confirmation'], {
+      relativeTo: this._activatedRoute,
+    });
   }
 }
