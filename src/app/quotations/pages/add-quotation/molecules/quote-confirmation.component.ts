@@ -14,7 +14,17 @@ import { combineLatestWith } from 'rxjs';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './quote-confirmation.component.html',
-  styleUrl: './quote-confirmation.component.scss',
+  styles: `
+    .quote-details {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 38px;
+    }
+
+    .total-label {
+      font-size: 18px;
+    }
+  `,
 })
 export class QuoteConfirmationComponent implements OnInit {
   private readonly _stateService = inject(QuotationStateService);
