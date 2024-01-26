@@ -129,7 +129,8 @@
     <button
       type="button"
       class="btn btn-primary"
-      (click)="handleClickToContinue()"
+      routerLink="../quote-info"
+      [disabled]="quoteItems().length === 0"
     >
       Continuar
     </button>

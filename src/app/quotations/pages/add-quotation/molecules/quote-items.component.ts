@@ -1,10 +1,4 @@
-import {
-  Component,
-  DestroyRef,
-  EventEmitter,
-  Output,
-  inject,
-} from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   Subscription,
@@ -20,11 +14,12 @@ import { Product } from '@app/catalog/models/product';
 import { ProductService } from '@app/catalog/services/product.service';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-quote-items',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, IconComponent],
+  imports: [CommonModule, ReactiveFormsModule, IconComponent, RouterModule],
   templateUrl: './quote-items.component.html',
   styles: `
     .price-control {
@@ -40,8 +35,6 @@ export class QuoteItemsComponent {
   public subtotalQuote = this._quoteStateService.quoteSubtotal;
   public searchControl = new FormControl('');
   public filteredProducts: Product[] = [];
-
-  @Output() onClickToContinue = new EventEmitter<any>();
 
   constructor() {
     this.watchToQuerySearch();
@@ -105,9 +98,5 @@ export class QuoteItemsComponent {
   public clearSearchControl(): void {
     this.searchControl.reset();
     this.filteredProducts = [];
-  }
-
-  public handleClickToContinue(): void {
-    this.onClickToContinue.emit(null);
   }
 }
