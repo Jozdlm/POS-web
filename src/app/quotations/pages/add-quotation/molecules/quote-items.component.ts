@@ -26,7 +26,11 @@ import { QuotationItem } from '@app/quotations/models/quotation-item';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, IconComponent],
   templateUrl: './quote-items.component.html',
-  styleUrl: './quote-items.component.scss',
+  styles: `
+    .price-control {
+      max-width: 80px;
+    }
+  `,
 })
 export class QuoteItemsComponent {
   private readonly _productService = inject(ProductService);
