@@ -3,22 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
 import { IconComponent } from '@app/common/components/icon.component';
-import { QuoteHeaderComponent } from './molecules/quote-header.component';
-import { QuoteItemsComponent } from './molecules/quote-items.component';
-import { QuoteConfirmationComponent } from './molecules/quote-confirmation.component';
 
 @Component({
   standalone: true,
   templateUrl: './add-quotation.component.html',
   styleUrl: './add-quotation.component.scss',
-  imports: [
-    CommonModule,
-    RouterModule,
-    IconComponent,
-    QuoteHeaderComponent,
-    QuoteItemsComponent,
-    QuoteConfirmationComponent,
-  ],
+  imports: [CommonModule, RouterModule, IconComponent],
 })
 export class AddQuotationComponent {
   private readonly _quotationState = inject(QuotationStateService);
