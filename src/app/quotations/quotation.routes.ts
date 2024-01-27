@@ -5,6 +5,7 @@ import { QuotationDetailsComponent } from './pages/quotation-details/quotation-d
 import { QuoteItemsComponent } from './pages/add-quotation/tabs/quote-items.component';
 import { QuoteHeaderComponent } from './pages/add-quotation/tabs/quote-header.component';
 import { QuoteConfirmationComponent } from './pages/add-quotation/tabs/quote-confirmation.component';
+import { quoteConfirmationGuard } from '@app/auth/guards/quote-confirmation.guard';
 
 const QUOTATION_ROUTES: Routes = [
   {
@@ -23,8 +24,11 @@ const QUOTATION_ROUTES: Routes = [
       },
       { path: 'cart', component: QuoteItemsComponent },
       { path: 'quote-info', component: QuoteHeaderComponent },
-      // TODO: Make the isValidQuoteGuard
-      { path: 'confirmation', component: QuoteConfirmationComponent },
+      {
+        path: 'confirmation',
+        component: QuoteConfirmationComponent,
+        canActivate: [quoteConfirmationGuard],
+      },
     ],
   },
   { path: ':id', component: QuotationDetailsComponent },
