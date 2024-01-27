@@ -158,5 +158,6 @@ export class QuotationStateService {
 
   public clearQuotationState(): void {
     this._quoteItems.set([]);
+    this.quoteHeaderForm.reset();
   }
 }
