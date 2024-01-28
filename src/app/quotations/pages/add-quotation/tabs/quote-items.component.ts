@@ -13,7 +13,6 @@ import { IconComponent } from '@app/common/components/icon.component';
 import { Product } from '@app/catalog/models/product';
 import { ProductService } from '@app/catalog/services/product.service';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
-import { QuotationItem } from '@app/quotations/models/quotation-item';
 import { RouterModule } from '@angular/router';
 
 @Component({
