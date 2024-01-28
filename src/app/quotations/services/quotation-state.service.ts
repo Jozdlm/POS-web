@@ -1,6 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
 import { QuoteFormStateService } from './quote-form-state.service';
+import { Product } from '@app/catalog/models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -120,17 +121,26 @@ export class QuotationStateService {
     });
   }
 
-  public addItem(newItem: QuotationItem): void {
+  public addItem(newItem: Product): void {
+    const quoteItem: QuotationItem = {
+      productId: newItem.id,
+      description: newItem.name,
+      quantity: 1,
+      price: newItem.sellingPrice,
+      discount: 0,
+      ammount: newItem.sellingPrice,
+    };
+
     if (this.quoteWithDiscount()) {
-      newItem.discount = newItem.price * 0.1;
-      newItem.ammount = newItem.price - newItem.discount;
+      quoteItem.discount = quoteItem.price * 0.1;
+      quoteItem.ammount = quoteItem.price - quoteItem.discount;
     }
 
-    if (this.isInQuoteItems(newItem.productId)) {
-      this.increaseQuantity(newItem.productId);
+    if (this.isInQuoteItems(quoteItem.productId)) {
+      this.increaseQuantity(quoteItem.productId);
     } else {
       this._quoteItems.update((value) => {
-        return [...value, newItem];
+        return [...value, quoteItem];
       });
     }
   }

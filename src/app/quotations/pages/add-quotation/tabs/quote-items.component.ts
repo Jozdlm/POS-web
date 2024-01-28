@@ -64,16 +64,7 @@ export class QuoteItemsComponent {
   }
 
   public addItemToQuotation(item: Product): void {
-    const quotationItem: QuotationItem = {
-      productId: item.id,
-      description: item.name,
-      quantity: 1,
-      price: item.sellingPrice,
-      discount: 0,
-      ammount: item.sellingPrice,
-    };
-
-    this._quoteStateService.addItem(quotationItem);
+    this._quoteStateService.addItem(item);
   }
 
   public increaseQuantity(itemId: number): void {
