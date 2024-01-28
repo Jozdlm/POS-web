@@ -21,17 +21,11 @@ export class SessionService {
     );
 
   constructor() {
-    this._db.auth.getSession().then((value) => {
-      if (value.data.session) {
-        this._stateEmmitter.next(true);
-      }
-    });
-
-    this._db.auth.onAuthStateChange((event, _) => {
-      if (event == 'SIGNED_IN') {
-        this._stateEmmitter.next(true);
-      } else {
+    this._db.auth.onAuthStateChange((event, session) => {
+      if (event == 'SIGNED_OUT') {
         this._stateEmmitter.next(false);
+      } else if (session) {
+        this._stateEmmitter.next(true);
       }
     });
   }
