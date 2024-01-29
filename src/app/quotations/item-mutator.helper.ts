@@ -53,3 +53,25 @@ export function updateItemPrice(
   array[itemIndex] = currItem;
   return [...array];
 }
+
+export function addItemDiscount(item: QuotationItem): QuotationItem {
+  const discount = item.ammount * 0.1;
+  const ammount = item.ammount - discount;
+
+  return {
+    ...item,
+    discount,
+    ammount,
+  };
+}
+
+export function removeItemDiscount(item: QuotationItem): QuotationItem {
+  const discount = 0;
+  const ammount = item.quantity * item.price;
+
+  return {
+    ...item,
+    discount,
+    ammount,
+  };
+}

@@ -3,8 +3,10 @@ import { QuotationItem } from '../models/quotation-item';
 import { QuoteFormStateService } from './quote-form-state.service';
 import { Product } from '@app/catalog/models/product';
 import {
+  addItemDiscount,
   decreaseItemQty,
   increaseItemQty,
+  removeItemDiscount,
   updateItemPrice,
 } from '../item-mutator.helper';
 
@@ -64,33 +66,17 @@ export class QuotationStateService {
 
   public addDiscount(): void {
     this._quoteItems.update((value) => {
-      return value.map((item) => {
-        const discount = item.ammount * 0.1;
-        const ammount = item.ammount - discount;
-
-        return {
-          ...item,
-          discount,
-          ammount,
-        };
-      });
+      return value.map((item) => addItemDiscount(item));
     });
+
     this.quoteWithDiscount.set(true);
   }
 
   public removeDiscount(): void {
     this._quoteItems.update((value) => {
-      return value.map((item) => {
-        const discount = 0;
-        const ammount = item.quantity * item.price;
-
-        return {
-          ...item,
-          discount,
-          ammount,
-        };
-      });
+      return value.map((item) => removeItemDiscount(item));
     });
+
     this.quoteWithDiscount.set(false);
   }
 
