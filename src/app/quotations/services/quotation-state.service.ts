@@ -2,6 +2,7 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
 import { QuoteFormStateService } from './quote-form-state.service';
 import { Product } from '@app/catalog/models/product';
+import { increaseItemQty } from '../item-mutator.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -151,9 +152,12 @@ export class QuotationStateService {
     });
   }
 
-  public increaseQuantity(itemId: number): void {
-    if (!this.isInQuoteItems(itemId)) return;
-    this.mutateItem('+Qty', itemId);
+  public increaseQuantity(producId: number): void {
+    if (!this.isInQuoteItems(producId)) return;
+
+    this._quoteItems.update((currValue) => {
+      return increaseItemQty(currValue, producId);
+    });
   }
 
   public decreaseQuantity(itemId: number): void {
