@@ -42,3 +42,25 @@ export function decreaseItemQty(
 
   return newArr;
 }
+
+export function updateItemPrice(
+  array: QuotationItem[],
+  productId: number,
+  newPrice: number,
+): QuotationItem[] {
+  const itemIndex = array.findIndex((el) => el.productId == productId);
+
+  if (itemIndex === -1) {
+    throw new Error("The quote item doesn't exist on the provided array");
+  }
+
+  const currItem = array[itemIndex];
+
+  currItem.price = newPrice > 0.01 ? newPrice : currItem.price;
+  currItem.ammount = currItem.quantity * (currItem.price - currItem.discount);
+
+  const newArr = [...array];
+  newArr[itemIndex] = currItem;
+
+  return newArr;
+}

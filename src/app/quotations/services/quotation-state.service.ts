@@ -2,7 +2,11 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { QuotationItem } from '../models/quotation-item';
 import { QuoteFormStateService } from './quote-form-state.service';
 import { Product } from '@app/catalog/models/product';
-import { decreaseItemQty, increaseItemQty } from '../item-mutator.helper';
+import {
+  decreaseItemQty,
+  increaseItemQty,
+  updateItemPrice,
+} from '../item-mutator.helper';
 
 @Injectable({
   providedIn: 'root',
@@ -90,38 +94,6 @@ export class QuotationStateService {
     this.quoteWithDiscount.set(false);
   }
 
-  private mutateItem(
-    type: '+Qty' | '-Qty' | 'updPrice',
-    itemId: number,
-    newPrice?: number,
-  ): void {
-    const itemIndex = this.quoteItems().findIndex(
-      (item) => item.productId == itemId,
-    );
-
-    if (itemIndex === -1) return;
-
-    const item = this.quoteItems()[itemIndex];
-    const { quantity, price } = item;
-
-    if (type === '-Qty') {
-      item.quantity = quantity > 1 ? item.quantity - 1 : quantity;
-    } else if (type === '+Qty') {
-      item.quantity = quantity + 1;
-    } else if (type === 'updPrice' && newPrice) {
-      item.price = newPrice > 0.01 ? newPrice : price;
-    }
-
-    this._quoteItems.update((value) => {
-      item.ammount = item.quantity * (item.price - item.discount);
-
-      const newArr = [...value];
-      newArr[itemIndex] = item;
-
-      return newArr;
-    });
-  }
-
   public addItem(newItem: Product): void {
     const quoteItem: QuotationItem = {
       productId: newItem.id,
@@ -168,9 +140,12 @@ export class QuotationStateService {
     });
   }
 
-  public updateSellingPrice(itemId: number, newPrice: number): void {
-    if (!this.isInQuoteItems(itemId)) return;
-    this.mutateItem('updPrice', itemId, newPrice);
+  public updateSellingPrice(productId: number, newPrice: number): void {
+    if (!this.isInQuoteItems(productId)) return;
+
+    this._quoteItems.update((curr) => {
+      return updateItemPrice(curr, productId, newPrice);
+    });
   }
 
   public clearQuotationState(): void {
