@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { QuotationComponent } from './pages/quotation-list/quotation.component';
-import { AddQuotationComponent } from './pages/add-quotation/add-quotation.component';
+import { AddQuotationComponent } from './pages/add-quotation/add-quotation.page';
 import { QuotationDetailsComponent } from './pages/quotation-details/quotation-details.component';
 import { QuoteItemsComponent } from './pages/add-quotation/tabs/quote-items.component';
 import { QuoteHeaderComponent } from './pages/add-quotation/tabs/quote-header.component';

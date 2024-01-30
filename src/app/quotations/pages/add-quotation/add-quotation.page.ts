@@ -6,8 +6,8 @@ import { IconComponent } from '@app/common/components/icon.component';
 
 @Component({
   standalone: true,
-  templateUrl: './add-quotation.component.html',
-  styleUrl: './add-quotation.component.scss',
+  templateUrl: './add-quotation.page.html',
+  styleUrl: './add-quotation.page.scss',
   imports: [CommonModule, RouterModule, IconComponent],
 })
 export class AddQuotationComponent {
