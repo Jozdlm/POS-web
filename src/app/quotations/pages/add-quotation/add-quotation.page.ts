@@ -10,7 +10,7 @@ import { IconComponent } from '@app/common/components/icon.component';
   styleUrl: './add-quotation.page.scss',
   imports: [CommonModule, RouterModule, IconComponent],
 })
-export class AddQuotationComponent {
+export class AddQuotationPage {
   private readonly _quotationState = inject(QuotationStateService);
   public tabItems = [
     { path: '/cart', label: '1. Carrito' },
