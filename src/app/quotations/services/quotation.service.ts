@@ -59,23 +59,19 @@ export class QuotationService {
     await this._insertItems(quotationItems);
   }
 
-  public async getQuotationItems(
-    quotationId: number,
-  ): Promise<QuotationItem[]> {
-    let { data: quotation_items, error } = await this._db
-      .from(DbTables.QUOTATION_ITEMS)
-      .select(`*, ${DbTables.PRODUCTS}(name)`)
-      .eq('quotation_id', quotationId);
+  public getQuotationItems(quotationId: number): Observable<QuotationItem[]> {
+    return from(
+      this._db
+        .from(DbTables.QUOTATION_ITEMS)
+        .select(`*, ${DbTables.PRODUCTS}(name)`)
+        .eq('quotation_id', quotationId),
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw new Error(error.message);
 
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    const items = quotation_items
-      ? quotation_items.map((itemDto) => QuotationItemMapper.toEntity(itemDto))
-      : [];
-
-    return items;
+        return data.map((itemDto) => QuotationItemMapper.toEntity(itemDto));
+      }),
+    );
   }
 
   public getQuotations(): Observable<Quotation[]> {
@@ -97,24 +93,20 @@ export class QuotationService {
     );
   }
 
-  public async getQuotationById(
-    quotationId: number,
-  ): Promise<Quotation | null> {
-    let { data: quotation_header, error } = await this._db
-      .from(DbTables.QUOTATIONS)
-      .select(
-        `*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name), ${DbTables.PROMOTION_TYPE}(description)`,
-      )
-      .eq('id', quotationId);
+  public getQuotationById(quotationId: number): Observable<Quotation | null> {
+    return from(
+      this._db
+        .from(DbTables.QUOTATIONS)
+        .select(
+          `*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name), ${DbTables.PROMOTION_TYPE}(description)`,
+        )
+        .eq('id', quotationId),
+    ).pipe(
+      map(({ data, error }) => {
+        if (error) throw new Error(error.message);
 
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    const quotation = quotation_header
-      ? QuotationMapper.toEntity(quotation_header[0])
-      : null;
-
-    return quotation;
+        return QuotationMapper.toEntity(data[0] as QuoteWithRefTables);
+      }),
+    );
   }
 }
