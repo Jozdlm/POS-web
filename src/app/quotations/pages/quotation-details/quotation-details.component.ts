@@ -10,7 +10,7 @@ import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Quotation } from '@app/quotations/models/quotation';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import { PdfMakerService } from '@app/common/services/pdf-maker.service';
 
 @Component({
@@ -38,16 +38,30 @@ export class QuotationDetailsComponent {
 
   constructor() {
     this.watchUrlParams();
-    this.getQuoteDetails();
-
     inject(DestroyRef).onDestroy(() => this._subscription.unsubscribe());
   }
 
   public watchUrlParams(): void {
     this._subscription.add(
-      this._activedRoute.paramMap.subscribe(
-        (params) => (this.quotationId = Number(params.get('id'))),
-      ),
+      this._activedRoute.paramMap
+        .pipe(
+          switchMap((params) => {
+            this.quotationId = Number(params.get('id'));
+            return this._quotationService.getQuotationById(this.quotationId);
+          }),
+          switchMap((quote) => {
+            if (quote) {
+              this.quotationHeader = quote;
+              return this._quotationService.getQuotationItems(this.quotationId);
+            } else {
+              this._router.navigateByUrl('/quotations');
+              throw new Error("It doesn't exist a quote with the provided Id");
+            }
+          }),
+        )
+        .subscribe((quoteItems) => {
+          this.quotationItems = quoteItems;
+        }),
     );
   }
 
@@ -58,23 +72,6 @@ export class QuotationDetailsComponent {
         htmlElement,
         `Cotización #${this.quotationId}`,
       );
-    }
-  }
-
-  public async getQuoteDetails(): Promise<void> {
-    const quotation = await this._quotationService.getQuotationById(
-      this.quotationId,
-    );
-
-    if (quotation) {
-      this.quotationHeader = quotation;
-
-      const items = await this._quotationService.getQuotationItems(
-        this.quotationId,
-      );
-      this.quotationItems = items;
-    } else {
-      this._router.navigateByUrl('/quotations');
     }
   }
 }
