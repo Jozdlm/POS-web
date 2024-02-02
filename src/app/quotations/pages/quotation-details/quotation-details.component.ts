@@ -10,7 +10,7 @@ import { QuotationService } from '@app/quotations/services/quotation.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Quotation } from '@app/quotations/models/quotation';
 import { QuotationItem } from '@app/quotations/models/quotation-item';
-import { Subscription, switchMap } from 'rxjs';
+import { Subscription, combineLatestWith, switchMap } from 'rxjs';
 import { PdfMakerService } from '@app/common/services/pdf-maker.service';
 
 @Component({
@@ -49,18 +49,17 @@ export class QuotationDetailsComponent {
             this.quotationId = Number(params.get('id'));
             return this._quotationService.getQuotationById(this.quotationId);
           }),
-          switchMap((quote) => {
-            if (quote) {
-              this.quotationHeader = quote;
-              return this._quotationService.getQuotationItems(this.quotationId);
-            } else {
-              this._router.navigateByUrl('/quotations');
-              throw new Error("It doesn't exist a quote with the provided Id");
-            }
-          }),
+          combineLatestWith(
+            this._quotationService.getQuotationItems(this.quotationId),
+          ),
         )
-        .subscribe((quoteItems) => {
-          this.quotationItems = quoteItems;
+        .subscribe(([quote, items]) => {
+          if (quote) {
+            this.quotationHeader = quote;
+            this.quotationItems = items;
+          } else {
+            this._router.navigateByUrl('/quotations');
+          }
         }),
     );
   }
