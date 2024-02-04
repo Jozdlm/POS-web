@@ -85,6 +85,7 @@ export class ProductSelectComponent implements OnInit {
   private _productService = inject(ProductService);
   public searchControl = new FormControl<string>('');
   public results: Product[] = [];
+  public lastOptionSelected: string = '';
 
   @Output() onSelectItem = new EventEmitter<Product>();
 
@@ -95,6 +96,7 @@ export class ProductSelectComponent implements OnInit {
         distinctUntilChanged(),
         filter((value) => typeof value === 'string'),
         map((value) => value as string),
+        filter((value) => value != this.lastOptionSelected),
         switchMap((value) => {
           return this._productService.getProductsBy({
             query: value,
@@ -111,6 +113,7 @@ export class ProductSelectComponent implements OnInit {
   public selectItem(item: Product): void {
     this.onSelectItem.emit(item);
     this.searchControl.setValue(item.name);
+    this.lastOptionSelected = item.name;
     this.results = [];
   }
 }
