@@ -98,7 +98,7 @@ export class ProductSelectComponent implements OnInit {
             this.results = [];
           }
         }),
-        filter((value) => value != this.lastOptionSelected || value != ''),
+        filter((value) => value != this.lastOptionSelected && value != ''),
         switchMap((value) => {
           return this._productService.getProductsBy({
             query: value,
