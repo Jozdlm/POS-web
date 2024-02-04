@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -30,6 +30,7 @@ import { Product } from '@app/catalog/models/product';
           @for (item of results; track item.id) {
             <div
               class="list-group-item d-flex justify-content-between align-items-center result-item"
+              (click)="selectItem(item)"
             >
               <div>
                 <span class="badge bg-success rounded-pill">{{ ' ' }}</span>
@@ -85,6 +86,8 @@ export class ProductSelectComponent implements OnInit {
   public searchControl = new FormControl<string>('');
   public results: Product[] = [];
 
+  @Output() onSelectItem = new EventEmitter<Product>();
+
   ngOnInit(): void {
     this.searchControl.valueChanges
       .pipe(
@@ -103,5 +106,11 @@ export class ProductSelectComponent implements OnInit {
       .subscribe((values) => {
         this.results = values;
       });
+  }
+
+  public selectItem(item: Product): void {
+    this.onSelectItem.emit(item);
+    this.searchControl.setValue(item.name);
+    this.results = [];
   }
 }
