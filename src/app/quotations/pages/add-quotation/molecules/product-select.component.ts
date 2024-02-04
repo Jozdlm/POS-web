@@ -18,7 +18,7 @@ import { Product } from '@app/catalog/models/product';
   template: `
     <div class="mb-3 select-wrapper">
       <input
-        type="text"
+        type="search"
         class="form-control select-field"
         id="searchControl"
         placeholder="Buscar producto"
@@ -78,6 +78,7 @@ import { Product } from '@app/catalog/models/product';
     .result-item {
       padding-top: 10px;
       padding-bottom: 10px;
+      cursor: pointer;
     }
   `,
 })
