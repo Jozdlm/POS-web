@@ -14,11 +14,18 @@ import { Product } from '@app/catalog/models/product';
 import { ProductService } from '@app/catalog/services/product.service';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
 import { RouterModule } from '@angular/router';
+import { ProductSelectComponent } from '../molecules/product-select.component';
 
 @Component({
   selector: 'app-quote-items',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, IconComponent, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    IconComponent,
+    RouterModule,
+    ProductSelectComponent,
+  ],
   templateUrl: './quote-items.component.html',
   styles: `
     .price-control {
