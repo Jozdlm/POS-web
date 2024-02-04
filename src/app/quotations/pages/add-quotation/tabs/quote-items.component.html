@@ -3,6 +3,7 @@
     <app-product-select
       class="flex-grow-1"
       (onSelectItem)="setInitialValues($event)"
+      (onClearValue)="clearInitialValues()"
     ></app-product-select>
     <div>
       <label for="itemQuantity" class="form-label">Cantidad</label>

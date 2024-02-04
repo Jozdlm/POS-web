@@ -85,6 +85,7 @@ export class ProductSelectComponent implements OnInit {
   public lastOptionSelected: string = '';
 
   @Output() onSelectItem = new EventEmitter<Product>();
+  @Output() onClearValue = new EventEmitter<any>();
 
   ngOnInit(): void {
     this.searchControl.valueChanges
@@ -96,6 +97,7 @@ export class ProductSelectComponent implements OnInit {
         tap((value) => {
           if (value === '') {
             this.results = [];
+            this.onClearValue.emit()
           }
         }),
         filter((value) => value != this.lastOptionSelected && value != ''),

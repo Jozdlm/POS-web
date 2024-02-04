@@ -43,6 +43,12 @@ export class QuoteItemsComponent {
     this.itemPriceControl.setValue(item.sellingPrice);
   }
 
+  public clearInitialValues(): void {
+    this.newQuoteItem = undefined;
+    this.itemQuantityControl.reset();
+    this.itemPriceControl.reset();
+  }
+
   public addItemToQuotation(): void {
     if (this.newQuoteItem) {
       this._quoteStateService.addItem(this.newQuoteItem);
