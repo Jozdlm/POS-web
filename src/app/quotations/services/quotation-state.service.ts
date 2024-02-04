@@ -80,14 +80,15 @@ export class QuotationStateService {
     this.quoteWithDiscount.set(false);
   }
 
-  public addItem(newItem: Product): void {
+  public addItem(newItem: Product, quantity: number = 1, price?: number): void {
+    const sellingPrice = price ?? newItem.sellingPrice;
     const quoteItem: QuotationItem = {
       productId: newItem.id,
       description: newItem.name,
-      quantity: 1,
-      price: newItem.sellingPrice,
+      quantity,
+      price: sellingPrice,
       discount: 0,
-      ammount: newItem.sellingPrice,
+      ammount: quantity * sellingPrice,
     };
 
     if (this.quoteWithDiscount()) {

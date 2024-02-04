@@ -51,7 +51,12 @@ export class QuoteItemsComponent {
 
   public addItemToQuotation(): void {
     if (this.newQuoteItem) {
-      this._quoteStateService.addItem(this.newQuoteItem);
+      this._quoteStateService.addItem(
+        this.newQuoteItem,
+        this.itemQuantityControl.getRawValue(),
+        this.itemPriceControl.getRawValue(),
+      );
+      this.clearInitialValues();
     }
   }
 
