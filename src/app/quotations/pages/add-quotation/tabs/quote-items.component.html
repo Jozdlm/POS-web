@@ -1,40 +1,11 @@
 <div>
   <div class="d-flex align-items-stretch mb-3">
-    <app-product-select></app-product-select>
+    <app-product-select
+      (onSelectItem)="addItemToQuotation($event)"
+    ></app-product-select>
     <p>Cantidad</p>
     <p>Precio</p>
     <p>añadir</p>
-  </div>
-
-  <div>
-    <div class="list-group">
-      @for (item of filteredProducts; track item.id) {
-        <div
-          class="list-group-item d-flex justify-content-between align-items-center"
-        >
-          <div class="ms-2 me-auto">
-            <div class="fw-medium">{{ item.name }}</div>
-            <div class="small-text">{{ item.barcode }}</div>
-          </div>
-          <div class="d-flex ms-3 column-gap-5 align-items-center">
-            <p class="mb-0">{{ item.sellingPrice | currency: "GTQ" }}</p>
-            <div>
-              <span class="badge bg-success rounded-pill">{{
-                item.inStock ? "En Stock" : "Sin Stock"
-              }}</span>
-            </div>
-            <button
-              type="button"
-              class="btn btn-light btn-sm"
-              (click)="addItemToQuotation(item)"
-              aria-label="add product button"
-            >
-              <ui-icon iconName="plus" />
-            </button>
-          </div>
-        </div>
-      }
-    </div>
   </div>
 
   <hr />
