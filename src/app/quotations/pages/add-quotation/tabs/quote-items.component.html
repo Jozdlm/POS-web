@@ -2,17 +2,17 @@
   <div class="d-flex align-items-end mb-4 column-gap-4">
     <app-product-select
       class="flex-grow-1"
-      (onSelectItem)="addItemToQuotation($event)"
+      (onSelectItem)="setInitialValues($event)"
     ></app-product-select>
     <div>
       <label for="itemQuantity" class="form-label">Cantidad</label>
       <input
         class="form-control price-control"
         type="number"
-        placeholder="0"
         min="0.00"
         step="0.01"
         id="itemQuantity"
+        [formControl]="itemQuantityControl"
       />
     </div>
     <div>
@@ -20,14 +20,18 @@
       <input
         class="form-control price-control"
         type="number"
-        placeholder="0"
         min="0.00"
         step="0.01"
         id="itemPrice"
+        [formControl]="itemPriceControl"
       />
     </div>
     <div>
-      <button class="btn btn-light" aria-label="add item button">
+      <button
+        class="btn btn-light"
+        aria-label="add item button"
+        (click)="addItemToQuotation()"
+      >
         <ui-icon iconName="plus" />
       </button>
     </div>

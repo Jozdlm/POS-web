@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { IconComponent } from '@app/common/components/icon.component';
 import { Product } from '@app/catalog/models/product';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
@@ -28,9 +28,25 @@ export class QuoteItemsComponent {
   private readonly _quoteStateService = inject(QuotationStateService);
   public quoteItems = this._quoteStateService.quoteItems;
   public subtotalQuote = this._quoteStateService.quoteSubtotal;
+  public newQuoteItem: Product | undefined;
 
-  public addItemToQuotation(item: Product): void {
-    this._quoteStateService.addItem(item);
+  public itemQuantityControl = new FormControl<number>(0, {
+    nonNullable: true,
+  });
+  public itemPriceControl = new FormControl<number>(0, {
+    nonNullable: true,
+  });
+
+  public setInitialValues(item: Product): void {
+    this.newQuoteItem = item;
+    this.itemQuantityControl.setValue(1);
+    this.itemPriceControl.setValue(item.sellingPrice);
+  }
+
+  public addItemToQuotation(): void {
+    if (this.newQuoteItem) {
+      this._quoteStateService.addItem(this.newQuoteItem);
+    }
   }
 
   public increaseQuantity(itemId: number): void {
