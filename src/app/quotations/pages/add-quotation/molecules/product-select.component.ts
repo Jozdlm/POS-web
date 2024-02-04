@@ -16,31 +16,27 @@ import { Product } from '@app/catalog/models/product';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <div class="mb-3">
+    <div class="mb-3 select-wrapper">
       <input
         type="text"
-        class="form-control"
+        class="form-control select-field"
         id="searchControl"
         placeholder="Buscar producto"
         [formControl]="searchControl"
+        autocomplete="off"
       />
-      <div>
-        <div class="list-group">
+      <div class="dropdown-wrapper">
+        <div class="list-group dropdown">
           @for (item of results; track item.id) {
             <div
               class="list-group-item d-flex justify-content-between align-items-center"
             >
-              <div class="ms-2 me-auto">
-                <div class="fw-medium">{{ item.name }}</div>
-                <div class="small-text">{{ item.barcode }}</div>
+              <span class="badge bg-success rounded-pill">{{ ' ' }}</span>
+              <div class="ms-2 me-auto fw-medium">
+                {{ item.name }}
               </div>
               <div class="d-flex ms-3 column-gap-5 align-items-center">
                 <p class="mb-0">{{ item.sellingPrice | currency: 'GTQ' }}</p>
-                <div>
-                  <span class="badge bg-success rounded-pill">{{
-                    item.inStock ? 'En Stock' : 'Sin Stock'
-                  }}</span>
-                </div>
               </div>
             </div>
           }
@@ -52,6 +48,28 @@ import { Product } from '@app/catalog/models/product';
     input::placeholder {
       font-size: 14px;
       display: grid;
+    }
+
+    .select-wrapper {
+      width: 100%;
+      min-width: 400px;
+    }
+
+    .select-field {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .dropdown-wrapper {
+      position: relative;
+      width: 100%
+    }
+
+    .dropdown {
+      position: absolute;
+      width: 100%;
+      background-color: white;
+      z-index: 99;
     }
   `,
 })
