@@ -29,10 +29,12 @@ import { Product } from '@app/catalog/models/product';
         <div class="list-group dropdown">
           @for (item of results; track item.id) {
             <div
-              class="list-group-item d-flex justify-content-between align-items-center"
+              class="list-group-item d-flex justify-content-between align-items-center result-item"
             >
-              <span class="badge bg-success rounded-pill">{{ ' ' }}</span>
-              <div class="ms-2 me-auto fw-medium">
+              <div>
+                <span class="badge bg-success rounded-pill">{{ ' ' }}</span>
+              </div>
+              <div class="ms-2 me-auto">
                 {{ item.name }}
               </div>
               <div class="d-flex ms-3 column-gap-5 align-items-center">
@@ -71,6 +73,11 @@ import { Product } from '@app/catalog/models/product';
       background-color: white;
       z-index: 99;
     }
+
+    .result-item {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
   `,
 })
 export class ProductSelectComponent implements OnInit {
@@ -89,7 +96,7 @@ export class ProductSelectComponent implements OnInit {
           return this._productService.getProductsBy({
             query: value,
             field: 'name',
-            limit: 5,
+            limit: 6,
           });
         }),
       )
