@@ -26,9 +26,11 @@ import { IconComponent } from '@app/common/components/icon.component';
       </div>
 
       <div class="toggle-wrapper">
-        <button class="btn d-flex align-items-center toggle">
-          <span class="toggle-label"> Vista Admon. </span>
-          <ui-icon iconName="chevron-down" />
+        <button class="btn">
+          <ui-icon iconName="clipboard-data" />
+        </button>
+        <button class="btn">
+          <ui-icon iconName="shop-window" />
         </button>
       </div>
     </div>
