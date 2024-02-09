@@ -25,10 +25,11 @@ import { IconComponent } from '@app/common/components/icon.component';
         </div>
       </div>
 
-      <div class="toggle-wrapper">
+      <div class="switch-view">
         <button class="btn">
           <ui-icon iconName="clipboard-data" />
         </button>
+        <div class="switch-line"></div>
         <button class="btn">
           <ui-icon iconName="shop-window" />
         </button>
