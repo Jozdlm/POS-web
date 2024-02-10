@@ -4,9 +4,9 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { IconComponent } from '@app/common/components/icon.component';
+import { TopbarComponent } from '@app/common/components/topbar.component';
 
 @Component({
-  selector: 'app-views-shell',
   standalone: true,
   imports: [
     CommonModule,
@@ -14,26 +14,12 @@ import { IconComponent } from '@app/common/components/icon.component';
     NavbarComponent,
     SidenavComponent,
     IconComponent,
+    TopbarComponent
   ],
   template: `
     <div class="app-wrapper">
-      <app-sidenav class="border-end bg-light" />
-
-      <div class="content-wrapper">
-        <div class="views-wrapper">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
-
-      <div class="switch-view">
-        <button class="btn">
-          <ui-icon iconName="clipboard-data" />
-        </button>
-        <div class="switch-line"></div>
-        <button class="btn">
-          <ui-icon iconName="shop-window" />
-        </button>
-      </div>
+      <app-topbar />
+      <router-outlet></router-outlet>
     </div>
   `,
   styleUrl: './views-shell.component.scss',

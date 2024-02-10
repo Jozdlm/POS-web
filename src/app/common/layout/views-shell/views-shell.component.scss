@@ -2,51 +2,7 @@
   min-height: 100vh;
   max-width: 100vw;
   width: 100%;
-  display: flex;
-  position: relative;
-}
-
-app-sidenav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 240px;
-  z-index: 99;
-}
-
-.content-wrapper {
-  flex: 1;
-  margin-left: 240px;
-}
-
-.views-wrapper {
-  margin: 24px auto;
-  width: 90%;
-}
-
-.switch-view {
-  position: absolute;
-  background-color: white;
-  top: 8px;
-  right: 8px;
-
-  display: flex;
-
-  border: 1px solid #c2c2c2;
-  border-radius: 4px;
-}
-
-.switch-line {
-  min-height: 100%;
-  width: 1px;
-  background-color: #c2c2c2;
-}
-
-.switch-view > button:first-child {
-  border-radius: 4px 0 0 4px;
-}
-
-.switch-view > button:last-child {
-  border-radius: 0 4px 4px 0;
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  grid-template-columns: 1fr;
 }
