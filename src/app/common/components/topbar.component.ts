@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from './icon.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [CommonModule, IconComponent, RouterModule],
   template: `
     <p class="fw-medium fs-6 mb-0">Librería La Joya</p>
 
     <div class="switch-view">
-      <button class="btn">
+      <button class="btn" routerLink="/">
         <ui-icon iconName="clipboard-data" />
       </button>
       <div class="switch-line"></div>
-      <button class="btn">
+      <button class="btn" routerLink="/sell">
         <ui-icon iconName="shop-window" />
       </button>
     </div>

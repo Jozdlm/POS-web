@@ -4,6 +4,7 @@ import { loggedClientGuard } from './auth/guards/logged-client.guard';
 import { ViewsShellComponent } from './common/layout/views-shell/views-shell.component';
 import { PagePrefix } from './common/enums/pages';
 import { ManagerLayoutComponent } from './common/layout/manager-layout/manager-layout.component';
+import { CashierLayoutComponent } from './common/layout/cashier-layout/cashier-layout.component';
 
 // TODO: Set title property to each route
 export const APP_ROUTES: Routes = [
@@ -52,6 +53,10 @@ export const APP_ROUTES: Routes = [
           },
         ],
       },
+      {
+        path: 'sell',
+        component: CashierLayoutComponent,
+      }
     ],
   },
 ];
