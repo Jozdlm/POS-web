@@ -5,18 +5,6 @@
   position: relative;
 }
 
-app-sidenav {
-  position: sticky;
-  top: 0;
-  width: 240px;
-  z-index: 99;
-}
-
-.content-wrapper {
-  flex: 1;
-  margin-left: 240px;
-}
-
 .views-wrapper {
   margin: 24px auto;
   width: 90%;
