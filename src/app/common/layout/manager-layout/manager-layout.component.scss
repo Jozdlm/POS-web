@@ -1,11 +1,15 @@
 .app-wrapper {
+  max-height: 100vh;
+  max-width: 100vw;
+  height: calc(100vh - 64px);
   width: 100%;
   display: grid;
+  grid-template-rows: 1fr;
   grid-template-columns: 240px 1fr;
-  position: relative;
 }
 
 .views-wrapper {
-  margin: 24px auto;
-  width: 90%;
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: scroll;
 }

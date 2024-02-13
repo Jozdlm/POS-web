@@ -1,19 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TopbarComponent } from '@app/common/components/topbar.component';
 
 @Component({
   selector: 'app-cashier-layout',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TopbarComponent],
   template: `
-    <p>
-      cashier-layout works!
-    </p>
+    <app-topbar />
     <router-outlet></router-outlet>
   `,
-  styleUrl: './cashier-layout.component.scss'
+  styleUrl: './cashier-layout.component.scss',
 })
-export class CashierLayoutComponent {
-
-}
+export class CashierLayoutComponent {}
