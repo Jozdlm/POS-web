@@ -8,8 +8,10 @@ import { TopbarComponent } from '@app/common/components/topbar.component';
   standalone: true,
   imports: [CommonModule, RouterModule, TopbarComponent],
   template: `
-    <app-topbar />
-    <router-outlet></router-outlet>
+    <div class="app-wrapper">
+      <app-topbar />
+      <router-outlet></router-outlet>
+    </div>
   `,
   styleUrl: './cashier-layout.component.scss',
 })

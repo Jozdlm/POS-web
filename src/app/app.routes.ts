@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { anonClientGuard } from './auth/guards/anon-client.guard';
 import { loggedClientGuard } from './auth/guards/logged-client.guard';
 import { PagePrefix } from './common/enums/pages';
-import { ManagerLayoutComponent } from './common/layout/manager-layout/manager-layout.component';
-import { CashierLayoutComponent } from './common/layout/cashier-layout/cashier-layout.component';
+import { ManagerLayoutComponent } from './common/layouts/manager-layout/manager-layout.component';
+import { CashierLayoutComponent } from './common/layouts/cashier-layout/cashier-layout.component';
 
 // TODO: Set title property to each route
 export const APP_ROUTES: Routes = [
