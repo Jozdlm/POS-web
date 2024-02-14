@@ -8,14 +8,19 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, IconComponent, RouterModule],
   template: `
-    <p class="fw-medium fs-6 mb-0">Librería La Joya</p>
+    <button
+      class="fw-medium fs-6 mb-0 btn"
+      routerLink="/"
+    >
+      Librería La Joya
+    </button>
 
     <div class="switch-view">
       <button class="btn" routerLink="/">
         <ui-icon iconName="clipboard-data" />
       </button>
       <div class="switch-line"></div>
-      <button class="btn" routerLink="/sell">
+      <button class="btn" routerLink="sell">
         <ui-icon iconName="shop-window" />
       </button>
     </div>

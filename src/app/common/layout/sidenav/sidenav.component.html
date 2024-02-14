@@ -1,11 +1,4 @@
 <div>
-  <a
-    href="/"
-    class="mb-3 link-body-emphasis text-decoration-none fs-5 fw-medium d-block px-3"
-  >
-    Librería La Joya
-  </a>
-  <hr />
   <div class="nav nav-pills flex-column mb-auto">
     @for (item of navItems; track $index) {
       <div class="nav-item">
@@ -24,10 +17,7 @@
 </div>
 <div>
   <hr />
-  <button
-    class="btn nav-item-icon"
-    (click)="handleLogoutEvent()"
-  >
+  <button class="btn nav-item-icon" (click)="handleLogoutEvent()">
     <ui-icon iconName="box-arrow-left" />
     Cerrar Sesión
   </button>

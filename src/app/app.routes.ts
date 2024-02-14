@@ -15,6 +15,7 @@ export const APP_ROUTES: Routes = [
   {
     path: 'sell',
     component: CashierLayoutComponent,
+    canActivate: [loggedClientGuard],
   },
   {
     path: '',
