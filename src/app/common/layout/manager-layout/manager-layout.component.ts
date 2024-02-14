@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SidenavComponent } from '../sidenav/sidenav.component';
+import { SidenavComponent } from '../../components/sidenav.component';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from '@app/common/components/icon.component';
 import { TopbarComponent } from '@app/common/components/topbar.component';
