@@ -16,6 +16,16 @@ export const APP_ROUTES: Routes = [
     path: 'sell',
     component: CashierLayoutComponent,
     canActivate: [loggedClientGuard],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () =>
+          import('./cashier/pages/shopping-cart/shopping-cart.page').then(
+            (c) => c.ShoppingCartPage,
+          ),
+      },
+    ],
   },
   {
     path: '',
