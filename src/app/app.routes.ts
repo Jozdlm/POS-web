@@ -13,12 +13,6 @@ export const APP_ROUTES: Routes = [
     loadChildren: () => import('./auth/auth.routes'),
   },
   {
-    path: 'sell',
-    component: CashierLayoutComponent,
-    canActivate: [loggedClientGuard],
-    loadChildren: () => import('./cashier/cashier.routes'),
-  },
-  {
     path: '',
     component: ManagerLayoutComponent,
     canActivate: [loggedClientGuard],
@@ -27,6 +21,11 @@ export const APP_ROUTES: Routes = [
         path: '',
         pathMatch: 'full',
         loadComponent: () => import('./home/home.page').then((c) => c.HomePage),
+      },
+      {
+        path: 'sell',
+        component: CashierLayoutComponent,
+        loadChildren: () => import('./cashier/cashier.routes'),
       },
       {
         path: PagePrefix.QUOTATIONS,
