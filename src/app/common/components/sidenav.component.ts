@@ -10,33 +10,55 @@ import { IconComponent } from '@app/common/components/icon.component';
   standalone: true,
   imports: [CommonModule, RouterModule, IconComponent],
   template: `
-    <div>
-      <div class="nav nav-pills flex-column mb-auto">
-        @for (item of navItems; track $index) {
-          <div class="nav-item">
-            <a
-              [routerLink]="item.path"
-              class="nav-link link-body-emphasis nav-item-icon"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <ui-icon [iconName]="item.icon" />
-              <span>{{ item.placeholder }}</span>
-            </a>
-          </div>
-        }
+    <div class="sidenav-wrapper">
+      <div>
+        <div class="nav nav-pills flex-column mb-auto">
+          @for (item of navItems; track $index) {
+            <div class="nav-item">
+              <a
+                [routerLink]="item.path"
+                class="nav-link link-body-emphasis nav-item-icon"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                <ui-icon [iconName]="item.icon" />
+                <span>{{ item.placeholder }}</span>
+              </a>
+            </div>
+          }
+        </div>
+      </div>
+      <div>
+        <hr />
+        <button class="btn nav-item-icon" (click)="handleLogoutEvent()">
+          <ui-icon iconName="box-arrow-left" />
+          Cerrar Sesión
+        </button>
       </div>
     </div>
-    <div>
-      <hr />
-      <button class="btn nav-item-icon" (click)="handleLogoutEvent()">
-        <ui-icon iconName="box-arrow-left" />
-        Cerrar Sesión
-      </button>
+    <div class="subnav-wrapper">
+      @for (item of navItems; track $index) {
+        @for (children of item.children; track $index) {
+          <p>{{ children.placeholder }}</p>
+        }
+      }
     </div>
   `,
   styles: `
     :host {
+      position: relative;
+    }
+
+    .subnav-wrapper {
+      position: absolute;
+      top: 0;
+      left: 240px;
+      height: 100%;
+      width: 240px;
+      background-color: #c2c2c2;
+    }
+
+    .sidenav-wrapper {
       padding: 24px 16px;
       display: grid;
       grid-template-rows: 1fr max-content;
@@ -61,6 +83,16 @@ export class SidenavComponent {
       path: '/quotations',
       placeholder: 'Cotizaciones',
       icon: 'wallet-fill',
+      children: [
+        {
+          path: 'schools',
+          placeholder: 'Centros Educativos',
+        },
+        {
+          path: 'school-grades',
+          placeholder: 'Grados Académicos'
+        }
+      ],
     },
     {
       path: '/products',
