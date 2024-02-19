@@ -4,7 +4,7 @@ export * from './enums/db-tables';
 export * from './enums/pages';
 export * from './interfaces/filter-data';
 export * from './interfaces/nav-item';
-export * from './components/sidenav.component';
+export * from './components/sidenav/sidenav.component';
 export * from './services/pdf-maker.service';
 export * from './services/supabase.service';
 export * from './utils/string-title-case';

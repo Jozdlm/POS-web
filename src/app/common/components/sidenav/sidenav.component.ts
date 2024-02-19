@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SessionService } from '@app/auth/services/session.service';
-import { NavItemWithIcon } from '@app/common/interfaces/nav-item';
+import { NavItem, NavItemWithIcon } from '@app/common/interfaces/nav-item';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from '@app/common/components/icon.component';
 
@@ -20,6 +20,7 @@ import { IconComponent } from '@app/common/components/icon.component';
                 class="nav-link link-body-emphasis nav-item-icon"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
+                (mouseover)="onHoverNavItem(item)"
               >
                 <ui-icon [iconName]="item.icon" />
                 <span>{{ item.placeholder }}</span>
@@ -36,40 +37,15 @@ import { IconComponent } from '@app/common/components/icon.component';
         </button>
       </div>
     </div>
-    <div class="subnav-wrapper">
-      @for (item of navItems; track $index) {
-        @for (children of item.children; track $index) {
-          <p>{{ children.placeholder }}</p>
+    @if (showSubnav()) {
+      <div class="subnav-wrapper">
+        @for (item of currSubnavItems(); track $index) {
+          <p>{{item.placeholder}}</p>
         }
-      }
-    </div>
-  `,
-  styles: `
-    :host {
-      position: relative;
-    }
-
-    .subnav-wrapper {
-      position: absolute;
-      top: 0;
-      left: 240px;
-      height: 100%;
-      width: 240px;
-      background-color: #c2c2c2;
-    }
-
-    .sidenav-wrapper {
-      padding: 24px 16px;
-      display: grid;
-      grid-template-rows: 1fr max-content;
-    }
-
-    .nav-item-icon {
-      display: flex;
-      align-items: center;
-      column-gap: 8px;
+      </div>
     }
   `,
+  styleUrl: './sidenav.component.scss',
 })
 export class SidenavComponent {
   private readonly _sessionService = inject(SessionService);
@@ -90,14 +66,20 @@ export class SidenavComponent {
         },
         {
           path: 'school-grades',
-          placeholder: 'Grados Académicos'
-        }
+          placeholder: 'Grados Académicos',
+        },
       ],
     },
     {
       path: '/products',
       placeholder: 'Productos',
       icon: 'bag-fill',
+      children: [
+        {
+          path: 'categories',
+          placeholder: 'Categorías',
+        },
+      ],
     },
     {
       path: '/categories',
@@ -115,6 +97,19 @@ export class SidenavComponent {
       icon: 'bar-chart-fill',
     },
   ];
+
+  public showSubnav = signal<boolean>(false);
+  public currSubnavItems = signal<NavItem[]>([]);
+
+  public onHoverNavItem(item: NavItem): void {
+    if(item.children) {
+      this.showSubnav.set(true);
+      this.currSubnavItems.set(item.children);
+    } else {
+      this.showSubnav.set(false);
+      this.currSubnavItems.set([]);
+    }
+  }
 
   public async handleLogoutEvent(): Promise<void> {
     await this._sessionService.logOut();
