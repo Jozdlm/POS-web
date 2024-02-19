@@ -38,13 +38,13 @@ import { NAVIGATION_LINKS } from './navigation-links';
         </button>
       </div>
     </div>
-    @if (showSubnav()) {
+    <!-- @if (showSubnav()) {
       <div class="subnav-wrapper">
         @for (item of currSubnavItems(); track $index) {
           <p>{{item.placeholder}}</p>
         }
       </div>
-    }
+    } -->
   `,
   styleUrl: './sidenav.component.scss',
 })

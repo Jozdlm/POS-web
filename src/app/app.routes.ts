@@ -24,7 +24,6 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: 'sell',
-        component: CashierLayoutComponent,
         loadChildren: () => import('./cashier/cashier.routes'),
       },
       {
