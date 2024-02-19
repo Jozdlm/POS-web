@@ -4,6 +4,7 @@ import { SessionService } from '@app/auth/services/session.service';
 import { NavItem, NavItemWithIcon } from '@app/common/interfaces/nav-item';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from '@app/common/components/icon.component';
+import { NAVIGATION_LINKS } from './navigation-links';
 
 @Component({
   selector: 'app-sidenav',
@@ -49,54 +50,7 @@ import { IconComponent } from '@app/common/components/icon.component';
 })
 export class SidenavComponent {
   private readonly _sessionService = inject(SessionService);
-  public readonly navItems: NavItemWithIcon[] = [
-    {
-      path: '',
-      placeholder: 'Inicio',
-      icon: 'house-door-fill',
-    },
-    {
-      path: '/quotations',
-      placeholder: 'Cotizaciones',
-      icon: 'wallet-fill',
-      children: [
-        {
-          path: 'schools',
-          placeholder: 'Centros Educativos',
-        },
-        {
-          path: 'school-grades',
-          placeholder: 'Grados Académicos',
-        },
-      ],
-    },
-    {
-      path: '/products',
-      placeholder: 'Productos',
-      icon: 'bag-fill',
-      children: [
-        {
-          path: 'categories',
-          placeholder: 'Categorías',
-        },
-      ],
-    },
-    {
-      path: '/categories',
-      placeholder: 'Categorías',
-      icon: 'tags-fill',
-    },
-    {
-      path: '/schools',
-      placeholder: 'Centros Educativos',
-      icon: 'bank2',
-    },
-    {
-      path: '/school-grades',
-      placeholder: 'Grados Académicos',
-      icon: 'bar-chart-fill',
-    },
-  ];
+  public readonly navItems: NavItemWithIcon[] = NAVIGATION_LINKS;
 
   public showSubnav = signal<boolean>(false);
   public currSubnavItems = signal<NavItem[]>([]);
