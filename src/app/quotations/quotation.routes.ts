@@ -6,12 +6,17 @@ import { QuoteItemsComponent } from './pages/add-quotation/tabs/quote-items.comp
 import { QuoteHeaderComponent } from './pages/add-quotation/tabs/quote-header.component';
 import { QuoteConfirmationComponent } from './pages/add-quotation/tabs/quote-confirmation.component';
 import { quoteConfirmationGuard } from '@app/auth/guards/quote-confirmation.guard';
+import { SchoolGradesComponent } from './pages/school-grades/school-grades.page';
 
 const QUOTATION_ROUTES: Routes = [
   {
     path: '',
     component: QuotationComponent,
     pathMatch: 'full',
+  },
+  {
+    path: 'school-grades',
+    component: SchoolGradesComponent,
   },
   {
     path: 'add',

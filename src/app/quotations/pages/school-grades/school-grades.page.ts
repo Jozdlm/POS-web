@@ -6,8 +6,8 @@ import { SchoolGradeService } from '@app/schools/services/school-grade.service';
   selector: 'app-school-grades',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './school-grades.component.html',
-  styleUrl: './school-grades.component.scss',
+  templateUrl: './school-grades.page.html',
+  styleUrl: './school-grades.page.scss',
 })
 export class SchoolGradesComponent {
   public readonly schoolGrades$ = inject(SchoolGradeService).getSchoolGrades();
