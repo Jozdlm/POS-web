@@ -40,7 +40,7 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: PagePrefix.SCHOOLS,
-        loadChildren: () => import('./schools/schools.routes'),
+        redirectTo: 'quotations/educational-centers'
       },
       {
         path: PagePrefix.GRADES,

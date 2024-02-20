@@ -8,6 +8,7 @@ import { QuoteConfirmationComponent } from './pages/add-quotation/tabs/quote-con
 import { quoteConfirmationGuard } from '@app/auth/guards/quote-confirmation.guard';
 import { SchoolGradesPage } from './pages/school-grades/school-grades.page';
 import { EducationalCentersPage } from './pages/educational-centers/educational-centers.page';
+import { SchoolFormComponent } from './pages/school-form/school-form.component';
 
 const QUOTATION_ROUTES: Routes = [
   {
@@ -16,8 +17,13 @@ const QUOTATION_ROUTES: Routes = [
     pathMatch: 'full',
   },
   {
+    // TODO: Fix issue related to navigation
     path: 'educational-centers',
-    component: EducationalCentersPage,
+    children: [
+      { path: '', component: EducationalCentersPage, pathMatch: 'full' },
+      { path: 'add-center', component: SchoolFormComponent },
+      { path: 'edit-center/:id', component: SchoolFormComponent },
+    ],
   },
   {
     path: 'school-grades',
