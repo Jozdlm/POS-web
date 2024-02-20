@@ -4,7 +4,7 @@ import { QuotationStateService } from '@app/quotations/services/quotation-state.
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { QuoteMutation } from '@app/quotations/models/quotation';
 import { SchoolService } from '@app/schools/services/school.service';
-import { SchoolGradeService } from '@app/schools/services/school-grade.service';
+import { SchoolGradeService } from '@app/quotations/services/school-grade.service';
 import { PromotionTypeService } from '@app/quotations/services/promotion-type.service';
 import { Router } from '@angular/router';
 import { combineLatestWith } from 'rxjs';
