@@ -47,36 +47,7 @@ import { Product } from '@app/catalog/models/product';
       </div>
     </div>
   `,
-  styles: `
-    input::placeholder {
-      font-size: 14px;
-      display: grid;
-    }
-
-    .select-field {
-      width: 100%;
-      min-width: 400px;
-    }
-
-    .dropdown-wrapper {
-      position: relative;
-      width: 100%;
-      min-width: 400px;
-    }
-
-    .dropdown {
-      position: absolute;
-      width: 100%;
-      background-color: white;
-      z-index: 99;
-    }
-
-    .result-item {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      cursor: pointer;
-    }
-  `,
+  styleUrl: './product-select.component.scss',
 })
 export class ProductSelectComponent implements OnInit {
   private _productService = inject(ProductService);
@@ -97,7 +68,7 @@ export class ProductSelectComponent implements OnInit {
         tap((value) => {
           if (value === '') {
             this.results = [];
-            this.onClearValue.emit()
+            this.onClearValue.emit();
           }
         }),
         filter((value) => value != this.lastOptionSelected && value != ''),
