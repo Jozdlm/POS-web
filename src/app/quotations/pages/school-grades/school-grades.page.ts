@@ -9,6 +9,6 @@ import { SchoolGradeService } from '@app/quotations/services/school-grade.servic
   templateUrl: './school-grades.page.html',
   styleUrl: './school-grades.page.scss',
 })
-export class SchoolGradesComponent {
+export class SchoolGradesPage {
   public readonly schoolGrades$ = inject(SchoolGradeService).getSchoolGrades();
 }

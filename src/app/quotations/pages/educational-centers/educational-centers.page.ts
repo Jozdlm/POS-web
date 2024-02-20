@@ -8,9 +8,9 @@ import { RecordStatusDirective } from '@app/common/directives/record-status.dire
   selector: 'app-schools',
   standalone: true,
   imports: [CommonModule, RouterModule, RecordStatusDirective],
-  templateUrl: './schools.component.html',
-  styleUrl: './schools.component.scss',
+  templateUrl: './educational-centers.page.html',
+  styleUrl: './educational-centers.page.scss',
 })
-export class SchoolsComponent {
+export class EducationalCentersPage {
   public readonly schools$ = inject(SchoolService).getSchools();
 }

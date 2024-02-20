@@ -6,7 +6,8 @@ import { QuoteItemsComponent } from './pages/add-quotation/tabs/quote-items.comp
 import { QuoteHeaderComponent } from './pages/add-quotation/tabs/quote-header.component';
 import { QuoteConfirmationComponent } from './pages/add-quotation/tabs/quote-confirmation.component';
 import { quoteConfirmationGuard } from '@app/auth/guards/quote-confirmation.guard';
-import { SchoolGradesComponent } from './pages/school-grades/school-grades.page';
+import { SchoolGradesPage } from './pages/school-grades/school-grades.page';
+import { EducationalCentersPage } from './pages/educational-centers/educational-centers.page';
 
 const QUOTATION_ROUTES: Routes = [
   {
@@ -15,8 +16,12 @@ const QUOTATION_ROUTES: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'educational-centers',
+    component: EducationalCentersPage,
+  },
+  {
     path: 'school-grades',
-    component: SchoolGradesComponent,
+    component: SchoolGradesPage,
   },
   {
     path: 'add',
