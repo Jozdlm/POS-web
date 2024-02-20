@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { SchoolGrade } from '../../schools/models/school-grades';
+import { SchoolGrade } from '../models/school-grades';
 import { DbTables } from '@app/common/enums/db-tables';
 import { Observable, map } from 'rxjs';
 import { DbContext } from '@api/db-context.service';
