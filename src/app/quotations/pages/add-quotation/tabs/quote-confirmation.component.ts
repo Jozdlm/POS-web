@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
 import { QuotationService } from '@app/quotations/services/quotation.service';
 import { QuoteMutation } from '@app/quotations/models/quotation';
-import { SchoolService } from '@app/schools/services/school.service';
+import { SchoolService } from '@app/quotations/services/school.service';
 import { SchoolGradeService } from '@app/quotations/services/school-grade.service';
 import { PromotionTypeService } from '@app/quotations/services/promotion-type.service';
 import { Router } from '@angular/router';

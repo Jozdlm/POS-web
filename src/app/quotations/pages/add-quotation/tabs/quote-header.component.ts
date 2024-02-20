@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SchoolGradeService } from '@app/quotations/services/school-grade.service';
-import { SchoolService } from '@app/schools/services/school.service';
+import { SchoolService } from '@app/quotations/services/school.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
 

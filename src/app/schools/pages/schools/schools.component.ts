@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SchoolService } from '@app/schools/services/school.service';
+import { SchoolService } from '@app/quotations/services/school.service';
 import { RouterModule } from '@angular/router';
 import { RecordStatusDirective } from '@app/common/directives/record-status.directive';
 
