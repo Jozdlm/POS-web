@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { supabaseClient } from '@api/constants';
+import { SUPABASE_CLIENT } from '@api/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SupabaseService {
-  public readonly supabase = supabaseClient;
+  public readonly supabase = SUPABASE_CLIENT;
 
   constructor() {}
 }
