@@ -3,7 +3,6 @@ import { anonClientGuard } from './auth/guards/anon-client.guard';
 import { loggedClientGuard } from './auth/guards/logged-client.guard';
 import { PagePrefix } from './common/enums/pages';
 import { ManagerLayoutComponent } from './common/layouts/manager-layout/manager-layout.component';
-import { CashierLayoutComponent } from './common/layouts/cashier-layout/cashier-layout.component';
 
 // TODO: Set title property to each route
 export const APP_ROUTES: Routes = [
@@ -28,7 +27,7 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: PagePrefix.QUOTATIONS,
-        loadChildren: () => import('./quotations/quotation.routes'),
+        loadChildren: () => import('./quotes/quotation.routes'),
       },
       {
         path: PagePrefix.CATEGORIES,
@@ -40,7 +39,7 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: PagePrefix.SCHOOLS,
-        redirectTo: 'quotations/educational-centers'
+        redirectTo: 'quotes/educational-centers'
       },
       {
         path: PagePrefix.GRADES,

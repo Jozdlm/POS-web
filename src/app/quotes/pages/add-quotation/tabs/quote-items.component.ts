@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { IconComponent } from '@app/common/components/icon.component';
 import { Product } from '@app/catalog/models/product';
-import { QuotationStateService } from '@app/quotations/services/quotation-state.service';
+import { QuotationStateService } from '@app/quotes/services/quotation-state.service';
 import { RouterModule } from '@angular/router';
 import { ProductSelectComponent } from '../molecules/product-select.component';
 
