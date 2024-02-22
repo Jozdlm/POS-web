@@ -2,26 +2,24 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from './icon.component';
 import { RouterModule } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [CommonModule, IconComponent, RouterModule],
+  imports: [CommonModule, IconComponent, RouterModule, MatIconModule],
   template: `
-    <button
-      class="fw-medium fs-6 mb-0 btn"
-      routerLink="/"
-    >
+    <button class="fw-medium fs-6 mb-0 btn" routerLink="/">
       Librería La Joya
     </button>
 
     <div class="switch-view">
-      <button class="btn" routerLink="/">
-        <ui-icon iconName="clipboard-data" />
-      </button>
-      <div class="switch-line"></div>
-      <button class="btn" routerLink="sell">
-        <ui-icon iconName="shop-window" />
+      <button class="btn d-flex align-items-center column-gap-2 switch-button">
+        <div class="d-flex align-items-center column-gap-2">
+          <mat-icon inline>storefront</mat-icon>
+          <span class="small-text">Administrador</span>
+        </div>
+        <mat-icon class="fs-4">expand_more</mat-icon>
       </button>
     </div>
   `,
@@ -34,24 +32,9 @@ import { RouterModule } from '@angular/router';
       padding: 12px 32px;
     }
 
-    .switch-view {
-      display: flex;
+    .switch-button {
       border: 1px solid #c2c2c2;
       border-radius: 4px;
-    }
-
-    .switch-line {
-      min-height: 100%;
-      width: 1px;
-      background-color: #c2c2c2;
-    }
-
-    .switch-view > button:first-child {
-      border-radius: 4px 0 0 4px;
-    }
-
-    .switch-view > button:last-child {
-      border-radius: 0 4px 4px 0;
     }
   `,
 })
