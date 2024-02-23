@@ -11,8 +11,10 @@ import { NAVIGATION_LINKS } from './navigation-links';
   standalone: true,
   imports: [CommonModule, RouterModule, IconComponent],
   template: `
-    <div class="sidenav-wrapper">
       <div>
+        <button class="fw-medium fs-6 mb-2 btn" routerLink="/">
+          Librería La Joya
+        </button>
         <div class="nav nav-pills flex-column mb-auto">
           @for (item of navItems; track $index) {
             <div class="nav-item">
@@ -30,14 +32,10 @@ import { NAVIGATION_LINKS } from './navigation-links';
           }
         </div>
       </div>
-      <div>
-        <hr />
-        <button class="btn nav-item-icon" (click)="handleLogoutEvent()">
-          <ui-icon iconName="box-arrow-left" />
-          Cerrar Sesión
-        </button>
-      </div>
-    </div>
+      <button class="btn nav-item-icon" (click)="handleLogoutEvent()">
+        <ui-icon iconName="box-arrow-left" />
+        Cerrar Sesión
+      </button>
     <!-- @if (showSubnav()) {
       <div class="subnav-wrapper">
         @for (item of currSubnavItems(); track $index) {
@@ -56,7 +54,7 @@ export class SidenavComponent {
   public currSubnavItems = signal<NavItem[]>([]);
 
   public onHoverNavItem(item: NavItem): void {
-    if(item.children) {
+    if (item.children) {
       this.showSubnav.set(true);
       this.currSubnavItems.set(item.children);
     } else {
