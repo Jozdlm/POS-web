@@ -13,7 +13,8 @@
   overflow-y: auto;
 
   display: grid;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: 64px 2fr;
+  row-gap: 12px;
 }
 
 .routes-wrapper {
