@@ -9,15 +9,10 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   imports: [CommonModule, IconComponent, RouterModule, MatIconModule],
   template: `
-    <div class="switch-view">
-      <button class="btn d-flex align-items-center column-gap-2 switch-button">
-        <div class="d-flex align-items-center column-gap-2">
-          <mat-icon inline>storefront</mat-icon>
-          <span class="small-text">Administrador</span>
-        </div>
-        <mat-icon class="fs-4">expand_more</mat-icon>
-      </button>
-    </div>
+    <button class="switch-button">
+      <p>Administrador</p>
+      <mat-icon>expand_more</mat-icon>
+    </button>
   `,
   styleUrl: `./topbar.component.scss`,
 })
