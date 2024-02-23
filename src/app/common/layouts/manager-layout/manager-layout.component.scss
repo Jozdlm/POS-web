@@ -1,15 +1,23 @@
-.app-wrapper {
-  max-height: 100vh;
+:host {
   max-width: 100vw;
-  height: calc(100vh - 64px);
   width: 100%;
+  height: 100vh;
   display: grid;
-  grid-template-rows: 1fr;
   grid-template-columns: 240px 1fr;
+  column-gap: 24px;
 }
 
-.views-wrapper {
+.content-wrapper {
+  max-height: 100vh;
+  height: 100%;
+  overflow-y: auto;
+
+  display: grid;
+  grid-template-rows: 1fr 2fr;
+}
+
+.routes-wrapper {
   margin: 0 auto;
   width: 100%;
-  overflow-y: auto;
+  max-width: 1000px;
 }

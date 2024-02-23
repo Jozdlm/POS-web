@@ -16,12 +16,12 @@ import { TopbarComponent } from '@app/common/components/topbar/topbar.component'
     IconComponent,
   ],
   template: `
-    <app-topbar />
+    <app-sidenav />
 
-    <div class="app-wrapper">
-      <app-sidenav class="border-end bg-light" />
+    <div class="content-wrapper">
+      <app-topbar />
 
-      <div class="views-wrapper">
+      <div class="routes-wrapper">
         <router-outlet></router-outlet>
       </div>
     </div>
