@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: end;
   padding: 12px;
+  margin-bottom: 12px;
 }
 
 .switch-button {
@@ -23,6 +24,11 @@
     margin-bottom: 0;
     text-align: center;
   }
+
+}
+
+button:hover {
+  background-color: hsl(0, 0%, 96%);
 }
 
 mat-icon {
