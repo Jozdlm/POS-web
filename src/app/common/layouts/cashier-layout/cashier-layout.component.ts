@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { TopbarComponent } from '@app/common/components/topbar.component';
+import { TopbarComponent } from '@app/common/components/topbar/topbar.component';
 
 @Component({
   selector: 'app-cashier-layout',
