@@ -16,14 +16,10 @@ import { TopbarComponent } from '@app/common/components/topbar/topbar.component'
     IconComponent,
   ],
   template: `
-    <app-sidenav />
+    <app-topbar />
 
-    <div class="content-wrapper">
-      <app-topbar />
-
-      <div class="routes-wrapper">
-        <router-outlet></router-outlet>
-      </div>
+    <div class="views-wrapper">
+      <router-outlet></router-outlet>
     </div>
   `,
   styleUrl: './manager-layout.component.scss',
