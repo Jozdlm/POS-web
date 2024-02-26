@@ -17,8 +17,7 @@ export const APP_ROUTES: Routes = [
     canActivate: [loggedClientGuard],
     children: [
       {
-        path: '',
-        pathMatch: 'full',
+        path: 'overview',
         loadComponent: () => import('./home/home.page').then((c) => c.HomePage),
       },
       {
@@ -39,11 +38,16 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: PagePrefix.SCHOOLS,
-        redirectTo: 'quotes/educational-centers'
+        redirectTo: 'quotes/educational-centers',
       },
       {
         path: PagePrefix.GRADES,
-        redirectTo: 'quotations/school-grades'
+        redirectTo: 'quotations/school-grades',
+      },
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'overview',
       },
     ],
   },
