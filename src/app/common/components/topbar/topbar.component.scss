@@ -1,39 +1,17 @@
 :host {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 12px 20px;
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  padding: 12px;
-}
-
-.switch-button {
-  border: 1px solid #c2c2c2;
-  border-radius: 12px;
-  padding: 8px 16px;
-  padding-right: 12px;
 
   display: flex;
   align-items: center;
-  column-gap: 2px;
-
-  background-color: white;
-  font-size: 13px;
-
-  p {
-    margin-bottom: 0;
-    text-align: center;
-  }
+  justify-content: space-between;
 }
 
-button:hover {
-  background-color: hsl(0, 0%, 96%);
-}
-
-mat-icon {
-  font-size: 20px;
+.navbar {
   display: flex;
+  column-gap: 48px;
   align-items: center;
-  justify-content: center;
 }
 
 .navigation {
@@ -44,15 +22,15 @@ mat-icon {
 
   &-link {
     text-decoration: none;
-    color: #64748B;
-    font-weight: 500;
+    color: #64748b;
+    font-weight: 400;
   }
 
   &-link:hover {
-    color: #0F172A;
+    color: #0f172a;
   }
 
   &-link-active {
-    color: #0F172A;
+    color: #0f172a;
   }
 }

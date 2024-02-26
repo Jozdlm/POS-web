@@ -10,15 +10,27 @@ import { TOP_BAR_LINKS } from './navigation-links';
   standalone: true,
   imports: [CommonModule, IconComponent, RouterModule, MatIconModule],
   template: `
-    <div>
-      <div></div>
+    <div class="navbar">
+      <div>
+        <div>
+          <div>IMG</div>
+          <p>Librería La Joya</p>
+        </div>
+        <div>
+          icon
+        </div>
+      </div>
       <div class="navigation">
         @for (link of navigationLinks; track $index) {
-          <a [routerLink]="link.path" class="navigation-link">{{ link.placeholder }}</a>
+          <a [routerLink]="link.path" class="navigation-link">{{
+            link.placeholder
+          }}</a>
         }
       </div>
     </div>
-    <div></div>
+    <div>
+      Avatar
+    </div>
   `,
   styleUrl: `./topbar.component.scss`,
 })
