@@ -35,3 +35,24 @@ mat-icon {
   align-items: center;
   justify-content: center;
 }
+
+.navigation {
+  display: flex;
+  align-items: center;
+  column-gap: 32px;
+  font-size: 14px;
+
+  &-link {
+    text-decoration: none;
+    color: #64748B;
+    font-weight: 500;
+  }
+
+  &-link:hover {
+    color: #0F172A;
+  }
+
+  &-link-active {
+    color: #0F172A;
+  }
+}
