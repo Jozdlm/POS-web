@@ -20,9 +20,13 @@ import { TOP_BAR_LINKS } from './navigation-links';
         </button>
         <div class="navigation">
           @for (link of navigationLinks; track $index) {
-            <a [routerLink]="link.path" class="navigation-link">{{
-              link.placeholder
-            }}</a>
+            <a
+              [routerLink]="link.path"
+              class="navigation-link"
+              routerLinkActive="navigation-link-active"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >{{ link.placeholder }}</a
+            >
           }
         </div>
       </div>
