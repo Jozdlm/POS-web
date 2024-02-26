@@ -30,7 +30,7 @@ import { TOP_BAR_LINKS } from './navigation-links';
           }
         </div>
       </div>
-      <div class="user-img"></div>
+      <button class="user-img"></button>
     </div>
   `,
   styleUrl: `./topbar.component.scss`,
