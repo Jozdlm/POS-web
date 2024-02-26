@@ -1,8 +1,12 @@
 :host {
   border-bottom: 1px solid #e2e8f0;
-  padding: 12px 20px;
-  width: 100%;
+  display: block;
+}
 
+.topbar-wrapper{
+  padding: 12px 20px;
+  max-width: 1512px;
+  margin-inline: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,14 +14,62 @@
 
 .navbar {
   display: flex;
-  column-gap: 48px;
+  column-gap: 36px;
   align-items: center;
+  padding: 0;
+}
+
+.business {
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  padding: 8px 16px;
+  width: 200px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: white;
+
+  &-info {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+  }
+
+  &-name {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  &-img {
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+  }
+
+  &-icon {
+    display: block;
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: #94a3b8;
+  }
+}
+
+.user-img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background-color: #CBD5E1;
 }
 
 .navigation {
   display: flex;
   align-items: center;
-  column-gap: 32px;
+  column-gap: 28px;
   font-size: 14px;
 
   &-link {
