@@ -7,7 +7,38 @@ import { SessionService } from './services/session.service';
   selector: 'app-auth',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './auth.component.html',
+  template: `
+    <div class="wrapper">
+      <h1 class="text-center mb-4 fs-2">Iniciar Sesión</h1>
+      <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="emailInput"
+            placeholder="name@example.com"
+            formControlName="email"
+          />
+          <label for="emailInput">Correo</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="passwordInput"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <label for="passwordInput">Contraseña</label>
+        </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary p-3">
+            Iniciar Sesión
+          </button>
+        </div>
+      </form>
+    </div>
+  `,
   styleUrl: './auth.component.scss',
 })
 export class AuthComponent {
