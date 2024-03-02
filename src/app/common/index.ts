@@ -9,3 +9,4 @@ export * from './services/pdf-maker.service';
 export * from './services/supabase.service';
 export * from './utils/string-title-case';
 export * from './utils/current-date';
+export * from './utils/debounce-search';
