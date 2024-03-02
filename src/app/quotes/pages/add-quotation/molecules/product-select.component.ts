@@ -1,16 +1,10 @@
 import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs';
 import { ProductService } from '@app/catalog/services/product.service';
 import { Product } from '@app/catalog/models/product';
+import { debounceSearch } from '@app/common';
 
 @Component({
   selector: 'app-product-select',
@@ -59,12 +53,8 @@ export class ProductSelectComponent implements OnInit {
   @Output() onClearValue = new EventEmitter<any>();
 
   ngOnInit(): void {
-    this.searchControl.valueChanges
+    debounceSearch(this.searchControl, 300)
       .pipe(
-        debounceTime(400),
-        distinctUntilChanged(),
-        filter((value) => typeof value === 'string'),
-        map((value) => value as string),
         tap((value) => {
           if (value === '') {
             this.results = [];

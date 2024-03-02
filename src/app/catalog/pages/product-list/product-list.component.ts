@@ -5,14 +5,8 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CategoryService } from '@app/catalog/services/category.service';
 import { RouterModule } from '@angular/router';
 import { Product } from '@app/catalog/models/product';
-import {
-  Subscription,
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-} from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
+import { debounceSearch } from '@app/common/utils/debounce-search';
 
 @Component({
   selector: 'app-product-list',
@@ -43,12 +37,8 @@ export class ProductListComponent {
   }
 
   public searchProduct(): Subscription {
-    return this.searchControl.valueChanges
+    return debounceSearch(this.searchControl, 300)
       .pipe(
-        debounceTime(300),
-        distinctUntilChanged(),
-        filter((value) => typeof value === 'string'),
-        map((query) => query as string),
         switchMap((query) => {
           if (query.trim() === '') {
             return this._productService.getProducts();
