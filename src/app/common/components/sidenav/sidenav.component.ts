@@ -1,54 +1,43 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, Input, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SessionService } from '@app/auth/services/session.service';
-import { NavItem, NavItemWithIcon } from '@app/common/interfaces/nav-item';
+import { NavItem } from '@app/common/interfaces/nav-item';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from '@app/common/components/icon.component';
-import { NAVIGATION_LINKS } from './navigation-links';
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
   imports: [CommonModule, RouterModule, IconComponent],
   template: `
-      <div>
-        <button class="fw-medium fs-6 mb-2 btn" routerLink="/">
-          Librería La Joya
-        </button>
-        <div class="nav nav-pills flex-column mb-auto">
-          @for (item of navItems; track $index) {
-            <div class="nav-item">
-              <a
-                [routerLink]="item.path"
-                class="nav-link link-body-emphasis nav-item-icon"
-                routerLinkActive="active"
-                [routerLinkActiveOptions]="{ exact: true }"
-                (mouseover)="onHoverNavItem(item)"
-              >
-                <ui-icon [iconName]="item.icon" />
-                <span>{{ item.placeholder }}</span>
-              </a>
-            </div>
-          }
+    <div class="nav nav-pills flex-column mb-auto">
+      @for (item of navItems; track $index) {
+        <div class="nav-item">
+          <a
+            [routerLink]="['', item.path]"
+            class="nav-link link-body-emphasis nav-item-icon"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (mouseover)="onHoverNavItem(item)"
+          >
+            <span>{{ item.placeholder }}</span>
+          </a>
         </div>
-      </div>
-      <button class="btn nav-item-icon" (click)="handleLogoutEvent()">
-        <ui-icon iconName="box-arrow-left" />
-        Cerrar Sesión
-      </button>
-    <!-- @if (showSubnav()) {
-      <div class="subnav-wrapper">
-        @for (item of currSubnavItems(); track $index) {
-          <p>{{item.placeholder}}</p>
-        }
-      </div>
-    } -->
+      }
+    </div>
   `,
   styleUrl: './sidenav.component.scss',
 })
 export class SidenavComponent {
   private readonly _sessionService = inject(SessionService);
-  public readonly navItems: NavItemWithIcon[] = NAVIGATION_LINKS;
+  public navItems: NavItem[] = [];
+
+  @Input({
+    required: true,
+  })
+  public set navigationItems(items: NavItem[]) {
+    this.navItems = items;
+  }
 
   public showSubnav = signal<boolean>(false);
   public currSubnavItems = signal<NavItem[]>([]);
