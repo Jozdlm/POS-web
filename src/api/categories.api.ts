@@ -16,3 +16,17 @@ export function apiGetCategories(): Observable<CategoryDto[]> {
     }),
   );
 }
+
+export function apiGetCategoryById(
+  categoryId: number,
+): Observable<CategoryDto> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.CATEGORIES).select('*').eq('id', categoryId),
+  ).pipe(
+    map(({ data, error }) => {
+      if (error) throw new Error(error.message);
+
+      return data[0] as CategoryDto;
+    }),
+  );
+}

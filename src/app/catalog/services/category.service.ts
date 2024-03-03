@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable, from, map, of } from 'rxjs';
+import { Observable, from, map } from 'rxjs';
 import { SupabaseService } from '@app/common/services/supabase.service';
 import { DbTables } from '@app/common/enums/db-tables';
-import { Category, CategoryDto } from '../models/category';
+import { Category } from '../models/category';
 import { CategoryMapper } from '../category.mapper';
-import { apiGetCategories } from '@api/categories.api';
+import { apiGetCategories, apiGetCategoryById } from '@api/categories.api';
 
 @Injectable({
   providedIn: 'root',
@@ -23,14 +23,9 @@ export class CategoryService {
   }
 
   public getCategoryById(categoryId: number): Observable<Category> {
-    return from(
-      this._db.from(DbTables.CATEGORIES).select('*').eq('id', categoryId),
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) throw new Error(error.message);
-
-        // TODO: Validate if the db has the provided Id
-        return CategoryMapper.toEntity(data[0] as CategoryDto);
+    return apiGetCategoryById(categoryId).pipe(
+      map((record) => {
+        return CategoryMapper.toEntity(record);
       }),
     );
   }
