@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SchoolGrade } from '../models/school-grades';
 import { Observable } from 'rxjs';
-import { API } from '@api/school-grades.api';
+import { API } from '@api/index';
 
 @Injectable({
   providedIn: 'root',

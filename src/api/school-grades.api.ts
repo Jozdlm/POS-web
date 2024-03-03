@@ -3,7 +3,7 @@ import { SchoolGrade } from '@app/quotes/models/school-grades';
 import { SUPABASE_CLIENT } from './constants';
 import { Observable, from, map } from 'rxjs';
 
-function getSchoolGrades(): Observable<SchoolGrade[]> {
+export function getSchoolGrades(): Observable<SchoolGrade[]> {
   return from(SUPABASE_CLIENT.from(DbTables.SCHOOL_GRADES).select('*')).pipe(
     map(({ data, error }) => {
       if (error) throw new Error(error.message);
@@ -13,7 +13,7 @@ function getSchoolGrades(): Observable<SchoolGrade[]> {
   );
 }
 
-function getSchoolGradeById(gradeId: number): Observable<SchoolGrade> {
+export function getSchoolGradeById(gradeId: number): Observable<SchoolGrade> {
   return from(
     SUPABASE_CLIENT.from(DbTables.SCHOOL_GRADES).select('*').eq('id', gradeId),
   ).pipe(
@@ -24,8 +24,3 @@ function getSchoolGradeById(gradeId: number): Observable<SchoolGrade> {
     }),
   );
 }
-
-export const API = {
-  getSchoolGrades,
-  getSchoolGradeById,
-};
