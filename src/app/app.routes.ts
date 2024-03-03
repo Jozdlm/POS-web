@@ -30,10 +30,18 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: PagePrefix.CATEGORIES,
+        loadComponent: () =>
+          import('./catalog/layouts/catalog-layout.component').then(
+            (c) => c.CatalogLayoutComponent,
+          ),
         loadChildren: () => import('./catalog/categories.routes'),
       },
       {
         path: PagePrefix.PRODUCTS,
+        loadComponent: () =>
+          import('./catalog/layouts/catalog-layout.component').then(
+            (c) => c.CatalogLayoutComponent,
+          ),
         loadChildren: () => import('./catalog/products.routes'),
       },
       {
