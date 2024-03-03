@@ -9,7 +9,9 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule, SidenavComponent],
   template: `
     <app-sidenav [navigationItems]="navItems" />
-    <router-outlet></router-outlet>
+    <section>
+      <router-outlet></router-outlet>
+    </section>
   `,
   styleUrl: './catalog-layout.component.scss',
 })
