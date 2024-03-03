@@ -1,6 +1,5 @@
 export * from './components/icon.component';
 export * from './directives/record-status.directive';
-export * from './enums/db-tables';
 export * from './enums/pages';
 export * from './interfaces/filter-data';
 export * from './interfaces/nav-item';

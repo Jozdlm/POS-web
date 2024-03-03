@@ -9,7 +9,7 @@ import { SupabaseService } from '@app/common/services/supabase.service';
 import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
 import { QuotationMapper } from '../quotation.mapper';
 import { QuotationItemMapper } from '../quotation-item.mapper';
-import { DbTables } from '@app/common/enums/db-tables';
+import { DbTables } from '@api/db-tables.enum';
 import { Observable, from, map } from 'rxjs';
 
 @Injectable({

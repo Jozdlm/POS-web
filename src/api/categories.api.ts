@@ -1,7 +1,7 @@
-import { DbTables } from '@app/common';
 import { SUPABASE_CLIENT } from './constants';
 import { Observable, from, map } from 'rxjs';
 import { CategoryDto } from '@app/catalog/models/category';
+import { DbTables } from './db-tables.enum';
 
 export function getCategories(): Observable<CategoryDto[]> {
   return from(

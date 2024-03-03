@@ -7,7 +7,7 @@ import {
   SchoolDto,
   UpdateSchool,
 } from '../models/school';
-import { DbTables } from '@app/common/enums/db-tables';
+import { DbTables } from '@api/db-tables.enum';
 import { SchoolMapper } from '../school.mapper';
 
 @Injectable({

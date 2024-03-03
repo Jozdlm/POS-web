@@ -1,7 +1,7 @@
 import { PromotionType } from '@app/quotes/models/promotion-type';
 import { SUPABASE_CLIENT } from './constants';
-import { DbTables } from '@app/common';
 import { Observable, from, map } from 'rxjs';
+import { DbTables } from './db-tables.enum';
 
 export function getPromotionTypeById(
   promoId: number,

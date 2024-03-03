@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, from, map } from 'rxjs';
 import { SupabaseService } from '@app/common/services/supabase.service';
-import { DbTables } from '@app/common/enums/db-tables';
+import { DbTables } from '@api/db-tables.enum';
 import { ProductMapper } from '../product.mapper';
 import {
   Product,
