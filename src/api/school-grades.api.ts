@@ -13,6 +13,19 @@ function getSchoolGrades(): Observable<SchoolGrade[]> {
   );
 }
 
+function getSchoolGradeById(gradeId: number): Observable<SchoolGrade> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.SCHOOL_GRADES).select('*').eq('id', gradeId),
+  ).pipe(
+    map(({ data, error }) => {
+      if (error) throw new Error(error.message);
+
+      return data[0] as SchoolGrade;
+    }),
+  );
+}
+
 export const API = {
   getSchoolGrades,
+  getSchoolGradeById,
 };
