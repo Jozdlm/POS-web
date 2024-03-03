@@ -3,7 +3,7 @@ import { SUPABASE_CLIENT } from './constants';
 import { Observable, from, map } from 'rxjs';
 import { CategoryDto } from '@app/catalog/models/category';
 
-function getCategories(): Observable<CategoryDto[]> {
+export function getCategories(): Observable<CategoryDto[]> {
   return from(
     SUPABASE_CLIENT.from(DbTables.CATEGORIES)
       .select('*')
@@ -17,7 +17,7 @@ function getCategories(): Observable<CategoryDto[]> {
   );
 }
 
-function getCategoryById(categoryId: number): Observable<CategoryDto> {
+export function getCategoryById(categoryId: number): Observable<CategoryDto> {
   return from(
     SUPABASE_CLIENT.from(DbTables.CATEGORIES).select('*').eq('id', categoryId),
   ).pipe(
@@ -29,7 +29,7 @@ function getCategoryById(categoryId: number): Observable<CategoryDto> {
   );
 }
 
-function createCategory(dto: CategoryDto): Observable<number> {
+export function createCategory(dto: CategoryDto): Observable<number> {
   return from(SUPABASE_CLIENT.from(DbTables.CATEGORIES).insert(dto)).pipe(
     map(({ status, error }) => {
       if (error) throw new Error(error.message);
@@ -39,7 +39,7 @@ function createCategory(dto: CategoryDto): Observable<number> {
   );
 }
 
-function updateCategory(
+export function updateCategory(
   dto: CategoryDto,
   categoryId: number,
 ): Observable<number> {
@@ -53,10 +53,3 @@ function updateCategory(
     }),
   );
 }
-
-export const API = {
-  getCategories,
-  getCategoryById,
-  createCategory,
-  updateCategory,
-};
