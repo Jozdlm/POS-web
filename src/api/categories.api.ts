@@ -3,7 +3,7 @@ import { SUPABASE_CLIENT } from './constants';
 import { Observable, from, map } from 'rxjs';
 import { CategoryDto } from '@app/catalog/models/category';
 
-export function apiGetCategories(): Observable<CategoryDto[]> {
+function getCategories(): Observable<CategoryDto[]> {
   return from(
     SUPABASE_CLIENT.from(DbTables.CATEGORIES)
       .select('*')
@@ -17,9 +17,7 @@ export function apiGetCategories(): Observable<CategoryDto[]> {
   );
 }
 
-export function apiGetCategoryById(
-  categoryId: number,
-): Observable<CategoryDto> {
+function getCategoryById(categoryId: number): Observable<CategoryDto> {
   return from(
     SUPABASE_CLIENT.from(DbTables.CATEGORIES).select('*').eq('id', categoryId),
   ).pipe(
@@ -30,3 +28,8 @@ export function apiGetCategoryById(
     }),
   );
 }
+
+export const API = {
+  getCategories,
+  getCategoryById,
+};

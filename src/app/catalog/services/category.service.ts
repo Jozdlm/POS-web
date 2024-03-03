@@ -4,7 +4,7 @@ import { SupabaseService } from '@app/common/services/supabase.service';
 import { DbTables } from '@app/common/enums/db-tables';
 import { Category } from '../models/category';
 import { CategoryMapper } from '../category.mapper';
-import { apiGetCategories, apiGetCategoryById } from '@api/categories.api';
+import { API } from '@api/categories.api';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,7 @@ export class CategoryService {
   constructor() {}
 
   public getCategories(): Observable<Category[]> {
-    return apiGetCategories().pipe(
+    return API.getCategories().pipe(
       map((data) => {
         return data.map((item) => CategoryMapper.toEntity(item));
       }),
@@ -23,7 +23,7 @@ export class CategoryService {
   }
 
   public getCategoryById(categoryId: number): Observable<Category> {
-    return apiGetCategoryById(categoryId).pipe(
+    return API.getCategoryById(categoryId).pipe(
       map((record) => {
         return CategoryMapper.toEntity(record);
       }),
