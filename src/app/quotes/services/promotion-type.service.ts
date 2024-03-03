@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PromotionType } from '../models/promotion-type';
-import { API } from '@api/promotion-type.api';
+import { API } from '@api/index';
 
 @Injectable({
   providedIn: 'root',

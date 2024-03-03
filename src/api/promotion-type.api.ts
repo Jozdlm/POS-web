@@ -3,7 +3,9 @@ import { SUPABASE_CLIENT } from './constants';
 import { DbTables } from '@app/common';
 import { Observable, from, map } from 'rxjs';
 
-function getPromotionTypeById(promoId: number): Observable<PromotionType> {
+export function getPromotionTypeById(
+  promoId: number,
+): Observable<PromotionType> {
   return from(
     SUPABASE_CLIENT.from(DbTables.PROMOTION_TYPE).select('*').eq('id', promoId),
   ).pipe(
@@ -14,7 +16,3 @@ function getPromotionTypeById(promoId: number): Observable<PromotionType> {
     }),
   );
 }
-
-export const API = {
-  getPromotionTypeById,
-};
