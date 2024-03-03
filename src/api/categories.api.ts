@@ -39,8 +39,24 @@ function createCategory(dto: CategoryDto): Observable<number> {
   );
 }
 
+function updateCategory(
+  dto: CategoryDto,
+  categoryId: number,
+): Observable<number> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.CATEGORIES).update(dto).eq('id', categoryId),
+  ).pipe(
+    map(({ status, error }) => {
+      if (error) throw new Error(error.message);
+
+      return status;
+    }),
+  );
+}
+
 export const API = {
   getCategories,
   getCategoryById,
   createCategory,
+  updateCategory,
 };

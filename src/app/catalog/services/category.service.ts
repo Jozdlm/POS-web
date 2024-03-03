@@ -1,7 +1,5 @@
-import { Injectable, inject } from '@angular/core';
-import { Observable, from, map } from 'rxjs';
-import { SupabaseService } from '@app/common/services/supabase.service';
-import { DbTables } from '@app/common/enums/db-tables';
+import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
 import { Category } from '../models/category';
 import { CategoryMapper } from '../category.mapper';
 import { API } from '@api/categories.api';
@@ -10,10 +8,6 @@ import { API } from '@api/categories.api';
   providedIn: 'root',
 })
 export class CategoryService {
-  private readonly _db = inject(SupabaseService).supabase;
-
-  constructor() {}
-
   public getCategories(): Observable<Category[]> {
     return API.getCategories().pipe(
       map((data) => {
@@ -46,12 +40,8 @@ export class CategoryService {
   ): Observable<boolean> {
     const dto = CategoryMapper.toDto(data);
 
-    return from(
-      this._db.from(DbTables.CATEGORIES).update(dto).eq('id', categoryId),
-    ).pipe(
-      map(({ status, error }) => {
-        if (error) throw new Error(error.message);
-
+    return API.updateCategory(dto, categoryId).pipe(
+      map((status) => {
         return status === 204 ? true : false;
       }),
     );
