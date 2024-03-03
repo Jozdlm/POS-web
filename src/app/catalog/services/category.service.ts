@@ -4,6 +4,7 @@ import { SupabaseService } from '@app/common/services/supabase.service';
 import { DbTables } from '@app/common/enums/db-tables';
 import { Category, CategoryDto } from '../models/category';
 import { CategoryMapper } from '../category.mapper';
+import { apiGetCategories } from '@api/categories.api';
 
 @Injectable({
   providedIn: 'root',
@@ -14,18 +15,9 @@ export class CategoryService {
   constructor() {}
 
   public getCategories(): Observable<Category[]> {
-    return from(
-      this._db
-        .from(DbTables.CATEGORIES)
-        .select('*')
-        .order('id', { ascending: true }),
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) throw new Error(error.message);
-
-        return (data as CategoryDto[]).map((item) =>
-          CategoryMapper.toEntity(item),
-        );
+    return apiGetCategories().pipe(
+      map((data) => {
+        return data.map((item) => CategoryMapper.toEntity(item));
       }),
     );
   }
