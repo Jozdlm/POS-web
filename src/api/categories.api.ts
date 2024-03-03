@@ -29,7 +29,18 @@ function getCategoryById(categoryId: number): Observable<CategoryDto> {
   );
 }
 
+function createCategory(dto: CategoryDto): Observable<number> {
+  return from(SUPABASE_CLIENT.from(DbTables.CATEGORIES).insert(dto)).pipe(
+    map(({ status, error }) => {
+      if (error) throw new Error(error.message);
+
+      return status;
+    }),
+  );
+}
+
 export const API = {
   getCategories,
   getCategoryById,
+  createCategory,
 };
