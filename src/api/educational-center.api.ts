@@ -15,3 +15,15 @@ export function getEducationalCenters<T>(): Observable<T> {
     }),
   );
 }
+
+export function getEducationalCenterById<T>(schoolId: number): Observable<T> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.SCHOOLS).select('*').eq('id', schoolId),
+  ).pipe(
+    map(({ data, error }) => {
+      if (error) throw new Error(error.message);
+
+      return data[0] as T;
+    }),
+  );
+}
