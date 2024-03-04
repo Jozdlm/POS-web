@@ -33,3 +33,18 @@ export function getQuoteById<T>(quoteId: number): Observable<T> {
     }),
   );
 }
+
+export function getQuoteItems<T>(quoteId: number): Observable<T> {
+  if (quoteId === 0) throw new Error('The Id value must be grater than 0');
+
+  return from(
+    SUPABASE_CLIENT.from(DbTables.QUOTATION_ITEMS)
+      .select(`*, ${DbTables.PRODUCTS}(name)`)
+      .eq('quotation_id', quoteId),
+  ).pipe(
+    map(({ data, error }) => {
+      if (error) throw new Error(error.message);
+      return data as T;
+    }),
+  );
+}

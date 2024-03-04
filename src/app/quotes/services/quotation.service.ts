@@ -9,7 +9,7 @@ import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
 import { QuotationMapper } from '../quotation.mapper';
 import { QuotationItemMapper } from '../quotation-item.mapper';
 import { DbTables } from '@api/db-tables.enum';
-import { Observable, from, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { SUPABASE_CLIENT } from '@api/constants';
 import { API } from '@api/index';
 
@@ -61,16 +61,9 @@ export class QuotationService {
   }
 
   public getQuotationItems(quotationId: number): Observable<QuotationItem[]> {
-    return from(
-      this._db
-        .from(DbTables.QUOTATION_ITEMS)
-        .select(`*, ${DbTables.PRODUCTS}(name)`)
-        .eq('quotation_id', quotationId),
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) throw new Error(error.message);
-
-        return data.map((itemDto) => QuotationItemMapper.toEntity(itemDto));
+    return API.getQuoteItems<QuotationItemDto[]>(quotationId).pipe(
+      map((response) => {
+        return response.map((itemDto) => QuotationItemMapper.toEntity(itemDto));
       }),
     );
   }
