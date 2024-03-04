@@ -1,9 +1,8 @@
 import { SUPABASE_CLIENT } from './constants';
 import { Observable, from, map } from 'rxjs';
-import { CategoryDto } from '@app/catalog/models/category';
 import { DbTables } from './db-tables.enum';
 
-export function getCategories(): Observable<CategoryDto[]> {
+export function getCategories<T>(): Observable<T> {
   return from(
     SUPABASE_CLIENT.from(DbTables.CATEGORIES)
       .select('*')
@@ -12,24 +11,24 @@ export function getCategories(): Observable<CategoryDto[]> {
     map(({ data, error }) => {
       if (error) throw new Error(error.message);
 
-      return data as CategoryDto[];
+      return data as T;
     }),
   );
 }
 
-export function getCategoryById(categoryId: number): Observable<CategoryDto> {
+export function getCategoryById<T>(categoryId: number): Observable<T> {
   return from(
     SUPABASE_CLIENT.from(DbTables.CATEGORIES).select('*').eq('id', categoryId),
   ).pipe(
     map(({ data, error }) => {
       if (error) throw new Error(error.message);
 
-      return data[0] as CategoryDto;
+      return data[0] as T;
     }),
   );
 }
 
-export function createCategory(dto: CategoryDto): Observable<number> {
+export function createCategory<T>(dto: T): Observable<number> {
   return from(SUPABASE_CLIENT.from(DbTables.CATEGORIES).insert(dto)).pipe(
     map(({ status, error }) => {
       if (error) throw new Error(error.message);
@@ -39,8 +38,8 @@ export function createCategory(dto: CategoryDto): Observable<number> {
   );
 }
 
-export function updateCategory(
-  dto: CategoryDto,
+export function updateCategory<T>(
+  dto: T,
   categoryId: number,
 ): Observable<number> {
   return from(

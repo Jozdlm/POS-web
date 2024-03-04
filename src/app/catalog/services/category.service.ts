@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Category } from '../models/category';
+import { Category, CategoryDto } from '../models/category';
 import { CategoryMapper } from '../category.mapper';
 import { API } from '@api/index';
 
@@ -9,7 +9,7 @@ import { API } from '@api/index';
 })
 export class CategoryService {
   public getCategories(): Observable<Category[]> {
-    return API.getCategories().pipe(
+    return API.getCategories<CategoryDto[]>().pipe(
       map((data) => {
         return data.map((item) => CategoryMapper.toEntity(item));
       }),
@@ -17,7 +17,7 @@ export class CategoryService {
   }
 
   public getCategoryById(categoryId: number): Observable<Category> {
-    return API.getCategoryById(categoryId).pipe(
+    return API.getCategoryById<CategoryDto>(categoryId).pipe(
       map((record) => {
         return CategoryMapper.toEntity(record);
       }),
