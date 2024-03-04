@@ -31,6 +31,10 @@ export class SessionService {
     });
   }
 
+  public getCurrentSession(): Observable<string | null> {
+    return AUTH.getSessionToken();
+  }
+
   public logInUser(credentials: LoginCredentials): Observable<void> {
     return AUTH.logInWithEmail(credentials).pipe(
       map((response) => {
@@ -45,6 +49,7 @@ export class SessionService {
     return AUTH.logOut().pipe(
       map((response) => {
         if (response.error) throw new Error(response.error.message);
+
         this._router.navigateByUrl('/auth');
       }),
     );
