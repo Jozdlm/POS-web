@@ -9,6 +9,7 @@ import {
 } from '../models/school';
 import { DbTables } from '@api/db-tables.enum';
 import { SchoolMapper } from '../school.mapper';
+import { API } from '@api/index';
 
 @Injectable({
   providedIn: 'root',
@@ -19,16 +20,9 @@ export class SchoolService {
   constructor() {}
 
   public getSchools(): Observable<School[]> {
-    return from(
-      this._db
-        .from(DbTables.SCHOOLS)
-        .select('*')
-        .order('id', { ascending: true }),
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) throw new Error(error.message);
-
-        return (data as SchoolDto[]).map((item) => SchoolMapper.toEntity(item));
+    return API.getEducationalCenters<SchoolDto[]>().pipe(
+      map((response) => {
+        return response.map((item) => SchoolMapper.toEntity(item));
       }),
     );
   }
