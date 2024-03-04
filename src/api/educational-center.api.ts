@@ -27,3 +27,13 @@ export function getEducationalCenterById<T>(schoolId: number): Observable<T> {
     }),
   );
 }
+
+export function createEduCenter<T>(dto: T): Observable<number> {
+  return from(SUPABASE_CLIENT.from(DbTables.SCHOOLS).insert(dto)).pipe(
+    map(({ status, error }) => {
+      if (error) throw new Error(error.message);
+
+      return status;
+    }),
+  );
+}

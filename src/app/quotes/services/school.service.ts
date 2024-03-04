@@ -38,11 +38,9 @@ export class SchoolService {
   public createSchool(data: CreateSchool): Observable<boolean> {
     const dto = SchoolMapper.toDto(data);
 
-    return from(this._db.from(DbTables.SCHOOLS).insert(dto)).pipe(
-      map(({ status, error }) => {
-        if (error) throw new Error(error.message);
-
-        return status === 201 ? true : false;
+    return API.createEduCenter(dto).pipe(
+      map((response) => {
+        return response === 201 ? true : false;
       }),
     );
   }
