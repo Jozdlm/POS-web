@@ -8,10 +8,10 @@ import { API } from '@api/index';
 })
 export class SchoolGradeService {
   public getSchoolGrades(): Observable<SchoolGrade[]> {
-    return API.getSchoolGrades();
+    return API.getSchoolGrades<SchoolGrade[]>();
   }
 
   public getGradeById(gradeId: number): Observable<SchoolGrade> {
-    return API.getSchoolGradeById(gradeId);
+    return API.getSchoolGradeById<SchoolGrade>(gradeId);
   }
 }
