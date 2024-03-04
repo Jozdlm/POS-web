@@ -1,13 +1,6 @@
-import { Injectable, inject } from '@angular/core';
-import { SupabaseService } from '@app/common/services/supabase.service';
-import { Observable, from, map } from 'rxjs';
-import {
-  CreateSchool,
-  School,
-  SchoolDto,
-  UpdateSchool,
-} from '../models/school';
-import { DbTables } from '@api/db-tables.enum';
+import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
+import { School, SchoolDto, SchoolMutation } from '../models/school';
 import { SchoolMapper } from '../school.mapper';
 import { API } from '@api/index';
 
@@ -15,10 +8,6 @@ import { API } from '@api/index';
   providedIn: 'root',
 })
 export class SchoolService {
-  private readonly _db = inject(SupabaseService).supabase;
-
-  constructor() {}
-
   public getSchools(): Observable<School[]> {
     return API.getEducationalCenters<SchoolDto[]>().pipe(
       map((response) => {
@@ -35,7 +24,7 @@ export class SchoolService {
     );
   }
 
-  public createSchool(data: CreateSchool): Observable<boolean> {
+  public createSchool(data: SchoolMutation): Observable<boolean> {
     const dto = SchoolMapper.toDto(data);
 
     return API.createEduCenter(dto).pipe(
@@ -46,7 +35,7 @@ export class SchoolService {
   }
 
   public updateSchool(
-    data: UpdateSchool,
+    data: SchoolMutation,
     schoolId: number,
   ): Observable<boolean> {
     const dto = SchoolMapper.toDto(data);
