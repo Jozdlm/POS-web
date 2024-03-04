@@ -1,22 +1,22 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   Quotation,
   QuotationDto,
   QuoteMutation,
   QuoteWithRefTables,
 } from '../models/quotation';
-import { SupabaseService } from '@app/common/services/supabase.service';
 import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
 import { QuotationMapper } from '../quotation.mapper';
 import { QuotationItemMapper } from '../quotation-item.mapper';
 import { DbTables } from '@api/db-tables.enum';
 import { Observable, from, map } from 'rxjs';
+import { SUPABASE_CLIENT } from '@api/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuotationService {
-  private readonly _db = inject(SupabaseService).supabase;
+  private readonly _db = SUPABASE_CLIENT;
 
   constructor() {}
 

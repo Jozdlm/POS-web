@@ -1,6 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, from, map } from 'rxjs';
-import { SupabaseService } from '@app/common/services/supabase.service';
 import { DbTables } from '@api/db-tables.enum';
 import { ProductMapper } from '../product.mapper';
 import {
@@ -10,12 +9,13 @@ import {
 } from '@app/catalog/models/product';
 import { FilterData } from '@app/common/interfaces/filter-data';
 import { stringToTitleCase } from '@app/common/utils/string-title-case';
+import { SUPABASE_CLIENT } from '@api/constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  private readonly _db = inject(SupabaseService).supabase;
+  private readonly _db = SUPABASE_CLIENT;
 
   constructor() {}
 
