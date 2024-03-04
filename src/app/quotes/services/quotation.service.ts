@@ -11,6 +11,7 @@ import { QuotationItemMapper } from '../quotation-item.mapper';
 import { DbTables } from '@api/db-tables.enum';
 import { Observable, from, map } from 'rxjs';
 import { SUPABASE_CLIENT } from '@api/constants';
+import { API } from '@api/index';
 
 @Injectable({
   providedIn: 'root',
@@ -75,20 +76,9 @@ export class QuotationService {
   }
 
   public getQuotations(): Observable<Quotation[]> {
-    return from(
-      this._db
-        .from(DbTables.QUOTATIONS)
-        .select(
-          `*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name), ${DbTables.PROMOTION_TYPE}(description)`,
-        )
-        .order('id', { ascending: true }),
-    ).pipe(
-      map(({ error, data }) => {
-        if (error) throw new Error(error.message);
-
-        return (data as QuoteWithRefTables[]).map((item) =>
-          QuotationMapper.toEntity(item),
-        );
+    return API.getQuotes<QuoteWithRefTables[]>().pipe(
+      map((response) => {
+        return response.map((item) => QuotationMapper.toEntity(item));
       }),
     );
   }
