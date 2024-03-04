@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SupabaseService } from '@app/common/services/supabase.service';
 import { LoginCredentials } from '../models/login-credentials';
 import { BehaviorSubject, Observable, filter, map } from 'rxjs';
+import { AUTH } from '@api/index';
 
 @Injectable({
   providedIn: 'root',
@@ -30,14 +31,14 @@ export class SessionService {
     });
   }
 
-  public async login(credentials: LoginCredentials) {
-    let { error } = await this._db.auth.signInWithPassword(credentials);
+  public logInUser(credentials: LoginCredentials) {
+    return AUTH.logInWithEmail(credentials).pipe(
+      map((response) => {
+        if (response.error) throw new Error(response.error.message);
 
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    this._router.navigateByUrl('/');
+        this._router.navigateByUrl('/');
+      }),
+    );
   }
 
   public async logOut(): Promise<void> {

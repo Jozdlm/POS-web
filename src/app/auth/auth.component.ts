@@ -10,7 +10,7 @@ import { SessionService } from './services/session.service';
   template: `
     <div class="wrapper">
       <h1 class="text-center mb-4 fs-2">Iniciar Sesión</h1>
-      <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+      <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="logIn()">
         <div class="form-floating mb-3">
           <input
             type="email"
@@ -51,9 +51,11 @@ export class AuthComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  public async login() {
+  public logIn(): void {
     const credentials = this.loginForm.getRawValue();
-    // TODO: Create a handler to show an error in the template
-    await this._sessionService.login(credentials);
+
+    this._sessionService.logInUser(credentials).subscribe((res) => {
+      console.log('User logged');
+    });
   }
 }
