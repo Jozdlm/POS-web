@@ -5,10 +5,11 @@ import { map } from 'rxjs';
 
 export const loggedClientGuard: CanActivateFn = (_, __) => {
   const router: Router = inject(Router);
+  const sessionToken$ = inject(SessionService).getSessionToken();
 
-  return inject(SessionService).isClientLogged$.pipe(
-    map((isLogged) => {
-      if (!isLogged) {
+  return sessionToken$.pipe(
+    map((sessionToken) => {
+      if (!sessionToken) {
         return router.createUrlTree(['/', 'auth']);
       }
 
