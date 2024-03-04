@@ -37,3 +37,18 @@ export function createEduCenter<T>(dto: T): Observable<number> {
     }),
   );
 }
+
+export function updateEduCenter<T>(
+  dto: T,
+  schoolId: number,
+): Observable<number> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.SCHOOLS).update(dto).eq('id', schoolId),
+  ).pipe(
+    map(({ status, error }) => {
+      if (error) throw new Error(error.message);
+
+      return status;
+    }),
+  );
+}

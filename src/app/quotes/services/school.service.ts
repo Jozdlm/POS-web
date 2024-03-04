@@ -51,13 +51,9 @@ export class SchoolService {
   ): Observable<boolean> {
     const dto = SchoolMapper.toDto(data);
 
-    return from(
-      this._db.from(DbTables.SCHOOLS).update(dto).eq('id', schoolId),
-    ).pipe(
-      map(({ status, error }) => {
-        if (error) throw new Error(error.message);
-
-        return status === 204 ? true : false;
+    return API.updateEduCenter(dto, schoolId).pipe(
+      map((response) => {
+        return response === 204 ? true : false;
       }),
     );
   }
