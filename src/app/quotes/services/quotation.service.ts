@@ -84,18 +84,10 @@ export class QuotationService {
   }
 
   public getQuotationById(quotationId: number): Observable<Quotation | null> {
-    return from(
-      this._db
-        .from(DbTables.QUOTATIONS)
-        .select(
-          `*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name), ${DbTables.PROMOTION_TYPE}(description)`,
-        )
-        .eq('id', quotationId),
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) throw new Error(error.message);
-
-        return QuotationMapper.toEntity(data[0] as QuoteWithRefTables);
+    return API.getQuoteById<QuoteWithRefTables | null>(quotationId).pipe(
+      map((response) => {
+        if (!response) return null;
+        return QuotationMapper.toEntity(response);
       }),
     );
   }

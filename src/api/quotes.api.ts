@@ -17,3 +17,19 @@ export function getQuotes<T>(): Observable<T> {
     }),
   );
 }
+
+export function getQuoteById<T>(quoteId: number): Observable<T> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.QUOTATIONS)
+      .select(
+        `*, ${DbTables.SCHOOL_GRADES}(name), ${DbTables.SCHOOLS}(name), ${DbTables.PROMOTION_TYPE}(description)`,
+      )
+      .eq('id', quoteId),
+  ).pipe(
+    map(({ data, error }) => {
+      if (error) throw new Error(error.message);
+
+      return data[0] as T;
+    }),
+  );
+}
