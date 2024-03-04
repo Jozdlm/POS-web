@@ -7,3 +7,7 @@ type LogInCredentials = SignInWithPasswordCredentials;
 export function logInWithEmail(credentials: LogInCredentials) {
   return from(SUPABASE_CLIENT.auth.signInWithPassword(credentials));
 }
+
+export function logOut() {
+  return from(SUPABASE_CLIENT.auth.signOut());
+}

@@ -31,7 +31,7 @@ export class SessionService {
     });
   }
 
-  public logInUser(credentials: LoginCredentials) {
+  public logInUser(credentials: LoginCredentials): Observable<void> {
     return AUTH.logInWithEmail(credentials).pipe(
       map((response) => {
         if (response.error) throw new Error(response.error.message);
@@ -41,13 +41,12 @@ export class SessionService {
     );
   }
 
-  public async logOut(): Promise<void> {
-    let { error } = await this._db.auth.signOut();
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    this._router.navigateByUrl('/auth');
+  public logOutUser(): Observable<void> {
+    return AUTH.logOut().pipe(
+      map((response) => {
+        if (response.error) throw new Error(response.error.message);
+        this._router.navigateByUrl('/auth');
+      }),
+    );
   }
 }
