@@ -8,6 +8,6 @@ import { API } from '@api/index';
 })
 export class PromotionTypeService {
   public getPromotionById(promoId: number): Observable<PromotionType> {
-    return API.getPromotionTypeById(promoId);
+    return API.getPromotionTypeById<PromotionType>(promoId);
   }
 }
