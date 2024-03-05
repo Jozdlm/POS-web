@@ -71,13 +71,9 @@ export class ProductService {
   }
 
   public getProductById(productId: number): Observable<Product> {
-    return from(
-      this._db.from(DbTables.PRODUCTS).select('*').eq('id', productId),
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) throw new Error(error.message);
-
-        return ProductMapper.toEntity(data[0] as ProductDto);
+    return API.getProductById<ProductDto>(productId).pipe(
+      map((response) => {
+        return ProductMapper.toEntity(response);
       }),
     );
   }

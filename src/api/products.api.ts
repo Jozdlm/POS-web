@@ -16,3 +16,15 @@ export function getProductRowCount(): Observable<number> {
     }),
   );
 }
+
+export function getProductById<T>(productId: number): Observable<T> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.PRODUCTS).select('*').eq('id', productId),
+  ).pipe(
+    map(({ data, error }) => {
+      if (error) throw new Error(error.message);
+
+      return data[0] as T;
+    }),
+  );
+}
