@@ -21,6 +21,7 @@ export interface QuoteMutation {
 }
 
 export interface QuotationDto {
+  id?: number;
   customer_name: string;
   student_name: string;
   date: string;

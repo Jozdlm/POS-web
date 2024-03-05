@@ -66,13 +66,11 @@ export class QuoteConfirmationComponent implements OnInit {
       promotionId: this.quoteState().promotionType,
       totalAmmount: this.quoteState().total,
     };
+
     const items = this.quoteState().items;
 
-    this._quoteService
-      .createQuotation({ ...header }, items)
-      .then((_) => {
-        this._router.navigateByUrl('/quotations');
-      })
-      .catch((err) => console.error(err));
+    this._quoteService.createQuoteWithItems(header, items).subscribe((res) => {
+      this._router.navigateByUrl('/quotations');
+    });
   }
 }

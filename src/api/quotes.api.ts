@@ -48,3 +48,27 @@ export function getQuoteItems<T>(quoteId: number): Observable<T> {
     }),
   );
 }
+
+export function createQuote<T, U>(metadata: T): Observable<U> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.QUOTATIONS).insert(metadata).select(),
+  ).pipe(
+    map(({ data, error }) => {
+      if (error) throw new Error(error.message);
+
+      return data[0] as U;
+    }),
+  );
+}
+
+export function createQuoteItems<T>(items: T): Observable<number> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.QUOTATION_ITEMS).insert(items),
+  ).pipe(
+    map(({ status, error }) => {
+      if (error) throw new Error(error.message);
+
+      return status;
+    }),
+  );
+}

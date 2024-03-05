@@ -8,58 +8,14 @@ import {
 import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
 import { QuotationMapper } from '../quotation.mapper';
 import { QuotationItemMapper } from '../quotation-item.mapper';
-import { DbTables } from '@api/db-tables.enum';
-import { Observable, map } from 'rxjs';
-import { SUPABASE_CLIENT } from '@api/constants';
+import { Observable, map, switchMap } from 'rxjs';
 import { API } from '@api/index';
+import { createQuote, createQuoteItems } from '@api/quotes.api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuotationService {
-  private readonly _db = SUPABASE_CLIENT;
-
-  constructor() {}
-
-  private async _insertHeader(header: QuotationDto): Promise<any> {
-    const { data, error } = await this._db
-      .from(DbTables.QUOTATIONS)
-      .insert(header)
-      .select();
-
-    if (error) {
-      throw new Error(error.message);
-    }
-
-    return data[0];
-  }
-
-  private async _insertItems(items: QuotationItemDto[]): Promise<void> {
-    const { error } = await this._db
-      .from(DbTables.QUOTATION_ITEMS)
-      .insert(items);
-
-    if (error) {
-      throw new Error(error.message);
-    }
-  }
-
-  public async createQuotation(
-    quotation: QuoteMutation,
-    items: QuotationItem[],
-  ): Promise<void> {
-    const quotationDto: QuotationDto = QuotationMapper.toDto(quotation);
-
-    const insertedHeader = await this._insertHeader(quotationDto);
-    const quotationId: number = insertedHeader.id;
-
-    const quotationItems: QuotationItemDto[] = items.map((item) =>
-      QuotationItemMapper.toDto(item, quotationId),
-    );
-
-    await this._insertItems(quotationItems);
-  }
-
   public getQuotationItems(quotationId: number): Observable<QuotationItem[]> {
     return API.getQuoteItems<QuotationItemDto[]>(quotationId).pipe(
       map((response) => {
@@ -81,6 +37,27 @@ export class QuotationService {
       map((response) => {
         if (!response) return null;
         return QuotationMapper.toEntity(response);
+      }),
+    );
+  }
+
+  public createQuoteWithItems(metadata: QuoteMutation, items: QuotationItem[]) {
+    const quotationDto: QuotationDto = QuotationMapper.toDto(metadata);
+
+    return createQuote<QuotationDto, QuotationDto>(quotationDto).pipe(
+      switchMap((insertedRow) => {
+        if (!insertedRow.id)
+          throw new Error(
+            'An error has retrieve it, when tried to create a quote',
+          );
+
+        const headerId = insertedRow.id;
+
+        const quoteItems: QuotationItemDto[] = items.map((item) =>
+          QuotationItemMapper.toDto(item, headerId),
+        );
+
+        return createQuoteItems(quoteItems);
       }),
     );
   }
