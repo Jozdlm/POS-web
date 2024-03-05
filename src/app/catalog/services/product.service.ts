@@ -10,6 +10,7 @@ import {
 import { FilterData } from '@app/common/interfaces/filter-data';
 import { stringToTitleCase } from '@app/common/utils/string-title-case';
 import { SUPABASE_CLIENT } from '@api/constants';
+import { API } from '@api/index';
 
 @Injectable({
   providedIn: 'root',
@@ -20,17 +21,7 @@ export class ProductService {
   constructor() {}
 
   public getProductCount(): Observable<number> {
-    return from(
-      this._db
-        .from(DbTables.PRODUCTS)
-        .select('*', { count: 'exact', head: true }),
-    ).pipe(
-      map(({ count, error }) => {
-        if (error) throw new Error(error?.message);
-
-        return count || 0;
-      }),
-    );
+    return API.getProductRowCount();
   }
 
   public getProducts(): Observable<Product[]> {

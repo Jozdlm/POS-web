@@ -4,6 +4,7 @@ import * as SchoolGradeController from './school-grades.api';
 import * as SessionController from './session.api';
 import * as EducationalCenterController from './educational-center.api';
 import * as QuotesController from './quotes.api';
+import * as ProductController from './products.api';
 
 export const API = {
   ...SessionController,
@@ -12,4 +13,5 @@ export const API = {
   ...SchoolGradeController,
   ...EducationalCenterController,
   ...QuotesController,
+  ...ProductController,
 };
