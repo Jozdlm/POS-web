@@ -94,13 +94,9 @@ export class ProductService {
   ): Observable<boolean> {
     const dto: ProductDto = ProductMapper.toDto(data);
 
-    return from(
-      this._db.from(DbTables.PRODUCTS).update(dto).eq('id', productId),
-    ).pipe(
-      map(({ status, error }) => {
-        if (error) throw new Error(error.message);
-
-        return status === 204 ? true : false;
+    return API.updateProduct(productId, dto).pipe(
+      map((response) => {
+        return response === 204 ? true : false;
       }),
     );
   }

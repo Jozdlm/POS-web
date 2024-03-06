@@ -38,3 +38,18 @@ export function createProduct<T>(dto: T): Observable<number> {
     }),
   );
 }
+
+export function updateProduct<T>(
+  productId: number,
+  dto: T,
+): Observable<number> {
+  return from(
+    SUPABASE_CLIENT.from(DbTables.PRODUCTS).update(dto).eq('id', productId),
+  ).pipe(
+    map(({ status, error }) => {
+      if (error) throw new Error(error.message);
+
+      return status;
+    }),
+  );
+}
