@@ -2,6 +2,41 @@ import { Observable, from, map } from 'rxjs';
 import { SUPABASE_CLIENT } from './constants';
 import { DbTables } from './db-tables.enum';
 
+interface QueryOptions {
+  limit?: {
+    from: number;
+    to: number;
+  };
+  orderBy?: {
+    field: string;
+    ascending: boolean;
+  };
+}
+
+export function getProducts<T>(options?: QueryOptions): Observable<T> {
+  let dbQuery = SUPABASE_CLIENT.from(DbTables.PRODUCTS).select('*');
+
+  if (options?.orderBy) {
+    dbQuery = dbQuery.order(options.orderBy.field, {
+      ascending: options.orderBy.ascending,
+    });
+  }
+
+  if (options?.limit && options.orderBy) {
+    dbQuery = dbQuery.range(options.limit.from, options.limit.to);
+  }
+
+  return from(dbQuery).pipe(
+    map(({ data, error }) => {
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      return data as T;
+    }),
+  );
+}
+
 export function getProductRowCount(): Observable<number> {
   return from(
     SUPABASE_CLIENT.from(DbTables.PRODUCTS).select('*', {

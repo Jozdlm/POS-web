@@ -25,21 +25,20 @@ export class ProductService {
   }
 
   public getProducts(): Observable<Product[]> {
-    return from(
-      this._db
-        .from(DbTables.PRODUCTS)
-        .select('*')
-        .order('id', { ascending: true })
-        .range(0, 49),
-    ).pipe(
-      map(({ data, error }) => {
-        if (error) {
-          throw new Error(error.message);
-        }
+    const queryOptions = {
+      orderBy: {
+        field: 'id',
+        ascending: true,
+      },
+      limit: {
+        from: 0,
+        to: 49,
+      },
+    };
 
-        return (data as ProductDto[]).map((item) =>
-          ProductMapper.toEntity(item),
-        );
+    return API.getProducts<ProductDto[]>(queryOptions).pipe(
+      map((response) => {
+        return response.map((item) => ProductMapper.toEntity(item));
       }),
     );
   }
