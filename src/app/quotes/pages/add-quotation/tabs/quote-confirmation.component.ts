@@ -5,7 +5,7 @@ import { QuotationService } from '@app/quotes/services/quotation.service';
 import { QuoteMutation } from '@app/quotes/models/quotation';
 import { SchoolService } from '@app/quotes/services/school.service';
 import { SchoolGradeService } from '@app/quotes/services/school-grade.service';
-import { PromotionTypeService } from '@app/quotes/services/promotion-type.service';
+import { PromotionTypeService } from '@app/quotes/promotion-types/promotion-type.service';
 import { Router } from '@angular/router';
 import { combineLatestWith } from 'rxjs';
 
