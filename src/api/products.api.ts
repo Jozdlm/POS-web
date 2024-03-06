@@ -28,3 +28,13 @@ export function getProductById<T>(productId: number): Observable<T> {
     }),
   );
 }
+
+export function createProduct<T>(dto: T): Observable<number> {
+  return from(SUPABASE_CLIENT.from(DbTables.PRODUCTS).insert(dto)).pipe(
+    map(({ status, error }) => {
+      if (error) throw new Error(error.message);
+
+      return status;
+    }),
+  );
+}
