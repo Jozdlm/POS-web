@@ -6,7 +6,12 @@ import { RouterModule } from '@angular/router';
 @Component({
   standalone: true,
   imports: [CommonModule, MatButtonModule, RouterModule],
-  templateUrl: './home.page.html',
+  template: `
+    <h1>¡Bienvenido!</h1>
+    <p>Algunos atajos rápidos que puedes tomar</p>
+
+    <a routerLink="/quotations/add/" mat-stroked-button>Nueva cotización</a>
+  `,
   styleUrl: './home.page.scss',
 })
 export class HomePage {}

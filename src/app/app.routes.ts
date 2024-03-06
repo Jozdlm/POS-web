@@ -18,7 +18,8 @@ export const APP_ROUTES: Routes = [
     children: [
       {
         path: 'overview',
-        loadComponent: () => import('./home/home.page').then((c) => c.HomePage),
+        loadComponent: () =>
+          import('./pages/home.page').then((c) => c.HomePage),
       },
       {
         path: 'sell',
