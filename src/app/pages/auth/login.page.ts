@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SessionService } from './services/session.service';
+import { SessionService } from '@app/auth/session.service';
 
 @Component({
   selector: 'app-auth',
@@ -39,9 +39,9 @@ import { SessionService } from './services/session.service';
       </form>
     </div>
   `,
-  styleUrl: './auth.component.scss',
+  styleUrl: './login.page.scss',
 })
-export class AuthComponent {
+export class LoginPage {
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _sessionService = inject(SessionService);
 
