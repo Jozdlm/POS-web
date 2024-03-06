@@ -22,10 +22,6 @@ export const APP_ROUTES: Routes = [
           import('./pages/home.page').then((c) => c.HomePage),
       },
       {
-        path: 'sell',
-        loadChildren: () => import('./cashier/cashier.routes'),
-      },
-      {
         path: PagePrefix.QUOTATIONS,
         loadChildren: () => import('./quotes/quotation.routes'),
       },
