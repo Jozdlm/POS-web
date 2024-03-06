@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Category, CategoryDto } from '../models/category';
-import { CategoryMapper } from '../category.mapper';
+import { Category, CategoryDto } from './category';
+import { CategoryMapper } from './category.mapper';
 import { API } from '@api/index';
 
 @Injectable({

@@ -1,12 +1,12 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '@app/catalog/services/product.service';
+import { ProductService } from '@app/products/product.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { CategoryService } from '@app/catalog/services/category.service';
+import { CategoryService } from '@app/products/categories/category.service';
 import { RouterModule } from '@angular/router';
-import { Product } from '@app/catalog/models/product';
 import { Subscription, switchMap } from 'rxjs';
 import { debounceSearch } from '@app/common/utils/debounce-search';
+import { Product } from '@app/products/product';
 
 @Component({
   selector: 'app-product-list',

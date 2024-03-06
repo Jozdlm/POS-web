@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { ProductMapper } from '../product.mapper';
-import {
-  Product,
-  ProductDto,
-  ProductMutation,
-} from '@app/catalog/models/product';
+import { ProductMapper } from './product.mapper';
 import { API } from '@api/index';
+import { Product, ProductDto, ProductMutation } from './product';
 
 interface RequestFilters {
   filterBy?: {

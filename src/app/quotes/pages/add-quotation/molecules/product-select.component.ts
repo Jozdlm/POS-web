@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { filter, switchMap, tap } from 'rxjs';
-import { ProductService } from '@app/catalog/services/product.service';
+import { ProductService } from '@app/products/product.service';
 import { Product } from '@app/catalog/models/product';
 import { debounceSearch } from '@app/common';
 
