@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { filter, switchMap, tap } from 'rxjs';
 import { ProductService } from '@app/products/product.service';
-import { Product } from '@app/catalog/models/product';
+import { Product } from '@app/products/product';
 import { debounceSearch } from '@app/common';
 
 @Component({

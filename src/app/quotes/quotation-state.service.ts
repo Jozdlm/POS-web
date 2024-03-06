@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { QuotationItem } from './quotation-item';
 import { QuoteFormStateService } from './quote-form-state.service';
-import { Product } from '@app/catalog/models/product';
+import { Product } from '@app/products/product';
 import {
   addItemDiscount,
   decreaseItemQty,

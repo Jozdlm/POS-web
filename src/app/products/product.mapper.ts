@@ -2,7 +2,7 @@ import {
   Product,
   ProductDto,
   ProductMutation,
-} from '@app/catalog/models/product';
+} from '@app/products/product';
 
 export class ProductMapper {
   public static toEntity(dto: ProductDto): Product {
