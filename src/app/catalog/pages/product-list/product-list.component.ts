@@ -156,9 +156,11 @@ export class ProductListComponent {
             return this.initialProducts$;
           }
 
-          return this._productService.getProductsBy({
-            query,
-            field: 'name',
+          return this._productService.getProducts({
+            filterBy: {
+              column: 'name',
+              value: query,
+            },
             limit: 50,
           });
         }),

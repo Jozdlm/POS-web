@@ -3,6 +3,10 @@ import { SUPABASE_CLIENT } from './constants';
 import { DbTables } from './db-tables.enum';
 
 interface QueryOptions {
+  filterBy?: {
+    column: string;
+    value: string;
+  };
   limit?: number;
   orderBy?: {
     field: string;
@@ -17,6 +21,13 @@ export function getProducts<T>(options?: QueryOptions): Observable<T> {
     dbQuery = dbQuery.order(options.orderBy.field, {
       ascending: options.orderBy.ascending,
     });
+  }
+
+  if (options?.filterBy) {
+    dbQuery = dbQuery.ilike(
+      options.filterBy.column,
+      `%${options.filterBy.value}%`,
+    );
   }
 
   if (options?.limit) {

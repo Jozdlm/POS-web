@@ -13,6 +13,10 @@ import { SUPABASE_CLIENT } from '@api/constants';
 import { API } from '@api/index';
 
 interface RequestFilters {
+  filterBy?: {
+    column: string;
+    value: string;
+  };
   orderBy?: {
     field: string;
     ascending: boolean;
