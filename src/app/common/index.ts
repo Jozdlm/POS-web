@@ -5,6 +5,5 @@ export * from './interfaces/filter-data';
 export * from './interfaces/nav-item';
 export * from './components/sidenav/sidenav.component';
 export * from './services/pdf-maker.service';
-export * from './utils/string-title-case';
 export * from './utils/current-date';
 export * from './utils/debounce-search';
