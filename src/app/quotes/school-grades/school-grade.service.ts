@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SchoolGrade } from '../models/school-grades';
+import { SchoolGrade } from './school-grades';
 import { Observable } from 'rxjs';
 import { API } from '@api/index';
 

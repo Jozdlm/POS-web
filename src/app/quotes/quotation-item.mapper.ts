@@ -1,4 +1,4 @@
-import { QuotationItem, QuotationItemDto } from './models/quotation-item';
+import { QuotationItem, QuotationItemDto } from './quotation-item';
 
 export class QuotationItemMapper {
   public static toEntity(dto: QuotationItemDto): QuotationItem {

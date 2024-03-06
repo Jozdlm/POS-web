@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SchoolService } from '@app/quotes/services/school.service';
+import { SchoolService } from '@app/quotes/educational-centers/school.service';
 import { Subscription, of, switchMap } from 'rxjs';
 
 @Component({

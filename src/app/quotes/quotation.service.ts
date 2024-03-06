@@ -4,10 +4,10 @@ import {
   QuotationDto,
   QuoteMutation,
   QuoteWithRefTables,
-} from '../models/quotation';
-import { QuotationItem, QuotationItemDto } from '../models/quotation-item';
-import { QuotationMapper } from '../quotation.mapper';
-import { QuotationItemMapper } from '../quotation-item.mapper';
+} from './quotation';
+import { QuotationItem, QuotationItemDto } from './quotation-item';
+import { QuotationMapper } from './quotation.mapper';
+import { QuotationItemMapper } from './quotation-item.mapper';
 import { Observable, map, switchMap } from 'rxjs';
 import { API } from '@api/index';
 import { createQuote, createQuoteItems } from '@api/quotes.api';

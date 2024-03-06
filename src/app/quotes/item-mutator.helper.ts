@@ -1,4 +1,4 @@
-import { QuotationItem } from './models/quotation-item';
+import { QuotationItem } from './quotation-item';
 
 function getItemIndex(array: QuotationItem[], equalsTo: number): number {
   const index = array.findIndex((el) => el.productId == equalsTo);

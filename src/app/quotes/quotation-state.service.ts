@@ -1,5 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { QuotationItem } from '../models/quotation-item';
+import { QuotationItem } from './quotation-item';
 import { QuoteFormStateService } from './quote-form-state.service';
 import { Product } from '@app/catalog/models/product';
 import {
@@ -8,7 +8,7 @@ import {
   increaseItemQty,
   removeItemDiscount,
   updateItemPrice,
-} from '../item-mutator.helper';
+} from './item-mutator.helper';
 
 @Injectable({
   providedIn: 'root',

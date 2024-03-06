@@ -6,10 +6,10 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuotationService } from '@app/quotes/services/quotation.service';
+import { QuotationService } from '@app/quotes/quotation.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Quotation } from '@app/quotes/models/quotation';
-import { QuotationItem } from '@app/quotes/models/quotation-item';
+import { Quotation } from '@app/quotes/quotation';
+import { QuotationItem } from '@app/quotes/quotation-item';
 import { Subscription, combineLatestWith, switchMap } from 'rxjs';
 import { PdfMakerService } from '@app/common/services/pdf-maker.service';
 

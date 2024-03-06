@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { School, SchoolDto, SchoolMutation } from '../models/school';
-import { SchoolMapper } from '../school.mapper';
+import { School, SchoolDto, SchoolMutation } from './school';
+import { SchoolMapper } from './school.mapper';
 import { API } from '@api/index';
 
 @Injectable({
