@@ -141,9 +141,11 @@ export class ProductListComponent {
   }
 
   public getProductList(): Subscription {
-    return this._productService.getProducts().subscribe((values) => {
-      this.listState = values;
-    });
+    return this._productService
+      .getProducts({ limit: 50 })
+      .subscribe((values) => {
+        this.listState = values;
+      });
   }
 
   public searchProduct(): Subscription {

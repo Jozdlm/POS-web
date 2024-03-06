@@ -12,6 +12,14 @@ import { stringToTitleCase } from '@app/common/utils/string-title-case';
 import { SUPABASE_CLIENT } from '@api/constants';
 import { API } from '@api/index';
 
+interface RequestFilters {
+  orderBy?: {
+    field: string;
+    ascending: boolean;
+  };
+  limit?: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -24,19 +32,8 @@ export class ProductService {
     return API.getProductRowCount();
   }
 
-  public getProducts(): Observable<Product[]> {
-    const queryOptions = {
-      orderBy: {
-        field: 'id',
-        ascending: true,
-      },
-      limit: {
-        from: 0,
-        to: 49,
-      },
-    };
-
-    return API.getProducts<ProductDto[]>(queryOptions).pipe(
+  public getProducts(filters?: RequestFilters): Observable<Product[]> {
+    return API.getProducts<ProductDto[]>(filters).pipe(
       map((response) => {
         return response.map((item) => ProductMapper.toEntity(item));
       }),

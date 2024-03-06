@@ -3,10 +3,7 @@ import { SUPABASE_CLIENT } from './constants';
 import { DbTables } from './db-tables.enum';
 
 interface QueryOptions {
-  limit?: {
-    from: number;
-    to: number;
-  };
+  limit?: number;
   orderBy?: {
     field: string;
     ascending: boolean;
@@ -22,8 +19,8 @@ export function getProducts<T>(options?: QueryOptions): Observable<T> {
     });
   }
 
-  if (options?.limit && options.orderBy) {
-    dbQuery = dbQuery.range(options.limit.from, options.limit.to);
+  if (options?.limit) {
+    dbQuery = dbQuery.range(0, options.limit - 1);
   }
 
   return from(dbQuery).pipe(
