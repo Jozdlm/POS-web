@@ -134,6 +134,8 @@ export class ProductListComponent {
   public diplayFilters: boolean = false;
   public searchControl = new FormControl('');
 
+  public initialProducts$ = this._productService.getProducts({ limit: 50 });
+
   constructor() {
     this._subscriptions.add(this.getProductList());
     this._subscriptions.add(this.searchProduct());
@@ -141,11 +143,9 @@ export class ProductListComponent {
   }
 
   public getProductList(): Subscription {
-    return this._productService
-      .getProducts({ limit: 50 })
-      .subscribe((values) => {
-        this.listState = values;
-      });
+    return this.initialProducts$.subscribe((values) => {
+      this.listState = values;
+    });
   }
 
   public searchProduct(): Subscription {
@@ -153,7 +153,7 @@ export class ProductListComponent {
       .pipe(
         switchMap((query) => {
           if (query.trim() === '') {
-            return this._productService.getProducts();
+            return this.initialProducts$;
           }
 
           return this._productService.getProductsBy({
