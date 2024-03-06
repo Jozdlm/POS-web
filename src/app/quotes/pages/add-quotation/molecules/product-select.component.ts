@@ -63,10 +63,12 @@ export class ProductSelectComponent implements OnInit {
         }),
         filter((value) => value != this.lastOptionSelected && value != ''),
         switchMap((value) => {
-          return this._productService.getProductsBy({
-            query: value,
-            field: 'name',
+          return this._productService.getProducts({
             limit: 6,
+            filterBy: {
+              column: 'name',
+              value,
+            },
           });
         }),
       )
