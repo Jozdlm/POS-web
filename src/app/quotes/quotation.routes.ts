@@ -7,7 +7,7 @@ import { QuoteHeaderComponent } from './pages/add-quotation/tabs/quote-header.co
 import { QuoteConfirmationComponent } from './pages/add-quotation/tabs/quote-confirmation.component';
 import { quoteConfirmationGuard } from '@app/quotes/quote-confirmation.guard';
 import { SchoolGradesPage } from './school-grades/school-grades.page';
-import { EducationalCentersPage } from './pages/educational-centers/educational-centers.page';
+import { EducationalCentersPage } from './educational-centers/educational-centers.page';
 import { SchoolFormComponent } from './pages/school-form/school-form.component';
 
 const QUOTATION_ROUTES: Routes = [
