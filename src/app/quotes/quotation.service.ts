@@ -6,8 +6,7 @@ import {
   QuoteWithRefTables,
 } from './quotation';
 import { QuotationItem, QuotationItemDto } from './quotation-item';
-import { QuotationMapper } from './quotation.mapper';
-import { QuotationItemMapper } from './quotation-item.mapper';
+import { QuoteMapper, QuoteItemMapper } from './quote.mapper';
 import { Observable, map, switchMap } from 'rxjs';
 import { API } from '@api/index';
 import { createQuote, createQuoteItems } from '@api/quotes.api';
@@ -19,7 +18,7 @@ export class QuotationService {
   public getQuotationItems(quotationId: number): Observable<QuotationItem[]> {
     return API.getQuoteItems<QuotationItemDto[]>(quotationId).pipe(
       map((response) => {
-        return response.map((itemDto) => QuotationItemMapper.toEntity(itemDto));
+        return response.map((itemDto) => QuoteItemMapper.toEntity(itemDto));
       }),
     );
   }
@@ -27,7 +26,7 @@ export class QuotationService {
   public getQuotations(): Observable<Quotation[]> {
     return API.getQuotes<QuoteWithRefTables[]>().pipe(
       map((response) => {
-        return response.map((item) => QuotationMapper.toEntity(item));
+        return response.map((item) => QuoteMapper.toEntity(item));
       }),
     );
   }
@@ -36,13 +35,13 @@ export class QuotationService {
     return API.getQuoteById<QuoteWithRefTables | null>(quotationId).pipe(
       map((response) => {
         if (!response) return null;
-        return QuotationMapper.toEntity(response);
+        return QuoteMapper.toEntity(response);
       }),
     );
   }
 
   public createQuoteWithItems(metadata: QuoteMutation, items: QuotationItem[]) {
-    const quotationDto: QuotationDto = QuotationMapper.toDto(metadata);
+    const quotationDto: QuotationDto = QuoteMapper.toDto(metadata);
 
     return createQuote<QuotationDto, QuotationDto>(quotationDto).pipe(
       switchMap((insertedRow) => {
@@ -54,7 +53,7 @@ export class QuotationService {
         const headerId = insertedRow.id;
 
         const quoteItems: QuotationItemDto[] = items.map((item) =>
-          QuotationItemMapper.toDto(item, headerId),
+          QuoteItemMapper.toDto(item, headerId),
         );
 
         return createQuoteItems(quoteItems);
