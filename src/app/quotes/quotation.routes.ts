@@ -6,7 +6,7 @@ import { QuoteItemsComponent } from './pages/add-quotation/tabs/quote-items.comp
 import { QuoteHeaderComponent } from './pages/add-quotation/tabs/quote-header.component';
 import { QuoteConfirmationComponent } from './pages/add-quotation/tabs/quote-confirmation.component';
 import { quoteConfirmationGuard } from '@app/quotes/quote-confirmation.guard';
-import { SchoolGradesPage } from './pages/school-grades.page';
+import { SchoolGradesPage } from './school-grades/school-grades.page';
 import { EducationalCentersPage } from './pages/educational-centers/educational-centers.page';
 import { SchoolFormComponent } from './pages/school-form/school-form.component';
 
