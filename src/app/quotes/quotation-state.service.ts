@@ -1,6 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { QuotationItem } from './quotation-item';
-import { QuoteFormStateService } from './quote-form-state.service';
 import { Product } from '@app/products/product';
 import {
   addItemDiscount,
@@ -9,6 +8,8 @@ import {
   removeItemDiscount,
   updateItemPrice,
 } from './item-mutator.helper';
+import { FormBuilder, Validators } from '@angular/forms';
+import { getCurrentDate } from '@app/common';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,15 @@ export class QuotationStateService {
   private _quoteItems = signal<QuotationItem[]>([]);
   public quoteItems = this._quoteItems.asReadonly();
   public quoteWithDiscount = signal<boolean>(false);
-  public quoteHeaderForm = inject(QuoteFormStateService).quoteForm;
+
+  public quoteHeaderForm = inject(FormBuilder).nonNullable.group({
+    customerName: ['', [Validators.required, Validators.minLength(3)]],
+    studentName: ['N/A', [Validators.required, Validators.minLength(3)]],
+    date: [getCurrentDate(), Validators.required],
+    schoolGrade: [0, [Validators.required, Validators.min(1)]],
+    school: [0, [Validators.required, Validators.min(1)]],
+    promotionType: [0, [Validators.required, Validators.min(1)]],
+  });
 
   public quoteSubtotal = computed<number>(() => {
     return this.quoteItems().reduce(
