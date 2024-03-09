@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../categories/category.service';
 import { RouterModule } from '@angular/router';
 import { RecordStatusDirective } from '@app/common/directives/record-status.directive';
+import { MatDialog } from '@angular/material/dialog';
+import { CategoryFormComponent } from '../category-form/category-form.component';
 
 @Component({
   selector: 'app-category-list',
@@ -13,6 +15,13 @@ import { RecordStatusDirective } from '@app/common/directives/record-status.dire
 })
 export class CategoryListComponent {
   private _categoryService = inject(CategoryService);
+  private _dialogRef = inject(MatDialog);
 
   public categories$ = this._categoryService.getCategories();
+
+  public openDialog(): void {
+    this._dialogRef.open(CategoryFormComponent, {
+      minWidth: 360,
+    });
+  }
 }
