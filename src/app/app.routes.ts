@@ -9,7 +9,7 @@ export const APP_ROUTES: Routes = [
   {
     path: PagePrefix.AUTH,
     canActivate: [anonClientGuard],
-    loadChildren: () => import('./auth/auth.routes'),
+    loadChildren: () => import('./pages/auth/auth.routes'),
   },
   {
     path: '',
