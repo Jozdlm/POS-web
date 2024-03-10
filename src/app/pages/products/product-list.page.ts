@@ -9,10 +9,8 @@ import { debounceSearch } from '@app/common/utils/debounce-search';
 import { Product } from '@app/products/product';
 
 @Component({
-  selector: 'app-product-list',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  styleUrl: './product-list.component.scss',
   template: `
     <h1 class="fs-3 mb-3">Productos</h1>
 
@@ -125,8 +123,9 @@ import { Product } from '@app/products/product';
       </div>
     </div>
   `,
+  styleUrl: './product-list.page.scss',
 })
-export class ProductListComponent {
+export class ProductListPage {
   private readonly _productService = inject(ProductService);
   private _subscriptions = new Subscription();
   public readonly categories$ = inject(CategoryService).getCategories();

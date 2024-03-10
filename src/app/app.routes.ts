@@ -39,7 +39,7 @@ export const APP_ROUTES: Routes = [
           import('./ui/layouts/catalog-layout.component').then(
             (c) => c.CatalogLayoutComponent,
           ),
-        loadChildren: () => import('./products/products.routes'),
+        loadChildren: () => import('./pages/products/products.routes'),
       },
       {
         path: PagePrefix.SCHOOLS,
