@@ -4,7 +4,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SessionService } from '@app/auth/session.service';
 
 @Component({
-  selector: 'app-auth',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
