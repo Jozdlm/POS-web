@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoginCredentials } from './models/login-credentials';
+import { LoginCredentials } from './login-credentials';
 import { Observable, map } from 'rxjs';
 import { API } from '@api/index';
 
