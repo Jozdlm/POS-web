@@ -4,7 +4,6 @@ import { NavItem, SidenavComponent } from '@app/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-catalog-layout',
   standalone: true,
   imports: [CommonModule, RouterModule, SidenavComponent],
   template: `

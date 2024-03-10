@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { anonClientGuard } from './auth/guards/anon-client.guard';
 import { loggedClientGuard } from './auth/guards/logged-client.guard';
 import { PagePrefix } from './common/enums/pages';
-import { ManagerLayoutComponent } from './common/layouts/manager-layout/manager-layout.component';
+import { ManagerLayoutComponent } from './ui/layouts/manager-layout.component';
 
 // TODO: Set title property to each route
 export const APP_ROUTES: Routes = [
@@ -28,7 +28,7 @@ export const APP_ROUTES: Routes = [
       {
         path: PagePrefix.CATEGORIES,
         loadComponent: () =>
-          import('./products/layouts/catalog-layout.component').then(
+          import('./ui/layouts/catalog-layout.component').then(
             (c) => c.CatalogLayoutComponent,
           ),
         loadChildren: () => import('./products/categories.routes'),
@@ -36,7 +36,7 @@ export const APP_ROUTES: Routes = [
       {
         path: PagePrefix.PRODUCTS,
         loadComponent: () =>
-          import('./products/layouts/catalog-layout.component').then(
+          import('./ui/layouts/catalog-layout.component').then(
             (c) => c.CatalogLayoutComponent,
           ),
         loadChildren: () => import('./products/products.routes'),
