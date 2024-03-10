@@ -100,7 +100,11 @@ import { Product } from '@app/products/product';
             class="list-group-item d-flex justify-content-between align-items-center"
           >
             <div class="ms-2 me-auto">
-              <div class="fw-medium">{{ item.name }}</div>
+              <div class="fw-medium">
+                <a [routerLink]="['edit', item.id]" class="text-dark">{{
+                  item.name
+                }}</a>
+              </div>
               <div class="small-text">{{ item.barcode }}</div>
             </div>
             <div class="d-flex ms-3 column-gap-5 align-items-center">
@@ -115,9 +119,6 @@ import { Product } from '@app/products/product';
                   item.isActive ? 'Activo' : 'Inactivo'
                 }}</span>
               </div>
-              <button class="btn" [routerLink]="['edit', item.id]">
-                Editar
-              </button>
             </div>
           </div>
         }
