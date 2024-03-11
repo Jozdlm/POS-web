@@ -2,8 +2,8 @@ import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription, of, switchMap } from 'rxjs';
-import { CategoryService } from '@app/products/categories/category.service';
-import { Category } from '@app/products/categories/category';
+import { CategoryService } from '@app/features/products/categories/category.service';
+import { Category } from '@app/features/products/categories/category';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({

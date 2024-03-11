@@ -1,11 +1,11 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryService } from '@app/products/categories/category.service';
+import { CategoryService } from '@app/features/products/categories/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ProductService } from '@app/products/product.service';
+import { ProductService } from '@app/features/products/product.service';
 import { Subscription, of, switchMap } from 'rxjs';
-import { Product } from '@app/products/product';
+import { Product } from '@app/features/products/product';
 
 @Component({
   selector: 'app-product-form',

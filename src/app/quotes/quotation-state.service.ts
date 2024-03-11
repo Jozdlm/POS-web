@@ -1,6 +1,6 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { QuotationItem } from './quotation-item';
-import { Product } from '@app/products/product';
+import { Product } from '@app/features/products/product';
 import {
   addItemDiscount,
   decreaseItemQty,
