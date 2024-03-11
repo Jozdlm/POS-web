@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { anonClientGuard } from './auth/guards/anon-client.guard';
-import { loggedClientGuard } from './auth/guards/logged-client.guard';
+import { anonClientGuard } from './features/auth/guards/anon-client.guard';
+import { loggedClientGuard } from './features/auth/guards/logged-client.guard';
 import { PagePrefix } from './common/enums/pages';
 import { ManagerLayoutComponent } from './ui/layouts/manager-layout.component';
 
