@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SessionService } from '@app/auth/session.service';
+import { SessionService } from '@app/features/auth/session.service';
 
 @Component({
   standalone: true,
