@@ -10,7 +10,64 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   selector: 'app-category-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './category-form.component.html',
+  template: `
+    <div class="wrapper">
+      <h1 class="fs-3 mb-4">Crear categoría</h1>
+      <form
+        [formGroup]="categoryForm"
+        (ngSubmit)="saveChanges()"
+        autocomplete="off"
+      >
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="categoryName"
+            placeholder="Nombre"
+            formControlName="name"
+          />
+          <label for="categoryName">Nombre</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="slug"
+            placeholder="URL amigable (slug)"
+            formControlName="slug"
+          />
+          <label for="slug">URL amigable (slug)</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            placeholder="Descripción"
+            formControlName="description"
+          />
+          <label for="description">Descripción</label>
+        </div>
+        <div class="form-floating mb-4">
+          <select
+            class="form-select"
+            id="categoryState"
+            formControlName="isActive"
+          >
+            <option value="false">Inactivo</option>
+            <option value="true">Activo</option>
+          </select>
+          <label for="categoryState">Estado</label>
+        </div>
+        <div class="d-flex justify-content-end column-gap-2">
+          <button type="button" class="btn" (click)="cancelAndReset()">
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </form>
+    </div>
+  `,
   styleUrl: './category-form.component.scss',
 })
 export class CategoryFormComponent {
