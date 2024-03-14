@@ -17,7 +17,6 @@ import { ProductSelectComponent } from '../molecules/product-select.component';
     RouterModule,
     ProductSelectComponent,
   ],
-  templateUrl: './quote-items.component.html',
   template: `
     <div>
       <div class="d-flex align-items-end mb-4 column-gap-4">
