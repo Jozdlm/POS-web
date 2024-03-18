@@ -5,7 +5,7 @@ import { IconComponent } from '@app/common/components/icon.component';
 import { Product } from '@app/features/products/product';
 import { QuotationStateService } from '@app/quotes/quotation-state.service';
 import { RouterModule } from '@angular/router';
-import { ProductSelectComponent } from '../molecules/product-select.component';
+import { ProductSelectComponent } from '@app/ui/components/product-select/product-select.component';
 
 @Component({
   selector: 'app-quote-items',
