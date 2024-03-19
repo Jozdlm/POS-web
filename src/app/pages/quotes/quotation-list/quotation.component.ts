@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { QuotationService } from '../../quotation.service';
-import { Quotation } from '../../quotation';
+import { QuotationService } from '../../../quotes/quotation.service';
+import { Quotation } from '../../../quotes/quotation';
 
 @Component({
   standalone: true,

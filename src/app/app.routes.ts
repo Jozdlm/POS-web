@@ -23,7 +23,7 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: PagePrefix.QUOTATIONS,
-        loadChildren: () => import('./quotes/quotation.routes'),
+        loadChildren: () => import('./pages/quotes/quotation.routes'),
       },
       {
         path: PagePrefix.CATEGORIES,
