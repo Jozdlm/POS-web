@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { QuotationStateService } from '@app/quotes/quotation-state.service';
+import { QuotationStateService } from '@app/features/quotes/quotation-state.service';
 import { IconComponent } from '@app/common/components/icon.component';
 
 @Component({

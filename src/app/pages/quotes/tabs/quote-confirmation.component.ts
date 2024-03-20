@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { QuotationStateService } from '@app/quotes/quotation-state.service';
-import { QuotationService } from '@app/quotes/quotation.service';
-import { QuoteMutation } from '@app/quotes/quotation';
-import { SchoolService } from '@app/quotes/educational-centers/school.service';
-import { SchoolGradeService } from '@app/quotes/school-grades/school-grade.service';
-import { PromotionTypeService } from '@app/quotes/promotion-types/promotion-type.service';
+import { QuotationStateService } from '@app/features/quotes/quotation-state.service';
+import { QuotationService } from '@app/features/quotes/quotation.service';
+import { QuoteMutation } from '@app/features/quotes/quotation';
+import { SchoolService } from '@app/features/quotes/educational-centers/school.service';
+import { SchoolGradeService } from '@app/features/quotes/school-grades/school-grade.service';
+import { PromotionTypeService } from '@app/features/quotes/promotion-types/promotion-type.service';
 import { Router } from '@angular/router';
 import { combineLatestWith } from 'rxjs';
 

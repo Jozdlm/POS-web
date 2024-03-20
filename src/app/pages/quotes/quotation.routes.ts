@@ -5,7 +5,7 @@ import { QuotationDetailsComponent } from './quotation-details/quotation-details
 import { QuoteItemsComponent } from './tabs/quote-items.component';
 import { QuoteHeaderComponent } from './tabs/quote-header.component';
 import { QuoteConfirmationComponent } from './tabs/quote-confirmation.component';
-import { quoteConfirmationGuard } from '@app/quotes/quote-confirmation.guard';
+import { quoteConfirmationGuard } from '@app/features/quotes/quote-confirmation.guard';
 import { SchoolGradesPage } from './school-grades/school-grades.page';
 import { EducationalCentersPage } from './educational-centers/educational-centers.page';
 import { SchoolFormComponent } from './school-form/school-form.component';

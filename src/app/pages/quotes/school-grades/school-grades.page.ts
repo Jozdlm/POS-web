@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SchoolGradeService } from '@app/quotes/school-grades/school-grade.service';
+import { SchoolGradeService } from '@app/features/quotes/school-grades/school-grade.service';
 
 @Component({
   selector: 'app-school-grades',

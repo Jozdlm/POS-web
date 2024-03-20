@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { QuotationStateService } from '@app/quotes/quotation-state.service';
+import { QuotationStateService } from '@app/features/quotes/quotation-state.service';
 
 export const quoteConfirmationGuard: CanActivateFn = (_, __) => {
   const { quoteItems, quoteHeaderForm } = inject(QuotationStateService);

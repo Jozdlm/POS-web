@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SchoolGradeService } from '@app/quotes/school-grades/school-grade.service';
-import { SchoolService } from '@app/quotes/educational-centers/school.service';
+import { SchoolGradeService } from '@app/features/quotes/school-grades/school-grade.service';
+import { SchoolService } from '@app/features/quotes/educational-centers/school.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { QuotationStateService } from '@app/quotes/quotation-state.service';
+import { QuotationStateService } from '@app/features/quotes/quotation-state.service';
 
 @Component({
   selector: 'app-quote-header',
