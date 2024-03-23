@@ -12,6 +12,5 @@ import { RouterModule } from '@angular/router';
 
     <a routerLink="/quotations/add/" mat-stroked-button>Nueva cotización</a>
   `,
-  styleUrl: './home.page.scss',
 })
 export class HomePage {}

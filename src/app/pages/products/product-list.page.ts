@@ -123,7 +123,6 @@ import { Product } from '@app/features/products/product';
       </div>
     </div>
   `,
-  styleUrl: './product-list.page.scss',
 })
 export class ProductListPage {
   private readonly _productService = inject(ProductService);
