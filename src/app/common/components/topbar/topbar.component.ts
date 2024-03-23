@@ -9,31 +9,40 @@ import { TOP_BAR_LINKS } from './navigation-links';
   standalone: true,
   imports: [CommonModule, RouterModule, MatIconModule],
   template: `
-    <div class="topbar-wrapper">
-      <div class="navbar">
-        <button class="business">
-          <div class="business-info">
-            <div class="business-img"></div>
-            <p class="business-name">Librería La Joya</p>
-          </div>
-          <mat-icon class="business-icon">unfold_more</mat-icon>
-        </button>
-        <div class="navigation">
-          @for (link of navigationLinks; track $index) {
-            <a
-              [routerLink]="link.path"
-              class="navigation-link"
-              routerLinkActive="navigation-link-active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              >{{ link.placeholder }}</a
+    <div class="block border-b border-slate-200">
+      <div
+        class="py-3 px-4 flex items-center justify-between mx-auto max-w-[1512px]"
+      >
+        <div class="flex items-center p-0 gap-x-10">
+          <button
+            class="bg-white flex items-center justify-between py-2 px-4 border border-slate-200 rounded-lg w-[216px]"
+          >
+            <div class="flex items-center gap-x-3">
+              <div class="h-5 w-5 rounded-full bg-slate-200"></div>
+              <span class="font-medium text-sm mb-0">Librería La Joya</span>
+            </div>
+            <mat-icon class="block text-base h-4 w-4 text-slate-400"
+              >unfold_more</mat-icon
             >
-          }
+          </button>
+          <div class="flex items-center gap-x-7 text-sm">
+            @for (link of navigationLinks; track $index) {
+              <a
+                [routerLink]="link.path"
+                class="no-underline text-slate-500 font-normal hover:text-slate-950"
+                routerLinkActive="text-slate-950"
+                [routerLinkActiveOptions]="{ exact: true }"
+                >{{ link.placeholder }}</a
+              >
+            }
+          </div>
         </div>
+        <button
+          class="border-none w-10 h-10 bg-slate-200 rounded-full"
+        ></button>
       </div>
-      <button class="user-img"></button>
     </div>
   `,
-  styleUrl: `./topbar.component.scss`,
 })
 export class TopbarComponent {
   public readonly navigationLinks = TOP_BAR_LINKS;
