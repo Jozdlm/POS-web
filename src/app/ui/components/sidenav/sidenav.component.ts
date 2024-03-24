@@ -10,18 +10,16 @@ import { IconComponent } from '@app/ui/components/icon.component';
   imports: [CommonModule, RouterModule, IconComponent],
   template: `
     <div class="flex flex-col justify-between">
-      <div class="nav nav-pills flex-column mb-auto">
+      <div>
         @for (item of navItems; track $index) {
-          <div class="nav-item">
-            <a
-              [routerLink]="['', item.path]"
-              class="nav-link link-body-emphasis nav-item-icon"
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <span>{{ item.placeholder }}</span>
-            </a>
-          </div>
+          <a
+            [routerLink]="['', item.path]"
+            class="block w-56 rounded-md px-4 py-2 text-slate-500 hover:bg-slate-100 hover:font-medium hover:text-slate-950"
+            routerLinkActive="text-slate-900 bg-slate-100 font-medium"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <span>{{ item.placeholder }}</span>
+          </a>
         }
       </div>
     </div>
