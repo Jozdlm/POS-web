@@ -14,8 +14,8 @@ import { IconComponent } from '@app/ui/components/icon.component';
         @for (item of navItems; track $index) {
           <a
             [routerLink]="['', item.path]"
-            class="block w-56 rounded-md px-4 py-2 text-slate-500 hover:bg-slate-100 hover:font-medium hover:text-slate-950"
-            routerLinkActive="text-slate-900 bg-slate-100 font-medium"
+            class="block w-56 rounded-lg px-4 py-2 font-medium text-slate-500 hover:bg-gray-100 hover:text-gray-950"
+            routerLinkActive="bg-gray-100 text-gray-950"
             [routerLinkActiveOptions]="{ exact: true }"
           >
             <span>{{ item.placeholder }}</span>
