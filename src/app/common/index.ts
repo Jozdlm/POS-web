@@ -1,4 +1,3 @@
-export * from './directives/record-status.directive';
 export * from './enums/pages';
 export * from './interfaces/filter-data';
 export * from './interfaces/nav-item';
