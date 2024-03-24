@@ -10,7 +10,11 @@ import { RouterModule } from '@angular/router';
     <h1>¡Bienvenido!</h1>
     <p>Algunos atajos rápidos que puedes tomar</p>
 
-    <a routerLink="/quotations/add/" mat-stroked-button>Nueva cotización</a>
+    <a
+      routerLink="/quotations/add/"
+      class="block max-w-max rounded-lg border px-3 py-2 hover:bg-slate-50"
+      >Nueva cotización</a
+    >
   `,
 })
 export class HomePage {}
