@@ -9,22 +9,23 @@ import { IconComponent } from '@app/ui/components/icon.component';
   standalone: true,
   imports: [CommonModule, RouterModule, IconComponent],
   template: `
-    <div class="nav nav-pills flex-column mb-auto">
-      @for (item of navItems; track $index) {
-        <div class="nav-item">
-          <a
-            [routerLink]="['', item.path]"
-            class="nav-link link-body-emphasis nav-item-icon"
-            routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <span>{{ item.placeholder }}</span>
-          </a>
-        </div>
-      }
+    <div class="flex flex-col justify-between">
+      <div class="nav nav-pills flex-column mb-auto">
+        @for (item of navItems; track $index) {
+          <div class="nav-item">
+            <a
+              [routerLink]="['', item.path]"
+              class="nav-link link-body-emphasis nav-item-icon"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <span>{{ item.placeholder }}</span>
+            </a>
+          </div>
+        }
+      </div>
     </div>
   `,
-  styleUrl: './sidenav.component.scss',
 })
 export class SidenavComponent {
   public navItems: NavItem[] = [];
