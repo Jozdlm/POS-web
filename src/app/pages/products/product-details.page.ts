@@ -96,7 +96,7 @@ import { Product } from '@app/features/products/product';
     </div>
   `,
 })
-export class ProductFormComponent {
+export class ProductDetailsPage {
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   private readonly _productService = inject(ProductService);
