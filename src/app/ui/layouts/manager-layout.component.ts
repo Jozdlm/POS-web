@@ -18,11 +18,8 @@ import { TOP_BAR_LINKS } from '../components/topbar/navigation-links';
   template: `
     <app-topbar />
 
-    <div class="flex">
-      <app-sidenav [navigationItems]="navigationLinks" class="max-w-max" />
-      <div class="mx-auto w-full max-w-screen-2xl px-4 py-6">
-        <router-outlet></router-outlet>
-      </div>
+    <div class="mx-auto w-full max-w-screen-xl px-4 py-2">
+      <router-outlet></router-outlet>
     </div>
   `,
 })
