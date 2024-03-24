@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryService } from '../../../../features/products/categories/category.service';
+import { CategoryService } from '../../../features/products/categories/category.service';
 import { RouterModule } from '@angular/router';
 import { RecordStatusDirective } from '@app/common/directives/record-status.directive';
 import { MatDialog } from '@angular/material/dialog';
-import { CategoryFormComponent } from '../category-form/category-form.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 @Component({
   standalone: true,
   imports: [CommonModule, RouterModule, RecordStatusDirective],
   template: `
-    <div class="wrapper">
+    <div class="mx-auto w-full max-w-screen-md">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="fs-3">Categorías</h1>
         <a class="btn btn-primary" routerLink="add">Nueva Categoría</a>
@@ -38,9 +38,8 @@ import { CategoryFormComponent } from '../category-form/category-form.component'
       </div>
     </div>
   `,
-  styleUrls: ['./category-list.component.scss'],
 })
-export class CategoryListComponent {
+export class CategoryListPage {
   private _categoryService = inject(CategoryService);
   private _dialogRef = inject(MatDialog);
 
