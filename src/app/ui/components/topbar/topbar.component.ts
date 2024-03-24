@@ -11,7 +11,7 @@ import { TOP_BAR_LINKS } from './navigation-links';
   template: `
     <div class="block border-b border-slate-200">
       <div
-        class="py-3 px-4 flex items-center justify-between mx-auto max-w-screen-xl"
+        class="py-2 px-4 flex items-center justify-between mx-auto max-w-screen-xl"
       >
         <div class="flex items-center p-0 gap-x-10">
           <button
@@ -38,7 +38,7 @@ import { TOP_BAR_LINKS } from './navigation-links';
           </div>
         </div>
         <button
-          class="border-none w-10 h-10 bg-slate-200 rounded-full"
+          class="border-none w-9 h-9 bg-slate-200 rounded-full"
         ></button>
       </div>
     </div>

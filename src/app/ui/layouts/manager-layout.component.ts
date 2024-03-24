@@ -23,6 +23,4 @@ import { TOP_BAR_LINKS } from '../components/topbar/navigation-links';
     </div>
   `,
 })
-export class ManagerLayoutComponent {
-  public navigationLinks = TOP_BAR_LINKS;
-}
+export class ManagerLayoutComponent {}
