@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SessionService } from '@app/features/auth/session.service';
 import { RouterModule } from '@angular/router';
+import { customEmailValidator } from '@app/features/auth/auth.validators';
 
 @Component({
   standalone: true,
@@ -58,9 +59,11 @@ export class LoginPage {
   private readonly _formBuilder = inject(FormBuilder);
   private readonly _sessionService = inject(SessionService);
 
-  // TODO: Validate if the email is valide with custom validator
   public loginForm = this._formBuilder.nonNullable.group({
-    email: ['', [Validators.required, Validators.minLength(3)]],
+    email: [
+      '',
+      [Validators.required, Validators.minLength(3), customEmailValidator],
+    ],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
