@@ -6,18 +6,19 @@ import { IconComponent } from '@app/ui/components/icon.component';
 
 @Component({
   standalone: true,
+  imports: [CommonModule, RouterModule, IconComponent],
   template: `
-    <div class="view-wrapper">
+    <div class="mx-auto w-full max-w-screen-md">
       <div class="mb-5">
-        <h1 class="fs-3 mb-lg-3">Nueva Cotización</h1>
+        <h1 class="mb-4 text-lg font-medium">Nueva Cotización</h1>
 
-        <div class="d-flex column-gap-3">
+        <div class="flex max-w-max rounded-md bg-slate-200 p-1">
           @for (item of tabItems; track $index) {
             <button
               type="button"
-              class="btn btn-sm"
+              class="rounded-lg px-3 py-2 text-sm"
               [routerLink]="['./' + item.path]"
-              routerLinkActive="btn-primary"
+              routerLinkActive="bg-slate-600 text-white"
               [disabled]="disableTab(item.path)"
             >
               {{ item.label }}
@@ -25,13 +26,11 @@ import { IconComponent } from '@app/ui/components/icon.component';
           }
         </div>
       </div>
-      <div class="row w-100">
+      <div class="mx-auto w-full">
         <router-outlet></router-outlet>
       </div>
     </div>
   `,
-  styleUrl: './add-quotation.page.scss',
-  imports: [CommonModule, RouterModule, IconComponent],
 })
 export class AddQuotationPage {
   private readonly _quotationState = inject(QuotationStateService);
