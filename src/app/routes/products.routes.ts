@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ProductListPage } from './products/product-list.page';
-import { ProductFormComponent } from './products/product-form/product-form.component';
+import { ProductListPage } from '../pages/products/product-list.page';
+import { ProductFormComponent } from '../pages/products/product-form/product-form.component';
 
 const PRODUCT_ROUTES: Routes = [
   { path: '', pathMatch: 'full', component: ProductListPage },
