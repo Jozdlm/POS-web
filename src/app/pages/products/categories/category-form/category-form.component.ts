@@ -7,68 +7,72 @@ import { Category } from '@app/features/products/categories/category';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-category-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   template: `
-    <div class="wrapper">
-      <h1 class="fs-3 mb-4">Crear categoría</h1>
+    <div class="mx-auto w-full max-w-[480px]">
+      <h1 class="font-lg mb-4">Crear categoría</h1>
       <form
         [formGroup]="categoryForm"
         (ngSubmit)="saveChanges()"
         autocomplete="off"
       >
-        <div class="form-floating mb-3">
+        <div class="mb-4 flex flex-col">
+          <label for="categoryName" class="mb-1 text-sm">Nombre</label>
           <input
             type="text"
-            class="form-control"
+            class="rounded-lg border border-slate-400 px-3 py-2 placeholder:text-sm placeholder:text-slate-500"
             id="categoryName"
-            placeholder="Nombre"
+            placeholder="Utensilios de oficina"
             formControlName="name"
           />
-          <label for="categoryName">Nombre</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="mb-4 flex flex-col">
+          <label for="slug" class="mb-1 text-sm">URL amigable (slug)</label>
           <input
             type="text"
-            class="form-control"
+            class="rounded-lg border border-slate-400 px-3 py-2 placeholder:text-sm placeholder:text-slate-500"
             id="slug"
-            placeholder="URL amigable (slug)"
+            placeholder="categoria-url-amigable"
             formControlName="slug"
           />
-          <label for="slug">URL amigable (slug)</label>
         </div>
-        <div class="form-floating mb-3">
+        <div class="mb-4 flex flex-col">
+          <label for="description" class="mb-1 text-sm">Descripción</label>
           <input
             type="text"
-            class="form-control"
+            class="rounded-lg border border-slate-400 px-3 py-2 placeholder:text-sm placeholder:text-slate-500"
             id="description"
             placeholder="Descripción"
             formControlName="description"
           />
-          <label for="description">Descripción</label>
         </div>
-        <div class="form-floating mb-4">
+        <div class="mb-4 flex flex-col">
+          <label for="categoryState" class="mb-1 text-sm">Estado</label>
           <select
-            class="form-select"
+            class="rounded-lg border border-slate-400 px-3 py-2 placeholder:text-sm placeholder:text-slate-500"
             id="categoryState"
             formControlName="isActive"
           >
             <option value="false">Inactivo</option>
             <option value="true">Activo</option>
           </select>
-          <label for="categoryState">Estado</label>
         </div>
-        <div class="d-flex justify-content-end column-gap-2">
-          <button type="button" class="btn" (click)="cancelAndReset()">
+        <div class="flex justify-end gap-x-4">
+          <button
+            type="button"
+            class="rounded-lg border border-slate-200 px-3 py-2"
+            (click)="cancelAndReset()"
+          >
             Cancelar
           </button>
-          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          <button type="submit" class="rounded-lg bg-slate-200 px-3 py-2">
+            Guardar cambios
+          </button>
         </div>
       </form>
     </div>
   `,
-  styleUrl: './category-form.component.scss',
 })
 export class CategoryFormComponent {
   private readonly _activatedRoute = inject(ActivatedRoute);
@@ -77,7 +81,6 @@ export class CategoryFormComponent {
   private readonly _subscription = new Subscription();
   public categoryId: number | null = null;
 
-  // TODO: Generate dinamicly the category slug
   public categoryForm = inject(FormBuilder).nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     description: [''],
