@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavItem, SidenavComponent } from '@app/common';
+import { SidenavComponent } from '@app/ui';
 import { RouterModule } from '@angular/router';
+import { NavItem } from '@app/common';
 
 @Component({
   standalone: true,

@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavItem } from '@app/common/interfaces/nav-item';
 import { RouterModule } from '@angular/router';
-import { IconComponent } from '@app/common/components/icon.component';
+import { IconComponent } from '@app/ui/components/icon.component';
 
 @Component({
   selector: 'app-sidenav',

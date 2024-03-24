@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { IconComponent } from '@app/common/components/icon.component';
+import { IconComponent } from '@app/ui/components/icon.component';
 import { Product } from '@app/features/products/product';
 import { QuotationStateService } from '@app/features/quotes/quotation-state.service';
 import { RouterModule } from '@angular/router';

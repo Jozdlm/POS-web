@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SidenavComponent } from '../../common/components/sidenav/sidenav.component';
+import { SidenavComponent } from '../components/sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
-import { IconComponent } from '@app/common/components/icon.component';
-import { TopbarComponent } from '@app/common/components/topbar/topbar.component';
+import { IconComponent } from '@app/ui/components/icon.component';
+import { TopbarComponent } from '@app/ui/components/topbar/topbar.component';
 
 @Component({
   standalone: true,
