@@ -8,11 +8,93 @@ import { Subscription, of, switchMap } from 'rxjs';
 import { Product } from '@app/features/products/product';
 
 @Component({
-  selector: 'app-product-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './product-form.component.html',
-  styleUrl: './product-form.component.scss',
+  template: `
+    <div class="mx-auto w-full max-w-[480px]">
+      <h1 class="fs-4 mb-4">{{ pageTitle }}</h1>
+      <form
+        autocomplete="off"
+        [formGroup]="productForm"
+        (ngSubmit)="onSubmitForm()"
+      >
+        <div class="mb-3">
+          <label for="productName" class="form-label">Producto</label>
+          <input
+            type="text"
+            class="form-control"
+            id="productName"
+            formControlName="name"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="barcode" class="form-label">Código Barras</label>
+          <input
+            type="text"
+            class="form-control"
+            id="barcode"
+            formControlName="barcode"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="sellingPrice" class="form-label">Precio Venta</label>
+          <input
+            type="number"
+            step="0.01"
+            min="0.00"
+            class="form-control"
+            id="sellingPrice"
+            formControlName="sellingPrice"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">Categoría</label>
+          <select
+            class="form-select"
+            id="category"
+            formControlName="categoryId"
+          >
+            <option value="0">Escoge una categoría</option>
+            @for (item of categories$ | async; track item.id) {
+              <option [value]="item.id">{{ item.name }}</option>
+            }
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="stockStatus" class="form-label">Inventario</label>
+          <select
+            class="form-select"
+            id="stockStatus"
+            formControlName="inStock"
+          >
+            <option value="false">Sin existencias</option>
+            <option value="true" selected>Con Existencias</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="productStatus" class="form-label">Estado</label>
+          <select
+            class="form-select"
+            id="productStatus"
+            formControlName="isActive"
+          >
+            <option value="false">Desactivado</option>
+            <option value="true" selected>Activo</option>
+          </select>
+        </div>
+        <div class="d-flex column-gap-2">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="resetAndReturn()"
+          >
+            Cancelar
+          </button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </form>
+    </div>
+  `,
 })
 export class ProductFormComponent {
   private readonly _activatedRoute = inject(ActivatedRoute);
