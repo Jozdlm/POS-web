@@ -9,7 +9,7 @@ export const APP_ROUTES: Routes = [
   {
     path: PagePrefix.AUTH,
     canActivate: [anonClientGuard],
-    loadChildren: () => import('./pages/auth/auth.routes'),
+    loadChildren: () => import('./pages/auth.routes'),
   },
   {
     path: '',
@@ -23,7 +23,7 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: PagePrefix.QUOTATIONS,
-        loadChildren: () => import('./pages/quotes/quotation.routes'),
+        loadChildren: () => import('./pages/quotation.routes'),
       },
       {
         path: PagePrefix.CATEGORIES,
@@ -31,7 +31,7 @@ export const APP_ROUTES: Routes = [
           import('./ui/layouts/catalog-layout.component').then(
             (c) => c.CatalogLayoutComponent,
           ),
-        loadChildren: () => import('./pages/products/categories/categories.routes'),
+        loadChildren: () => import('./pages/categories.routes'),
       },
       {
         path: PagePrefix.PRODUCTS,
@@ -39,7 +39,7 @@ export const APP_ROUTES: Routes = [
           import('./ui/layouts/catalog-layout.component').then(
             (c) => c.CatalogLayoutComponent,
           ),
-        loadChildren: () => import('./pages/products/products.routes'),
+        loadChildren: () => import('./pages/products.routes'),
       },
       {
         path: PagePrefix.SCHOOLS,

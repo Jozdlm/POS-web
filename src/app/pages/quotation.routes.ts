@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { QuotationComponent } from './quotation-list/quotation.component';
-import { AddQuotationPage } from './add-quotation/add-quotation.page';
-import { QuotationDetailsComponent } from './quotation-details/quotation-details.component';
-import { QuoteItemsComponent } from './tabs/quote-items.component';
-import { QuoteHeaderComponent } from './tabs/quote-header.component';
-import { QuoteConfirmationComponent } from './tabs/quote-confirmation.component';
+import { QuotationComponent } from './quotes/quotation-list/quotation.component';
+import { AddQuotationPage } from './quotes/add-quotation/add-quotation.page';
+import { QuotationDetailsComponent } from './quotes/quotation-details/quotation-details.component';
+import { QuoteItemsComponent } from './quotes/tabs/quote-items.component';
+import { QuoteHeaderComponent } from './quotes/tabs/quote-header.component';
+import { QuoteConfirmationComponent } from './quotes/tabs/quote-confirmation.component';
 import { quoteConfirmationGuard } from '@app/features/quotes/quote-confirmation.guard';
-import { SchoolGradesPage } from './school-grades/school-grades.page';
-import { EducationalCentersPage } from './educational-centers/educational-centers.page';
-import { SchoolFormComponent } from './school-form/school-form.component';
+import { SchoolGradesPage } from './quotes/school-grades/school-grades.page';
+import { EducationalCentersPage } from './quotes/educational-centers/educational-centers.page';
+import { SchoolFormComponent } from './quotes/school-form/school-form.component';
 
 const QUOTATION_ROUTES: Routes = [
   {
