@@ -7,22 +7,29 @@ import { RouterModule } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 import { debounceSearch } from '@app/common/utils/debounce-search';
 import { Product } from '@app/features/products/product';
+import { InputFieldDirective } from '@app/ui';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    InputFieldDirective,
+  ],
   template: `
     <h1 class="fs-3 mb-3">Productos</h1>
 
     <div>
       <div class="d-flex justify-content-between">
         <div>
-          <div class="d-flex mb-2 align-items-center">
+          <div class="d-flex align-items-center mb-2">
             <input
               type="text"
               placeholder="Buscar producto"
               [formControl]="searchControl"
-              class="form-control"
+              uiInputField
+              class="w-full"
             />
             <button class="btn" (click)="clearSearchQuery()">Limpiar</button>
           </div>
@@ -97,7 +104,7 @@ import { Product } from '@app/features/products/product';
           <div
             class="list-group-item d-flex justify-content-between align-items-center"
           >
-            <div class="ms-2 me-auto">
+            <div class="me-auto ms-2">
               <div class="fw-medium">
                 <a [routerLink]="['edit', item.id]" class="text-dark">{{
                   item.name
@@ -105,7 +112,7 @@ import { Product } from '@app/features/products/product';
               </div>
               <div class="small-text">{{ item.barcode }}</div>
             </div>
-            <div class="d-flex ms-3 column-gap-5 align-items-center">
+            <div class="d-flex column-gap-5 align-items-center ms-3">
               <p class="mb-0">{{ item.sellingPrice | currency: 'GTQ' }}</p>
               <div>
                 <span class="badge bg-success rounded-pill">{{
