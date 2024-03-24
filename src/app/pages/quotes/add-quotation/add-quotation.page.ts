@@ -6,7 +6,30 @@ import { IconComponent } from '@app/ui/components/icon.component';
 
 @Component({
   standalone: true,
-  templateUrl: './add-quotation.page.html',
+  template: `
+    <div class="view-wrapper">
+      <div class="mb-5">
+        <h1 class="fs-3 mb-lg-3">Nueva Cotización</h1>
+
+        <div class="d-flex column-gap-3">
+          @for (item of tabItems; track $index) {
+            <button
+              type="button"
+              class="btn btn-sm"
+              [routerLink]="['./' + item.path]"
+              routerLinkActive="btn-primary"
+              [disabled]="disableTab(item.path)"
+            >
+              {{ item.label }}
+            </button>
+          }
+        </div>
+      </div>
+      <div class="row w-100">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  `,
   styleUrl: './add-quotation.page.scss',
   imports: [CommonModule, RouterModule, IconComponent],
 })
