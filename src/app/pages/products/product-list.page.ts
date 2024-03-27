@@ -105,34 +105,29 @@ import { InputFieldDirective } from '@app/ui';
           </div>
         </div>
       }
-      <div class="list-group">
-        @for (item of listState; track item.id) {
-          <div
-            class="list-group-item d-flex justify-content-between align-items-center"
-          >
-            <div class="me-auto ms-2">
-              <div class="fw-medium">
-                <a [routerLink]="['edit', item.id]" class="text-dark">{{
-                  item.name
-                }}</a>
-              </div>
-              <div class="small-text">{{ item.barcode }}</div>
-            </div>
-            <div class="d-flex column-gap-5 align-items-center ms-3">
-              <p class="mb-0">{{ item.sellingPrice | currency: 'GTQ' }}</p>
-              <div>
-                <span class="badge bg-success rounded-pill">{{
-                  item.inStock ? 'En Stock' : 'Sin Stock'
-                }}</span>
-              </div>
-              <div>
-                <span class="badge bg-success rounded-pill">{{
-                  item.isActive ? 'Activo' : 'Inactivo'
-                }}</span>
-              </div>
-            </div>
-          </div>
-        }
+      <div>
+        <table class="w-full">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Código</th>
+              <th>Precio Venta</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of listState; track item.id) {
+              <tr>
+                <td>
+                  <a [routerLink]="['edit', item.id]">{{ item.name }}</a>
+                </td>
+                <td>{{ item.barcode }}</td>
+                <td>{{ item.sellingPrice | currency: 'GTQ' }}</td>
+                <td>{{ item.isActive ? 'Activo' : 'Inactivo' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
     </div>
   `,
