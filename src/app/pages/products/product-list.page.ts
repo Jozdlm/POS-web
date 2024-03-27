@@ -23,7 +23,7 @@ import { InputFieldDirective } from '@app/ui';
     <div>
       <div class="d-flex justify-content-between">
         <div>
-          <div class="d-flex align-items-center mb-2">
+          <div class="d-flex align-items-center relative mb-2">
             <input
               type="text"
               placeholder="Buscar producto"
@@ -31,7 +31,13 @@ import { InputFieldDirective } from '@app/ui';
               uiInputField
               class="w-full"
             />
-            <button class="btn" (click)="clearSearchQuery()">Limpiar</button>
+            <button
+              [hidden]="searchControl.value?.length == 0"
+              class="absolute right-3 top-1/4"
+              (click)="clearSearchQuery()"
+            >
+              Limpiar
+            </button>
           </div>
           <p class="small-text">
             Mostrando {{ listState.length }} resultados de
