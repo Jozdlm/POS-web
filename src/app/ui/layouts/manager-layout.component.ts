@@ -16,11 +16,16 @@ import { TOP_BAR_LINKS } from '../components/topbar/navigation-links';
     IconComponent,
   ],
   template: `
-    <app-topbar />
-
-    <div class="mx-auto w-full max-w-screen-xl px-4 py-2">
-      <router-outlet></router-outlet>
+    <div
+      class="grid w-full max-w-[100vw] grid-cols-[280px_minmax(max-content,_1fr)]"
+    >
+      <app-sidenav [navigationItems]="navItems" />
+      <div class="mx-auto w-full max-w-screen-lg px-4 py-2">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   `,
 })
-export class ManagerLayoutComponent {}
+export class ManagerLayoutComponent {
+  public readonly navItems = TOP_BAR_LINKS;
+}
