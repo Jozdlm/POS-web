@@ -4,7 +4,7 @@ import { SidenavComponent } from '../components/sidenav/sidenav.component';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from '@app/ui/components/icon.component';
 import { TopbarComponent } from '@app/ui/components/topbar/topbar.component';
-import { TOP_BAR_LINKS } from '../components/topbar/navigation-links';
+import { NAVIGATION_LINKS } from '../../common/constants/navigation-links';
 
 @Component({
   standalone: true,
@@ -29,5 +29,5 @@ import { TOP_BAR_LINKS } from '../components/topbar/navigation-links';
   `,
 })
 export class ManagerLayoutComponent {
-  public readonly navItems = TOP_BAR_LINKS;
+  public readonly navItems = NAVIGATION_LINKS;
 }

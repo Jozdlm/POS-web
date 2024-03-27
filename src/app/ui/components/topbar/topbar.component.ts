@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { TOP_BAR_LINKS } from './navigation-links';
+import { NAVIGATION_LINKS } from '../../../common/constants/navigation-links';
 
 @Component({
   selector: 'app-topbar',
@@ -45,5 +45,5 @@ import { TOP_BAR_LINKS } from './navigation-links';
   `,
 })
 export class TopbarComponent {
-  public readonly navigationLinks = TOP_BAR_LINKS;
+  public readonly navigationLinks = NAVIGATION_LINKS;
 }
