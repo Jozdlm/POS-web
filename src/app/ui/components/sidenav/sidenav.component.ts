@@ -9,13 +9,13 @@ import { IconComponent } from '@app/ui/components/icon.component';
   standalone: true,
   imports: [CommonModule, RouterModule, IconComponent],
   template: `
-    <div class="flex flex-col justify-between">
+    <div class="h-full w-full bg-slate-50 p-4">
       <div>
         @for (item of navItems; track $index) {
           <a
             [routerLink]="['', item.path]"
-            class="block w-56 rounded-lg px-4 py-2 font-medium text-slate-500 hover:bg-gray-100 hover:text-gray-950"
-            routerLinkActive="bg-gray-100 text-gray-950"
+            class="block rounded-lg px-4 py-2 text-slate-800 hover:bg-slate-200 hover:text-slate-950"
+            routerLinkActive="bg-slate-200 text-slate-950"
             [routerLinkActiveOptions]="{ exact: true }"
           >
             <span>{{ item.placeholder }}</span>
