@@ -21,9 +21,9 @@ import { InputFieldDirective } from '@app/ui';
     <h1 class="fs-3 mb-3">Productos</h1>
 
     <div>
-      <div class="d-flex justify-content-between">
+      <div class="mb-6">
         <div>
-          <div class="d-flex align-items-center relative mb-2">
+          <div class="d-flex align-items-center relative mb-3">
             <input
               type="text"
               placeholder="Buscar producto"
@@ -39,20 +39,18 @@ import { InputFieldDirective } from '@app/ui';
               Limpiar
             </button>
           </div>
-          <p class="small-text">
-            Mostrando {{ listState.length }} resultados de
-            {{ productCount$ | async }}
-          </p>
         </div>
-
-        <div class="d-flex column-gap-2 align-items-start">
+        <div class="flex items-center justify-between">
           <button
-            class="btn btn-outline-secondary"
+            class="max-w-max rounded-md border border-slate-300 px-3 py-2 hover:bg-slate-50"
             (click)="toggleDisplayFilters()"
           >
             Filtrar
           </button>
-          <button class="btn btn-primary" routerLink="add">
+          <button
+            class="max-w-max rounded-md border border-slate-300 px-3 py-2 hover:bg-slate-50"
+            routerLink="add"
+          >
             Nuevo Producto
           </button>
         </div>
@@ -106,6 +104,10 @@ import { InputFieldDirective } from '@app/ui';
         </div>
       }
       <div>
+        <p class="small-text">
+          Mostrando {{ listState.length }} resultados de
+          {{ productCount$ | async }}
+        </p>
         <table class="w-full">
           <thead>
             <tr>
@@ -119,7 +121,9 @@ import { InputFieldDirective } from '@app/ui';
             @for (item of listState; track item.id) {
               <tr>
                 <td>
-                  <a [routerLink]="['edit', item.id]">{{ item.name }}</a>
+                  <a [routerLink]="['edit', item.id]" class="hover:underline">{{
+                    item.name
+                  }}</a>
                 </td>
                 <td>{{ item.barcode }}</td>
                 <td>{{ item.sellingPrice | currency: 'GTQ' }}</td>
