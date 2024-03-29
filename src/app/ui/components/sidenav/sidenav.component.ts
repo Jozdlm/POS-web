@@ -9,7 +9,7 @@ import { IconComponent } from '@app/ui/components/icon.component';
   standalone: true,
   imports: [CommonModule, RouterModule, IconComponent],
   template: `
-    <div class="h-full w-full bg-slate-50 p-4">
+    <div class="h-full w-full p-4">
       <div>
         @for (item of navItems; track $index) {
           <a

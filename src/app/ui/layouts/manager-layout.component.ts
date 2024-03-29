@@ -17,10 +17,10 @@ import { NAVIGATION_LINKS } from '../../common/constants/navigation-links';
   ],
   template: `
     <div
-      class="grid w-full h-full max-w-[100vw] grid-cols-[280px_minmax(max-content,_1fr)]"
+      class="grid h-full w-full max-w-[100vw] grid-cols-[280px_minmax(max-content,_1fr)]"
     >
-      <app-sidenav [navigationItems]="navItems" />
-      <div class="max-h-screen w-full overflow-auto p-4">
+      <app-sidenav [navigationItems]="navItems" class="border-r border-r-slate-300" />
+      <div class="max-h-screen w-full overflow-auto py-8">
         <div class="mx-auto max-w-screen-md">
           <router-outlet></router-outlet>
         </div>
