@@ -15,7 +15,7 @@ import { InputFieldDirective } from '@app/ui';
     <div
       class="mx-auto w-full max-w-max rounded-lg border border-slate-300 px-6 py-4"
     >
-      <h1 class="text-base mb-4 font-medium text-slate-900">{{ pageTitle }}</h1>
+      <h1 class="mb-4 text-base font-medium text-slate-900">Agregar nuevo producto</h1>
       <form
         class="border-t border-t-slate-300 pt-6"
         autocomplete="off"
@@ -138,13 +138,10 @@ import { InputFieldDirective } from '@app/ui';
   `,
 })
 export class AddProductPage {
-  private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _router = inject(Router);
   private readonly _productService = inject(ProductService);
   private readonly _subscriptions = new Subscription();
   public readonly categories$ = inject(CategoryService).getCategories();
-  public productId: number | null = null;
-  public pageTitle: string = 'Agregar nuevo producto';
 
   public productForm = inject(FormBuilder).nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -156,59 +153,19 @@ export class AddProductPage {
   });
 
   constructor() {
-    this._subscriptions.add(this.getProductDetails());
     inject(DestroyRef).onDestroy(() => this._subscriptions.unsubscribe());
   }
 
-  public getProductDetails(): Subscription {
-    return this._activatedRoute.paramMap
-      .pipe(
-        switchMap((params) => {
-          const id = params.get('id');
-
-          if (id) {
-            this.productId = parseInt(id);
-            this.pageTitle = 'Editar producto';
-            return this._productService.getProductById(this.productId);
-          }
-
-          return of(null);
-        }),
-      )
-      .subscribe((resp) => {
-        if (resp) {
-          this.setInitialValues(resp);
-        }
-      });
-  }
-
-  public setInitialValues(src: Product): void {
-    const { name, barcode, sellingPrice, categoryId, inStock, isActive } = src;
-    this.productForm.setValue({
-      name,
-      barcode,
-      sellingPrice,
-      categoryId,
-      inStock,
-      isActive,
-    });
-  }
-
   public onSubmitForm(): void {
-    if (this.productId) {
+    if (this.productForm.valid) {
       const values = this.productForm.getRawValue();
-      this._productService
-        .updateProduct(this.productId, { ...values })
-        .subscribe({
+
+      this._subscriptions.add(
+        this._productService.createProduct({ ...values }).subscribe({
           next: (_) => this.resetAndReturn(),
           error: (err) => console.log(err),
-        });
-    } else {
-      const values = this.productForm.getRawValue();
-      this._productService.createProduct({ ...values }).subscribe({
-        next: (_) => this.resetAndReturn(),
-        error: (err) => console.log(err),
-      });
+        }),
+      );
     }
   }
 
