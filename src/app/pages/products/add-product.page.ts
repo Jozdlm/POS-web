@@ -1,11 +1,10 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '@app/features/products/categories/category.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '@app/features/products/product.service';
-import { Subscription, of, switchMap } from 'rxjs';
-import { Product } from '@app/features/products/product';
+import { Subscription } from 'rxjs';
 import { InputFieldDirective } from '@app/ui';
 
 @Component({
@@ -15,7 +14,9 @@ import { InputFieldDirective } from '@app/ui';
     <div
       class="mx-auto w-full max-w-max rounded-lg border border-slate-300 px-6 py-4"
     >
-      <h1 class="mb-4 text-base font-medium text-slate-900">Agregar nuevo producto</h1>
+      <h1 class="mb-4 text-base font-medium text-slate-900">
+        Agregar nuevo producto
+      </h1>
       <form
         class="border-t border-t-slate-300 pt-6"
         autocomplete="off"
