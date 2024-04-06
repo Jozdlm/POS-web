@@ -8,6 +8,8 @@ import { Subscription, switchMap } from 'rxjs';
 import { debounceSearch } from '@app/common/utils/debounce-search';
 import { Product } from '@app/features/products/product';
 import { InputFieldDirective } from '@app/ui';
+import { Dialog, DialogModule } from '@angular/cdk/dialog';
+import { AddProductPage } from './add-product.page';
 
 @Component({
   standalone: true,
@@ -16,9 +18,10 @@ import { InputFieldDirective } from '@app/ui';
     ReactiveFormsModule,
     RouterModule,
     InputFieldDirective,
+    DialogModule,
   ],
   template: `
-    <h1 class="fs-3 mb-3">Productos</h1>
+    <h1 class="text-xl mb-3">Productos</h1>
 
     <div>
       <div class="mb-6">
@@ -48,8 +51,8 @@ import { InputFieldDirective } from '@app/ui';
             Filtrar
           </button>
           <button
-            class="max-w-max rounded-md border border-slate-300 px-3 py-2 hover:bg-slate-50"
-            routerLink="add"
+            class="rounded-md bg-slate-700 px-3 py-2 text-white"
+            (click)="openDialog()"
           >
             Nuevo Producto
           </button>
@@ -111,10 +114,10 @@ import { InputFieldDirective } from '@app/ui';
         <table class="w-full">
           <thead>
             <tr>
-              <th>Producto</th>
-              <th>Código</th>
-              <th>Precio Venta</th>
-              <th>Estado</th>
+              <th class="font-medium">Producto</th>
+              <th class="font-medium">Código</th>
+              <th class="font-medium">Precio Venta</th>
+              <th class="font-medium">Estado</th>
             </tr>
           </thead>
           <tbody>
@@ -147,10 +150,16 @@ export class ProductListPage {
 
   public initialProducts$ = this._productService.getProducts({ limit: 50 });
 
+  public dialog = inject(Dialog);
+
   constructor() {
     this._subscriptions.add(this.getProductList());
     this._subscriptions.add(this.searchProduct());
     inject(DestroyRef).onDestroy(() => this._subscriptions.unsubscribe());
+  }
+
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(AddProductPage);
   }
 
   public getProductList(): Subscription {

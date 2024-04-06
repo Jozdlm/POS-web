@@ -6,13 +6,14 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '@app/features/products/product.service';
 import { Subscription } from 'rxjs';
 import { InputFieldDirective } from '@app/ui';
+import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, InputFieldDirective],
   template: `
     <div
-      class="mx-auto w-full max-w-max rounded-lg border border-slate-300 px-6 py-4"
+      class="mx-auto block w-full max-w-max rounded-lg bg-white px-6 py-4"
     >
       <h1 class="mb-4 text-base font-medium text-slate-900">
         Agregar nuevo producto
@@ -41,7 +42,7 @@ import { InputFieldDirective } from '@app/ui';
           <label
             for="barcode"
             class="inline-block w-40 font-medium text-gray-700"
-            >Código Barras</label
+            >SKU</label
           >
           <input
             uiInputField
@@ -80,6 +81,7 @@ import { InputFieldDirective } from '@app/ui';
             uiInputField
           >
             <option value="0">Escoge una categoría</option>
+            <option value="">Nueva categoría</option>
             @for (item of categories$ | async; track item.id) {
               <option [value]="item.id">{{ item.name }}</option>
             }
@@ -153,6 +155,8 @@ export class AddProductPage {
     isActive: [true, Validators.required],
   });
 
+  public dialogRef = inject(DialogRef);
+
   constructor() {
     inject(DestroyRef).onDestroy(() => this._subscriptions.unsubscribe());
   }
@@ -172,6 +176,6 @@ export class AddProductPage {
 
   public resetAndReturn(): void {
     this.productForm.reset();
-    this._router.navigateByUrl('products');
+    this.dialogRef.close();
   }
 }
