@@ -10,6 +10,7 @@ import { Product } from '@app/features/products/product';
 import { InputFieldDirective } from '@app/ui';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { AddProductPage } from './add-product.page';
+import { TableFiltersDialogComponent } from '@app/features/products/_components/table-filters-dialog.component';
 
 @Component({
   standalone: true,
@@ -21,7 +22,7 @@ import { AddProductPage } from './add-product.page';
     DialogModule,
   ],
   template: `
-    <h1 class="text-xl mb-3">Productos</h1>
+    <h1 class="mb-3 text-xl">Productos</h1>
 
     <div>
       <div class="mb-6">
@@ -46,66 +47,18 @@ import { AddProductPage } from './add-product.page';
         <div class="flex items-center justify-between">
           <button
             class="max-w-max rounded-md border border-slate-300 px-3 py-2 hover:bg-slate-50"
-            (click)="toggleDisplayFilters()"
+            (click)="openFiltersDialog()"
           >
             Filtrar
           </button>
           <button
             class="rounded-md bg-slate-700 px-3 py-2 text-white"
-            (click)="openDialog()"
+            (click)="openProductDialog()"
           >
             Nuevo Producto
           </button>
         </div>
       </div>
-      @if (diplayFilters) {
-        <div class="mb-4">
-          <div class="mb-3">
-            <p class="fw-medium mb-1">Categorías</p>
-            <form>
-              @for (item of categories$ | async; track item.id) {
-                <div class="form-check">
-                  <input
-                    type="checkbox"
-                    [id]="item.name"
-                    title="category checkbox"
-                    class="form-check-input"
-                  />
-                  <label [for]="item.name" class="form-check-label">
-                    {{ item.name }}
-                  </label>
-                </div>
-              }
-            </form>
-          </div>
-          <div class="mb-3">
-            <label for="stockSelect" class="form-label fw-medium"
-              >Existencias</label
-            >
-            <select
-              class="form-select form-select-sm"
-              aria-label="Stock select"
-              id="stockSelect"
-            >
-              <option selected>Todos los registros</option>
-              <option value="true">En existencia</option>
-              <option value="false">Sin existencias</option>
-            </select>
-          </div>
-          <div>
-            <label for="stateSelect" class="form-label fw-medium">Estado</label>
-            <select
-              class="form-select form-select-sm"
-              aria-label="State select"
-              id="stateSelect"
-            >
-              <option selected>Todos los registros</option>
-              <option value="true">Activo</option>
-              <option value="false">Inactivo</option>
-            </select>
-          </div>
-        </div>
-      }
       <div>
         <p class="small-text">
           Mostrando {{ listState.length }} resultados de
@@ -158,8 +111,14 @@ export class ProductListPage {
     inject(DestroyRef).onDestroy(() => this._subscriptions.unsubscribe());
   }
 
-  public openDialog(): void {
-    const dialogRef = this.dialog.open(AddProductPage);
+  public openProductDialog(): void {
+    this.dialog.open(AddProductPage);
+  }
+
+  public openFiltersDialog(): void {
+    this.dialog.open(TableFiltersDialogComponent, {
+      data: this.categories$,
+    });
   }
 
   public getProductList(): Subscription {
@@ -192,9 +151,5 @@ export class ProductListPage {
 
   public clearSearchQuery(): void {
     this.searchControl.setValue('');
-  }
-
-  public toggleDisplayFilters(): void {
-    this.diplayFilters = !this.diplayFilters;
   }
 }
