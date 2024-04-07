@@ -1,16 +1,18 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from '@app/features/products/product.service';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { CategoryService } from '@app/features/products/categories/category.service';
 import { RouterModule } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 import { debounceSearch } from '@app/common/utils/debounce-search';
-import { Product } from '@app/features/products/product';
 import { InputFieldDirective } from '@app/ui';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { AddProductPage } from './add-product.page';
-import { TableFiltersDialogComponent } from '@app/features/products/_components/table-filters-dialog.component';
+import {
+  TableFiltersDialogComponent,
+  Product,
+  ProductService,
+  CategoryService,
+} from '@app/features/products';
 
 @Component({
   standalone: true,
