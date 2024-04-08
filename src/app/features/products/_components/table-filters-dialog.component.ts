@@ -60,8 +60,12 @@ import { InputFieldDirective } from '@app/ui';
         </select>
       </div>
       <div>
-        <button>Cancelar</button>
-        <button>Filtrar</button>
+        <button class="rounded-md border border-slate-300 px-3 py-2">
+          Cancelar
+        </button>
+        <button class="rounded-md bg-slate-700 px-3 py-2 text-white">
+          Filtrar
+        </button>
       </div>
     </div>
   `,
