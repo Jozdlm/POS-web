@@ -1,7 +1,7 @@
 import { DIALOG_DATA } from '@angular/cdk/dialog';
 import { Component, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Category } from '../categories/category';
+import { Category } from '@app/features/products/categories/category';
 import { CommonModule } from '@angular/common';
 import { InputFieldDirective } from '@app/ui';
 

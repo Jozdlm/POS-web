@@ -8,11 +8,11 @@ import { InputFieldDirective } from '@app/ui';
 import { Dialog, DialogModule } from '@angular/cdk/dialog';
 import { AddProductPage } from './add-product.page';
 import {
-  TableFiltersDialogComponent,
   Product,
   ProductService,
   CategoryService,
 } from '@app/features/products';
+import { TableFiltersDialogComponent } from './_components/table-filters-dialog.component';
 
 @Component({
   standalone: true,
