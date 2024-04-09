@@ -1,5 +1,5 @@
-import { DIALOG_DATA } from '@angular/cdk/dialog';
-import { Component, Inject } from '@angular/core';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { Component, Inject, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Category } from '@app/features/products/categories/category';
 import { CommonModule } from '@angular/common';
@@ -60,7 +60,10 @@ import { InputFieldDirective } from '@app/ui';
         </select>
       </div>
       <div>
-        <button class="rounded-md border border-slate-300 px-3 py-2">
+        <button
+          class="rounded-md border border-slate-300 px-3 py-2"
+          (click)="closeDialog()"
+        >
           Cancelar
         </button>
         <button class="rounded-md bg-slate-700 px-3 py-2 text-white">
@@ -71,7 +74,13 @@ import { InputFieldDirective } from '@app/ui';
   `,
 })
 export class TableFiltersDialogComponent {
+  public dialogRef = inject(DialogRef);
+
   constructor(
     @Inject(DIALOG_DATA) public categories$: Observable<Category[]>,
   ) {}
+
+  public closeDialog(): void {
+    this.dialogRef.close();
+  }
 }
