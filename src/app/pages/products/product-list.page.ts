@@ -28,8 +28,8 @@ import { TableFiltersDialogComponent } from './_components/table-filters-dialog.
 
     <div>
       <div class="mb-6">
-        <div>
-          <div class="d-flex align-items-center relative mb-3">
+        <div class="mb-3 flex gap-x-2">
+          <div class="d-flex align-items-center relative flex-grow">
             <input
               type="text"
               placeholder="Buscar producto"
@@ -45,8 +45,6 @@ import { TableFiltersDialogComponent } from './_components/table-filters-dialog.
               Limpiar
             </button>
           </div>
-        </div>
-        <div class="flex items-center justify-between">
           <button
             class="max-w-max rounded-md border border-slate-300 px-3 py-2 hover:bg-slate-50"
             (click)="openFiltersDialog()"
@@ -62,30 +60,32 @@ import { TableFiltersDialogComponent } from './_components/table-filters-dialog.
         </div>
       </div>
       <div>
-        <p class="small-text">
+        <p class="mb-2">
           Mostrando {{ listState.length }} resultados de
           {{ productCount$ | async }}
         </p>
-        <table class="w-full">
-          <thead>
+        <table class="w-full rounded outline outline-1 outline-slate-300">
+          <thead class="border-b border-b-slate-300 text-gray-600">
             <tr>
-              <th class="font-medium">Producto</th>
-              <th class="font-medium">Código</th>
-              <th class="font-medium">Precio Venta</th>
-              <th class="font-medium">Estado</th>
+              <th class="py-2 ps-4 text-start font-medium">Producto</th>
+              <th class="py-2 text-start font-medium">SKU</th>
+              <th class="py-2 text-start font-medium">Precio Venta</th>
+              <th class="py-2 pe-4 text-start font-medium">Estado</th>
             </tr>
           </thead>
           <tbody>
             @for (item of listState; track item.id) {
-              <tr>
-                <td>
+              <tr class="border-b border-b-slate-300 last:border-b-transparent">
+                <td class="py-3 ps-4">
                   <a [routerLink]="['edit', item.id]" class="hover:underline">{{
                     item.name
                   }}</a>
                 </td>
-                <td>{{ item.barcode }}</td>
-                <td>{{ item.sellingPrice | currency: 'GTQ' }}</td>
-                <td>{{ item.isActive ? 'Activo' : 'Inactivo' }}</td>
+                <td class="py-3">{{ item.barcode }}</td>
+                <td class="py-3">{{ item.sellingPrice | currency: 'GTQ' }}</td>
+                <td class="py-3 pe-4">
+                  {{ item.isActive ? 'Activo' : 'Inactivo' }}
+                </td>
               </tr>
             }
           </tbody>
