@@ -5,43 +5,40 @@ import { filter, switchMap, tap } from 'rxjs';
 import { ProductService } from '@app/features/products/product.service';
 import { Product } from '@app/features/products/product';
 import { debounceSearch } from '@app/common';
+import { InputFieldDirective } from '@app/ui/directives/input-field.directive';
 
 @Component({
   selector: 'app-product-select',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, InputFieldDirective],
   template: `
-    <label for="searchControl" class="form-label">Producto</label>
+    <label for="searchControl" class="mb-1 block">Producto</label>
     <input
       type="search"
-      class="form-control select-field"
       id="searchControl"
       placeholder="Buscar producto"
       [formControl]="searchControl"
       autocomplete="off"
+      uiInputField
     />
-    <div class="dropdown-wrapper">
-      <div class="list-group dropdown">
+    <div class="relative w-full">
+      <div class="absolute z-10 min-w-max rounded-md bg-white py-2 shadow">
         @for (item of results; track item.id) {
           <div
-            class="list-group-item d-flex justify-content-between align-items-center result-item"
+            class="flex cursor-pointer items-center justify-between gap-x-8 px-3 py-2 hover:bg-gray-100"
             (click)="selectItem(item)"
           >
             <div>
-              <span class="badge bg-success rounded-pill">{{ ' ' }}</span>
-            </div>
-            <div class="ms-2 me-auto">
               {{ item.name }}
             </div>
-            <div class="d-flex ms-3 column-gap-5 align-items-center">
-              <p class="mb-0">{{ item.sellingPrice | currency: 'GTQ' }}</p>
+            <div>
+              {{ item.sellingPrice | currency: 'GTQ' }}
             </div>
           </div>
         }
       </div>
     </div>
   `,
-  styleUrl: './product-select.component.scss',
 })
 export class ProductSelectComponent implements OnInit {
   private _productService = inject(ProductService);
