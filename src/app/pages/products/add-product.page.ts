@@ -1,7 +1,6 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '@app/features/products/categories/category.service';
-import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductService } from '@app/features/products/product.service';
 import { Subscription } from 'rxjs';
@@ -141,7 +140,6 @@ import { DialogRef } from '@angular/cdk/dialog';
   `,
 })
 export class AddProductPage {
-  private readonly _router = inject(Router);
   private readonly _productService = inject(ProductService);
   private readonly _subscriptions = new Subscription();
   public readonly categories$ = inject(CategoryService).getCategories();
