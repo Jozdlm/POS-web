@@ -28,7 +28,7 @@ import { Product } from '@app/features/products/product';
           />
         </div>
         <div class="mb-3">
-          <label for="barcode" class="form-label">Código Barras</label>
+          <label for="barcode" class="form-label">SKU</label>
           <input
             type="text"
             class="form-control"
@@ -103,7 +103,7 @@ export class ProductDetailsPage {
   private readonly _subscriptions = new Subscription();
   public readonly categories$ = inject(CategoryService).getCategories();
   public productId: number | null = null;
-  public pageTitle: string = 'Crear producto';
+  public pageTitle: string = 'Agregar producto';
 
   public productForm = inject(FormBuilder).nonNullable.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
