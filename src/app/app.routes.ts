@@ -22,6 +22,10 @@ export const APP_ROUTES: Routes = [
           import('./pages/home.page').then((c) => c.HomePage),
       },
       {
+        path: 'pos',
+        loadComponent: () => import('./pages/pos.page').then((c) => c.PosPage),
+      },
+      {
         path: PagePrefix.QUOTATIONS,
         loadChildren: () => import('./routes/quotation.routes'),
       },
