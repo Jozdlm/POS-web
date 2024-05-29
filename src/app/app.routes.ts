@@ -13,7 +13,6 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: '',
-    component: ManagerLayoutComponent,
     canActivate: [loggedClientGuard],
     children: [
       {
