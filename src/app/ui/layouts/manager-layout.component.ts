@@ -19,7 +19,7 @@ import { NAVIGATION_LINKS } from '../../common/constants/navigation-links';
     <div
       class="grid h-full w-full max-w-[100vw] grid-cols-[280px_minmax(max-content,_1fr)]"
     >
-      <app-sidenav [navigationItems]="navItems" class="border-r border-r-slate-300" />
+      <app-sidenav [navItems]="navItems" />
       <div class="max-h-screen w-full overflow-auto py-8">
         <div class="mx-auto max-w-screen-md">
           <router-outlet></router-outlet>
