@@ -5,10 +5,9 @@ import { RouterModule } from '@angular/router';
 import { IconComponent } from '@app/ui/components/icon.component';
 
 @Component({
-  selector: 'app-sidenav',
-  standalone: true,
-  imports: [CommonModule, RouterModule, IconComponent],
-  template: `
+    selector: 'app-sidenav',
+    imports: [CommonModule, RouterModule, IconComponent],
+    template: `
     <div class="h-full w-full p-4">
       <div>
         @for (item of navItems(); track $index) {
@@ -23,7 +22,7 @@ import { IconComponent } from '@app/ui/components/icon.component';
         }
       </div>
     </div>
-  `,
+  `
 })
 export class SidenavComponent {
   public navItems = input.required<NavItem[]>();

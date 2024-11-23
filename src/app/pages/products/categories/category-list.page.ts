@@ -7,9 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { CategoryFormComponent } from './category-form/category-form.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, RecordStatusDirective],
-  template: `
+    imports: [CommonModule, RouterModule, RecordStatusDirective],
+    template: `
     <div class="mx-auto w-full max-w-screen-md">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="fs-3">Categorías</h1>
@@ -37,7 +36,7 @@ import { CategoryFormComponent } from './category-form/category-form.component';
         }
       </div>
     </div>
-  `,
+  `
 })
 export class CategoryListPage {
   private _categoryService = inject(CategoryService);

@@ -6,11 +6,10 @@ import { SchoolService } from '@app/features/quotes/educational-centers/school.s
 import { Subscription, of, switchMap } from 'rxjs';
 
 @Component({
-  selector: 'app-school-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './school-form.component.html',
-  styleUrl: './school-form.component.scss',
+    selector: 'app-school-form',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './school-form.component.html',
+    styleUrl: './school-form.component.scss'
 })
 export class SchoolFormComponent {
   private readonly _activatedRoute = inject(ActivatedRoute);

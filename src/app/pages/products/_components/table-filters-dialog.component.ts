@@ -6,10 +6,9 @@ import { CommonModule } from '@angular/common';
 import { InputFieldDirective } from '@app/ui';
 
 @Component({
-  selector: 'app-filters-dialog',
-  standalone: true,
-  imports: [CommonModule, InputFieldDirective],
-  template: `
+    selector: 'app-filters-dialog',
+    imports: [CommonModule, InputFieldDirective],
+    template: `
     <div
       class="block w-full min-w-[480px] max-w-max rounded-lg bg-white px-6 py-4"
     >
@@ -71,7 +70,7 @@ import { InputFieldDirective } from '@app/ui';
         </button>
       </div>
     </div>
-  `,
+  `
 })
 export class TableFiltersDialogComponent {
   public dialogRef = inject(DialogRef);

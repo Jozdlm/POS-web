@@ -7,9 +7,8 @@ import { Category } from '@app/features/products/categories/category';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="mx-auto w-full max-w-[480px]">
       <h1 class="font-lg mb-4">Crear categoría</h1>
       <form
@@ -72,7 +71,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
         </div>
       </form>
     </div>
-  `,
+  `
 })
 export class CategoryFormComponent {
   private readonly _activatedRoute = inject(ActivatedRoute);

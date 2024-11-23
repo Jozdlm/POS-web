@@ -8,16 +8,15 @@ import { RouterModule } from '@angular/router';
 import { ProductSelectComponent } from '@app/ui/components/product-select/product-select.component';
 
 @Component({
-  selector: 'app-quote-items',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    IconComponent,
-    RouterModule,
-    ProductSelectComponent,
-  ],
-  template: `
+    selector: 'app-quote-items',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        IconComponent,
+        RouterModule,
+        ProductSelectComponent,
+    ],
+    template: `
     <div>
       <div class="d-flex align-items-end mb-4 column-gap-4">
         <app-product-select
@@ -152,11 +151,11 @@ import { ProductSelectComponent } from '@app/ui/components/product-select/produc
       </div>
     </div>
   `,
-  styles: `
+    styles: `
     .price-control {
       max-width: 80px;
     }
-  `,
+  `
 })
 export class QuoteItemsComponent {
   private readonly _quoteStateService = inject(QuotationStateService);

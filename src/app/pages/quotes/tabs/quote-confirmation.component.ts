@@ -10,10 +10,9 @@ import { Router } from '@angular/router';
 import { combineLatestWith } from 'rxjs';
 
 @Component({
-  selector: 'app-quote-confirmation',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-quote-confirmation',
+    imports: [CommonModule],
+    template: `
     <div class="quote-details">
       <div>
         <p class="fw-medium mb-3">Detalles</p>
@@ -97,7 +96,7 @@ import { combineLatestWith } from 'rxjs';
       </div>
     </div>
   `,
-  styles: `
+    styles: `
     .quote-details {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -107,7 +106,7 @@ import { combineLatestWith } from 'rxjs';
     .total-label {
       font-size: 18px;
     }
-  `,
+  `
 })
 export class QuoteConfirmationComponent implements OnInit {
   private readonly _stateService = inject(QuotationStateService);

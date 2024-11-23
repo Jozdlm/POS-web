@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import { SchoolGradeService } from '@app/features/quotes/school-grades/school-grade.service';
 
 @Component({
-  selector: 'app-school-grades',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'app-school-grades',
+    imports: [CommonModule],
+    template: `
     <div class="wrapper">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="fs-3">Grados Académicos</h1>
@@ -27,7 +26,7 @@ import { SchoolGradeService } from '@app/features/quotes/school-grades/school-gr
       </div>
     </div>
   `,
-  styleUrl: './school-grades.page.scss',
+    styleUrl: './school-grades.page.scss'
 })
 export class SchoolGradesPage {
   private readonly _gradeService = inject(SchoolGradeService);

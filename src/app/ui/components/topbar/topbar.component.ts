@@ -5,10 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { NAVIGATION_LINKS } from '../../../common/constants/navigation-links';
 
 @Component({
-  selector: 'app-topbar',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MatIconModule],
-  template: `
+    selector: 'app-topbar',
+    imports: [CommonModule, RouterModule, MatIconModule],
+    template: `
     <div class="block border-b border-slate-200">
       <div
         class="py-2 px-4 flex items-center justify-between mx-auto max-w-screen-xl"
@@ -42,7 +41,7 @@ import { NAVIGATION_LINKS } from '../../../common/constants/navigation-links';
         ></button>
       </div>
     </div>
-  `,
+  `
 })
 export class TopbarComponent {
   public readonly navigationLinks = NAVIGATION_LINKS;

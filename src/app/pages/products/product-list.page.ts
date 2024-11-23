@@ -15,15 +15,14 @@ import {
 import { TableFiltersDialogComponent } from './_components/table-filters-dialog.component';
 
 @Component({
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule,
-    InputFieldDirective,
-    DialogModule,
-  ],
-  template: `
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        RouterModule,
+        InputFieldDirective,
+        DialogModule,
+    ],
+    template: `
     <h1 class="mb-3 text-xl">Productos</h1>
 
     <div>
@@ -92,7 +91,7 @@ import { TableFiltersDialogComponent } from './_components/table-filters-dialog.
         </table>
       </div>
     </div>
-  `,
+  `
 })
 export class ProductListPage {
   private readonly _productService = inject(ProductService);

@@ -14,11 +14,10 @@ import { Subscription, combineLatestWith, switchMap } from 'rxjs';
 import { PdfMakerService } from '@app/common/services/pdf-maker.service';
 
 @Component({
-  selector: 'app-quotation-details',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './quotation-details.component.html',
-  styleUrl: './quotation-details.component.scss',
+    selector: 'app-quotation-details',
+    imports: [CommonModule, RouterModule],
+    templateUrl: './quotation-details.component.html',
+    styleUrl: './quotation-details.component.scss'
 })
 export class QuotationDetailsComponent {
   private readonly _quotationService = inject(QuotationService);

@@ -7,10 +7,9 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { QuotationStateService } from '@app/features/quotes/quotation-state.service';
 
 @Component({
-  selector: 'app-quote-header',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  template: `
+    selector: 'app-quote-header',
+    imports: [CommonModule, ReactiveFormsModule, RouterModule],
+    template: `
     <form
       autocomplete="off"
       [formGroup]="quoteHeaderForm"
@@ -97,7 +96,7 @@ import { QuotationStateService } from '@app/features/quotes/quotation-state.serv
       </div>
     </form>
   `,
-  styles: ``,
+    styles: ``
 })
 export class QuoteHeaderComponent {
   private readonly _quoteState = inject(QuotationStateService);

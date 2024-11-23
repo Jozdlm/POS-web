@@ -5,10 +5,9 @@ import { RouterModule } from '@angular/router';
 import { RecordStatusDirective } from '@app/ui/directives/record-status.directive';
 
 @Component({
-  selector: 'app-schools',
-  standalone: true,
-  imports: [CommonModule, RouterModule, RecordStatusDirective],
-  template: `
+    selector: 'app-schools',
+    imports: [CommonModule, RouterModule, RecordStatusDirective],
+    template: `
     <div class="wrapper">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="fs-3">Centros Educativos</h1>
@@ -35,7 +34,7 @@ import { RecordStatusDirective } from '@app/ui/directives/record-status.directiv
       </div>
     </div>
   `,
-  styleUrl: './educational-centers.page.scss',
+    styleUrl: './educational-centers.page.scss'
 })
 export class EducationalCentersPage {
   public readonly schools$ = inject(SchoolService).getSchools();

@@ -7,15 +7,14 @@ import { TopbarComponent } from '@app/ui/components/topbar/topbar.component';
 import { NAVIGATION_LINKS } from '../../common/constants/navigation-links';
 
 @Component({
-  standalone: true,
-  imports: [
-    CommonModule,
-    SidenavComponent,
-    TopbarComponent,
-    RouterModule,
-    IconComponent,
-  ],
-  template: `
+    imports: [
+        CommonModule,
+        SidenavComponent,
+        TopbarComponent,
+        RouterModule,
+        IconComponent,
+    ],
+    template: `
     <div
       class="grid h-full w-full max-w-[100vw] grid-cols-[280px_minmax(max-content,_1fr)]"
     >
@@ -26,7 +25,7 @@ import { NAVIGATION_LINKS } from '../../common/constants/navigation-links';
         </div>
       </div>
     </div>
-  `,
+  `
 })
 export class ManagerLayoutComponent {
   public readonly navItems = NAVIGATION_LINKS;

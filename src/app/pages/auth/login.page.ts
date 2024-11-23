@@ -6,9 +6,8 @@ import { RouterModule } from '@angular/router';
 import { customEmailValidator } from '@app/features/auth/auth.validators';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  template: `
+    imports: [CommonModule, ReactiveFormsModule, RouterModule],
+    template: `
     <div class="flex h-screen w-screen items-center justify-center">
       <div class="w-full max-w-[360px]">
         <h1 class="mb-8 text-center text-lg font-medium">Iniciar Sesión</h1>
@@ -53,7 +52,7 @@ import { customEmailValidator } from '@app/features/auth/auth.validators';
         </p>
       </div>
     </div>
-  `,
+  `
 })
 export class LoginPage {
   private readonly _formBuilder = inject(FormBuilder);

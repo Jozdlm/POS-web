@@ -5,10 +5,9 @@ import { QuotationService } from '../../../features/quotes/quotation.service';
 import { Quotation } from '../../../features/quotes/quotation';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './quotation.component.html',
-  styleUrl: './quotation.component.scss',
+    imports: [CommonModule, RouterModule],
+    templateUrl: './quotation.component.html',
+    styleUrl: './quotation.component.scss'
 })
 export class QuotationComponent {
   private readonly _quotationService = inject(QuotationService);

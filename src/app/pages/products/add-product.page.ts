@@ -8,9 +8,8 @@ import { InputFieldDirective } from '@app/ui';
 import { DialogRef } from '@angular/cdk/dialog';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputFieldDirective],
-  template: `
+    imports: [CommonModule, ReactiveFormsModule, InputFieldDirective],
+    template: `
     <div
       class="mx-auto block w-full max-w-max rounded-lg bg-white px-6 py-4"
     >
@@ -137,7 +136,7 @@ import { DialogRef } from '@angular/cdk/dialog';
         </div>
       </form>
     </div>
-  `,
+  `
 })
 export class AddProductPage {
   private readonly _productService = inject(ProductService);

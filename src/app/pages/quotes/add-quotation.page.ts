@@ -5,9 +5,8 @@ import { QuotationStateService } from '@app/features/quotes/quotation-state.serv
 import { IconComponent } from '@app/ui/components/icon.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, RouterModule, IconComponent],
-  template: `
+    imports: [CommonModule, RouterModule, IconComponent],
+    template: `
     <div class="mx-auto w-full max-w-screen-md">
       <div class="mb-5">
         <h1 class="mb-4 text-lg font-medium">Nueva Cotización</h1>
@@ -30,7 +29,7 @@ import { IconComponent } from '@app/ui/components/icon.component';
         <router-outlet></router-outlet>
       </div>
     </div>
-  `,
+  `
 })
 export class AddQuotationPage {
   private readonly _quotationState = inject(QuotationStateService);

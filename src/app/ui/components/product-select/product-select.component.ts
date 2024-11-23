@@ -8,10 +8,9 @@ import { debounceSearch } from '@app/common';
 import { InputFieldDirective } from '@app/ui/directives/input-field.directive';
 
 @Component({
-  selector: 'app-product-select',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, InputFieldDirective],
-  template: `
+    selector: 'app-product-select',
+    imports: [CommonModule, ReactiveFormsModule, InputFieldDirective],
+    template: `
     <label for="searchControl" class="mb-1 block">Producto</label>
     <input
       type="search"
@@ -38,7 +37,7 @@ import { InputFieldDirective } from '@app/ui/directives/input-field.directive';
         }
       </div>
     </div>
-  `,
+  `
 })
 export class ProductSelectComponent implements OnInit {
   private _productService = inject(ProductService);

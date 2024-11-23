@@ -5,9 +5,8 @@ import { RouterModule } from '@angular/router';
 import { ShoppingCartComponent } from './sales/_components/shopping-cart.component';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, RouterModule, ShoppingCartComponent],
-  template: `
+    imports: [CommonModule, MatButtonModule, RouterModule, ShoppingCartComponent],
+    template: `
     <main class="mx-auto mt-10 w-[90%] max-w-[800px]">
       <h1 class="mb-8 text-center text-2xl font-medium">
         Bienvenido, Nombre Usuario
@@ -26,6 +25,6 @@ import { ShoppingCartComponent } from './sales/_components/shopping-cart.compone
         </a>
       </div>
     </main>
-  `,
+  `
 })
 export class HomePage {}

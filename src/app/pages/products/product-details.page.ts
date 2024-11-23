@@ -8,9 +8,8 @@ import { Subscription, of, switchMap } from 'rxjs';
 import { Product } from '@app/features/products/product';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  template: `
+    imports: [CommonModule, ReactiveFormsModule],
+    template: `
     <div class="mx-auto w-full max-w-[480px]">
       <h1 class="fs-4 mb-4">{{ pageTitle }}</h1>
       <form
@@ -94,7 +93,7 @@ import { Product } from '@app/features/products/product';
         </div>
       </form>
     </div>
-  `,
+  `
 })
 export class ProductDetailsPage {
   private readonly _activatedRoute = inject(ActivatedRoute);
